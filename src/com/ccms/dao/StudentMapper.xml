@@ -3,9 +3,9 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.geekymv.mapper.UserMapper">
+<mapper namespace="com.geekymv.mapper.SdudentDAO">
 	
-	<insert id="save" parameterType="User">
+	<insert id="save" parameterType="Student">
 		insert into t_users(username, password, email, birthday) 
 		values(#{username}, #{password}, #{email}, #{birthday})
 	</insert>

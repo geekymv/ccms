@@ -7,6 +7,6 @@
 <title>欢迎访问学分认证系统</title>
 </head>
 <body>
-	<h1>欢迎访问学分认证系统</h1>
+	<jsp:forward page="index"></jsp:forward>
 </body>
 </html>
