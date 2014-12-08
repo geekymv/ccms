@@ -14,7 +14,6 @@
 			base-package="com.ccms.controller, com.ccms.dao.impl, com.ccms.service.impl">
 	</context:component-scan>
 	 
-	 
 	<context:property-placeholder location="classpath:db.properties"/>
 	
 	<!-- 配置数据源 -->
@@ -40,7 +39,7 @@
 	
 	<!-- 映射接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.geekymv.mapper" />
+		<property name="basePackage" value="com.ccms.dao" />
 	</bean>
 	
 	<!-- 配置事务的传播特性 -->
@@ -59,7 +58,7 @@
 	<!-- 配置AOP -->
 	<aop:config>
 		<!-- 切点 -->
-		<aop:pointcut expression="execution(* com.geekymv.service.*.*(..))" id="txPointcut"/>
+		<aop:pointcut expression="execution(* com.ccms.service.*.*(..))" id="txPointcut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
 	</aop:config>
 
