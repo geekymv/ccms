@@ -3,7 +3,6 @@ package com.ccms.pojo;
 /**
  * 学院类
  * @author Geek_ymv
- *
  */
 public class College {
 	
