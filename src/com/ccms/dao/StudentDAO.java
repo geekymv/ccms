@@ -5,10 +5,10 @@ import com.ccms.pojo.Student;
 public interface StudentDAO {
 	
 	/**
-	 * 保存
+	 * 添加
 	 * @param student
 	 * @return
 	 */
-	public int save(Student student);
+	public int add(Student student);
 
 }

@@ -4,13 +4,28 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+	<properties resource="db.properties"></properties>
+
 	<!-- 为实体类配置别名 -->
 	<typeAliases>
 		<package name="com.ccms.pojo"/>
 	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+			  <property name="driver" value="${jdbc.driver}"/>
+			  <property name="url" value="${jdbc.url}"/>
+			  <property name="username" value="${jdbc.username}"/>
+			  <property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+	</environments>
 
 	<mappers>
 		<mapper resource="com/ccms/dao/StudentMapper.xml" />
+		<mapper resource="com/ccms/dao/CollegeMapper.xml" />
 	</mappers>
 	
 </configuration> 

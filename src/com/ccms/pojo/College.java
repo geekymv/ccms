@@ -14,6 +14,31 @@ public class College {
 	private String contact;
 	private String address;
 	
+	public College() {
+	}
+	public College(String account, String name, String pwd,
+			String phone, String contact, String address) {
+		this.account = account;
+		this.name = name;
+		this.pwd = pwd;
+		this.phone = phone;
+		this.contact = contact;
+		this.address = address;
+	}
+
+	public College(Integer id, String account, String name, String pwd,
+			String phone, String contact, String address) {
+		this(account, name, pwd, phone, contact, address);
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "College [id=" + id + ", account=" + account + ", name=" + name
+				+ ", pwd=" + pwd + ", phone=" + phone + ", contact=" + contact
+				+ ", address=" + address + "]";
+	}
+	
 	public Integer getId() {
 		return id;
 	}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+"-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccms.dao.CollegeDAO">
+	
+	<!-- 添加 -->
+	<insert id="add" parameterType="College">
+		insert into t_colleges(account, name, pwd, phone, contact, address )
+		values(#{account}, #{name}, #{pwd}, #{phone}, #{contact}, #{address});
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="College">
+		update t_colleges set account=#{account}, name=#{name}, pwd=#{pwd}, phone=#{phone},
+		contact=#{contact}, address=#{address} where id=#{id};
+	</update>
+	
+	<!-- 查询 -->
+	<select id="query" parameterType="int" resultType="College">
+		select * from t_colleges where id=#{id}	
+	</select>
+	
+</mapper>  
+
+
+

@@ -16,6 +16,7 @@ public class Student {
 	private String qq;
 	private String introduce; // 个人简介
 	
+	
 	private College college; //  学院
 	private Specialty specialty; // 专业
 	
