@@ -1,5 +1,7 @@
 package com.ccms.pojo;
 
+import java.util.List;
+
 /**
  * 学院类
  * @author Geek_ymv
@@ -13,6 +15,8 @@ public class College {
 	private String phone;
 	private String contact;
 	private String address;
+	
+	private List<Specialty> specialties;
 	
 	public College() {
 	}
@@ -36,7 +40,7 @@ public class College {
 	public String toString() {
 		return "College [id=" + id + ", account=" + account + ", name=" + name
 				+ ", pwd=" + pwd + ", phone=" + phone + ", contact=" + contact
-				+ ", address=" + address + "]";
+				+ ", address=" + address + ", specialties=" + specialties + "]";
 	}
 	
 	public Integer getId() {
@@ -81,4 +85,12 @@ public class College {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public List<Specialty> getSpecialties() {
+		return specialties;
+	}
+	public void setSpecialties(List<Specialty> specialties) {
+		this.specialties = specialties;
+	}
+	
+	
 }

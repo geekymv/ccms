@@ -26,6 +26,7 @@
 	<mappers>
 		<mapper resource="com/ccms/dao/StudentMapper.xml" />
 		<mapper resource="com/ccms/dao/CollegeMapper.xml" />
+		<mapper resource="com/ccms/dao/SpecialtyMapper.xml" />
 	</mappers>
 	
 </configuration> 

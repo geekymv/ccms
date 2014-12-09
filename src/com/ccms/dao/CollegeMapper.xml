@@ -22,6 +22,28 @@
 		select * from t_colleges where id=#{id}	
 	</select>
 	
+	<!-- 查询该学院所有的专业 -->
+	<select id="querySpecialtys" parameterType="int" resultMap="querySpecialtysMap">
+		select col.id col_id, col.account, col.name col_name, col.phone, col.contact, col.address,
+		spe.id spe_id, spe.name spe_name
+		from t_colleges col inner join t_specialty spe on col.id=spe.col_id where col.id=#{id};
+	</select>
+	<resultMap type="College" id="querySpecialtysMap">
+		<id column="col_id" property="id" />
+		<result column="account" property="account"/>
+		<result column="col_name" property="name"/>
+		<result column="phone" property="phone"/>
+		<result column="contact" property="contact"/>
+		<result column="address" property="address"/>
+		
+		<collection property="specialties" ofType="Specialty">
+			<id column="spe_id" property="id"/>
+			<result column="spe_name" property="name"/>
+		</collection>
+		
+	</resultMap>
+	
+	
 </mapper>  
 
 

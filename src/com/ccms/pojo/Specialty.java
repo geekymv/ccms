@@ -10,6 +10,28 @@ public class Specialty {
 	private String name;
 	private College college; // 所属学院
 	
+	public Specialty() {
+	}
+	
+	public Specialty(String name, College college) {
+		this.name = name;
+		this.college = college;
+	}
+	public Specialty(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	public Specialty(Integer id, String name, College college) {
+		this(name, college);
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Specialty [id=" + id + ", name=" + name + ", college="
+				+ college + "]";
+	}
+
 	public Integer getId() {
 		return id;
 	}

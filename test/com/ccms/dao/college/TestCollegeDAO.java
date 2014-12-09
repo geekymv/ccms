@@ -9,6 +9,26 @@ import com.ccms.pojo.College;
 public class TestCollegeDAO {
 
 	@Test
+	public void testQuerySpecialtys() {
+		SqlSession session = MyBatisUtil.getSqlSession();
+		try {
+
+			CollegeDAO collegeDAO = session.getMapper(CollegeDAO.class);
+			
+			College college = collegeDAO.querySpecialtys(1);
+			
+			System.out.println(college);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	@Test
 	public void testQuery(){
 		SqlSession session = MyBatisUtil.getSqlSession();
 		try {
