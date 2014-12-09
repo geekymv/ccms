@@ -1,11 +1,28 @@
 /*学分认证管理系统*/
 create database ccms;
 
+/*学院/单位*/
+create table t_colleges(
+	id int primary key auto_increment,
+	account varchar(20) unique not null, /*登录账号唯一*/
+	name varchar(20) unique not null, /*学院名称唯一*/
+	pwd varchar(30), /*登录密码*/ 
+	phone varchar(20), /*电话号码*/
+	contact varchar(20), /*联系人姓名*/ 
+	address varchar(30) /*办公地址*/
+);
+/*专业*/
+create table t_specialty(
+	id int primary key auto_increment,
+	name varchar(30) unique not null, /*专业名称*/
+	col_id int /*所属学院*/
+);
+
 /*学生*/
 create table t_students(
 	id int primary key auto_increment,
 	num int unique not null,	/*学号*/
-	password varchar(30) not null, /*密码*/
+	pwd varchar(30) not null, /*密码*/
 	name varchar(20) not null, /*姓名*/
 	gender varchar(5), /*性别*/
 	phone varchar(20), /*手机号码*/
@@ -26,22 +43,7 @@ create table t_access_log(){
 	status int /*用户状态：已登录1， 未登录0*/
 }
 
-/*学院/单位*/
-create table t_colleges(
-	id int primary key auto_increment,
-	account varchar(20) unique not null, /*登录账号唯一*/
-	name varchar(20) unique not null, /*学院名称唯一*/
-	password varchar(30), /*登录密码*/ 
-	phone varchar(20), /*电话号码*/
-	contact varchar(20), /*联系人姓名*/ 
-	address varchar(30) /*办公地址*/
-);
-/*专业*/
-create table t_specialty(
-	id int primary key auto_increment,
-	name varchar(30) unique not null, /*专业名称*/
-	col_id int /*所属学院*/
-);
+
 
 /*受助等级：甲乙丙*/
 create table t_rank(
