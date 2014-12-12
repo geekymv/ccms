@@ -3,10 +3,86 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ccms.dao.SdudentDAO">
+<mapper namespace="com.ccms.dao.StudentDAO">
 	
+	<!-- 添加学生 -->
 	<insert id="add" parameterType="Student">
-		
+		insert into t_students( num, pwd, name, gender, phone, email, qq, col_id, spec_id, introduce )
+		values(#{num}, #{pwd}, #{name}, #{gender}, #{phone}, 
+		#{email}, #{qq}, #{college.id}, #{specialty.id}, #{introduce});
 	</insert>
 	
+	<!-- 更新学生 -->
+	<update id="update" parameterType="Student">
+		update t_students set num=#{num}, pwd=#{pwd}, name=#{name}, #{gender}, phone=#{phone},
+		email=#{email}, qq=#{qq}, col_id=#{college.id}, spec_id=#{specialty.id}, introduce=#{introduce}
+		where id=#{id};
+	</update>
+	
+	
+	<!-- 根据学号查询学生 -->
+	<select id="queryByNum" parameterType="string" resultMap="StudentResultMap">
+		select stu.id stu_id, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.phone, stu.email, stu.qq, 
+		col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
+		FROM t_students stu 
+		inner join t_colleges col on stu.col_id=col.id 
+		inner join t_specialty spe on stu.spec_id=spe.id 
+		where stu.num=#{num};
+	</select>	
+	
+	
+	<!-- 根据id查询学生 -->
+	<select id="queryById" parameterType="int" resultMap="StudentResultMap">
+		select stu.id stu_id, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.phone, stu.email, stu.qq, 
+		col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
+		FROM t_students stu 
+		inner join t_colleges col on stu.col_id=col.id 
+		inner join t_specialty spe on stu.spec_id=spe.id 
+		where stu.id=#{id};
+	</select>	
+	
+	<resultMap type="Student" id="StudentResultMap">
+		<id column="stu_id" property="id"/>
+		<result column="num" property="num"/>
+		<result column="stu_name" property="name"/>
+		<result column="gender" property="gender"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="qq" property="qq"/>
+		
+		<association property="college" javaType="College">
+			<id column="col_id" property="id"/>
+			<result column="col_name" property="name"/>
+		</association>	
+		<association property="specialty" javaType="Specialty">
+			<id column="spe_id" property="id"/>
+			<result column="spe_name" property="name"/>
+		</association>	
+				
+	</resultMap>
+	
+	
 </mapper>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

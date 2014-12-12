@@ -20,6 +20,19 @@ public class Student {
 	private College college; //  学院
 	private Specialty specialty; // 专业
 	
+	public Student() {
+	}
+	
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", num=" + num + ", pwd=" + pwd
+				+ ", name=" + name + ", gender=" + gender + ", phone=" + phone
+				+ ", email=" + email + ", qq=" + qq + ", introduce="
+				+ introduce + ", college=" + college + ", specialty="
+				+ specialty + "]";
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
