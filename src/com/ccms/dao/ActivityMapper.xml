@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+"-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccms.dao.ActivityDAO">
+	
+	<!-- 添加活动 -->
+	<insert id="add" parameterType="Activity">
+		insert into t_activities( 
+		name, col_id, publish_time, date_time, end_date, location, aim, content, activity_type,
+		duration, act_object, number, contact, phone, assist, status ) 
+		values(#{name}, #{college.id}, #{publishTime}, #{dateTime},
+		#{endDate}, #{location}, #{aim}, #{content}, #{actType.id}, #{duration}, 
+		#{actObject}, #{number}, #{contact}, #{phone}, #{assist}, #{status} );		
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="Activity">
+		update t_activities set 
+		name=#{name}, col_id=#{college.id}, publish_time=#{publishTime}, date_time=#{dateTime}, end_date=#{endDate},
+		location=#{location}, aim=#{aim}, content=#{content}, activity_type=#{actType.id}, duration=#{duration},
+		act_object=#{actObject}, number=#{number}, contact=#{contact}, phone=#{phone}, assist=#{assist}, status=#{status}
+		where id=#{id}
+	</update>
+	
+	<!-- 分页查询所有Activity -->
+	<select id="queryByPage" resultMap="ActivityResultMap">
+		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
+		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
+		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
+		inner join t_colleges col on act.col_id=col.id 
+		inner join t_activity_type a_type on act.activity_type=a_type.id limit #{pageOffset}, #{pageSize};	
+	</select>
+	
+	<!-- 分页查询所有通过审核的Activity -->
+	<select id="queryAllStatusByPage" resultMap="ActivityResultMap">
+		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
+		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
+		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
+		inner join t_colleges col on act.col_id=col.id 
+		inner join t_activity_type a_type on act.activity_type=a_type.id where act.status=1 limit #{pageOffset}, #{pageSize};	
+	</select>
+	
+	<!-- 根据id查询 -->
+	<select id="queryById" parameterType="int" resultMap="ActivityResultMap">
+		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
+		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
+		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
+		inner join t_colleges col on act.col_id=col.id 
+		inner join t_activity_type a_type on act.activity_type=a_type.id where act.id=#{id};
+	</select>
+	
+	<resultMap type="Activity" id="ActivityResultMap">
+		<id column="act_id" property="id"/>
+		<result column="act_name" property="name"/>
+		<result column="publish_time" property="publishTime"/>
+		<result column="date_time" property="dateTime"/>
+		<result column="end_date" property="endDate"/>
+		<result column="location" property="location"/>
+		<result column="aim" property="aim"/>
+		<result column="content" property="content"/>
+		<result column="duration" property="duration"/>
+		<result column="act_object" property="actObject"/>
+		<result column="number" property="number"/>
+		<result column="contact" property="contact"/>
+		<result column="phone" property="phone"/>
+		<result column="assist" property="assist"/>
+		<result column="status" property="status"/>
+		
+		<association property="college" javaType="College">
+			<id column="col_id" property="id"/>
+			<result column="col_name" property="name"/>
+		</association>
+		
+		<association property="actType" javaType="ActType">
+			<id column="a_type_id" property="id"/>
+			<result column="a_type_name" property="name"/>
+		</association>
+	</resultMap>
+	
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

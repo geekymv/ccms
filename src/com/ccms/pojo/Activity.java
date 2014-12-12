@@ -10,11 +10,11 @@ public class Activity {
 	
 	private Integer id;
 	private String name; /*活动名称*/
-	private Date dateTime;	/*活动时间*/
-	private String location; /*地点*/
 	private College college; /*发布单位*/
 	private Date publishTime; /*发布时间*/
+	private String dateTime;	/*活动时间*/
 	private Date endDate;/*报名截止日期*/
+	private String location; /*地点*/
 	private String aim; /*目的*/
 	private String content; /*活动内容*/
 	private ActType actType;/*活动加分类型*/
@@ -26,6 +26,19 @@ public class Activity {
 	private String assist; /*活动协助人员*/
 	private Integer status; /*状态:通过1， 未通过0， 删除-1*/
 
+	
+	
+	@Override
+	public String toString() {
+		return "Activity [id=" + id + ", name=" + name + ", college=" + college
+				+ ", publishTime=" + publishTime + ", dateTime=" + dateTime
+				+ ", endDate=" + endDate + ", location=" + location + ", aim="
+				+ aim + ", content=" + content + ", actType=" + actType
+				+ ", duration=" + duration + ", actObject=" + actObject
+				+ ", number=" + number + ", contact=" + contact + ", phone="
+				+ phone + ", assist=" + assist + ", status=" + status + "]";
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -38,10 +51,10 @@ public class Activity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getDateTime() {
+	public String getDateTime() {
 		return dateTime;
 	}
-	public void setDateTime(Date dateTime) {
+	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
 	public String getLocation() {

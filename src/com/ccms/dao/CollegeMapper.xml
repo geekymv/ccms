@@ -18,7 +18,7 @@
 	</update>
 	
 	<!-- 查询 -->
-	<select id="query" parameterType="int" resultType="College">
+	<select id="queryById" parameterType="int" resultType="College">
 		select * from t_colleges where id=#{id}	
 	</select>
 	

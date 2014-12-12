@@ -1,5 +1,9 @@
 package com.ccms.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 public interface BaseDAO<T> {
 
 	/**
@@ -28,5 +32,37 @@ public interface BaseDAO<T> {
 	 * @param id
 	 * @return
 	 */
-	public T query(Integer id);
+	public T queryById(Integer id);
+	
+	/**
+	 * 分页查询
+	 * @param pageOffset
+	 * @param pageSize
+	 * @return
+	 */
+	public List<T> queryByPage(@Param("pageOffset")int pageOffset, @Param("pageSize")int pageSize);
+	
+	/**
+	 * 总记录数
+	 * @return
+	 */
+	public int totalRecord();
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

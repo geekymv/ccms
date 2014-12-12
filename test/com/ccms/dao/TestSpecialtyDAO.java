@@ -1,14 +1,11 @@
 package com.ccms.dao;
 
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ccms.dao.CollegeDAO;
-import com.ccms.dao.SpecialtyDAO;
 import com.ccms.pojo.College;
 import com.ccms.pojo.Specialty;
 
@@ -33,7 +30,7 @@ public class TestSpecialtyDAO {
 
 	@Test
 	public void testAdd() {
-		College college = collegeDAO.query(1);
+		College college = collegeDAO.queryById(1);
 
 		Specialty specialty = new Specialty("网络工程", college);
 

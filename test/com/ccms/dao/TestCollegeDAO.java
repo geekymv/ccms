@@ -23,9 +23,9 @@ public class TestCollegeDAO {
 	}
 
 	@Test
-	public void testQuery() {
+	public void testQueryById() {
 
-		College college = collegeDAO.query(1);
+		College college = collegeDAO.queryById(1);
 
 		System.out.println(college);
 	}
