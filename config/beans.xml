@@ -9,15 +9,16 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	
+	<context:annotation-config />
+		
 	<context:component-scan 
-			base-package="com.ccms.controller, com.ccms.dao.impl, com.ccms.service.impl">
+			base-package="com.ccms.controller, com.ccms.service.impl">
 	</context:component-scan>
 	 
 	<context:property-placeholder location="classpath:db.properties"/>
 	
 	<!-- 配置数据源 -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> <!-- destroy-method="close" -->
  		<property name="driverClass" value="${jdbc.driver}"></property>
  		<property name="jdbcUrl" value="${jdbc.url}"></property>
  		<property name="user" value="${jdbc.username}"></property>

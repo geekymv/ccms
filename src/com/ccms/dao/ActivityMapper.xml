@@ -23,6 +23,11 @@
 		act_object=#{actObject}, number=#{number}, contact=#{contact}, phone=#{phone}, assist=#{assist}, status=#{status}
 		where id=#{id}
 	</update>
+
+	<!-- 查询总记录数 -->
+	<select id="totalRecord" resultType="int">
+		select count(*) from t_activities
+	</select>
 	
 	<!-- 分页查询所有Activity -->
 	<select id="queryByPage" resultMap="ActivityResultMap">
