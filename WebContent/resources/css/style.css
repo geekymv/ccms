@@ -65,12 +65,13 @@ a {
 	display: block;
 }
 
-.login {
+.logout {
 	padding-left: 18px;
 	transition: 0.5s ease;
 	-o-transition: 0.5s ease;
 	-webkit-transition: 0.5s ease;
 }
+
 .sign {
 	padding-left: 18px;
 	transition: 0.5s ease;

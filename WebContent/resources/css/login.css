@@ -1,0 +1,85 @@
+body, button, input, select, textarea, h1, h2, h3,
+	h4, h5, h6 {
+	font-family: Microsoft YaHei, '宋体', Tahoma, Helvetica, Arial,sans-serif;
+}
+
+.navbar {
+	height: 144px;
+	margin-bottom: 0;
+}
+
+.navbar .container {
+	height: 140px;
+}
+
+.navbar-right {
+	margin-top: 40px;
+}
+
+.reg-modal {
+	margin-top: 100px;
+}
+
+.carousel .item img {
+	height: 550px;
+	width: 100%;
+}
+
+.carousel {
+	position: relative;
+	z-index: 0;
+}
+
+.reg-bg {
+	border-radius: 5px;
+	height: 380px;
+	left: 62.5%;
+	position: absolute;
+	top: 230px;
+	width: 320px;
+	z-index: 2;
+	background: #FFFFFF;
+	opacity: 0.7;
+}
+
+.reg {
+	border-radius: 5px;
+	height: 380px;
+	left: 62.5%;
+	position: absolute;
+	top: 230px;
+	width: 320px;
+	z-index: 3;
+}
+
+.reg h3 {
+	text-align: center;
+}
+
+.reg .form-control {
+	background: repeat scroll 0 0 #FFFFFF;
+}
+
+.reg .form-control, .sub-btn {
+	width: 80%;
+}
+
+.reg .form-group, .sub-btn {
+	margin-top: 15px;
+}
+
+.reg form {
+	margin-left: 50px;
+}
+
+.reg .checkbox .forget {
+	margin-left: 70px;
+}
+
+.reg .control-label {
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px #4e6877;
+}
+

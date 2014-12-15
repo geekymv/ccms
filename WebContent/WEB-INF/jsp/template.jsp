@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap 101 Template</title>
 
-    <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,8 +48,8 @@
 	   </tbody>
 	</table>
 
-    <script src="resources/jsjquery-1.11.1.min.js"></script>
-    <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
 

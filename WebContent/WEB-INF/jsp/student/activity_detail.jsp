@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>欢迎访问公益活动时间认证系统</title>
+    <title>活动公告详情</title>
 
     <link href="${pageContext.request.contextPath }/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,8 +20,6 @@
     <![endif]-->
   </head>
   <body>
-  
-  	
 	<div class="container">
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="row">
@@ -31,32 +29,43 @@
 			  <li class="active">公告详情</li>
 			</ol>
 			<table class="table table-bordered table-hover table-condensed table-responsive">
-			   <thead>
-			      <tr>
-			         <th>活动名称</th>
-			         <th>发布单位</th>
-			         <th>活动对象</th>
-			         <th>发布时间</th>
-			         <th>活动类型</th>
-			         <th>活动时长</th>
-			         <th>查看</th>
-			         <th>报名</th>
-			      </tr>
-			   </thead>
-			   <tbody>
-			   	  <c:forEach items="${activities }" var="activity">
-			      <tr>
-			         <td>${activity.name }</td>
-			         <td>${activity.college.name }</td>
-			         <td>${activity.actObject }</td>
-			         <td><fmt:formatDate value="${activity.publishTime }" pattern="yyyy年MM月dd日"/> </td>
-			         <td>${activity.actType.name }</td>
-			         <td>${activity.duration }小时</td>
-			         <td><a href="activity/detail/${activity.id }">查看</a></td>
-			         <td>报名</td>
-			      </tr>
-			      </c:forEach>		
-			   </tbody>
+				<tr>
+			    	<td>活动名称</td> <td>${activity.name }</td>
+			    </tr>  
+			    <tr>
+			        <td>发布单位</td> <td>${activity.college.name }</td>
+			    </tr>
+			    <tr>
+			    	<td>发布时间</td> <td><fmt:formatDate value="${activity.publishTime }" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+			    </tr>    
+			    <tr>
+			    	<td>活动对象</td> <td>${activity.actObject }</td>
+			    </tr>  
+			    <tr>
+			    	<td>活动时间</td> <td>${activity.dateTime }</td>
+			    </tr> 
+			    <tr>
+			    	<td>活动类型</td> <td>${activity.actType.name }</td>
+			    </tr> 
+			    <tr>
+			    	<td>活动加分时长</td> <td>${activity.duration }小时</td>
+			    </tr> 
+		      	<tr>
+		        	<td>参与人数</td> <td>${activity.number }人</td>
+		      	</tr>  
+		      	<tr>
+		        	<td>联系人</td> <td>${activity.contact }人</td>
+		      	</tr> 
+		      	<tr>
+		        	<td>联系方式</td> <td>${activity.phone }人</td>
+		      	</tr> 
+		      	<tr>
+		        	<td>参与人数</td> <td>${activity.number }人</td>
+		      	</tr> 
+		      	<tr>
+		        	<td>报名截止日期</td> <td><fmt:formatDate value="${activity.endDate }" pattern="yyyy-MM-dd"/></td>
+		      	</tr> 
+		      	 	
 			</table>
 		</div>
 	</div>

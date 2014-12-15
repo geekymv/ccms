@@ -16,4 +16,5 @@ public interface ActivityDAO extends BaseDAO<Activity> {
 	 * @return
 	 */
 	public List<Activity> queryAllStatusByPage(@Param("pageOffset")int pageOffset, @Param("pageSize")int pageSize);
+
 }

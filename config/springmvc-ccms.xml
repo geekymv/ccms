@@ -12,6 +12,19 @@
 
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
 
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<bean class="com.ccms.interceptor.LoginInterceptor">
+			<!-- 不需要拦截的url地址 -->
+			<property name="excludeUrls">
+				<list>
+					<value>/index</value>
+					<value>/index/</value>
+				</list>
+			</property>
+		</bean>
+	</mvc:interceptors>
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"

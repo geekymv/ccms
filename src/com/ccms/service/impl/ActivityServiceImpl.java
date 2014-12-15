@@ -33,6 +33,12 @@ public class ActivityServiceImpl implements ActivityService {
 		return pager;
 	}
 
+	@Override
+	public Activity detail(Integer id) {
+
+		return activityDAO.queryById(id);
+	}
+
 }
 
 
