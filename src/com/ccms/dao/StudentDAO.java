@@ -1,5 +1,7 @@
 package com.ccms.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ccms.pojo.Student;
 
 public interface StudentDAO extends BaseDAO<Student>{
@@ -9,5 +11,13 @@ public interface StudentDAO extends BaseDAO<Student>{
 	 * @return
 	 */
 	public Student queryByNum(String num);
+	
+	/**
+	 * 根据学号和密码查询
+	 * @param num
+	 * @param pwd
+	 * @return
+	 */
+	public Student queryByNumAndPwd(@Param("num")String num, @Param("pwd")String pwd);
 
 }

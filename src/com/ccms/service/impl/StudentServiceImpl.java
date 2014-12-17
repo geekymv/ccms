@@ -22,4 +22,11 @@ public class StudentServiceImpl implements StudentService {
 		return false;
 	}
 
+
+	@Override
+	public Student login(String num, String pwd) {
+
+		return studentDAO.queryByNumAndPwd(num, pwd);
+	}
+
 }

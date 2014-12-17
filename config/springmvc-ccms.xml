@@ -11,6 +11,11 @@
 	<mvc:annotation-driven />
 
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	<!-- 
+		mvc:view-controller可以在不需要Controller处理request的情况，转向到设置的View 
+		<mvc:view-controller path="/" view-name="forward:login"/>
+	 -->
+	
 
 	<!-- 配置拦截器 -->
 	<mvc:interceptors>
@@ -23,6 +28,24 @@
 				</list>
 			</property>
 		</bean>
+		
+		<!-- 记录用户登录 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/stu/login"/>
+			<bean class="com.ccms.interceptor.Log4LoginInterceptor">
+				<property name="accessLogService" ref="accessLogService"></property>
+			</bean>
+			
+		</mvc:interceptor>
+		
+		<!-- 记录用户退出 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/stu/logout"/>
+			<bean class="com.ccms.interceptor.Log4LogoutInterceptor">
+				<property name="accessLogService" ref="accessLogService"></property>
+			</bean>
+		</mvc:interceptor>
+		
 	</mvc:interceptors>
 
 	<bean

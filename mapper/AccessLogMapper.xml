@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+"-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccms.dao.AccessLogDAO">
+	
+	<!-- 添加登录日志 -->
+	<insert id="add" parameterType="AccessLog">
+		insert into t_access_log( user_id, ip, login_time, logout_time, status ) 
+		values(#{userId}, #{ip}, #{loginTime}, #{logoutTime}, #{status});
+	</insert>
+	
+	<select id="queryByUserIdAndStatus" resultType="AccessLog">
+		
+	</select>
+	
+	<!-- 更新退出时间，用于状态-->
+	<update id="update" parameterType="AccessLog">
+		update t_access_log set logout_time=#{logoutTime}, status=0 where user_id=#{userId} and status=1;
+	</update>
+	 
+</mapper>  

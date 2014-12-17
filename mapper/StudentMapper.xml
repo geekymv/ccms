@@ -30,6 +30,11 @@
 		where stu.num=#{num};
 	</select>	
 	
+	<!-- 根据学号和密码查询学生 -->
+	<select id="queryByNumAndPwd" resultType="Student">
+		select id, num, pwd, name FROM t_students where num=#{num} and pwd=#{pwd};
+	</select>
+	
 	
 	<!-- 根据id查询学生 -->
 	<select id="queryById" parameterType="int" resultMap="StudentResultMap">

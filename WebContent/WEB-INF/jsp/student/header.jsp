@@ -10,25 +10,50 @@
 <script src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$(".login").hover(function(){
+		$(".login").click(function(){
 			// 显示登录模态框
 			$("#myModal").modal('show');
-		}, function(){
-			// 隐藏登录模态框
 		});
-		
 		
 		$("#login").click(function(){
 			var account = $("#account").val();
 			var password = $("#password").val();
-			alert(account + "," + password);
+			
+			if(!account || !password) {
+				$(".error").html("用户名或密码不能为空！");
+				return;
+			}
+			
+			$.ajax({
+				url: "stu/login",
+				type: "POST",
+				data: {"account": account, "password": password},
+				dataType: "text",
+				success: function(data){
+					if(data == "success"){
+						$("#myModal").modal('hide');
+						window.location.reload(); // 刷新当前页面
+					}else if(data == "fail"){
+						$(".error").html("用户名或密码错误！");
+					}
+				}
+			});
+			
 		});
 		
+		
+		$("#logout").click(function(){
+			$.ajax({
+				url: "stu/logout",
+				type: "POST",
+				dataType: "text",
+				success: function(data){
+					alert(data);
+					window.location.href="index"; 
+				}
+			});
+		});
 	});
-	
-	
-
-
 </script>
 
 </head>
@@ -41,18 +66,20 @@
 		  </div>
 		  <div class="right-left">
 			<ul>
-				<li class="sign">
-					<c:choose>
-						<c:when test="${empty user }">
-							<a href="" class="login">登录</a>						
-						</c:when>
-						<c:otherwise>
-							欢迎${user.name }登录
-						</c:otherwise>
-					</c:choose>
-					
-				</li>
-				<li class="logout"><a href="#">退出</a></li>
+				<c:choose>
+					<c:when test="${empty user }">
+						<li class="sign">
+						<a style="cursor: pointer;" class="login">登录</a>	
+						</li>
+					</c:when>
+					<c:otherwise>
+						欢迎${user.name }
+						<li class="logout"><a style="cursor: pointer;" id="logout">退出</a></li>
+					</c:otherwise>
+				</c:choose>
+				
+				
+				
 			</ul>
 		  </div>
 		  <div class="clear"> </div>
@@ -117,15 +144,20 @@
 			  <div class="form-group">
 			    <label for="account" class="col-sm-2 control-label">账号</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="account" name="account" placeholder="请输入账号">
+			      <input type="text" class="form-control" id="account" name="account" placeholder="请输入账号"/>
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="password" class="col-sm-2 control-label">密码</label>
 			    <div class="col-sm-10">
-			      <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+			      <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"/>
 			    </div>
 			  </div>
+			  <div class="form-group">
+			  	<div class='col-sm-10 col-sm-offset-2 error' style="color: red;">
+			  	</div>
+			  </div>
+			  
 			  <!-- 
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">

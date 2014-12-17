@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.pojo.Activity;
 import com.ccms.pojo.Pager;
@@ -19,13 +17,21 @@ public class IndexController {
 	@Autowired
 	private ActivityService activityService;
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	@ResponseBody
-	public String login(String account, String password) {
-		
-		return "success";
+	/**
+	 * 跳转到首页
+	 * @return
+	 */
+	@RequestMapping("/")
+	public String goIndex(){
+		return "redirect:index";
 	}
 	
+	/**
+	 * 分页显示activity
+	 * @param request
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request, Model model) {
 		

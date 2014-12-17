@@ -22,7 +22,7 @@ create table t_specialty(
 /*学生*/
 create table t_students(
 	id int primary key auto_increment,
-	num int unique not null,	/*学号*/
+	num varchar(11) unique not null,	/*学号*/
 	pwd varchar(30) not null, /*密码*/
 	name varchar(20) not null, /*姓名*/
 	gender varchar(5), /*性别*/

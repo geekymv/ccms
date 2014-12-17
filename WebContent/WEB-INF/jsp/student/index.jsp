@@ -66,7 +66,7 @@
 	           -->	
 	          <nav style="text-align:center;">
 			  <ul class="pagination">
-			      <pg:pager url="${pageContext.request.contextPath }" items="${pager.totalRecord }" export="currentPageNumber=pageNumber" maxPageItems="3">  
+			      <pg:pager url="${pageContext.request.contextPath }/index" items="${pager.totalRecord }" export="currentPageNumber=pageNumber" maxPageItems="3">  
 					   <%--  <li><a>总记录数${pager.totalRecord }</a></li>
 					    <li><a>总页数${pager.totalPage }</a></li>
 					    <li><a>当前页${currentPageNumber }</a></li> --%>

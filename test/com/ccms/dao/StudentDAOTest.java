@@ -20,6 +20,15 @@ public class StudentDAOTest {
 	}
 	
 	@Test
+	public void testQueryByNumAndPwd() {
+		
+		Student student = studentDAO.queryByNumAndPwd("11", "123");
+		
+		System.out.println(student);
+	}
+	
+	
+	@Test
 	public void testQueryById() {
 		
 		Student student = studentDAO.queryById(1);
