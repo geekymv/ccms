@@ -1,5 +1,7 @@
 package com.ccms.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +24,13 @@ public class AccessLogServiceImpl implements AccessLogService {
 	@Override
 	public boolean logout(AccessLog accessLog) {
 		
-
 		return accessLogDAO.update(accessLog) == 1 ? true : false;
+	}
+
+	@Override
+	public List<AccessLog> queryByUserIdAndStatus(String userId, int status) {
+		
+		return accessLogDAO.queryByUserIdAndStatus(userId, status);
 	}
 
 }

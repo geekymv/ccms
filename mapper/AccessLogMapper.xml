@@ -11,13 +11,15 @@
 		values(#{userId}, #{ip}, #{loginTime}, #{logoutTime}, #{status});
 	</insert>
 	
+	<!-- 根据用户id和用户状态(是否在线)查询 -->
 	<select id="queryByUserIdAndStatus" resultType="AccessLog">
-		
+		select id id, user_id userId, ip, login_time loginTime, logout_time logoutTime, status
+		from t_access_log where user_id=#{userId} and status=#{status}
 	</select>
 	
 	<!-- 更新退出时间，用于状态-->
 	<update id="update" parameterType="AccessLog">
-		update t_access_log set logout_time=#{logoutTime}, status=0 where user_id=#{userId} and status=1;
+		update t_access_log set logout_time=#{logoutTime}, status=0 where id=#{id} and status=1;
 	</update>
 	 
 </mapper>  

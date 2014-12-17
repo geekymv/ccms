@@ -25,7 +25,7 @@
 			}
 			
 			$.ajax({
-				url: "stu/login",
+				url: "${pageContext.request.contextPath }/stu/login",
 				type: "POST",
 				data: {"account": account, "password": password},
 				dataType: "text",
@@ -44,7 +44,7 @@
 		
 		$("#logout").click(function(){
 			$.ajax({
-				url: "stu/logout",
+				url: "${pageContext.request.contextPath }/stu/logout",
 				type: "POST",
 				dataType: "text",
 				success: function(data){
