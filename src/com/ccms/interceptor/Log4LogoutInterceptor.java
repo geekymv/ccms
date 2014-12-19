@@ -33,19 +33,19 @@ public class Log4LogoutInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("user");
 		
-		Class<?> clazz = obj.getClass();
-	
 		String userId = "";
-		
-		if(clazz == Student.class) {
-			Student student = (Student)obj;
-			userId = student.getId() + "";
+		if(obj != null){
+			Class<?> clazz = obj.getClass();
+			if(clazz == Student.class) {
+				Student student = (Student)obj;
+				userId = student.getId() + "";
 
-		}else if (clazz == College.class) {
-			College college = (College)obj;
-			userId = college.getId() + "";
+			}else if (clazz == College.class) {
+				College college = (College)obj;
+				userId = college.getId() + "";
+			}
 		}
-		
+
 		List<AccessLog> accessLogs = accessLogService.queryByUserIdAndStatus(userId, Constant.USER_STATUS_ONLINE);
 		
 		AccessLog accessLog = null;

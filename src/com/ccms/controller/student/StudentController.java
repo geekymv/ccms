@@ -19,6 +19,14 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 	
+	/**
+	 * 学生登录
+	 * @param account
+	 * @param password
+	 * @param session
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
 	public String login(String account, String password, 
@@ -51,6 +59,20 @@ public class StudentController {
 		return "success";
 	}
 	
+	
+	/**
+	 * 学生报名活动
+	 * @param id 活动id
+	 * @return
+	 */
+	@RequestMapping("/apply")
+	@ResponseBody
+	public String apply(Integer id){
+		
+		System.out.println("activity id = " + id);	
+		
+		return "success";
+	}
 }
 
 

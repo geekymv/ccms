@@ -30,7 +30,6 @@ public class ActivityController {
 		
 		return "student/activity_detail";
 	}
-	
 }
 
 

@@ -18,6 +18,17 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <style type="text/css">
+    	table {
+    		margin: 0 auto;
+    	}
+    	td {
+    		font-family: "微软雅黑";
+    		text-align: center;
+    	}
+    </style>
+    
   </head>
   <body>
 	<div class="container">
@@ -28,7 +39,7 @@
 			  <li><a href="${pageContext.request.contextPath }">活动公告</a></li>
 			  <li class="active">公告详情</li>
 			</ol>
-			<table class="table table-bordered table-hover table-condensed table-responsive">
+			<table class="table table-bordered table-hover table-condensed table-responsive" style="width: 500px;">
 				<tr>
 			    	<td>活动名称</td> <td>${activity.name }</td>
 			    </tr>  
@@ -48,23 +59,29 @@
 			    	<td>活动类型</td> <td>${activity.actType.name }</td>
 			    </tr> 
 			    <tr>
+			    	<td>活动地点</td> <td>${activity.location }</td>
+			    </tr> 
+			    <tr>
 			    	<td>活动加分时长</td> <td>${activity.duration }小时</td>
 			    </tr> 
 		      	<tr>
 		        	<td>参与人数</td> <td>${activity.number }人</td>
 		      	</tr>  
 		      	<tr>
-		        	<td>联系人</td> <td>${activity.contact }人</td>
+		        	<td>联系人</td> <td>${activity.contact }</td>
 		      	</tr> 
 		      	<tr>
-		        	<td>联系方式</td> <td>${activity.phone }人</td>
-		      	</tr> 
-		      	<tr>
-		        	<td>参与人数</td> <td>${activity.number }人</td>
+		        	<td>联系方式</td> <td>${activity.phone }</td>
 		      	</tr> 
 		      	<tr>
 		        	<td>报名截止日期</td> <td><fmt:formatDate value="${activity.endDate }" pattern="yyyy-MM-dd"/></td>
 		      	</tr> 
+		      	
+		      	<tr>
+		      		<td colspan="2">
+		      			<button class="btn btn-primary" id="apply">我要报名</button>
+		      		</td>
+		      	</tr>
 		      	 	
 			</table>
 		</div>
@@ -72,7 +89,47 @@
 	
     <script src="${pageContext.request.contextPath }/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+		$(function(){
+			$("#apply").click(function(){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/stu/apply",
+					type: "post",
+					data: {"id": '${activity.id}'},	
+					dataType: "text",
+					success: function(data){
+						
+						alert(data)
+					}
+				});
+			});			
+		});    	
+    	
+    </script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     

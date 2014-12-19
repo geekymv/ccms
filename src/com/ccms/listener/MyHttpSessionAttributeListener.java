@@ -31,6 +31,9 @@ public class MyHttpSessionAttributeListener implements HttpSessionAttributeListe
 			System.out.println("session == null");
 		}else {
 			System.out.println("session != null");
+			
+			Object obj = session.getAttribute("user");
+			
 		}
 		
 //		Object obj = session.getAttribute("user");

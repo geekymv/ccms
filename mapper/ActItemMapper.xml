@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+"-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccms.dao.ActItemDAO">
+	
+	<!-- 学生报名活动 -->
+	<insert id="add" parameterType="ActItem">
+	    insert into t_activity_item (
+	       act_id
+	      ,stu_id
+	      ,audit
+	    ) VALUES (
+	       activity.id  
+	      ,student.id
+	       0  
+	    );
+	</insert>
+	
+	<!--  根据活动id和学生id查询 -->
+	<select id="queryByActIdAndStuId" resultType="ActItem">
+		select id, audit where act_id=#{activityId} and stu_id=#{studentId} 
+	</select>
+	
+	<!-- 更新 
+	<update id="update" parameterType="Activity">
+	</update>
+	-->
+	
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
