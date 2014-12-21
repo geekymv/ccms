@@ -1,5 +1,8 @@
 package com.ccms.service;
 
+import com.ccms.pojo.Activity;
+import com.ccms.pojo.Student;
+
 public interface ActItemService {
 	
 	/**
@@ -8,6 +11,6 @@ public interface ActItemService {
 	 * @param studentId
 	 * @return
 	 */
-	public boolean apply(Integer activityId, Integer studentId);
+	public boolean apply(Activity activity, Student student);
 
 }

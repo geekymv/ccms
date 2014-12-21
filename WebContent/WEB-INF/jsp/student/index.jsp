@@ -52,7 +52,7 @@
 			         <td><fmt:formatDate value="${activity.publishTime }" pattern="yyyy年MM月dd日"/> </td>
 			         <td>${activity.actType.name }</td>
 			         <td>${activity.duration }小时</td>
-			         <td><a href="activity/detail/${activity.id }">查看</a></td>
+			         <td><a href="${pageContext.request.contextPath }/stu/activity_detail/${activity.id }">查看</a></td>
 			         <td>报名</td>
 			      </tr>
 			      </c:forEach>		

@@ -26,6 +26,11 @@ public class Activity {
 	private String assist; /*活动协助人员*/
 	private Integer status; /*状态:通过1， 未通过0， 删除-1*/
 
+	public Activity() {
+	}
+	public Activity(Integer id) {
+		this.id = id;
+	}
 	
 	
 	@Override
