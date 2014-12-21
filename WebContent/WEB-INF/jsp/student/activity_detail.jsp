@@ -23,7 +23,7 @@
     	table {
     		margin: 0 auto;
     	}
-    	td {
+    	td, th {
     		font-family: "微软雅黑";
     		text-align: center;
     	}
@@ -41,46 +41,52 @@
 			</ol>
 			<table class="table table-bordered table-hover table-condensed table-responsive" style="width: 500px;">
 				<tr>
-			    	<td>活动名称</td> <td>${activity.name }</td>
+			    	<th>活动名称</th> <td>${activity.name }</td>
 			    </tr>  
 			    <tr>
-			        <td>发布单位</td> <td>${activity.college.name }</td>
+			        <th>发布单位</th> <td>${activity.college.name }</td>
 			    </tr>
 			    <tr>
-			    	<td>发布时间</td> <td><fmt:formatDate value="${activity.publishTime }" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+			    	<th>发布时间</th> <td><fmt:formatDate value="${activity.publishTime }" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 			    </tr>    
 			    <tr>
-			    	<td>活动对象</td> <td>${activity.actObject }</td>
+			    	<th>活动对象</th> <td>${activity.actObject }</td>
 			    </tr>  
 			    <tr>
-			    	<td>活动时间</td> <td>${activity.dateTime }</td>
+			    	<th>活动时间</th> <td>${activity.dateTime }</td>
 			    </tr> 
 			    <tr>
-			    	<td>活动类型</td> <td>${activity.actType.name }</td>
+			    	<th>活动类型</th> <td>${activity.actType.name }</td>
 			    </tr> 
 			    <tr>
-			    	<td>活动地点</td> <td>${activity.location }</td>
+			    	<th>活动地点</th> <td>${activity.location }</td>
 			    </tr> 
 			    <tr>
-			    	<td>活动加分时长</td> <td>${activity.duration }小时</td>
+			    	<th>活动加分时长</th> <td>${activity.duration }小时</td>
 			    </tr> 
 		      	<tr>
-		        	<td>参与人数</td> <td>${activity.number }人</td>
+		        	<th>参与人数</th> <td>${activity.number }人</td>
 		      	</tr>  
 		      	<tr>
-		        	<td>联系人</td> <td>${activity.contact }</td>
+		        	<th>联系人</th> <td>${activity.contact }</td>
 		      	</tr> 
 		      	<tr>
-		        	<td>联系方式</td> <td>${activity.phone }</td>
+		        	<th>联系方式</th> <td>${activity.phone }</td>
 		      	</tr> 
 		      	<tr>
-		        	<td>报名截止日期</td> <td><fmt:formatDate value="${activity.endDate }" pattern="yyyy-MM-dd"/></td>
+		        	<th>报名截止日期</th> <td><fmt:formatDate value="${activity.endDate }" pattern="yyyy-MM-dd"/></td>
 		      	</tr> 
 		      	
 		      	<tr>
-		      		<td colspan="2">
-		      			<button class="btn btn-primary" id="apply">我要报名</button>
-		      		</td>
+		      		<th colspan="2">
+		      			<c:if test="${isApplyed == 'isApplyed' }">
+		      				<span style="color:red;">已报名</span>
+			      			<button class="btn btn-primary" id="apply" onclick="alert('暂未提供取消报名功能！敬请期待...')">取消报名</button>
+		      			</c:if>
+		      			<c:if test="${isApplyed == 'unApply' }">
+		      				<button class="btn btn-primary" id="apply">我要报名</button>
+		      			</c:if>
+		      		</th>
 		      	</tr>
 		      	 	
 			</table>
@@ -99,8 +105,9 @@
 					data: {"id": '${activity.id}'},	
 					dataType: "text",
 					success: function(data){
-						
-						alert(data)
+						if(data == "success") {
+							alert("报名成功");
+						}
 					}
 				});
 			});			

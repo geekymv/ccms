@@ -7,26 +7,14 @@
 	
 	<!-- 学生报名活动 -->
 	<insert id="add" parameterType="ActItem">
-	    insert into t_activity_item (
-	       act_id
-	      ,stu_id
-	      ,audit
-	    ) VALUES (
-	       activity.id  
-	      ,student.id
-	       0  
-	    );
+	    insert into t_activity_item (act_id, stu_id , audit) 
+	    VALUES (#{activity.id}, #{student.id}, #{audit});
 	</insert>
 	
-	<!--  根据活动id和学生id查询 -->
+	<!--  根据活动id和学生id查询  -->
 	<select id="queryByActIdAndStuId" resultType="ActItem">
-		select id, audit where act_id=#{activityId} and stu_id=#{studentId} 
+		select id, audit from t_activity_item where act_id=#{activityId} and stu_id=#{studentId};
 	</select>
-	
-	<!-- 更新 
-	<update id="update" parameterType="Activity">
-	</update>
-	-->
 	
 </mapper>  
 

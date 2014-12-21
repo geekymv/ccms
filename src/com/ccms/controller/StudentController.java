@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.pojo.Activity;
 import com.ccms.pojo.Student;
+import com.ccms.service.ActItemService;
 import com.ccms.service.ActivityService;
 import com.ccms.service.StudentService;
 
@@ -24,6 +25,8 @@ public class StudentController {
 	private StudentService studentService;
 	@Autowired
 	private ActivityService activityService;
+	@Autowired
+	private ActItemService actItemService;
 	
 	/**
 	 * 学生登录
@@ -71,13 +74,21 @@ public class StudentController {
 	 * @return
 	 */
 	@RequestMapping("/activity_detail/{id}")
-	public String detail(@PathVariable Integer id, Model model) {
-		
-		System.out.println("id = " + id);
-		
+	public String detail(@PathVariable Integer id, Model model, HttpSession session) {
 		Activity activity = activityService.detail(id);
 		model.addAttribute("activity", activity);
 		
+//		Student student = (Student) session.getAttribute("user");
+		Student student = new Student();
+		student.setId(1);
+		// 判断该学生是否报名
+		boolean res = actItemService.isApplyed(activity, student);
+		
+		if(res) { // 该学生已经报名了该活动
+			model.addAttribute("isApplyed", "isApplyed");
+		}else {
+			model.addAttribute("isApplyed", "unApply");
+		}
 		return "student/activity_detail";
 	}
 	
@@ -88,11 +99,25 @@ public class StudentController {
 	 */
 	@RequestMapping("/apply")
 	@ResponseBody
-	public String apply(Integer id){
-		
+	public String apply(Integer id, HttpSession session){
 		System.out.println("activity id = " + id);	
+
+		Activity activity = activityService.detail(id);
+//		Student student = (Student) session.getAttribute("user");
 		
-		return "success";
+		Student student = new Student();
+		student.setId(1);
+//		if(student == null) {
+//			return "fail";
+//		}
+		
+		boolean res = actItemService.apply(activity, student);
+		if(res){
+			return "success";
+		} else {
+			return "fail";
+		}
+		
 	}
 }
 

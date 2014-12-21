@@ -38,4 +38,41 @@ public class ActItemServiceImpl implements ActItemService {
 		
 		return false;
 	}
+
+	
+	@Override
+	public boolean isApplyed(Activity activity, Student student) {
+		
+		ActItem actItem = actItemDAO.queryByActIdAndStuId(activity.getId(), student.getId());
+	
+		return actItem == null ? false : true;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
