@@ -1,5 +1,8 @@
 package com.ccms.service;
 
+import java.util.List;
+
+import com.ccms.pojo.ActItem;
 import com.ccms.pojo.Activity;
 import com.ccms.pojo.Student;
 
@@ -20,5 +23,13 @@ public interface ActItemService {
 	 * @return
 	 */
 	public boolean apply(Activity activity, Student student);
+	
+	
+	/**
+	 * 根据学生id查询学生报名的活动
+	 * @param studentId
+	 * @return
+	 */
+	public List<ActItem> queryAllActivityItem(Integer studentId);
 
 }

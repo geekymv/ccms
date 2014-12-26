@@ -21,4 +21,6 @@ public interface ActivityService {
 	 */
 	public Activity detail(Integer id);
 	
+	
+	
 }

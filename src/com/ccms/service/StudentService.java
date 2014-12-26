@@ -18,4 +18,11 @@ public interface StudentService {
 	 * @return
 	 */
 	public Student login(String num, String pwd);
+	
+	/**
+	 * 根据学生学号获得学生个人信息
+	 * @param num
+	 * @return
+	 */
+	public Student getInfo(String num);
 }

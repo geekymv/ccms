@@ -11,6 +11,12 @@ public class ActItem {
 	private Student student;
 	private Integer audit; /*审核：认证通过1，等待认证0， 认证不通过-1*/
 	
+	@Override
+	public String toString() {
+		return "ActItem [id=" + id + ", activity=" + activity + ", audit="
+				+ audit + "]";
+	}
+	
 	public Integer getId() {
 		return id;
 	}

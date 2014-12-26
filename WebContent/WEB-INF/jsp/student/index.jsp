@@ -19,6 +19,15 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+    	table {
+    		margin: 0 auto;
+    	}
+    	td, th {
+    		font-family: "微软雅黑";
+    		text-align: center;
+    	}
+  	</style>
   </head>
   <body>
   
@@ -39,8 +48,7 @@
 			         <th>发布时间</th>
 			         <th>活动类型</th>
 			         <th>活动时长</th>
-			         <th>查看</th>
-			         <th>报名</th>
+			         <th>查看活动详情</th>
 			      </tr>
 			   </thead>
 			   <tbody>
@@ -52,8 +60,11 @@
 			         <td><fmt:formatDate value="${activity.publishTime }" pattern="yyyy年MM月dd日"/> </td>
 			         <td>${activity.actType.name }</td>
 			         <td>${activity.duration }小时</td>
-			         <td><a href="${pageContext.request.contextPath }/stu/activity_detail/${activity.id }">查看</a></td>
-			         <td>报名</td>
+			         <td>
+			         	<a href="${pageContext.request.contextPath }/stu/activity_detail/${activity.id }">
+			         		<span class="glyphicon glyphicon-eye-open"></span>
+			         	</a>
+			         </td>
 			      </tr>
 			      </c:forEach>		
 			   </tbody>

@@ -17,6 +17,10 @@
 		contact=#{contact}, address=#{address} where id=#{id};
 	</update>
 	
+	<select id="queryAll" resultType="College">
+		select * from t_colleges;
+	</select>
+	
 	<!-- 查询 -->
 	<select id="queryById" parameterType="int" resultType="College">
 		select * from t_colleges where id=#{id}	

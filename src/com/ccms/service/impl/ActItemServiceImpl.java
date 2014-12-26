@@ -1,5 +1,7 @@
 package com.ccms.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,13 @@ public class ActItemServiceImpl implements ActItemService {
 		ActItem actItem = actItemDAO.queryByActIdAndStuId(activity.getId(), student.getId());
 	
 		return actItem == null ? false : true;
+	}
+
+
+	@Override
+	public List<ActItem> queryAllActivityItem(Integer studentId) {
+
+		return actItemDAO.queryAllActivityItem(studentId);
 	}
 }
 

@@ -16,6 +16,21 @@
 		select id, audit from t_activity_item where act_id=#{activityId} and stu_id=#{studentId};
 	</select>
 	
+	<!-- 根据学生id查询学生报名的活动  -->
+	<select id="queryAllActivityItem" parameterType="int" resultMap="ActItemResultMap">
+		select act_item.id item_id, act_item.audit, act.id act_id
+		FROM t_activity_item act_item
+		inner join t_activities act on act_item.act_id=act.id where act_item.stu_id=1; 
+	</select>
+	
+	<resultMap type="ActItem" id="ActItemResultMap">
+		<id column="item_id" property="id" />
+		<result column="audit" property="audit" />
+		<association property="activity" javaType="Activity" column="act_id" 
+						select="com.ccms.dao.ActivityDAO.queryById">
+		</association>
+	</resultMap>
+	
 </mapper>  
 
 

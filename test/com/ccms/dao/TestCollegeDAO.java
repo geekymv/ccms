@@ -1,5 +1,7 @@
 package com.ccms.dao;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,16 @@ public class TestCollegeDAO {
 		System.out.println(college);
 	}
 
+	@Test
+	public void testQueryAll() {
+		
+		List<College> colleges = collegeDAO.queryAll();
+
+		for (College college : colleges) {
+			System.out.println(college);
+		}
+	}
+	
 	@Test
 	public void testUpdate() {
 

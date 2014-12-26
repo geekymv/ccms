@@ -1,5 +1,7 @@
 package com.ccms.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ccms.pojo.ActItem;
 import com.ccms.pojo.Activity;
+import com.ccms.pojo.College;
+import com.ccms.pojo.Specialty;
 import com.ccms.pojo.Student;
 import com.ccms.service.ActItemService;
 import com.ccms.service.ActivityService;
+import com.ccms.service.CollegeService;
 import com.ccms.service.StudentService;
 
 @Controller
@@ -27,6 +33,8 @@ public class StudentController {
 	private ActivityService activityService;
 	@Autowired
 	private ActItemService actItemService;
+	@Autowired
+	private CollegeService collegeService;
 	
 	/**
 	 * 学生登录
@@ -43,13 +51,15 @@ public class StudentController {
 		
 		Student student = studentService.login(account, password);
 		
+		System.out.println("student = " + student);
+		
 		if(student == null) {
 			return "fail";
 		}
 		
 		session.setAttribute("user", student);
-		session.setMaxInactiveInterval(30);
-		
+	//	session.setMaxInactiveInterval(30);
+
 		return "success";
 	}
 	
@@ -117,8 +127,72 @@ public class StudentController {
 		} else {
 			return "fail";
 		}
-		
 	}
+	
+	
+	/**
+	 * 显示学生报名的活动
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/myactivities")
+	public String applyedActivities(Model model) {
+		
+		List<ActItem> actItems = actItemService.queryAllActivityItem(1);
+		
+		model.addAttribute("actItems", actItems);
+		
+		return "student/my_activity";
+	}
+	
+	/**
+	 * 跳转到个人信息管理页面
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/{num}/infocenter", method=RequestMethod.GET)
+	public String infoCenter(@PathVariable String num, Model model) {
+		
+		Student student = studentService.getInfo(num);
+		model.addAttribute("student", student);
+		
+		// 获得该学生所在学院的所有专业
+		List<Specialty> specialties = collegeService.getSpecialties(student.getCollege().getId());
+		model.addAttribute("specialties", specialties);
+		
+		// 查询所有学院
+		List<College> colleges = collegeService.getColleges();
+		model.addAttribute("colleges", colleges);
+
+		return "student/into_center";
+	}
+	
+	/**
+	 * 表单级联响应Ajax请求获得该学院所有专业
+	 * @param collegeId
+	 * @return
+	 */
+	@RequestMapping("/getSpecialties")
+	@ResponseBody
+	public List<Specialty> getSpecialties(Integer collegeId){
+		
+		return collegeService.getSpecialties(collegeId);
+	}
+
+	/**
+	 * 更新学生信息
+	 * @param student
+	 * @return
+	 */
+	@RequestMapping(value="/updateInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateInfo(Student student){
+		
+		
+		return "success";
+	}
+	
 }
 
 

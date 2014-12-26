@@ -81,7 +81,7 @@
 		      		<th colspan="2">
 		      			<c:if test="${isApplyed == 'isApplyed' }">
 		      				<span style="color:red;">已报名</span>
-			      			<button class="btn btn-primary" id="apply" onclick="alert('暂未提供取消报名功能！敬请期待...')">取消报名</button>
+			      			<button class="btn btn-primary" id="cancel" onclick="alert('暂未提供取消报名功能！敬请期待...')">取消报名</button>
 		      			</c:if>
 		      			<c:if test="${isApplyed == 'unApply' }">
 		      				<button class="btn btn-primary" id="apply">我要报名</button>
@@ -107,6 +107,7 @@
 					success: function(data){
 						if(data == "success") {
 							alert("报名成功");
+							window.location.reload();	// 刷新当前页面
 						}
 					}
 				});

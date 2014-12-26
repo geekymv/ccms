@@ -29,4 +29,11 @@ public class StudentServiceImpl implements StudentService {
 		return studentDAO.queryByNumAndPwd(num, pwd);
 	}
 
+
+	@Override
+	public Student getInfo(String num) {
+		
+		return studentDAO.queryByNum(num);
+	}
+
 }
