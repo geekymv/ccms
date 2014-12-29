@@ -25,4 +25,32 @@ public interface StudentService {
 	 * @return
 	 */
 	public Student getInfo(String num);
+	
+	/**
+	 * 更新学生信息
+	 * @param student
+	 * @return
+	 */
+	public boolean updateInfo(Student student);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

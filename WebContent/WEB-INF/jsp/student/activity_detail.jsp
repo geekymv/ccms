@@ -22,10 +22,15 @@
     <style type="text/css">
     	table {
     		margin: 0 auto;
-    	}
-    	td, th {
     		font-family: "微软雅黑";
+    	}
+    	
+    	th {
     		text-align: center;
+    	}
+    	
+    	td {
+    		text-align: left;
     	}
     </style>
     

@@ -189,8 +189,14 @@ public class StudentController {
 	@ResponseBody
 	public String updateInfo(Student student){
 		
+		boolean res = studentService.updateInfo(student);
 		
-		return "success";
+		if(res){
+			return "success";
+		}else {
+			return "fail";
+		}
+		
 	}
 	
 }

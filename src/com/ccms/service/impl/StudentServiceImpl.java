@@ -36,4 +36,33 @@ public class StudentServiceImpl implements StudentService {
 		return studentDAO.queryByNum(num);
 	}
 
+
+	@Override
+	public boolean updateInfo(Student student) {
+
+		int res = studentDAO.update(student);
+		
+		return res == 1 ? true : false;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

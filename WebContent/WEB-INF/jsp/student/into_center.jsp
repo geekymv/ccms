@@ -23,8 +23,20 @@
     	table {
     		margin: 0 auto;
     	}
-    	td, th {
+    	tr th {
     		font-family: "微软雅黑";
+			text-align: right;
+    	}
+    	tr td {
+    		margin-left: 20px;
+    	}
+    	
+    	td span {
+    		color: red;
+    		padding-left: 10px;
+    	}
+    	
+    	#td-submit {
     		text-align: center;
     	}
     </style>
@@ -38,18 +50,34 @@
 			  <li><a href="${pageContext.request.contextPath }">首页</a></li>
 			  <li class="active">账号管理</li>
 			</ol>
+			<form id="stuform">
 			<table class="table table-bordered table-hover table-condensed table-responsive" style="width: 500px;">
 				<tr>
 			    	<th>学号</th> 
 			    	<td>
 			    		${student.num }
 			    		<input type="hidden" name="id" value="${student.id }"/>
+			    		<input type="hidden" name="num" value="${student.num }"/>
 			    	</td>
 			    </tr>  
 			    <tr>
+			        <th>登录密码</th> 
+			        <td>
+			        	<input type="password" name="pwd" id="pwd" />
+			        	<span>若不修改密码，不用填写</span>
+			        </td>
+			    </tr>
+			    <tr>
+			        <th>密码确认</th> 
+			        <td>
+			        	<input type="password" name="repwd" id="repwd" />
+			        </td>
+			    </tr>
+			    <tr>
 			        <th>姓名</th> 
 			        <td>
-			        	<input type="text" name="name" id="name" value="${student.name }" />
+			        	<input type="text" name="name" id="name" value="${student.name}" autofocus="autofocus" />
+			        	<span>*</span>
 			        </td>
 			    </tr>
 			     <tr>
@@ -82,6 +110,7 @@
 		    			</c:choose>
 		    			</c:forEach>
 		    		</select>
+		    		<span>*</span>
 			    	</td>
 			    </tr>    
 			    <tr>
@@ -98,41 +127,46 @@
 			    			</c:otherwise>
 			    		</c:choose>
 			    		</c:forEach>
-			    	</select>		
+			    	</select>	
+			    	<span>*</span>	
 			    	</td>
 			    </tr>  
 			    <tr>
 			    	<th>联系电话</th> 
 			    	<td>
-			    		<input type="text" name="phone" value="${student.phone}" />
+			    		<input type="text" name="phone" id="phone" value="${student.phone}" />
+			    		<span>*</span>
 			    	</td>
+			    
 			    </tr> 
 			    <tr>
 			    	<th>邮箱</th> 
 			    	<td>
-			    		<input type="text" name="email" value="${student.email }"/>
+			    		<input type="text" name="email" id="email" value="${student.email }"/>
+			    		<span>*</span>
 			    	</td>
 			    </tr> 
 			    <tr>
 			    	<th>QQ</th> 
 			    	<td>
-			    		<input type="text" name="qq" value="${student.qq }" />
+			    		<input type="text" name="qq" id="qq" value="${student.qq }" />
+			    		<span>*</span>
 			    	</td>
 			    </tr> 
 			    <tr>
 			    	<th>个人简介</th> 
 			    	<td>
-			    		<textarea name="introduce"><c:if test="${empty student.introduce }">暂无介绍...</c:if></textarea>
+			    		<textarea name="introduce" id="introduce" rows="4" cols="22"><c:if test="${empty student.introduce }">暂无介绍...</c:if></textarea>
 			    	</td>
 			    </tr> 
 			    
 			    <tr>
-			    	<td colspan="2">
-			    		<button class="btn btn-primary" id="submit">确认修改</button>
+			    	<td colspan="2" id="td-submit">
+			    		<button type="button"  class="btn btn-primary" id="submit">确认修改</button>
 			    	</td>
 			    </tr>
-		      	 	
 			</table>
+			</form>
 		</div>
 	</div>
 	
@@ -163,15 +197,39 @@
 				});
 			});
 			
+			
 			/*修改信息*/
 			$("#submit").click(function(){
-				var id = '${student.id }';
-				var col_id = $("#col_name").val();
+				var id = '${student.id }'; // 学生id
+				var pwd = $("#pwd").val();
+				var repwd = $("#repwd").val();
+				
+				if(pwd != repwd) {
+					alert('密码不一致');
+					return;
+				}
+				
+				var col_id = $("#col_name").val(); // 学院id
 				var spe_id = $("#spe_id").val(); // 专业id	
-				var name = $("#name").val().trim();
-				var gender = $("input[name='gender']").val();
+				var name = $("#name").val().trim(); // 姓名
+				var gender = $("input[name='gender']").val(); // 性别
+				var phone = $("#phone").val();
+				var email = $("#email").val();
+				var qq = $("#qq").val();
+				var introduce = $("#introduce").val();
 	
-				alert(gender);
+				var data = $("#stuform").serialize();
+				data = decodeURIComponent(data,true); /* 解决中文乱码问题 */
+				
+				$.ajax({
+					url: '${pageContext.request.contextPath}/stu/updateInfo',
+					type: 'post',
+					data: data,
+					dataType: 'text',
+					success: function(data){
+						alert(data);
+					}
+				});
 			});
 		});    	
     	
