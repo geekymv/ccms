@@ -10,38 +10,6 @@
 <script src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$(".login").click(function(){
-			// 显示登录模态框
-			$("#myModal").modal('show');
-		});
-		
-		$("#login").click(function(){
-			var account = $("#account").val();
-			var password = $("#password").val();
-			
-			if(!account || !password) {
-				$(".error").html("用户名或密码不能为空！");
-				return;
-			}
-			
-			$.ajax({
-				url: "${pageContext.request.contextPath }/stu/login",
-				type: "POST",
-				data: {"account": account, "password": password},
-				dataType: "text",
-				success: function(data){
-					if(data == "success"){
-						$("#myModal").modal('hide');
-						window.location.reload(); // 刷新当前页面
-					}else if(data == "fail"){
-						$(".error").html("用户名或密码错误！");
-					}
-				}
-			});
-			
-		});
-		
-		
 		$("#logout").click(function(){
 			$.ajax({
 				url: "${pageContext.request.contextPath }/stu/logout",
@@ -49,7 +17,7 @@
 				dataType: "text",
 				success: function(data){
 					alert(data);
-					window.location.href="index"; 
+					window.location.href="${pageContext.request.contextPath }/"; 
 				}
 			});
 		});
@@ -128,57 +96,5 @@
 		</div>
 	  </div>
 	</div>
-	
-	<!-- 用户登录 -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" style="width: 400px; margin-top: 200px">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">
-	        <span aria-hidden="true">&times;</span>
-	        <span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="myModalLabel">用户登录</h4>
-	      </div>
-	      <div class="modal-body">
-			<form class="form-horizontal" role="form">
-			  <div class="form-group">
-			    <label for="account" class="col-sm-2 control-label">账号</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="account" name="account" placeholder="请输入账号"/>
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="password" class="col-sm-2 control-label">密码</label>
-			    <div class="col-sm-10">
-			      <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"/>
-			    </div>
-			  </div>
-			  <div class="form-group">
-			  	<div class='col-sm-10 col-sm-offset-2 error' style="color: red;">
-			  	</div>
-			  </div>
-			  
-			  <!-- 
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <div class="checkbox">
-			        <label>
-			          <input type="checkbox">下次自动登录
-			        </label>
-			      </div>
-			    </div>
-			  </div>
-			   -->	
-			</form>
-
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" id="login">登录</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
 </body>
 </html>

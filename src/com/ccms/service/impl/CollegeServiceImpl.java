@@ -28,4 +28,10 @@ public class CollegeServiceImpl implements CollegeService {
 		return collegeDAO.querySpecialtys(collegeId).getSpecialties();
 	}
 
+	@Override
+	public College login(String account, String pwd) {
+
+		return collegeDAO.queryByAccountPwd(account, pwd);
+	}
+
 }

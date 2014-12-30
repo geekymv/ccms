@@ -5,7 +5,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-
 	<import resource="classpath:beans.xml" />
 
 	<mvc:annotation-driven />
@@ -15,8 +14,10 @@
 		mvc:view-controller可以在不需要Controller处理request的情况，转向到设置的View 
 		<mvc:view-controller path="/" view-name="forward:login"/>
 	 -->
+	<!--  
+	<mvc:view-controller path="/" view-name="redirect:login"/>
+ 	-->
 	
-
 	<!-- 配置拦截器 -->
 	<mvc:interceptors>
 		<bean class="com.ccms.interceptor.LoginInterceptor">

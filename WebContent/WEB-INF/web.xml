@@ -30,11 +30,5 @@
 		<servlet-name>hello</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-	<listener>
-		<listener-class>com.ccms.listener.MyHttpSessionAttributeListener</listener-class>
-	</listener>
-	
-	
-	
+
 </web-app>

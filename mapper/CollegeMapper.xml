@@ -17,6 +17,10 @@
 		contact=#{contact}, address=#{address} where id=#{id};
 	</update>
 	
+	<select id="queryByAccountPwd" resultType="College">
+		select * from t_colleges where account=#{account} and pwd=#{pwd};
+	</select>
+	
 	<select id="queryAll" resultType="College">
 		select * from t_colleges;
 	</select>

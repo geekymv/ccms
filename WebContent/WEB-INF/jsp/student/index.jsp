@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>欢迎访问公益活动时间认证系统</title>
 
-    <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,7 +77,7 @@
 	           -->	
 	          <nav style="text-align:center;">
 			  <ul class="pagination">
-			      <pg:pager url="${pageContext.request.contextPath }/index" items="${pager.totalRecord }" export="currentPageNumber=pageNumber" maxPageItems="3">  
+			      <pg:pager url="${pageContext.request.contextPath }/stu/index" items="${pager.totalRecord }" export="currentPageNumber=pageNumber" maxPageItems="3">  
 					   <%--  <li><a>总记录数${pager.totalRecord }</a></li>
 					    <li><a>总页数${pager.totalPage }</a></li>
 					    <li><a>当前页${currentPageNumber }</a></li> --%>

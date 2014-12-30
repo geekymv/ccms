@@ -25,6 +25,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<!--导航-->
 				<ul class="nav navbar-nav navbar-right">
+					<%--
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">首页<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
@@ -43,6 +44,7 @@
 							</li>
 						</ul>
 					</li>
+					 --%>
 					<li>
 						<a href="#" data-toggle="modal" data-target="#myModal2">开发团队</a>
 					</li>
@@ -134,28 +136,78 @@
 		</div>
 		<form role="form" method="post">
 			<div class="form-group">
-				<label for="exampleInputEmail1">用户名</label>
-				<input type="text" class="form-control" placeholder="输入您的用户名">
+				<label for="account">用户名</label>
+				<input type="text" class="form-control" name="account" id="account" placeholder="输入您的用户名">
 			</div>
 			<div class="form-group">
-				<label for="exampleInputPassword1">密码</label>
-				<input type="password" class="form-control"placeholder="输入您的密码">
+				<label for="password">密码</label>
+				<input type="password" class="form-control" name="password" id="password" placeholder="输入您的密码">
 			</div>
 			<div class="form-group">
 				<div class="checkbox">
-					<label>
-						<input type="checkbox">
-						记住密码 </label><label class="forget"><a href="#">忘记密码？</a></label>
+					<label><input type="checkbox">记住密码 </label>
+					<label class="forget"><a href="#">忘记密码？</a></label>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary sub-btn">
-				登　　录
-			</button>
+			<button type="button" class="btn btn-primary sub-btn">登　　录</button>
 		</form>
 	</div>
 	
     <script src="${pageContext.request.contextPath }/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+		$(function(){
+			$('.sub-btn').on('click', function(){
+				var account = $("#account").val();
+				var password = $("#password").val();
+				
+				$.ajax({
+					url: 'login',
+					type: 'post',
+					data: {'account': account, 'password': password},
+					dataType: 'text',
+					success: function(data){
+						if(data == 'student_success') {
+							alert('学生登录成功！');
+							window.location.href="${pageContext.request.contextPath }/stu/success"
+							
+						}else if(data == 'college_success'){
+							alert('College登录成功！');	
+							
+						}else if(data == 'errors'){
+							alert('用户名或密码错误！');
+						}
+					}
+				});
+			});
+		});
+	</script>    
+    
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

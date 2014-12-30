@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ccms.pojo.ActItem;
 import com.ccms.pojo.Activity;
 import com.ccms.pojo.College;
+import com.ccms.pojo.Pager;
 import com.ccms.pojo.Specialty;
 import com.ccms.pojo.Student;
 import com.ccms.service.ActItemService;
@@ -37,32 +38,39 @@ public class StudentController {
 	private CollegeService collegeService;
 	
 	/**
-	 * 学生登录
-	 * @param account
-	 * @param password
-	 * @param session
-	 * @param request
-	 * @return
+	 * 学生登录成功
 	 */
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	@ResponseBody
-	public String login(String account, String password, 
-							HttpSession session, HttpServletRequest request) {
-		
-		Student student = studentService.login(account, password);
-		
-		System.out.println("student = " + student);
-		
-		if(student == null) {
-			return "fail";
-		}
-		
-		session.setAttribute("user", student);
-	//	session.setMaxInactiveInterval(30);
+	@RequestMapping(value="/success", method=RequestMethod.GET)
+	public String login() {
 
-		return "success";
+		return "redirect:index";
 	}
 	
+	
+	/**
+	 * 分页显示activity
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/index")
+	public String index(HttpServletRequest request, Model model) {
+		
+		String pagerOffset = request.getParameter("pager.offset");
+		Integer offSet = 0;
+		if(pagerOffset != null && !pagerOffset.trim().equals("")) {
+			offSet = Integer.parseInt(pagerOffset);
+		}
+		
+		System.out.println(offSet);
+		
+		Pager<Activity> pager = activityService.queryAllStatusByPage(offSet, 3);
+		
+		model.addAttribute("pager", pager);
+		
+		return "student/index";
+	}
+
 	/**
 	 * 用户退出
 	 * @param session

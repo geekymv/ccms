@@ -18,4 +18,12 @@ public interface CollegeService {
 	 * @return
 	 */
 	public List<Specialty> getSpecialties(Integer collegeId);
+	
+	/**
+	 * 登录
+	 * @param account
+	 * @param pwd
+	 * @return
+	 */
+	public College login(String account, String pwd);
 }
