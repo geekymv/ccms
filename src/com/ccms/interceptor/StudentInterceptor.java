@@ -16,6 +16,9 @@ import com.ccms.pojo.Student;
  * @author Geek_ymv
  */
 public class StudentInterceptor implements HandlerInterceptor {
+	/**
+	 * 不要要拦截的url
+	 */
 	private List<String> excludeUrls;
 	public void setExcludeUrls(List<String> excludeUrls) {
 		this.excludeUrls = excludeUrls;
@@ -28,10 +31,12 @@ public class StudentInterceptor implements HandlerInterceptor {
 		String uri = request.getRequestURI();
 		System.out.println("uri = " + uri);
 		
-		for (String excludeUrl : excludeUrls) {
-			if(uri.endsWith(excludeUrl) || uri.contains("/resources/")) {
-				System.out.println("url 不需要拦截...");
-				return true;
+		if(excludeUrls != null){
+			for (String excludeUrl : excludeUrls) {
+				if(uri.endsWith(excludeUrl) || uri.contains("/resources/")) {
+					System.out.println("url 不需要拦截...");
+					return true;
+				}
 			}
 		}
 		
@@ -46,10 +51,17 @@ public class StudentInterceptor implements HandlerInterceptor {
 			response.sendRedirect(contextPath); // 跳转到/ccms
 			
 			return false;
+		}else {
+			
+			System.out.println("session拦截通过...");
+			
+			if(obj instanceof Student) { // 是学生
+				return true;
+			}else {
+				return false;
+			}
 		}
 		
-		System.out.println("session拦截通过...");
-		return true;
 	}
 
 	@Override

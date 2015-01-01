@@ -10,7 +10,8 @@ create table t_colleges(
 	pwd varchar(30), /*登录密码*/ 
 	phone varchar(20), /*电话号码*/
 	contact varchar(20), /*联系人姓名*/ 
-	address varchar(30) /*办公地址*/
+	address varchar(30), /*办公地址*/
+	authority int not null /*1表示管理员，2表示学院*/
 );
 /*专业*/
 create table t_specialty(
@@ -29,6 +30,7 @@ create table t_students(
 	phone varchar(20), /*手机号码*/
 	email varchar(30), /*邮箱*/
 	qq varchar(11), /*qq*/
+	rank_id, /*受助等级*/
 	col_id int, /*所在学院*/
 	spec_id int, /*所在专业*/
 	introduce varchar(60) /*个人简介*/ 

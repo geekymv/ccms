@@ -2,6 +2,14 @@ package com.ccms.pojo;
 
 /**
  * 中间实体类
+ * 甲等 实践类 30小时
+ * 甲等 劳务类 20小时
+ * 甲等 文体类 18小时
+ * 
+ * 乙等...
+ * 
+ * 丙等...
+ * 
  * @author Geek_ymv
  */
 public class RankActType {

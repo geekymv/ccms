@@ -7,22 +7,23 @@
 	
 	<!-- 添加 -->
 	<insert id="add" parameterType="College">
-		insert into t_colleges(account, name, pwd, phone, contact, address )
-		values(#{account}, #{name}, #{pwd}, #{phone}, #{contact}, #{address});
+		insert into t_colleges(account, name, pwd, phone, contact, address, authority )
+		values(#{account}, #{name}, #{pwd}, #{phone}, #{contact}, #{address}, #{authority});
 	</insert>
 	
 	<!-- 修改 -->
 	<update id="update" parameterType="College">
 		update t_colleges set account=#{account}, name=#{name}, pwd=#{pwd}, phone=#{phone},
-		contact=#{contact}, address=#{address} where id=#{id};
+		contact=#{contact}, address=#{address}, authority=#{authority} where id=#{id};
 	</update>
 	
 	<select id="queryByAccountPwd" resultType="College">
 		select * from t_colleges where account=#{account} and pwd=#{pwd};
 	</select>
 	
+	<!-- 获得所有学院authority=0 -->
 	<select id="queryAll" resultType="College">
-		select * from t_colleges;
+		select * from t_colleges where authority=0;
 	</select>
 	
 	<!-- 查询 -->
@@ -32,9 +33,9 @@
 	
 	<!-- 查询该学院所有的专业 -->
 	<select id="querySpecialtys" parameterType="int" resultMap="querySpecialtysMap">
-		select col.id col_id, col.account, col.name col_name, col.phone, col.contact, col.address,
+		select col.id col_id, col.account, col.name col_name, col.phone, col.contact, col.address, col.authority,
 		spe.id spe_id, spe.name spe_name
-		from t_colleges col inner join t_specialty spe on col.id=spe.col_id where col.id=#{id};
+		from t_colleges col inner join t_specialty spe on col.id=spe.col_id where col.id=#{id} and col.authority=0;
 	</select>
 	<resultMap type="College" id="querySpecialtysMap">
 		<id column="col_id" property="id" />
@@ -43,6 +44,7 @@
 		<result column="phone" property="phone"/>
 		<result column="contact" property="contact"/>
 		<result column="address" property="address"/>
+		<result column="authority" property="authority"/>
 		
 		<collection property="specialties" ofType="Specialty">
 			<id column="spe_id" property="id"/>

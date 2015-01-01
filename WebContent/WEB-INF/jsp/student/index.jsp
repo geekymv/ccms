@@ -39,8 +39,18 @@
 			  <li><a href="${pageContext.request.contextPath }/stu/index">首页</a></li>
 			  <li class="active">活动公告</li>
 			</ol>
+			
+			
+				
 			<table class="table table-bordered table-hover table-condensed table-responsive">
-			   <thead>
+			<c:choose>
+				<c:when test="${empty pager.datas }">
+					<tr>
+						<td colspan="7" style="color: red;">暂无活动公告！</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+				 <thead>
 			      <tr>
 			         <th>活动名称</th>
 			         <th>发布单位</th>
@@ -50,8 +60,8 @@
 			         <th>活动时长</th>
 			         <th>查看活动详情</th>
 			      </tr>
-			   </thead>
-			   <tbody>
+			   	</thead>
+			   	<tbody>
 			   	  <c:forEach items="${pager.datas }" var="activity">
 			      <tr>
 			         <td>${activity.name }</td>
@@ -67,8 +77,12 @@
 			         </td>
 			      </tr>
 			      </c:forEach>		
-			   </tbody>
+			   	</tbody>
+				</c:otherwise>		
+			</c:choose>
 			</table>
+
+			<c:if test="${pager.totalPage > 1}">
 			<div class="panel-footer">
           		<!-- 
 	          	分页显示
@@ -116,6 +130,7 @@
 				</ul>
 				</nav>
             </div>
+            </c:if>
 			
 		</div>
 	</div>

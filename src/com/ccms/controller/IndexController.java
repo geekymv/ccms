@@ -62,9 +62,20 @@ public class IndexController {
 		}
 	}
 	
-	
+	/**
+	 * 用户退出
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/logout")
+	@ResponseBody
+	public String logout(HttpSession session){
 
-	
+		session.invalidate();
+		
+		System.out.println("exit...");
+		return "success";
+	}
 	
 }
 

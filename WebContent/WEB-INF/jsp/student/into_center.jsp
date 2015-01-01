@@ -132,6 +132,15 @@
 			    	</td>
 			    </tr>  
 			    <tr>
+			    	<th>受助等级</th>
+			    	<td>
+			    		<input type="hidden" name="rank.id" value="${student.rank.id }" />
+			    		${student.rank.name }
+			    	
+			    	</td>
+			    </tr>
+			    
+			    <tr>
 			    	<th>联系电话</th> 
 			    	<td>
 			    		<input type="text" name="phone" id="phone" value="${student.phone}" />
@@ -184,16 +193,20 @@
 					data: {"collegeId": col_id},
 					dataType: "json",
 					success: function(data){
-					
-					var html = '<select name="specialty.id" id="spe_id">';
-							for(var i = 0; i < data.length; i++){
-								var specialty = data[i];
-								html += '<option value="'+specialty.id+'">' +specialty.name+ '</option>';
+							var html = '<select name="specialty.id" id="spe_id">';
+							if(data.length > 0){
+								for(var i = 0; i < data.length; i++){
+									var specialty = data[i];
+									html += '<option value="'+specialty.id+'">' +specialty.name+ '</option>';
+								}
+							}else {
+								html += '<option value="-1">没有专业供选择</option>';
 							}
-						html += "</select>";	
-						
-						$("#spe_id").html(html);	
-					}
+							html += "</select>";	
+								
+							$("#spe_id").html(html);	
+					
+					}						
 				});
 			});
 			
@@ -211,6 +224,7 @@
 				
 				var col_id = $("#col_name").val(); // 学院id
 				var spe_id = $("#spe_id").val(); // 专业id	
+							
 				var name = $("#name").val().trim(); // 姓名
 				var gender = $("input[name='gender']").val(); // 性别
 				var phone = $("#phone").val();
@@ -221,6 +235,8 @@
 				var data = $("#stuform").serialize();
 				data = decodeURIComponent(data,true); /* 解决中文乱码问题 */
 				
+				alert(data);
+				
 				$.ajax({
 					url: '${pageContext.request.contextPath}/stu/updateInfo',
 					type: 'post',
@@ -228,6 +244,7 @@
 					dataType: 'text',
 					success: function(data){
 						alert(data);
+						window.location.reload(); //刷新当前页面						
 					}
 				});
 			});

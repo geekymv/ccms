@@ -16,6 +16,7 @@ public class Student {
 	private String qq;
 	private String introduce; // 个人简介
 	
+	private Rank rank;	// 学生受助等级：甲乙丙
 	
 	private College college; //  学院
 	private Specialty specialty; // 专业
@@ -86,6 +87,12 @@ public class Student {
 	}
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
+	}
+	public void setRank(Rank rank) {
+		this.rank = rank;
+	}
+	public Rank getRank() {
+		return rank;
 	}
 	public College getCollege() {
 		return college;

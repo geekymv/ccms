@@ -1,5 +1,6 @@
 package com.ccms.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,28 +63,13 @@ public class StudentController {
 			offSet = Integer.parseInt(pagerOffset);
 		}
 		
-		System.out.println(offSet);
+		System.out.println("offSet = " + offSet);
 		
 		Pager<Activity> pager = activityService.queryAllStatusByPage(offSet, 3);
 		
 		model.addAttribute("pager", pager);
 		
 		return "student/index";
-	}
-
-	/**
-	 * 用户退出
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping("/logout")
-	@ResponseBody
-	public String logout(HttpSession session){
-
-		session.invalidate();
-		
-		System.out.println("exit...");
-		return "success";
 	}
 	
 	/**
@@ -185,7 +171,13 @@ public class StudentController {
 	@ResponseBody
 	public List<Specialty> getSpecialties(Integer collegeId){
 		
-		return collegeService.getSpecialties(collegeId);
+		List<Specialty> specialties = collegeService.getSpecialties(collegeId);
+		
+		if(specialties == null){ // 没有查到该学院的专业集合
+			specialties = new ArrayList<Specialty>();
+		}
+		
+		return specialties;
 	}
 
 	/**
@@ -197,15 +189,31 @@ public class StudentController {
 	@ResponseBody
 	public String updateInfo(Student student){
 		
-		boolean res = studentService.updateInfo(student);
+		Integer speId = student.getSpecialty().getId();
+		if(speId == -1){
+			student.getSpecialty().setId(null);
+		}
 		
+		boolean res = studentService.updateInfo(student);
 		if(res){
 			return "success";
 		}else {
 			return "fail";
 		}
-		
 	}
+	
+	/**
+	 * 时间统计
+	 * @return
+	 */
+	@RequestMapping("/timeCounter")
+	public String timeCounter() {
+		
+		return "student/time_counter";
+	}
+	
+	
+	
 	
 }
 

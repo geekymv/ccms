@@ -25,7 +25,15 @@ public class CollegeServiceImpl implements CollegeService {
 	@Override
 	public List<Specialty> getSpecialties(Integer collegeId) {
 		
-		return collegeDAO.querySpecialtys(collegeId).getSpecialties();
+		College college = collegeDAO.querySpecialtys(collegeId);
+		
+		if(college == null){ // 该学院暂时没有专业
+			return null;
+		}
+		
+		List<Specialty> specialties = college.getSpecialties();
+		
+		return specialties;
 	}
 
 	@Override

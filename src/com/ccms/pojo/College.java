@@ -10,7 +10,7 @@ public class College {
 	
 	private Integer id;
 	private String account;
-	private Integer authority;
+	private Integer authority; // 权限
 	private String name;
 	private String pwd;
 	private String phone;
