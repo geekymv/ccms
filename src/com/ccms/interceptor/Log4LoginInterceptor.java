@@ -25,6 +25,16 @@ public class Log4LoginInterceptor extends HandlerInterceptorAdapter {
 	public void setAccessLogService(AccessLogService accessLogService) {
 		this.accessLogService = accessLogService;
 	}
+
+	
+	@Override
+	public boolean preHandle(HttpServletRequest request,
+			HttpServletResponse response, Object handler) throws Exception {
+
+		System.out.println("preHandle....");
+		
+		return true;
+	}
 	
 	@Override
 	public void postHandle(HttpServletRequest request,
@@ -33,6 +43,10 @@ public class Log4LoginInterceptor extends HandlerInterceptorAdapter {
 	
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("user");
+		
+		if(obj == null){
+			return;
+		}
 		
 		Class<?> clazz = obj.getClass();
 	
@@ -61,6 +75,8 @@ public class Log4LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		System.out.println("登录记录状态 = " + res);
 	}
+	
+	
 }
 
 

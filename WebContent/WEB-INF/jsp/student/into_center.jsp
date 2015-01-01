@@ -47,7 +47,7 @@
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="row">
 			<ol class="breadcrumb">
-			  <li><a href="${pageContext.request.contextPath }">首页</a></li>
+			  <li><a href="${pageContext.request.contextPath }/stu/index">首页</a></li>
 			  <li class="active">账号管理</li>
 			</ol>
 			<form id="stuform">

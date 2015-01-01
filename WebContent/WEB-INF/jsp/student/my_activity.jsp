@@ -34,7 +34,7 @@
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="row">
 			<ol class="breadcrumb">
-			  <li><a href="${pageContext.request.contextPath }/index">首页</a></li>
+			  <li><a href="${pageContext.request.contextPath }/stu/index">首页</a></li>
 			  <li class="active">我的公益活动</li>
 			</ol>
 			
@@ -138,8 +138,8 @@
 		</div>
 	</div>
 	
-    <script src="resources/js/jquery-1.11.1.min.js"></script>
-    <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
 
