@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+"-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccms.dao.ActivityItemDAO">
+	
+	<!-- 学生报名活动 -->
+	<insert id="add" parameterType="ActivityItem">
+	    insert into t_activity_item (act_id, stu_id , audit) 
+	    VALUES (#{activity.id}, #{student.id}, #{audit});
+	</insert>
+	
+	<!--  根据活动id和学生id查询  -->
+	<select id="queryByActIdAndStuId" resultType="ActivityItem">
+		select id, audit from t_activity_item where act_id=#{activityId} and stu_id=#{studentId};
+	</select>
+	
+	<!-- 根据学生id查询学生通过审核的活动 -->
+	<select id="queryApproveActivityItems" parameterType="int" resultMap="ApproveActItemResultMap">
+		select act_item.id item_id, act.id act_id, act.duration, act_type.id act_type_id, act_type.name act_type_name
+		from t_activity_item act_item 
+		inner join t_activities act on act_item.act_id=act.id
+		inner join t_activity_type act_type on act.activity_type=act_type.id
+		where act_item.stu_id=1 and act_item.audit=1;
+	</select>
+	
+	<resultMap type="ActivityItem" id="ApproveActItemResultMap">
+		<id column="item_id" property="id"/>
+		<association property="activity" javaType="Activity">
+			<id column="act_id" property="id"/>
+			<result column="duration" property="duration" />
+			<association property="actType" javaType="ActivityType">
+				<id column="act_type_id" property="id"/>
+				<result column="act_type_name" property="name"/>
+			</association>
+		</association>
+	</resultMap>
+	
+	
+	<!-- 根据学生id查询学生报名的活动  -->
+	<select id="queryAllActivityItem" parameterType="int" resultMap="ActItemResultMap">
+		select act_item.id item_id, act_item.audit, act.id act_id
+		FROM t_activity_item act_item
+		inner join t_activities act on act_item.act_id=act.id 
+		where act_item.stu_id=1; 
+	</select>
+	
+	<resultMap type="ActivityItem" id="ActItemResultMap">
+		<id column="item_id" property="id" />
+		<result column="audit" property="audit" />
+		<association property="activity" javaType="Activity" column="act_id" 
+						select="com.ccms.dao.ActivityDAO.queryById">
+		</association>
+	</resultMap>
+	
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

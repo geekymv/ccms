@@ -16,7 +16,7 @@ public class RankActType {
 	
 	private Integer id;
 	private Rank rank; // 所属等级
-	private ActType activityType; // 所属活动类型
+	private ActivityType activityType; // 所属活动类型
 	private int duration;	// 时长
 	
 	public Integer getId() {
@@ -31,10 +31,10 @@ public class RankActType {
 	public void setRank(Rank rank) {
 		this.rank = rank;
 	}
-	public ActType getActivityType() {
+	public ActivityType getActivityType() {
 		return activityType;
 	}
-	public void setActivityType(ActType activityType) {
+	public void setActivityType(ActivityType activityType) {
 		this.activityType = activityType;
 	}
 	public int getDuration() {

@@ -5,27 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ccms.dao.ActItemDAO;
-import com.ccms.pojo.ActItem;
+import com.ccms.dao.ActivityItemDAO;
+import com.ccms.pojo.ActivityItem;
 import com.ccms.pojo.Activity;
 import com.ccms.pojo.Student;
-import com.ccms.service.ActItemService;
+import com.ccms.service.ActivityItemService;
 import com.ccms.util.Constant;
 
 @Service
-public class ActItemServiceImpl implements ActItemService {
+public class ActivityItemServiceImpl implements ActivityItemService {
 
 	@Autowired
-	private ActItemDAO actItemDAO;
+	private ActivityItemDAO actItemDAO;
 	
 	@Override
 	public boolean apply(Activity activity, Student student) {
 		
 		//  判断学生是否已经报名了
-		ActItem actItem = actItemDAO.queryByActIdAndStuId(activity.getId(), student.getId());
+		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(activity.getId(), student.getId());
 		
 		if(actItem == null) { // 学生还没有报名
-			actItem = new ActItem();
+			actItem = new ActivityItem();
 			actItem.setActivity(activity);
 			actItem.setStudent(student);
 			actItem.setAudit(Constant.ACTITEM_AUDIT_WAIT);
@@ -45,14 +45,14 @@ public class ActItemServiceImpl implements ActItemService {
 	@Override
 	public boolean isApplyed(Activity activity, Student student) {
 		
-		ActItem actItem = actItemDAO.queryByActIdAndStuId(activity.getId(), student.getId());
+		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(activity.getId(), student.getId());
 	
 		return actItem == null ? false : true;
 	}
 
 
 	@Override
-	public List<ActItem> queryAllActivityItem(Integer studentId) {
+	public List<ActivityItem> queryAllActivityItem(Integer studentId) {
 
 		return actItemDAO.queryAllActivityItem(studentId);
 	}

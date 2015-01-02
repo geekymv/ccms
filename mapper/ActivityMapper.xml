@@ -78,7 +78,7 @@
 			<result column="col_name" property="name"/>
 		</association>
 		
-		<association property="actType" javaType="ActType">
+		<association property="actType" javaType="ActivityType">
 			<id column="a_type_id" property="id"/>
 			<result column="a_type_name" property="name"/>
 		</association>

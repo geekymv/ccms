@@ -41,7 +41,7 @@
 		<div class="row">
 			<ol class="breadcrumb">
 			  <li><a href="${pageContext.request.contextPath }/stu/index">首页</a></li>
-			  <li><a href="${pageContext.request.contextPath }">活动公告</a></li>
+			  <li><a href="${pageContext.request.contextPath }/stu/index">活动公告</a></li>
 			  <li class="active">公告详情</li>
 			</ol>
 			<table class="table table-bordered table-hover table-condensed table-responsive" style="width: 500px;">

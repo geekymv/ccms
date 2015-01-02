@@ -11,15 +11,17 @@
 <script type="text/javascript">
 	$(function(){
 		$("#logout").click(function(){
-			$.ajax({
-				url: "${pageContext.request.contextPath }/stu/logout",
-				type: "POST",
-				dataType: "text",
-				success: function(data){
-					alert(data);
-					window.location.href="${pageContext.request.contextPath }/"; 
-				}
-			});
+			var res = confirm("确定要退出么？");
+			if(res){
+				$.ajax({
+					url: "${pageContext.request.contextPath }/logout",
+					type: "POST",
+					dataType: "text",
+					success: function(data){
+						window.location.href="${pageContext.request.contextPath }/"; 
+					}
+				});
+			}			
 		});
 	});
 </script>

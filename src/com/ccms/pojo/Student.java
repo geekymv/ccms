@@ -29,8 +29,8 @@ public class Student {
 		return "Student [id=" + id + ", num=" + num + ", pwd=" + pwd
 				+ ", name=" + name + ", gender=" + gender + ", phone=" + phone
 				+ ", email=" + email + ", qq=" + qq + ", introduce="
-				+ introduce + ", college=" + college + ", specialty="
-				+ specialty + "]";
+				+ introduce + ", rank=" + rank + ", college=" + college
+				+ ", specialty=" + specialty + "]";
 	}
 
 

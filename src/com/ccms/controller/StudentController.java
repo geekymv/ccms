@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ccms.pojo.ActItem;
+import com.ccms.pojo.ActivityItem;
 import com.ccms.pojo.Activity;
 import com.ccms.pojo.College;
 import com.ccms.pojo.Pager;
 import com.ccms.pojo.Specialty;
 import com.ccms.pojo.Student;
-import com.ccms.service.ActItemService;
+import com.ccms.service.ActivityItemService;
 import com.ccms.service.ActivityService;
 import com.ccms.service.CollegeService;
 import com.ccms.service.StudentService;
@@ -34,7 +34,7 @@ public class StudentController {
 	@Autowired
 	private ActivityService activityService;
 	@Autowired
-	private ActItemService actItemService;
+	private ActivityItemService actItemService;
 	@Autowired
 	private CollegeService collegeService;
 	
@@ -132,7 +132,7 @@ public class StudentController {
 	@RequestMapping("/myactivities")
 	public String applyedActivities(Model model) {
 		
-		List<ActItem> actItems = actItemService.queryAllActivityItem(1);
+		List<ActivityItem> actItems = actItemService.queryAllActivityItem(1);
 		
 		model.addAttribute("actItems", actItems);
 		

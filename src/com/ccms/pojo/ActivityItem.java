@@ -4,7 +4,7 @@ package com.ccms.pojo;
  * 活动报名明细
  * @author Geek_ymv
  */
-public class ActItem {
+public class ActivityItem {
 	
 	private Integer id;
 	private Activity activity;
@@ -13,7 +13,7 @@ public class ActItem {
 	
 	@Override
 	public String toString() {
-		return "ActItem [id=" + id + ", activity=" + activity + ", audit="
+		return "ActivityItem [id=" + id + ", activity=" + activity + ", audit="
 				+ audit + "]";
 	}
 	

@@ -17,7 +17,7 @@ public class Activity {
 	private String location; /*地点*/
 	private String aim; /*目的*/
 	private String content; /*活动内容*/
-	private ActType actType;/*活动加分类型*/
+	private ActivityType actType;/*活动加分类型*/
 	private Integer duration;  /*活动加分时长*/
 	private String actObject; /*参与对象*/
 	private Integer number; /*参与人数*/
@@ -98,10 +98,10 @@ public class Activity {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public ActType getActType() {
+	public ActivityType getActType() {
 		return actType;
 	}
-	public void setActType(ActType actType) {
+	public void setActType(ActivityType actType) {
 		this.actType = actType;
 	}
 	public Integer getDuration() {
