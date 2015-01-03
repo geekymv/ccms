@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccms.pojo.ActivityItem;
+import com.ccms.pojo.ActivityItemVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/beans.xml")
@@ -31,9 +32,9 @@ public class ActItemDAOTest {
 	@Test
 	public void testQueryApproveActivityItems() {
 		
-		List<ActivityItem> items = actItemDAO.queryApproveActivityItems(1);
+		List<ActivityItemVO> items = actItemDAO.queryActivityItemVO(1);
 		
-		for (ActivityItem actItem : items) {
+		for (ActivityItemVO actItem : items) {
 			System.out.println(actItem);
 		}
 		

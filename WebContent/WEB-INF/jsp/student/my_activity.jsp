@@ -47,6 +47,7 @@
 					   <thead>
 					      <tr>
 					         <th>活动名称</th>
+					         <th>发布时间</th>
 					         <th>举办单位</th>
 					         <th>活动时间</th>
 					         <th>活动类型</th>
@@ -58,6 +59,7 @@
 					   	  <c:forEach items="${actItems }" var="item">
 					      <tr>
 					         <td>${item.activity.name }</td>
+					         <td><fmt:formatDate value="${item.activity.publishTime }" pattern="yyyy年MM月dd日"/></td>
 					         <td>${item.activity.college.name }</td>
 					         <td>${item.activity.dateTime }</td>
 					         <td>${item.activity.actType.name }</td>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+"-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccms.dao.RankDAO">
+
+<!-- 
+	<select id="queryAll" resultMap="RankDTOResultMap">
+		 select 
+	     rank.id, rank.name,sum(rank_act_type.duration) totalDuration
+	     from t_ranks rank
+	     inner join t_rank_activity_type rank_act_type on rank.id=rank_act_type.rank_id group by rank.id;
+	</select>
+	<resultMap type="RankDTO" id="RankDTOResultMap">
+		<result column="totalDuration" property="totalDuration"/>
+		<association property="rank" javaType="Rank">
+			<id column="id" property="id"/>
+			<result column="name" property="name"/>
+		</association>
+	</resultMap>
+ -->
+ 	 
+</mapper>  

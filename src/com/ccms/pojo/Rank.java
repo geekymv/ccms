@@ -9,6 +9,11 @@ public class Rank {
 	private Integer id;
 	private String name; // 等级名称
 	
+	@Override
+	public String toString() {
+		return "Rank [id=" + id + ", name=" + name + "]";
+	}
+
 	public Integer getId() {
 		return id;
 	}

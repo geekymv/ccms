@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ccms.pojo.ActivityItem;
+import com.ccms.pojo.ActivityItemVO;
 
 public interface ActivityItemDAO extends BaseDAO<ActivityItem> {
 
@@ -26,11 +27,11 @@ public interface ActivityItemDAO extends BaseDAO<ActivityItem> {
 	public List<ActivityItem> queryAllActivityItem(Integer studentId);
 	
 	/**
-	 * 根据学生id查询学生通过审核的活动
-	 * @param studentId
+	 * 根据学生id分组查询各种类型完成的活动时间
+	 * @param studentId 学生id
 	 * @return
 	 */
-	public List<ActivityItem> queryApproveActivityItems(Integer studentId);
+	public List<ActivityItemVO> queryActivityItemVO(Integer studentId);
 	
 	
 }

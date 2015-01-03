@@ -88,7 +88,7 @@
 			<ul>
 				<li><a href="${pageContext.request.contextPath }/stu/index" target="_parent">首页</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu/myactivities" target="_parent">我的公益活动</a></li>
-				<li><a href="sjtj.html" target="_parent">时间统计</a></li>
+				<li><a href="${pageContext.request.contextPath }/stu/timeCounter" target="_parent">时间统计</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu/${user.num }/infocenter" target="_parent">账号管理</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu/index" target="_parent">活动公告</a></li>
 

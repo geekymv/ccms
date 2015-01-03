@@ -16,26 +16,21 @@
 		select id, audit from t_activity_item where act_id=#{activityId} and stu_id=#{studentId};
 	</select>
 	
-	<!-- 根据学生id查询学生通过审核的活动 -->
-	<select id="queryApproveActivityItems" parameterType="int" resultMap="ApproveActItemResultMap">
-		select act_item.id item_id, act.id act_id, act.duration, act_type.id act_type_id, act_type.name act_type_name
-		from t_activity_item act_item 
+	<!-- 根据学生id分组查询各种类型完成的活动时间-->
+	<select id="queryActivityItemVO" resultMap="ActivityItemVOResultMap">
+		select act_type.id, act_type.name, sum(act.duration) totalDuration from t_activity_item act_item 
 		inner join t_activities act on act_item.act_id=act.id
-		inner join t_activity_type act_type on act.activity_type=act_type.id
-		where act_item.stu_id=1 and act_item.audit=1;
+		inner join t_activity_type act_type on act_type.id=act.activity_type
+		where act_item.stu_id=#{studentId} and act_item.audit=1 group by act.activity_type;
 	</select>
-	
-	<resultMap type="ActivityItem" id="ApproveActItemResultMap">
-		<id column="item_id" property="id"/>
-		<association property="activity" javaType="Activity">
-			<id column="act_id" property="id"/>
-			<result column="duration" property="duration" />
-			<association property="actType" javaType="ActivityType">
-				<id column="act_type_id" property="id"/>
-				<result column="act_type_name" property="name"/>
-			</association>
+	<resultMap type="ActivityItemVO" id="ActivityItemVOResultMap">
+		<result column="totalDuration" property="totalDuration"/>
+		<association property="activityType" javaType="ActivityType">
+			<id column="id" property="id"/>
+			<result column="name" property="name" />
 		</association>
 	</resultMap>
+	
 	
 	
 	<!-- 根据学生id查询学生报名的活动  -->
@@ -43,9 +38,8 @@
 		select act_item.id item_id, act_item.audit, act.id act_id
 		FROM t_activity_item act_item
 		inner join t_activities act on act_item.act_id=act.id 
-		where act_item.stu_id=1; 
+		where act_item.stu_id=#{id}; 
 	</select>
-	
 	<resultMap type="ActivityItem" id="ActItemResultMap">
 		<id column="item_id" property="id" />
 		<result column="audit" property="audit" />

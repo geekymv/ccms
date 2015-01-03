@@ -2,8 +2,9 @@ package com.ccms.service;
 
 import java.util.List;
 
-import com.ccms.pojo.ActivityItem;
 import com.ccms.pojo.Activity;
+import com.ccms.pojo.ActivityItem;
+import com.ccms.pojo.ActivityItemVO;
 import com.ccms.pojo.Student;
 
 public interface ActivityItemService {
@@ -32,7 +33,13 @@ public interface ActivityItemService {
 	 */
 	public List<ActivityItem> queryAllActivityItem(Integer studentId);
 	
-
+	
+	/**
+	 * 根据学生id查询该学生各种类型完成的时间
+	 * @param studentId 学生id
+	 * @return
+	 */
+	public List<ActivityItemVO> queryActivityItemVO(Integer studentId);
 }
 
 

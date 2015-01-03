@@ -6,8 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccms.dao.ActivityItemDAO;
-import com.ccms.pojo.ActivityItem;
+import com.ccms.dao.RankActivityTypeDAO;
+import com.ccms.dao.StudentDAO;
 import com.ccms.pojo.Activity;
+import com.ccms.pojo.ActivityItem;
+import com.ccms.pojo.ActivityItemVO;
+import com.ccms.pojo.ActivityType;
+import com.ccms.pojo.Rank;
+import com.ccms.pojo.RankActivityType;
 import com.ccms.pojo.Student;
 import com.ccms.service.ActivityItemService;
 import com.ccms.util.Constant;
@@ -17,62 +23,70 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 
 	@Autowired
 	private ActivityItemDAO actItemDAO;
-	
+	@Autowired
+	private StudentDAO studentDAO;
+	@Autowired
+	private RankActivityTypeDAO rankActivityTypeDAO;
+
 	@Override
 	public boolean apply(Activity activity, Student student) {
-		
-		//  判断学生是否已经报名了
-		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(activity.getId(), student.getId());
-		
-		if(actItem == null) { // 学生还没有报名
+
+		// 判断学生是否已经报名了
+		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(
+				activity.getId(), student.getId());
+
+		if (actItem == null) { // 学生还没有报名
 			actItem = new ActivityItem();
 			actItem.setActivity(activity);
 			actItem.setStudent(student);
 			actItem.setAudit(Constant.ACTITEM_AUDIT_WAIT);
-			
+
 			int res = actItemDAO.add(actItem);
-			if(res == 1) {
+			if (res == 1) {
 				return true;
 			}
 		} else { // 学生已经报名了
 			return false;
 		}
-		
+
 		return false;
 	}
 
-	
 	@Override
 	public boolean isApplyed(Activity activity, Student student) {
-		
-		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(activity.getId(), student.getId());
-	
+
+		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(
+				activity.getId(), student.getId());
+
 		return actItem == null ? false : true;
 	}
-
 
 	@Override
 	public List<ActivityItem> queryAllActivityItem(Integer studentId) {
 
 		return actItemDAO.queryAllActivityItem(studentId);
 	}
+
+	@Override
+	public List<ActivityItemVO> queryActivityItemVO(Integer studentId) {
+		
+		Student student = studentDAO.queryById(studentId);
+		// 获得学生受助等级
+		Rank rank = student.getRank();
+		
+		List<ActivityItemVO> itemVOs = actItemDAO.queryActivityItemVO(studentId);
+		
+		for (ActivityItemVO activityItemVO : itemVOs) {
+			ActivityType activityType = activityItemVO.getActivityType();
+			RankActivityType rankActivityType = rankActivityTypeDAO.queryByRankIdActivityTypeId(rank.getId(), activityType.getId());
+
+			Integer duration = rankActivityType.getDuration();
+			activityItemVO.setActualDuration(duration);
+		}
+
+		return itemVOs;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

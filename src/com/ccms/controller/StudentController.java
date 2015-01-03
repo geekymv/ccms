@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ccms.pojo.ActivityItem;
 import com.ccms.pojo.Activity;
+import com.ccms.pojo.ActivityItem;
+import com.ccms.pojo.ActivityItemVO;
 import com.ccms.pojo.College;
 import com.ccms.pojo.Pager;
 import com.ccms.pojo.Specialty;
@@ -82,9 +83,11 @@ public class StudentController {
 		Activity activity = activityService.detail(id);
 		model.addAttribute("activity", activity);
 		
-//		Student student = (Student) session.getAttribute("user");
-		Student student = new Student();
-		student.setId(1);
+		Student student = (Student) session.getAttribute("user");
+
+//		Student student = new Student();
+//		student.setId(1);
+		
 		// 判断该学生是否报名
 		boolean res = actItemService.isApplyed(activity, student);
 		
@@ -107,13 +110,14 @@ public class StudentController {
 		System.out.println("activity id = " + id);	
 
 		Activity activity = activityService.detail(id);
-//		Student student = (Student) session.getAttribute("user");
+		Student student = (Student) session.getAttribute("user");
 		
-		Student student = new Student();
-		student.setId(1);
-//		if(student == null) {
-//			return "fail";
-//		}
+//		Student student = new Student();
+//		student.setId(1);
+		
+		if(student == null) {
+			return "fail";
+		}
 		
 		boolean res = actItemService.apply(activity, student);
 		if(res){
@@ -130,9 +134,9 @@ public class StudentController {
 	 * @return
 	 */
 	@RequestMapping("/myactivities")
-	public String applyedActivities(Model model) {
-		
-		List<ActivityItem> actItems = actItemService.queryAllActivityItem(1);
+	public String applyedActivities(Model model, HttpSession session) {
+		Student student = (Student) session.getAttribute("user");
+		List<ActivityItem> actItems = actItemService.queryAllActivityItem(student.getId());
 		
 		model.addAttribute("actItems", actItems);
 		
@@ -161,7 +165,7 @@ public class StudentController {
 
 		return "student/into_center";
 	}
-	
+
 	/**
 	 * 表单级联响应Ajax请求获得该学院所有专业
 	 * @param collegeId
@@ -207,7 +211,13 @@ public class StudentController {
 	 * @return
 	 */
 	@RequestMapping("/timeCounter")
-	public String timeCounter() {
+	public String timeCounter(HttpSession session, Model model) {
+		
+		Student student = (Student) session.getAttribute("user");
+		
+		List<ActivityItemVO> itemVOs = actItemService.queryActivityItemVO(student.getId());
+		
+		model.addAttribute("itemVOs", itemVOs);
 		
 		return "student/time_counter";
 	}

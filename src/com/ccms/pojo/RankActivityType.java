@@ -12,13 +12,20 @@ package com.ccms.pojo;
  * 
  * @author Geek_ymv
  */
-public class RankActType {
+public class RankActivityType {
 	
 	private Integer id;
 	private Rank rank; // 所属等级
 	private ActivityType activityType; // 所属活动类型
 	private int duration;	// 时长
 	
+	@Override
+	public String toString() {
+		return "RankActivityType [id=" + id + ", rank=" + rank
+				+ ", activityType=" + activityType + ", duration=" + duration
+				+ "]";
+	}
+
 	public Integer getId() {
 		return id;
 	}
