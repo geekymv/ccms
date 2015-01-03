@@ -11,9 +11,8 @@ import com.ccms.dao.StudentDAO;
 import com.ccms.pojo.Activity;
 import com.ccms.pojo.ActivityItem;
 import com.ccms.pojo.ActivityItemVO;
-import com.ccms.pojo.ActivityType;
 import com.ccms.pojo.Rank;
-import com.ccms.pojo.RankActivityType;
+import com.ccms.pojo.RankActivityTypeVO;
 import com.ccms.pojo.Student;
 import com.ccms.service.ActivityItemService;
 import com.ccms.util.Constant;
@@ -68,23 +67,25 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 	}
 
 	@Override
-	public List<ActivityItemVO> queryActivityItemVO(Integer studentId) {
+	public List<RankActivityTypeVO> queryRankActivityItemVO(Integer studentId) {
 		
 		Student student = studentDAO.queryById(studentId);
 		// 获得学生受助等级
 		Rank rank = student.getRank();
 		
 		List<ActivityItemVO> itemVOs = actItemDAO.queryActivityItemVO(studentId);
+		List<RankActivityTypeVO> rankActivityTypeVOs = rankActivityTypeDAO.queryByRankId(rank.getId());
 		
-		for (ActivityItemVO activityItemVO : itemVOs) {
-			ActivityType activityType = activityItemVO.getActivityType();
-			RankActivityType rankActivityType = rankActivityTypeDAO.queryByRankIdActivityTypeId(rank.getId(), activityType.getId());
-
-			Integer duration = rankActivityType.getDuration();
-			activityItemVO.setActualDuration(duration);
+		for (RankActivityTypeVO rankActivityTypeVO : rankActivityTypeVOs) {
+			Integer activityTypeId = rankActivityTypeVO.getActivityType().getId();
+			for(ActivityItemVO itemVO : itemVOs){
+				if(activityTypeId == itemVO.getActivityType().getId()){
+					rankActivityTypeVO.setFinishedDuration(itemVO.getFinishedDuration());
+				}
+			}
 		}
-
-		return itemVOs;
+		
+		return rankActivityTypeVOs;
 	}
 }
 

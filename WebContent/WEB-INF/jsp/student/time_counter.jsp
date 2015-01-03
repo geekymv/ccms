@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="pg" uri="http://jsptags.com/tags/navigation/pager" %>     
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -53,12 +54,17 @@
 					      </tr>
 					   </thead>
 					   <tbody>
-					   	  <c:forEach items="${itemVOs }" var="itemVO">
+					   	  <c:forEach items="${itemVOs }" var="itemVO" varStatus="status">
 					      <tr>
 					         <td>${itemVO.activityType.name }</td>
-					         <td>${itemVO.totalDuration }</td>
-					         <td>${itemVO.actualDuration }</td>
-					         <td>年度考核</td>
+					         <td>${itemVO.finishedDuration }小时</td>
+					         <td>${itemVO.duration }小时</td>
+					         <c:if test="${status.count == 1 }">
+					         <td rowspan="${fn:length(itemVOs) }" style="vertical-align: middle;color: blue; font-size: 16px;">
+					         	等待审核
+					         </td>
+					         </c:if>	
+					        
 					         <%--
 					         <td>
 					         	<c:choose>

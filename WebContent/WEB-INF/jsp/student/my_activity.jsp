@@ -52,13 +52,17 @@
 					         <th>活动时间</th>
 					         <th>活动类型</th>
 					         <th>活动时长</th>
-					         <th>状态</th>
+					         <th>认证状态</th>
 					      </tr>
 					   </thead>
 					   <tbody>
 					   	  <c:forEach items="${actItems }" var="item">
 					      <tr>
-					         <td>${item.activity.name }</td>
+					         <td>
+					         	<a href="${pageContext.request.contextPath }/stu/activity_detail/${item.activity.id}">
+					         		${item.activity.name }
+					         	</a>
+					         </td>
 					         <td><fmt:formatDate value="${item.activity.publishTime }" pattern="yyyy年MM月dd日"/></td>
 					         <td>${item.activity.college.name }</td>
 					         <td>${item.activity.dateTime }</td>
@@ -67,10 +71,10 @@
 					         <td>
 					         	<c:choose>
 					         		<c:when test="${item.audit == 1 }">
-						         		<span class="glyphicon glyphicon-ok-circle"></span> 认证通过
+						         		<span class="glyphicon glyphicon-ok-circle"></span> 通过
 					         		</c:when>
 					         		<c:when test="${item.audit == -1 }">
-					         			<span class="glyphicon glyphicon-remove-circle" style="color: red"></span> 认证未通过
+					         			<span class="glyphicon glyphicon-remove-circle" style="color: red"></span> 未通过
 					         		</c:when>
 									<c:otherwise>
 										<span class="glyphicon glyphicon-ban-circle" style="color: blue"></span> 等待认证

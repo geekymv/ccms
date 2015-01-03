@@ -4,6 +4,27 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ccms.dao.RankActivityTypeDAO">
+	
+	<!--  根据等级id查询该等级的各项活动类型总分 -->
+	<select id="queryByRankId" parameterType="int" resultMap="RankActivityTypeVOResultMap">
+		select rat.id rat_id, rat.duration, rank.id rank_id, rank.name rank_name, at.id at_id, at.name at_name
+	     from t_rank_activity_type rat 
+	     inner join t_ranks rank on rat.rank_id=rank.id
+	     inner join t_activity_type at on rat.activity_type_id=at.id
+	     where rank_id=#{rankId};
+	</select>
+	<resultMap type="RankActivityTypeVO" id="RankActivityTypeVOResultMap">
+		<id column="rat_id" property="id"/>
+		<result column="duration" property="duration"/>
+		<association property="rank" javaType="Rank">
+			<id column="rank_id" property="id"/>
+			<result column="rank_name" property="name" />
+		</association>
+		<association property="activityType" javaType="ActivityType">
+			<id column="at_id" property="id"/>
+			<result column="at_name" property="name"/>
+		</association>
+	</resultMap>
 
 	<!-- 根据等级id和活动id查询  -->
 	<select id="queryByRankIdActivityTypeId" resultMap="RankActivityTypeResultMap">

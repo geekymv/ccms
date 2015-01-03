@@ -9,36 +9,18 @@ public class ActivityItemVO {
 	/**
 	 * 已完成的总时长
 	 */
-	private Integer totalDuration;
+	private Integer finishedDuration;
 	
-	/**
-	 * 实际应完成总时长
-	 */
-	private Integer actualDuration;
-	
-	@Override
-	public String toString() {
-		return "ActivityItemVO [activityType=" + activityType
-				+ ", totalDuration=" + totalDuration + ", actualDuration="
-				+ actualDuration + "]";
-	}
-
 	public ActivityType getActivityType() {
 		return activityType;
 	}
 	public void setActivityType(ActivityType activityType) {
 		this.activityType = activityType;
 	}
-	public Integer getTotalDuration() {
-		return totalDuration;
+	public Integer getFinishedDuration() {
+		return finishedDuration;
 	}
-	public void setTotalDuration(Integer totalDuration) {
-		this.totalDuration = totalDuration;
+	public void setFinishedDuration(Integer finishedDuration) {
+		this.finishedDuration = finishedDuration;
 	}
-	public Integer getActualDuration() {
-		return actualDuration;
-	}
-	public void setActualDuration(Integer actualDuration) {
-		this.actualDuration = actualDuration;
-	} 
 }

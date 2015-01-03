@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.pojo.Activity;
 import com.ccms.pojo.ActivityItem;
-import com.ccms.pojo.ActivityItemVO;
 import com.ccms.pojo.College;
 import com.ccms.pojo.Pager;
+import com.ccms.pojo.RankActivityTypeVO;
 import com.ccms.pojo.Specialty;
 import com.ccms.pojo.Student;
 import com.ccms.service.ActivityItemService;
@@ -215,7 +215,7 @@ public class StudentController {
 		
 		Student student = (Student) session.getAttribute("user");
 		
-		List<ActivityItemVO> itemVOs = actItemService.queryActivityItemVO(student.getId());
+		List<RankActivityTypeVO> itemVOs = actItemService.queryRankActivityItemVO(student.getId());
 		
 		model.addAttribute("itemVOs", itemVOs);
 		
