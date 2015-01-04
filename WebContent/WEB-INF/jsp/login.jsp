@@ -170,10 +170,11 @@
 					success: function(data){
 						if(data == 'student_success') {
 							alert('学生登录成功！');
-							window.location.href="${pageContext.request.contextPath }/stu/success"
+							window.location.href="${pageContext.request.contextPath }/stu/stu_success"
 							
 						}else if(data == 'college_success'){
 							alert('College登录成功！');	
+							window.location.href="${pageContext.request.contextPath }/admin/admin_success"
 							
 						}else if(data == 'errors'){
 							alert('用户名或密码错误！');

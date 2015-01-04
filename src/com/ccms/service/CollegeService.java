@@ -6,6 +6,14 @@ import com.ccms.pojo.College;
 import com.ccms.pojo.Specialty;
 
 public interface CollegeService {
+	
+	/**
+	 * 根据id查询
+	 * @param id
+	 * @return
+	 */
+	public College getById(Integer id);
+	
 	/**
 	 * 查询所有College
 	 * @return

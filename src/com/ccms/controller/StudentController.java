@@ -42,7 +42,7 @@ public class StudentController {
 	/**
 	 * 学生登录成功
 	 */
-	@RequestMapping(value="/success", method=RequestMethod.GET)
+	@RequestMapping(value="/stu_success", method=RequestMethod.GET)
 	public String login() {
 
 		return "redirect:index";

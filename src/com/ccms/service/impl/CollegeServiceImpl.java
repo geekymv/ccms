@@ -42,4 +42,10 @@ public class CollegeServiceImpl implements CollegeService {
 		return collegeDAO.queryByAccountPwd(account, pwd);
 	}
 
+	@Override
+	public College getById(Integer id) {
+		
+		return collegeDAO.queryById(id);
+	}
+
 }

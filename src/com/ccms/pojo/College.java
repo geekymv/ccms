@@ -19,7 +19,12 @@ public class College {
 	
 	private List<Specialty> specialties;
 	
-	public College() {
+	@Override
+	public String toString() {
+		return "College [id=" + id + ", account=" + account + ", authority="
+				+ authority + ", name=" + name + ", pwd=" + pwd + ", phone="
+				+ phone + ", contact=" + contact + ", address=" + address
+				+ ", specialties=" + specialties + "]";
 	}
 
 	public Integer getId() {

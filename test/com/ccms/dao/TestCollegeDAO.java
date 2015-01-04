@@ -3,20 +3,24 @@ package com.ccms.dao;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccms.pojo.College;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/beans.xml")
-public class TestCollegeDAO {
+public class TestCollegeDAO extends BaseTest{
 
 	@Autowired
 	private CollegeDAO collegeDAO;
 
+	@Test
+	public void testqueryByAccountPwd() {
+		
+		College college = collegeDAO.queryByAccountPwd("jsjxy", "111");
+
+		System.out.println(college);	
+	}
+	
+	
 	@Test
 	public void testQuerySpecialtys() {
 		College college = collegeDAO.querySpecialtys(1);

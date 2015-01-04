@@ -26,9 +26,15 @@
 		select * from t_colleges where authority=0;
 	</select>
 	
-	<!-- 查询 -->
+	<!-- 根据id查询
 	<select id="queryById" parameterType="int" resultType="College">
 		select * from t_colleges where id=#{id}	
+	</select>
+	 -->
+	<select id="queryById" parameterType="int" resultMap="querySpecialtysMap">
+		select col.id col_id, col.account, col.name col_name, col.phone, col.contact, col.address, col.authority,
+		spe.id spe_id, spe.name spe_name
+		from t_colleges col inner join t_specialty spe on col.id=spe.col_id where col.id=#{id}
 	</select>
 	
 	<!-- 查询该学院所有的专业 -->

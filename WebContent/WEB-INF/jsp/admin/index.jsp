@@ -1,27 +1,114 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>后台管理</title>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>学分认证系统后台管理</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/responsive-tables.css">
 
-    <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/admin/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/admin/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/admin/js/custom.js"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-  
-    <h1>Hello, world! 管理员 </h1>
-    <script src="resources/js/jquery-1.11.1.min.js"></script>
-    <script src="resources/bootstrap/js/bootstrap.min.js"></script>
-  </body>
-</html>
+</head>
+<body>
+	<div class="mainwrapper">
+		<div class="header">
+        <div class="logo">
+            <a href=""><img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" alt="" /></a>
+        </div>
+        <div class="headerinner">
+            <ul class="headmenu">
+                <li class="right">
+                    <div class="userloggedinfo">
+                        <img src="${pageContext.request.contextPath }/resources/admin/images/photos/thumb1.png" alt="" />
+                        <div class="userinfo">
+                            <h5>${user.name }</h5>
+                            <ul>
+                                <li><a href="editprofile.html">修改资料</a></li>
+                                <li><a href="">账号设置</a></li>
+                                <li><a href="index.html">退出系统</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul><!--headmenu-->
+        </div>
+    	</div> 
+
+		<div class="leftpanel">
+		<div class="leftmenu">        
+            <ul class="nav nav-tabs nav-stacked">
+            	<li class="nav-header"><h4>菜单栏</h4></li>
+                <li class="active"><a href="${pageContext.request.contextPath }/admin"><span class="iconfa-laptop"></span>控制面板</a></li>
+                <li class="dropdown"><a href=""><span class="iconfa-pencil"></span> 基本管理</a>
+                	<ul>
+                       <li><a href="${pageContext.request.contextPath }/admin/myinfo">个人资料</a></li>
+                       <li class="dropdown"><a href="">公告管理</a>
+                        	<ul>
+	                            <li><a href="">发布公告</a></li>
+	                            <li><a href="">公告列表</a></li>
+                        	</ul>
+                        </li>
+                        <li><a href="wysiwyg.html">报名管理</a></li>
+                        <li><a href="wysiwyg.html">学生管理</a></li>
+                        <li><a href="wysiwyg.html">考核管理</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href=""><span class="iconfa-briefcase"></span> 勤管管理</a>
+                	<ul>
+                    	<li><a href="elements.html">学院管理</a></li>
+                        <li><a href="bootstrap.html">学生管理</a></li>
+                        <li><a href="boxes.html">公告管理</a></li>
+                        <li><a href="boxes.html">时间认证</a></li>
+                        <li><a href="boxes.html">名单导入</a></li>
+                        <li><a href="boxes.html">文档管理</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href=""><span class="iconfa-th-list"></span> 年度考核</a>
+                	<ul>
+                    	<li><a href="table-static.html">考核时间</a></li>
+                        <li class="dropdown"><a href="table-dynamic.html">年度考核</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href=""><span class="iconfa-th-list"></span> Three Level Menu Sample</a>
+                	<ul>
+                    	<li class="dropdown"><a href="">Second Level Menu</a>
+                        <ul>
+                            <li><a href="">Third Level Menu</a></li>
+                            <li><a href="">Another Third Level Menu</a></li>
+                        </ul>
+                     </li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--leftmenu-->
+		</div>
+		<div class="righpanel">
+			
+		</div>
+
+	</div>
+
+</body>
+</html>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
