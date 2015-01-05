@@ -1,5 +1,8 @@
 package com.ccms.dao;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.ccms.pojo.College;
 import com.ccms.pojo.Specialty;
 
 /**
@@ -7,5 +10,13 @@ import com.ccms.pojo.Specialty;
  * @author Geek_ymv
  */
 public interface SpecialtyDAO extends BaseDAO<Specialty>{
+	
+	/**
+	 * 根据专业名称查询该学院的专业
+	 * @param name
+	 * @param college
+	 * @return
+	 */
+	public Specialty queryByName(@Param("name")String name, @Param("college")College college);
 
 }

@@ -5,6 +5,11 @@
 
 <mapper namespace="com.ccms.dao.SpecialtyDAO">
 	
+	
+	<select id="queryByName" resultType="Specialty">
+		select id, name from t_specialty where col_id=#{college.id} and name=#{name};
+	</select>
+	
 	<!-- 添加专业 -->
 	<insert id="add" parameterType="Specialty">
 		insert into t_specialty(name, col_id) values(#{name}, #{college.id});
@@ -14,5 +19,10 @@
 	<update id="update" parameterType="Specialty">
 		update t_specialty set name=#{name} where id=#{id}
 	</update>
+	
+	
+	
+	
+	
 	
 </mapper>  

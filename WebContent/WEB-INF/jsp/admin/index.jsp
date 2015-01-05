@@ -47,6 +47,7 @@
                 <li class="dropdown"><a href=""><span class="iconfa-pencil"></span> 基本管理</a>
                 	<ul>
                        <li><a href="${pageContext.request.contextPath }/admin/myinfo">个人资料</a></li>
+                       <li><a href="${pageContext.request.contextPath }/college/specialties">专业设置</a></li>
                        <li class="dropdown"><a href="">公告管理</a>
                         	<ul>
 	                            <li><a href="">发布公告</a></li>

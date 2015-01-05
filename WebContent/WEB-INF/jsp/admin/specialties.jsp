@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>我的资料</title>
+<title>专业设置</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/style.default.css" type="text/css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/responsive-tables.css">
 
@@ -18,7 +19,7 @@
 	<div class="mainwrapper">
 		<div class="header">
         <div class="logo">
-            <a href="dashboard.html"><img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" alt="" /></a>
+            <a href=""><img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" alt="" /></a>
         </div>
         <div class="headerinner">
             <ul class="headmenu">
@@ -45,9 +46,9 @@
             	<li class="nav-header"><h4>菜单栏</h4></li>
                 <li><a href="${pageContext.request.contextPath }/admin"><span class="iconfa-laptop"></span>控制面板</a></li>
                 <li class="dropdown active"><a href=""><span class="iconfa-pencil"></span> 基本管理</a>
-                	<ul style="display: block">
-                       <li class="active"><a href="${pageContext.request.contextPath }/admin/myinfo" target="right">个人资料</a></li>
-                       <li><a href="${pageContext.request.contextPath }/college/specialties">专业设置</a></li>
+                	<ul style="display: block;">
+                       <li><a href="${pageContext.request.contextPath }/admin/myinfo">个人资料</a></li>
+                       <li  class="active"><a href="${pageContext.request.contextPath }/college/specialties">专业设置</a></li>
                        <li class="dropdown"><a href="">公告管理</a>
                         	<ul>
 	                            <li><a href="">发布公告</a></li>
@@ -88,70 +89,141 @@
             </ul>
         </div><!--leftmenu-->
 		</div>
+		
 		<div class="rightpanel">
 			<ul class="breadcrumbs">
 	            <li><a href="${pageContext.request.contextPath }/admin"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
 	            <li>基本管理 <span class="separator"></span></li>
-	            <li>个人资料</li>
-	            
-	            <%--
-	            <li class="right">
-	                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-	                <ul class="dropdown-menu pull-right skin-color">
-	                    <li><a href="default">Default</a></li>
-	                    <li><a href="navyblue">Navy Blue</a></li>
-	                    <li><a href="palegreen">Pale Green</a></li>
-	                    <li><a href="red">Red</a></li>
-	                    <li><a href="green">Green</a></li>
-	                    <li><a href="brown">Brown</a></li>
-	                </ul>
-	            </li>
-	             --%>
+	            <li>专业设置</li>
         	</ul>
         	<div class="maincontent">
         	<div class="maincontentinner">
             <div class="widget">
-                <h4 class="widgettitle">我的资料</h4>
-                <div class="widgetcontent">
-                    <form id="form1" class="stdform" method="post" action="forms.html">
-                            <div class="par control-group">
-                                    <label class="control-label" for="account">账号</label>
-                                <div class="controls"><input type="text" name="account" value="${college.account }" id="account" class="input-large" /></div>
-                            </div>
-                            <div class="control-group">
-                                    <label class="control-label" for="name">名称</label>
-                                <div class="controls"><input type="text" name="name" value="${college.name }" id="name" class="input-large" /></div>
-                            </div>
-                            
-                            <div class="par control-group">
-                                    <label class="control-label" for="phone">电话号码</label>
-                                <div class="controls"><input type="text" name="phone" value="${college.phone }" id="phone" class="input-large" /></div>
-                            </div>
-                            
-                            <div class="par control-group">
-                                    <label class="control-label" for="contact">联系人</label>
-                                <div class="controls"><input type="text" name="contact" value="${college.contact }" id="contact" class="input-large" /></div>
-                            </div>
-                            <div class="par control-group">
-                                    <label class="control-label" for="address">地址</label>
-                                <div class="controls"><textarea cols="20" rows="5" name="address" class="input-large" id="location">${college.address }</textarea></div> 
-                            </div>
-                                                    
-                            <p class="stdformbutton">
-                                    <button class="btn btn-primary">更新</button>
-                            </p>
-                    </form>
-                </div><!--widgetcontent-->
+            	<button id="add" class="btn btn-primary">添加专业</button>
+                <h4 class="widgettitle">专业设置</h4>
+            	<table class="table table-bordered responsive">
+            		<c:choose>
+            			<c:when test="${empty specialties }">
+            			<tr>
+            				<td colspan="4">暂时还没设置专业！点击上方按钮设置专业吧...</td>
+            			</tr>	
+            			</c:when>
+            			
+            			<c:otherwise>
+            			<thead>
+                        <tr>
+                        	<th class="centeralign"><input type="checkbox" class="checkall" />选择所有</th>
+                            <th>序号</th>
+                            <th>专业名称</th>
+                            <th>操作</th>
+                        </tr>
+	                    </thead>
+	                    <tbody>
+	                    	<c:forEach items="${specialties }" var="specialty" varStatus="status">
+            				<tr>
+	                        	<td class="centeralign"><input type="checkbox" /></td>
+	                            <td>${status.count }</td>
+	                            <td>${specialty.name }</td>
+	                            <td class="centeralign">
+ 	                            	<a href="javascript:void(0);" class="edit" title="编辑"><span class="icon-edit"></span></a>
+	                            </td>
+	                        </tr>
+            				</c:forEach>
+	                    </tbody>
+            			</c:otherwise>
+            		</c:choose>
+                </table>
             </div><!--widget-->
             </div>
             </div>      
         	
 		</div>
-
-	</div><!--end of mainwrapper-->
+		
+		<div style="display: none; margin-top: 10px;text-align: center;" id="addSpecialty">
+			<table style="margin-top: 80px;">
+				<tr>
+					<td>专业名称</td>
+					<td><input type="text" name="name" id="name" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;">
+						<button class="btn btn-primary">添加专业</button>		
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		
+	</div>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/layer/layer.min.js"></script>
+	<script type="text/javascript">
+		var pageii = null;
+		// 添加专业
+		jQuery("#add").on('click', function() {
+		pageii = jQuery.layer({
+			    type : 1,
+			    title : ['添加专业',
+			             'border:none; background:#0866c6; color:#fff;' 
+			             ],
+			    /*
+				border的值分别为：[边框大小, 透明度, 颜色, layer1.8之前需在此处加true]
+				不想显示border，设置 border: [0] 即可
+			    */         
+			    border: [1, 1, '#0866c6'],
+			 	/*
+			 	shade:
+			 	值分别是：[遮罩透明度, 遮罩颜色, layer1.8之前需在此处加true]
+			 	不想显示遮罩，配置shade: [0]即可
+			 	*/
+			 	shade: [0],
+			    fix : true, // fix:用于设定层是否不随滚动条而滚动，固定在可视区域。
+			    moveOut: false,	// 用于控制层是否允许被拖出可视窗口外 
+			    shift: 'left', //从左动画弹出
+			    /*
+				控制层坐标。
+				offset的值分别是： [纵坐标, 横坐标]，默认为垂直水平居中
+				如果您要设定纵坐标，可以：offset:['200px', '']/td> 
+			     */
+			    offset: [(jQuery(window).height() - 490)/2+'px', ''],
+			    area : ['400px','300px'],
+			    bgcolor: '#eee', //设置层背景色
+			    page : {dom : '#addSpecialty'}
+				});
+		});
+		
+		// 判断专业是否已经存在
+		jQuery("#name").
+		
+		
+	//	/college/exist
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
 
 </body>
 </html>    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -19,6 +19,13 @@ public class College {
 	
 	private List<Specialty> specialties;
 	
+	public College() {
+	}
+	
+	public College(Integer id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String toString() {
 		return "College [id=" + id + ", account=" + account + ", authority="
