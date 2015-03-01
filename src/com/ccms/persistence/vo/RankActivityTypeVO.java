@@ -1,37 +1,34 @@
-package com.ccms.pojo;
+package com.ccms.persistence.vo;
 
-/**
- * 中间实体类
- * 甲等 实践类 30小时
- * 甲等 劳务类 20小时
- * 甲等 文体类 18小时
- * 
- * 乙等...
- * 
- * 丙等...
- * 
- * @author Geek_ymv
- */
-public class RankActivityType {
-	
+import com.ccms.persistence.pojo.ActivityType;
+import com.ccms.persistence.pojo.Rank;
+
+public class RankActivityTypeVO {
 	private Integer id;
 	private Rank rank; // 所属等级
 	private ActivityType activityType; // 所属活动类型
 	private int duration;	// 时长
+	/**
+	 * 已完成的总时长
+	 */
+	private Integer finishedDuration = 0;
+	
+	
 	
 	@Override
 	public String toString() {
-		return "RankActivityType [id=" + id + ", rank=" + rank
+		return "RankActivityTypeVO [id=" + id + ", rank=" + rank
 				+ ", activityType=" + activityType + ", duration=" + duration
-				+ "]";
+				+ ", finishedDuration=" + finishedDuration + "]";
 	}
-
-	public Integer getId() {
-		return id;
-	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public Integer getId() {
+		return id;
+	}
+	
 	public Rank getRank() {
 		return rank;
 	}
@@ -49,6 +46,12 @@ public class RankActivityType {
 	}
 	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+	public void setFinishedDuration(Integer finishedDuration) {
+		this.finishedDuration = finishedDuration;
+	}
+	public Integer getFinishedDuration() {
+		return finishedDuration;
 	}
 
 }

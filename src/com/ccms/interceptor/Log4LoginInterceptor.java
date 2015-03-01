@@ -9,11 +9,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.ccms.pojo.AccessLog;
-import com.ccms.pojo.College;
-import com.ccms.pojo.Student;
+import com.ccms.persistence.pojo.AccessLog;
+import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Student;
 import com.ccms.service.AccessLogService;
-import com.ccms.util.Constant;
+import com.ccms.util.SysCode;
 
 /**
  * 用户登录日志
@@ -67,7 +67,7 @@ public class Log4LoginInterceptor extends HandlerInterceptorAdapter {
 		accessLog.setIp(ip);
 		accessLog.setLoginTime(new Date());
 		accessLog.setUserId(userId);
-		accessLog.setStatus(Constant.USER_STATUS_ONLINE);
+		accessLog.setStatus(SysCode.USER_STATUS_ONLINE);
 		
 		boolean res = accessLogService.login(accessLog);
 		

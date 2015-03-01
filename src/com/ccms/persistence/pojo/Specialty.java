@@ -1,4 +1,4 @@
-package com.ccms.pojo;
+package com.ccms.persistence.pojo;
 
 /**
  * 专业类

@@ -1,6 +1,6 @@
 package com.ccms.service;
 
-import com.ccms.pojo.Student;
+import com.ccms.persistence.pojo.Student;
 
 public interface StudentService {
 

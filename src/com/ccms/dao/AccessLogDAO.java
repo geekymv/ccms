@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ccms.pojo.AccessLog;
+import com.ccms.base.dao.BaseDAO;
+import com.ccms.persistence.pojo.AccessLog;
 
 public interface AccessLogDAO extends BaseDAO<AccessLog> {
 

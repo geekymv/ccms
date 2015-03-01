@@ -1,4 +1,6 @@
-package com.ccms.pojo;
+package com.ccms.persistence.pojo;
+
+import java.util.Date;
 
 /**
  * 活动报名明细
@@ -9,13 +11,12 @@ public class ActivityItem {
 	private Integer id;
 	private Activity activity;
 	private Student student;
-	private Integer audit; /*审核：认证通过1，等待认证0， 认证不通过-1*/
+	/**
+	 * 审核：认证通过1，等待认证0， 认证不通过-1
+	 */
+	private Integer audit;
+	private Date recordTime;
 	
-	@Override
-	public String toString() {
-		return "ActivityItem [id=" + id + ", activity=" + activity + ", audit="
-				+ audit + "]";
-	}
 	
 	public Integer getId() {
 		return id;
@@ -41,5 +42,11 @@ public class ActivityItem {
 	public void setAudit(Integer audit) {
 		this.audit = audit;
 	}
-
+	public Date getRecordTime() {
+		return recordTime;
+	}
+	public void setRecordTime(Date recordTime) {
+		this.recordTime = recordTime;
+	}
+	
 }

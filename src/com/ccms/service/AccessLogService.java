@@ -2,7 +2,7 @@ package com.ccms.service;
 
 import java.util.List;
 
-import com.ccms.pojo.AccessLog;
+import com.ccms.persistence.pojo.AccessLog;
 
 public interface AccessLogService {
 	

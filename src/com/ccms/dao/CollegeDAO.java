@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ccms.pojo.College;
+import com.ccms.base.dao.BaseDAO;
+import com.ccms.persistence.pojo.College;
 
 public interface CollegeDAO extends BaseDAO<College>{
 	
@@ -16,7 +17,13 @@ public interface CollegeDAO extends BaseDAO<College>{
 	public College querySpecialtys(Integer id);
 	
 	/**
-	 * 查询所有College
+	 * 根据类型查询所有
+	 * @return
+	 */
+	public List<College> queryAllByType(Integer colType);
+	
+	/**
+	 * 查询所有
 	 * @return
 	 */
 	public List<College> queryAll();

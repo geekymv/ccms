@@ -1,5 +1,6 @@
 package com.ccms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +9,14 @@ import org.springframework.stereotype.Service;
 import com.ccms.dao.ActivityItemDAO;
 import com.ccms.dao.RankActivityTypeDAO;
 import com.ccms.dao.StudentDAO;
-import com.ccms.pojo.Activity;
-import com.ccms.pojo.ActivityItem;
-import com.ccms.pojo.ActivityItemVO;
-import com.ccms.pojo.Rank;
-import com.ccms.pojo.RankActivityTypeVO;
-import com.ccms.pojo.Student;
+import com.ccms.persistence.pojo.Activity;
+import com.ccms.persistence.pojo.ActivityItem;
+import com.ccms.persistence.pojo.Rank;
+import com.ccms.persistence.pojo.Student;
+import com.ccms.persistence.vo.ActivityItemVO;
+import com.ccms.persistence.vo.RankActivityTypeVO;
 import com.ccms.service.ActivityItemService;
-import com.ccms.util.Constant;
+import com.ccms.util.SysCode;
 
 @Service
 public class ActivityItemServiceImpl implements ActivityItemService {
@@ -38,8 +39,8 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 			actItem = new ActivityItem();
 			actItem.setActivity(activity);
 			actItem.setStudent(student);
-			actItem.setAudit(Constant.ACTITEM_AUDIT_WAIT);
-
+			actItem.setAudit(SysCode.ACTITEM_AUDIT_WAIT);
+			actItem.setRecordTime(new Date());
 			int res = actItemDAO.add(actItem);
 			if (res == 1) {
 				return true;

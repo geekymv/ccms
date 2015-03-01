@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ccms.pojo.College;
-import com.ccms.pojo.Specialty;
+import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Specialty;
 import com.ccms.service.CollegeService;
 import com.ccms.service.SpecialtyService;
 

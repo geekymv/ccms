@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ccms.pojo.Student;
+import com.ccms.persistence.pojo.Student;
 
 /**
  * 学生合法性验证

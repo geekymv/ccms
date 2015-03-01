@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ccms.pojo.College;
+import com.ccms.persistence.pojo.College;
 import com.ccms.service.CollegeService;
 
 @Controller

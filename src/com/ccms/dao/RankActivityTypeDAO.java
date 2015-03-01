@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ccms.pojo.RankActivityType;
-import com.ccms.pojo.RankActivityTypeVO;
+import com.ccms.persistence.pojo.RankActivityType;
+import com.ccms.persistence.vo.RankActivityTypeVO;
 
 public interface RankActivityTypeDAO {
 	

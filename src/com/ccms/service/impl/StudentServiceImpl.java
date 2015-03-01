@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccms.dao.StudentDAO;
-import com.ccms.pojo.Student;
+import com.ccms.persistence.pojo.Student;
 import com.ccms.service.StudentService;
 
 @Service("studentService")

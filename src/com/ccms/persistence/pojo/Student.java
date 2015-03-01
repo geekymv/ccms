@@ -1,25 +1,80 @@
-package com.ccms.pojo;
+package com.ccms.persistence.pojo;
 
 /**
  * 学生类
  * @author Geek_ymv
  */
 public class Student {
-	
+	/**
+	 * id
+	 */
 	private Integer id;
-	private String num; // 学号
+	
+	/**
+	 * 学号
+	 */
+	private String num;
+	
+	/**
+	 * 密码
+	 */
 	private String pwd;
+	
+	/**
+	 * 姓名
+	 */
 	private String name;
+	
+	/**
+	 * 性别
+	 */
 	private String gender;
+	
+	/**
+	 * 联系方式
+	 */
 	private String phone;
+	
+	/**
+	 * 邮箱
+	 */
 	private String email;
+	
+	/**
+	 * qq
+	 */
 	private String qq;
-	private String introduce; // 个人简介
 	
-	private Rank rank;	// 学生受助等级：甲乙丙
+	/**
+	 * 个人简介
+	 */
+	private String introduce;
 	
-	private College college; //  学院
-	private Specialty specialty; // 专业
+	/**
+	 * 学年（每年的9月1号到第二年的7月1号为一学年）
+	 */
+	private String year;
+	
+	/**
+	 * 学生受助等级：甲乙丙
+	 */
+	private Rank rank;
+	
+	/**
+	 * 学院
+	 */
+	private College college;
+	
+	/**
+	 * 专业
+	 */
+	private Specialty specialty;
+	
+	/**
+	 * 学生状态（1可用，0不可用）
+	 */
+	private Integer status;
+	
 	
 	public Student() {
 	}
@@ -29,8 +84,9 @@ public class Student {
 		return "Student [id=" + id + ", num=" + num + ", pwd=" + pwd
 				+ ", name=" + name + ", gender=" + gender + ", phone=" + phone
 				+ ", email=" + email + ", qq=" + qq + ", introduce="
-				+ introduce + ", rank=" + rank + ", college=" + college
-				+ ", specialty=" + specialty + "]";
+				+ introduce + ", status=" + status + ", year=" + year
+				+ ", rank=" + rank + ", college=" + college + ", specialty="
+				+ specialty + "]";
 	}
 
 
@@ -105,5 +161,17 @@ public class Student {
 	}
 	public void setSpecialty(Specialty specialty) {
 		this.specialty = specialty;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
 	}
 }

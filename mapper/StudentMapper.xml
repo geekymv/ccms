@@ -7,45 +7,54 @@
 	
 	<!-- 添加学生 -->
 	<insert id="add" parameterType="Student">
-		insert into t_students( num, pwd, name, gender, phone, email, qq, rank_id, col_id, spec_id, introduce )
-		values(#{num}, #{pwd}, #{name}, #{gender}, #{phone}, 
-		#{email}, #{qq}, #{rank.id}, #{college.id}, #{specialty.id}, #{introduce});
+		<!-- 
+		<![CDATA[
+			INSERT INTO T_STUDENTS( NUM, PWD, NAME, GENDER, PHONE, EMAIL, QQ, RANK_ID, COL_ID, SPEC_ID, INTRODUCE )
+			VALUES(#{NUM}, #{PWD}, #{NAME}, #{GENDER}, #{PHONE}, 
+			#{EMAIL}, #{QQ}, #{RANK.ID}, #{COLLEGE.ID}, #{SPECIALTY.ID}, #{INTRODUCE});	
+		]]>
+		 -->
 	</insert>
 	
 	<!-- 更新学生 -->
 	<update id="update" parameterType="Student">
-		update t_students 
-		<set> 
-			<if test="num != null">num=#{num}, </if>
-			<if test="pwd != null and pwd != '' ">pwd=#{pwd}, </if>
-			<if test="name != null">name=#{name}, </if>
-			<if test="gender != null">gender=#{gender}, </if>
-			<if test="phone != null">phone=#{phone}, </if>
-			<if test="email != null">email=#{email}, </if>
-			<if test="qq != null">qq=#{qq}, </if>
-			<if test="rank.id != null">rank_id=#{rank.id}, </if>
-			<if test="college.id != null">col_id=#{college.id}, </if>
-			<if test="specialty.id != null">spec_id=#{specialty.id}, </if>
-			<if test="introduce != null"> introduce=#{introduce} </if>
-		</set>
-		where id=#{id};
+		<![CDATA[
+			update t_students 
+			<set> 
+				<if test="num != null">num=#{num}, </if>
+				<if test="pwd != null and pwd != '' ">pwd=#{pwd}, </if>
+				<if test="name != null">name=#{name}, </if>
+				<if test="gender != null">gender=#{gender}, </if>
+				<if test="phone != null">phone=#{phone}, </if>
+				<if test="email != null">email=#{email}, </if>
+				<if test="qq != null">qq=#{qq}, </if>
+				<if test="year != null">year=#{year}, </if>
+				<if test="rank.id != null">rank_id=#{rank.id}, </if>
+				<if test="college.id != null">col_id=#{college.id}, </if>
+				<if test="specialty.id != null">spec_id=#{specialty.id}, </if>
+				<if test="introduce != null"> introduce=#{introduce}, </if>
+				<if test="status != null"> status=#{status}</if>
+			</set>
+			where id=#{id};
+		]]>
 	</update>
 	
 	
 	<!-- 根据学号查询学生 -->
 	<select id="queryByNum" parameterType="string" resultMap="StudentResultMap">
 		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
-		rank.id rand_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
+		stu.year, rank.id rand_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
 		FROM t_students stu 
 		inner join t_ranks rank on stu.rank_id=rank.id
 		inner join t_colleges col on stu.col_id=col.id 
-		inner join t_specialty spe on stu.spec_id=spe.id 
-		where stu.num=#{num};
+		inner join t_specialties spe on stu.spec_id=spe.id 
+		where stu.num=#{num} and status=1;
 	</select>	
 	
-	<!-- 根据学号和密码查询学生 -->
+	<!-- 根据学号和密码查询学生 status=1学生账号可用-->
 	<select id="queryByNumAndPwd" resultType="Student">
-		select id, num, pwd, name FROM t_students where num=#{num} and pwd=#{pwd};
+		select id, num, pwd, name FROM t_students 
+			where num=#{num} and pwd=#{pwd} and status=1;
 	</select>
 	
 	
@@ -56,7 +65,7 @@
 		FROM t_students stu 
 		inner join t_ranks rank on stu.rank_id=rank.id
 		inner join t_colleges col on stu.col_id=col.id 
-		inner join t_specialty spe on stu.spec_id=spe.id 
+		inner join t_specialties spe on stu.spec_id=spe.id 
 		where stu.id=#{id};
 	</select>	
 	
@@ -69,6 +78,7 @@
 		<result column="phone" property="phone"/>
 		<result column="email" property="email"/>
 		<result column="qq" property="qq"/>
+		<result column="year" property="year"/>
 		
 		<association property="rank" javaType="Rank">
 			<id column="rank_id" property="id"/>

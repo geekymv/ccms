@@ -11,10 +11,12 @@ create table t_colleges(
 	phone varchar(20), /*电话号码*/
 	contact varchar(20), /*联系人姓名*/ 
 	address varchar(30), /*办公地址*/
-	authority int not null /*1表示管理员，2表示学院*/
+	colType int, /*1勤管中心，2学院， 3社团*/
+	authority int not null /*1表示管理员，0一般用户*/
 );
+
 /*专业*/
-create table t_specialty(
+create table t_specialties(
 	id int primary key auto_increment,
 	name varchar(30) unique not null, /*专业名称*/
 	col_id int /*所属学院*/
@@ -30,10 +32,12 @@ create table t_students(
 	phone varchar(20), /*手机号码*/
 	email varchar(30), /*邮箱*/
 	qq varchar(11), /*qq*/
+	year varchar(20), /*学年*/
 	rank_id, /*受助等级*/
 	col_id int, /*所在学院*/
 	spec_id int, /*所在专业*/
-	introduce varchar(60) /*个人简介*/ 
+	introduce varchar(60), /*个人简介*/
+	status int /*学生账号状态：1可用，0不可用*/
 );
 
 /*用户访问记录表*/
@@ -46,7 +50,13 @@ create table t_access_log(
 	status int /*用户状态：已登录1， 未登录0*/
 );
 
-
+/*字典表
+create table t_dicts(
+	id int primary key auto_increment,
+	name varchar(20),
+	type_ varchar(20)
+);
+*/
 
 /*受助等级：甲乙丙*/
 create table t_rank(
@@ -74,17 +84,16 @@ create table t_activities(
 	publish_time datetime, /*发布时间*/
 	date_time varchar(30),	/*活动时间*/
 	end_date date, /*报名截止日期*/
-	location varchar(60), /*地点*/
-	aim varchar(30), /*目的*/
+	location varchar(60), /*活动地点*/
+	aim varchar(30), /*活动目的*/
 	content varchar(60), /*活动内容*/
 	activity_type int, /*活动加分类型*/
-	duration int, /*活动时长*/
+	duration int, /*活动加分时长*/
 	act_object varchar(30), /*参与对象*/
 	number int, /*参与人数*/
-	contact varchar(20), /*联系人姓名*/ 
+	contact varchar(20), /*联系人*/ 
 	phone varchar(20), /*联系方式*/
-	assist varchar(20), /*活动协助人员*/
-	
+	assist varchar(20), /*协助人员*/
 	status int /*状态:通过1， 未通过0， 删除-1*/
 );
 
@@ -93,5 +102,6 @@ create table t_activity_item (
 	id int primary key auto_increment,
 	act_id int, /*活动编号*/
 	stu_id int, /*学生编号*/
-	audit int /*审核：认证通过1，等待认证0， 认证不通过-1*/
+	audit int, /*审核：认证通过1，等待认证0， 认证不通过-1*/
+	record_time datetime /*记录时间*/ 
 );

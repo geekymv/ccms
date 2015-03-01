@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ccms.pojo.ActivityItem;
-import com.ccms.pojo.ActivityItemVO;
+import com.ccms.base.dao.BaseDAO;
+import com.ccms.persistence.pojo.ActivityItem;
+import com.ccms.persistence.vo.ActivityItemVO;
 
 public interface ActivityItemDAO extends BaseDAO<ActivityItem> {
 

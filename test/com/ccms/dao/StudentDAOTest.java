@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccms.dao.StudentDAO;
-import com.ccms.pojo.Student;
+import com.ccms.persistence.pojo.Student;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/beans.xml")
@@ -22,7 +22,7 @@ public class StudentDAOTest {
 	@Test
 	public void testQueryByNumAndPwd() {
 		
-		Student student = studentDAO.queryByNumAndPwd("11", "123");
+		Student student = studentDAO.queryByNumAndPwd("22", "123");
 		
 		System.out.println(student);
 	}
@@ -39,7 +39,7 @@ public class StudentDAOTest {
 	@Test
 	public void testQueryByNum() {
 		
-		Student student = studentDAO.queryByNum("11");
+		Student student = studentDAO.queryByNum("22");
 		
 		System.out.println(student);
 	}

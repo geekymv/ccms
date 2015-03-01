@@ -2,8 +2,9 @@ package com.ccms.dao;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ccms.pojo.College;
-import com.ccms.pojo.Specialty;
+import com.ccms.base.dao.BaseDAO;
+import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Specialty;
 
 /**
  * 专业DAO

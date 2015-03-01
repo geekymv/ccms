@@ -1,19 +1,18 @@
-package com.ccms.pojo;
+package com.ccms.persistence.pojo;
 
 /**
- * 受助等级：甲乙丙
+ * 活动类型：劳务类，文体类，实践类
  * @author Geek_ymv
  */
-public class Rank {
+public class ActivityType {
 	
 	private Integer id;
-	private String name; // 等级名称
+	private String name;	//活动类型名称
 	
 	@Override
 	public String toString() {
-		return "Rank [id=" + id + ", name=" + name + "]";
+		return "ActivityType [id=" + id + ", name=" + name + "]";
 	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -26,4 +25,5 @@ public class Rank {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 }

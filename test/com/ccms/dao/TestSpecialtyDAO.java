@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ccms.pojo.College;
-import com.ccms.pojo.Specialty;
+import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Specialty;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/beans.xml")

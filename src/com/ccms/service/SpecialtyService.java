@@ -1,7 +1,7 @@
 package com.ccms.service;
 
-import com.ccms.pojo.College;
-import com.ccms.pojo.Specialty;
+import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Specialty;
 
 public interface SpecialtyService {
 	

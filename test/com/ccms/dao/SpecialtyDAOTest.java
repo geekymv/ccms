@@ -3,8 +3,8 @@ package com.ccms.dao;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ccms.pojo.College;
-import com.ccms.pojo.Specialty;
+import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Specialty;
 
 public class SpecialtyDAOTest extends BaseTest {
 

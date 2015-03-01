@@ -2,8 +2,8 @@ package com.ccms.service;
 
 import java.util.List;
 
-import com.ccms.pojo.College;
-import com.ccms.pojo.Specialty;
+import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Specialty;
 
 public interface CollegeService {
 	
@@ -15,7 +15,7 @@ public interface CollegeService {
 	public College getById(Integer id);
 	
 	/**
-	 * 查询所有College
+	 * 查询所有学院
 	 * @return
 	 */
 	public List<College> getColleges();

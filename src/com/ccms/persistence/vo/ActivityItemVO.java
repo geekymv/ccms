@@ -1,4 +1,6 @@
-package com.ccms.pojo;
+package com.ccms.persistence.vo;
+
+import com.ccms.persistence.pojo.ActivityType;
 
 public class ActivityItemVO {
 	/**

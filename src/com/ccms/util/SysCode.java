@@ -1,6 +1,6 @@
 package com.ccms.util;
 
-public class Constant {
+public class SysCode {
 	/**
 	 * 用户在线
 	 */
@@ -24,5 +24,17 @@ public class Constant {
 	 */
 	public static final Integer ACTITEM_AUDIT_UNAPPROVE = -1;
 	
+	/**
+	 * 勤管中心
+	 */
+	public static final Integer COLTYPE_QGZX = 1;
+	/**
+	 * 学院
+	 */
+	public static final Integer COLTYPE_COLLEGE = 2;
+	/**
+	 * 社团
+	 */
+	public static final Integer COLTYPE_CORPORATION = 3;
 	
 }

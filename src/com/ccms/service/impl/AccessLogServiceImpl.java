@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccms.dao.AccessLogDAO;
-import com.ccms.pojo.AccessLog;
+import com.ccms.persistence.pojo.AccessLog;
 import com.ccms.service.AccessLogService;
 
 @Service("accessLogService")

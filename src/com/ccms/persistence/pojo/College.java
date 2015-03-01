@@ -1,4 +1,4 @@
-package com.ccms.pojo;
+package com.ccms.persistence.pojo;
 
 import java.util.List;
 
@@ -10,12 +10,19 @@ public class College {
 	
 	private Integer id;
 	private String account;
-	private Integer authority; // 权限
+	/**
+	 * 权限：1管理员，0一般用户
+	 */
+	private Integer authority;
 	private String name;
 	private String pwd;
 	private String phone;
 	private String contact;
 	private String address;
+	/**
+	 * 类型：1勤管中心，2学院， 3社团
+	 */
+	private Integer colType;
 	
 	private List<Specialty> specialties;
 	
@@ -26,12 +33,13 @@ public class College {
 		this.id = id;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "College [id=" + id + ", account=" + account + ", authority="
 				+ authority + ", name=" + name + ", pwd=" + pwd + ", phone="
 				+ phone + ", contact=" + contact + ", address=" + address
-				+ ", specialties=" + specialties + "]";
+				+ ", colType=" + colType + ", specialties=" + specialties + "]";
 	}
 
 	public Integer getId() {
@@ -88,6 +96,10 @@ public class College {
 	public void setSpecialties(List<Specialty> specialties) {
 		this.specialties = specialties;
 	}
-	
-	
+	public Integer getColType() {
+		return colType;
+	}
+	public void setColType(Integer colType) {
+		this.colType = colType;
+	}
 }

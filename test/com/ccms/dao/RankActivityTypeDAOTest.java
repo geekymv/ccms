@@ -5,8 +5,8 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ccms.pojo.RankActivityType;
-import com.ccms.pojo.RankActivityTypeVO;
+import com.ccms.persistence.pojo.RankActivityType;
+import com.ccms.persistence.vo.RankActivityTypeVO;
 
 
 public class RankActivityTypeDAOTest extends BaseTest {

@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccms.dao.CollegeDAO;
-import com.ccms.pojo.College;
-import com.ccms.pojo.Specialty;
+import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Specialty;
 import com.ccms.service.CollegeService;
+import com.ccms.util.SysCode;
 
 @Service
 public class CollegeServiceImpl implements CollegeService {
@@ -19,7 +20,7 @@ public class CollegeServiceImpl implements CollegeService {
 	@Override
 	public List<College> getColleges() {
 		
-		return collegeDAO.queryAll();
+		return collegeDAO.queryAllByType(SysCode.COLTYPE_COLLEGE);
 	}
 
 	@Override

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccms.dao.ActivityDAO;
-import com.ccms.pojo.Activity;
-import com.ccms.pojo.Pager;
+import com.ccms.persistence.pojo.Activity;
+import com.ccms.persistence.pojo.Pager;
 import com.ccms.service.ActivityService;
 
 @Service("activityService")

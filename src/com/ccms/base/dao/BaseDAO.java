@@ -1,4 +1,4 @@
-package com.ccms.dao;
+package com.ccms.base.dao;
 
 import java.util.List;
 

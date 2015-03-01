@@ -2,10 +2,10 @@ package com.ccms.service;
 
 import java.util.List;
 
-import com.ccms.pojo.Activity;
-import com.ccms.pojo.ActivityItem;
-import com.ccms.pojo.RankActivityTypeVO;
-import com.ccms.pojo.Student;
+import com.ccms.persistence.pojo.Activity;
+import com.ccms.persistence.pojo.ActivityItem;
+import com.ccms.persistence.pojo.Student;
+import com.ccms.persistence.vo.RankActivityTypeVO;
 
 public interface ActivityItemService {
 	

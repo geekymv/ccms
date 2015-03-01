@@ -7,8 +7,8 @@
 	
 	<!-- 学生报名活动 -->
 	<insert id="add" parameterType="ActivityItem">
-	    insert into t_activity_item (act_id, stu_id , audit) 
-	    VALUES (#{activity.id}, #{student.id}, #{audit});
+	    insert into t_activity_item (act_id, stu_id , audit, recordTime) 
+	    VALUES (#{activity.id}, #{student.id}, #{audit}, #{recordTime});
 	</insert>
 	
 	<!--  根据活动id和学生id查询  -->
@@ -35,10 +35,10 @@
 	
 	<!-- 根据学生id查询学生报名的活动  -->
 	<select id="queryAllActivityItem" parameterType="int" resultMap="ActItemResultMap">
-		select act_item.id item_id, act_item.audit, act.id act_id
-		FROM t_activity_item act_item
-		inner join t_activities act on act_item.act_id=act.id 
-		where act_item.stu_id=#{id}; 
+		SELECT ACT_ITEM.ID ITEM_ID, ACT_ITEM.AUDIT, ACT.ID ACT_ID
+		FROM T_ACTIVITY_ITEM ACT_ITEM
+		INNER JOIN T_ACTIVITIES ACT ON ACT_ITEM.ACT_ID=ACT.ID 
+		WHERE ACT_ITEM.STU_ID=#{ID}; 
 	</select>
 	<resultMap type="ActivityItem" id="ActItemResultMap">
 		<id column="item_id" property="id" />

@@ -7,17 +7,17 @@
 	
 	
 	<select id="queryByName" resultType="Specialty">
-		select id, name from t_specialty where col_id=#{college.id} and name=#{name};
+		select id, name from t_specialties where col_id=#{college.id} and name=#{name};
 	</select>
 	
 	<!-- 添加专业 -->
 	<insert id="add" parameterType="Specialty">
-		insert into t_specialty(name, col_id) values(#{name}, #{college.id});
+		insert into t_specialties(name, col_id) values(#{name}, #{college.id});
 	</insert>
 	
 	<!-- 修改 -->
 	<update id="update" parameterType="Specialty">
-		update t_specialty set name=#{name} where id=#{id}
+		update t_specialties set name=#{name} where id=#{id}
 	</update>
 	
 	

@@ -2,7 +2,8 @@ package com.ccms.dao;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ccms.pojo.Student;
+import com.ccms.base.dao.BaseDAO;
+import com.ccms.persistence.pojo.Student;
 
 public interface StudentDAO extends BaseDAO<Student>{
 	/**

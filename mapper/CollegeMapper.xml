@@ -21,9 +21,14 @@
 		select * from t_colleges where account=#{account} and pwd=#{pwd};
 	</select>
 	
-	<!-- 获得所有学院authority=0 -->
+	<!-- 获得所有学院colType=2 -->
+	<select id="queryAllByType" resultType="College">
+		select * from t_colleges where colType=#{colType};
+	</select>
+	
+	<!-- 获得所有 -->
 	<select id="queryAll" resultType="College">
-		select * from t_colleges where authority=0;
+		select * from t_colleges;
 	</select>
 	
 	<!-- 根据id查询
@@ -34,14 +39,14 @@
 	<select id="queryById" parameterType="int" resultMap="querySpecialtysMap">
 		select col.id col_id, col.account, col.name col_name, col.phone, col.contact, col.address, col.authority,
 		spe.id spe_id, spe.name spe_name
-		from t_colleges col inner join t_specialty spe on col.id=spe.col_id where col.id=#{id}
+		from t_colleges col inner join t_specialties spe on col.id=spe.col_id where col.id=#{id}
 	</select>
 	
 	<!-- 查询该学院所有的专业 -->
 	<select id="querySpecialtys" parameterType="int" resultMap="querySpecialtysMap">
 		select col.id col_id, col.account, col.name col_name, col.phone, col.contact, col.address, col.authority,
 		spe.id spe_id, spe.name spe_name
-		from t_colleges col inner join t_specialty spe on col.id=spe.col_id where col.id=#{id} and col.authority=0;
+		from t_colleges col inner join t_specialties spe on col.id=spe.col_id where col.id=#{id} and col.authority=0;
 	</select>
 	<resultMap type="College" id="querySpecialtysMap">
 		<id column="col_id" property="id" />

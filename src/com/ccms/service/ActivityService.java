@@ -1,8 +1,8 @@
 package com.ccms.service;
 
 
-import com.ccms.pojo.Activity;
-import com.ccms.pojo.Pager;
+import com.ccms.persistence.pojo.Activity;
+import com.ccms.persistence.pojo.Pager;
 
 public interface ActivityService {
 	

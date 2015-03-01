@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ccms.pojo.Activity;
+import com.ccms.base.dao.BaseDAO;
+import com.ccms.persistence.pojo.Activity;
 
 public interface ActivityDAO extends BaseDAO<Activity> {
 	
