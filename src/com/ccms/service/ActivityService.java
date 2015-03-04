@@ -1,8 +1,8 @@
 package com.ccms.service;
 
 
+import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
-import com.ccms.persistence.pojo.Pager;
 
 public interface ActivityService {
 	

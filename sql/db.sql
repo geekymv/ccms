@@ -105,3 +105,18 @@ create table t_activity_item (
 	audit int, /*审核：认证通过1，等待认证0， 认证不通过-1*/
 	record_time datetime /*记录时间*/ 
 );
+
+/**
+ * 文件表
+ */
+create table t_files(
+	id int primary key auto_increment,
+	col_id int, /*所属用工单位*/
+	originalFilename varchar(60), /*文件原始名称*/
+	newFileName varchar(255),	/*文件新的名称*/
+	saveUrl varchar(20),		/*文件的保存路径*/
+	fileSize float,	/*文件大小*/
+	uploadDate datetime,	/* 上传时间*/
+	authority int	/*查看文件的权限 1公有：所有用户,0一般：管理员和用工单位,-1 私有：只有本单位*/
+);
+

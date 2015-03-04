@@ -128,7 +128,7 @@
 	                                	加分类型<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	 <select name="select" class="uniformselect" style="width: 160px;">
+	                                	 <select name="actType" class="uniformselect" style="width: 160px;">
 			                            	<option value="">Choose One</option>
 			                                <option value="">Selection One</option>
 			                                <option value="">Selection Two</option>
@@ -204,16 +204,7 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    		<td>
-	                    		<div class="par control-group my-par">
-	                                <label class="control-label" for="account">
-	                                	活动名称<span class="tips">*</span>
-	                                </label>
-	                                <div class="controls">
-	                                	<input type="text" name="name" id="name" class="input-medium" />
-	                                </div>
-	                            </div>
-                    		</td>
+                    		
                     	</tr>
                     
                     </table>

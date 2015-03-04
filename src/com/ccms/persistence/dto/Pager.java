@@ -1,4 +1,4 @@
-package com.ccms.persistence.pojo;
+package com.ccms.persistence.dto;
 
 import java.util.List;
 
