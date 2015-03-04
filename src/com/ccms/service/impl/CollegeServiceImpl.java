@@ -25,13 +25,10 @@ public class CollegeServiceImpl implements CollegeService {
 
 	@Override
 	public List<Specialty> getSpecialties(Integer collegeId) {
-		
 		College college = collegeDAO.querySpecialtys(collegeId);
-		
 		if(college == null){ // 该学院暂时没有专业
 			return null;
 		}
-		
 		List<Specialty> specialties = college.getSpecialties();
 		
 		return specialties;
@@ -39,14 +36,17 @@ public class CollegeServiceImpl implements CollegeService {
 
 	@Override
 	public College login(String account, String pwd) {
-
 		return collegeDAO.queryByAccountPwd(account, pwd);
 	}
 
 	@Override
 	public College getById(Integer id) {
-		
 		return collegeDAO.queryById(id);
+	}
+
+	@Override
+	public int update(College college) {
+		return collegeDAO.update(college);
 	}
 
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>
+
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -9,8 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>个人中心</title>
-
-    <link href="${pageContext.request.contextPath }/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<%@ include file="/WEB-INF/jsp/inc/style.jsp"%>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -178,9 +177,6 @@
 			</form>
 		</div>
 	</div>
-	
-    <script src="${pageContext.request.contextPath }/resources/js/jquery-1.11.1.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
     
     <script type="text/javascript">
 		$(function(){

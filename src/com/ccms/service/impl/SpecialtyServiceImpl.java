@@ -19,5 +19,21 @@ public class SpecialtyServiceImpl implements SpecialtyService {
 		
 		return specialtyDAO.queryByName(name, college);
 	}
+	
+	/**
+	 * 添加专业
+	 * @param name
+	 * @param college
+	 * @return
+	 */
+	public boolean add(String name, College college) {
+		Specialty s = new Specialty();
+		s.setCollege(college);
+		s.setName(name);
+		
+		int res = specialtyDAO.add(s);
+		
+		return res == 1 ? true : false;
+	}
 
 }

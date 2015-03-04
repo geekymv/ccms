@@ -42,18 +42,14 @@ public class IndexController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
 	public String login(String account, String password, HttpSession session, Model model){
-
 		Student student = studentService.login(account, password);
 		if(student != null) {
 			session.setAttribute("user", student);
-			
 			return "student_success";
-		
 		}else {
 			College college = collegeService.login(account, password);
 			if(college != null){
 				session.setAttribute("user", college);
-				
 				return "college_success";
 			}else {
 				model.addAttribute("errors", "用户名或密码错误！");
@@ -68,13 +64,10 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping("/logout")
-	@ResponseBody
 	public String logout(HttpSession session){
-
 		session.invalidate();
-		
-		System.out.println("exit...");
-		return "success";
+		// 页面跳转到首页
+		return "redirect:/";
 	}
 	
 }

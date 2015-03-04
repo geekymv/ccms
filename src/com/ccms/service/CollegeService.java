@@ -8,6 +8,13 @@ import com.ccms.persistence.pojo.Specialty;
 public interface CollegeService {
 	
 	/**
+	 * 修改信息
+	 * @param college
+	 * @return
+	 */
+	public int update(College college);
+	
+	/**
 	 * 根据id查询
 	 * @param id
 	 * @return

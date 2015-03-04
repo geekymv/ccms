@@ -14,5 +14,11 @@ public interface SpecialtyService {
 	 */
 	public Specialty getByName(String name, College college);
 	
-
+	/**
+	 * 添加专业
+	 * @param name
+	 * @param college
+	 * @return
+	 */
+	public boolean add(String name, College college);
 }

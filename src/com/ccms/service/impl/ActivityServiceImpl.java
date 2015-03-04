@@ -10,7 +10,7 @@ import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.Pager;
 import com.ccms.service.ActivityService;
 
-@Service("activityService")
+@Service
 public class ActivityServiceImpl implements ActivityService {
 
 	@Autowired
@@ -37,6 +37,11 @@ public class ActivityServiceImpl implements ActivityService {
 	public Activity detail(Integer id) {
 
 		return activityDAO.queryById(id);
+	}
+
+	@Override
+	public int add(Activity activity) {
+		return activityDAO.add(activity);
 	}
 
 }

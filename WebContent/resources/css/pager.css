@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+table {
+	margin: 0 auto;
+}
+
+td, th {
+	font-family: "微软雅黑";
+	text-align: center;
+}

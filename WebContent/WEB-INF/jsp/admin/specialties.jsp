@@ -1,93 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>专业设置</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/admin/css/responsive-tables.css">
-
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/admin/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/admin/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/admin/js/custom.js"></script>
+<%@ include file="/WEB-INF/jsp/inc/admin_style.jsp"%>
 
 </head>
 <body>
 	<div class="mainwrapper">
-		<div class="header">
-        <div class="logo">
-            <a href=""><img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" alt="" /></a>
-        </div>
-        <div class="headerinner">
-            <ul class="headmenu">
-                <li class="right">
-                    <div class="userloggedinfo">
-                        <img src="${pageContext.request.contextPath }/resources/admin/images/photos/thumb1.png" alt="" />
-                        <div class="userinfo">
-                            <h5>${user.name }</h5>
-                            <ul>
-                                <li><a href="editprofile.html">修改资料</a></li>
-                                <li><a href="">账号设置</a></li>
-                                <li><a href="index.html">退出系统</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-            </ul><!--headmenu-->
-        </div>
-    	</div> 
-
+		<jsp:include page="header.jsp"></jsp:include>
 		<div class="leftpanel">
-		<div class="leftmenu">        
-            <ul class="nav nav-tabs nav-stacked">
-            	<li class="nav-header"><h4>菜单栏</h4></li>
-                <li><a href="${pageContext.request.contextPath }/admin"><span class="iconfa-laptop"></span>控制面板</a></li>
-                <li class="dropdown active"><a href=""><span class="iconfa-pencil"></span> 基本管理</a>
-                	<ul style="display: block;">
-                       <li><a href="${pageContext.request.contextPath }/admin/myinfo">个人资料</a></li>
-                       <li  class="active"><a href="${pageContext.request.contextPath }/college/specialties">专业设置</a></li>
-                       <li class="dropdown"><a href="">公告管理</a>
-                        	<ul>
-	                            <li><a href="">发布公告</a></li>
-	                            <li><a href="">公告列表</a></li>
-                        	</ul>
-                        </li>
-                        <li><a href="wysiwyg.html">报名管理</a></li>
-                        <li><a href="wysiwyg.html">学生管理</a></li>
-                        <li><a href="wysiwyg.html">考核管理</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a href=""><span class="iconfa-briefcase"></span> 勤管管理</a>
-                	<ul>
-                    	<li><a href="elements.html">学院管理</a></li>
-                        <li><a href="bootstrap.html">学生管理</a></li>
-                        <li><a href="boxes.html">公告管理</a></li>
-                        <li><a href="boxes.html">时间认证</a></li>
-                        <li><a href="boxes.html">名单导入</a></li>
-                        <li><a href="boxes.html">文档管理</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a href=""><span class="iconfa-th-list"></span> 年度考核</a>
-                	<ul>
-                    	<li><a href="table-static.html">考核时间</a></li>
-                        <li class="dropdown"><a href="table-dynamic.html">年度考核</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a href=""><span class="iconfa-th-list"></span> Three Level Menu Sample</a>
-                	<ul>
-                    	<li class="dropdown"><a href="">Second Level Menu</a>
-                        <ul>
-                            <li><a href="">Third Level Menu</a></li>
-                            <li><a href="">Another Third Level Menu</a></li>
-                        </ul>
-                     </li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!--leftmenu-->
+			<jsp:include page="leftmenu.jsp"></jsp:include>
 		</div>
 		
 		<div class="rightpanel">
@@ -147,7 +75,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center;">
-						<button class="btn btn-primary">添加专业</button>		
+						<button class="btn btn-primary" onclick="addSpec();">添加专业</button>		
 					</td>
 				</tr>
 			</table>
@@ -191,23 +119,9 @@
 			    page : {dom : '#addSpecialty'}
 				});
 		});
-		
-		// 判断专业是否已经存在
-		jQuery("#name").
-		
-		
-	//	/college/exist
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	</script>
+	
+	<script type="text/javascript" src="${ctx }/resources/scripts/college.js"></script>
 
 </body>
 </html>    

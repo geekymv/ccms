@@ -10,19 +10,13 @@ public class College {
 	
 	private Integer id;
 	private String account;
-	/**
-	 * 权限：1管理员，0一般用户
-	 */
-	private Integer authority;
+	private Integer authority; // 权限：1管理员，0一般用户
 	private String name;
 	private String pwd;
 	private String phone;
 	private String contact;
 	private String address;
-	/**
-	 * 类型：1勤管中心，2学院， 3社团
-	 */
-	private Integer colType;
+	private Integer colType; // 类型：1勤管中心，2学院， 3社团
 	
 	private List<Specialty> specialties;
 	

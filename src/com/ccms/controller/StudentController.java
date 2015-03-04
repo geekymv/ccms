@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ccms.persistence.dto.ActivityItemDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.College;
@@ -25,6 +26,7 @@ import com.ccms.service.ActivityItemService;
 import com.ccms.service.ActivityService;
 import com.ccms.service.CollegeService;
 import com.ccms.service.StudentService;
+import com.ccms.uti.DateUtils;
 
 @Controller
 @RequestMapping("/stu")
@@ -207,19 +209,26 @@ public class StudentController {
 	}
 	
 	/**
+	 * 跳转到时间统计页面
+	 * @return
+	 */
+	@RequestMapping(value="/timeCounter", method=RequestMethod.GET)
+	public String timeCounter() {
+		return "student/time_counter";
+	}
+	/**
 	 * 时间统计
 	 * @return
 	 */
-	@RequestMapping("/timeCounter")
-	public String timeCounter(HttpSession session, Model model) {
-		
+	@RequestMapping(value="/timeCounter", method=RequestMethod.POST)
+	@ResponseBody
+	public List<RankActivityTypeVO> timeCounter(HttpSession session, Model model, ActivityItemDto dto) {
 		Student student = (Student) session.getAttribute("user");
+		dto.setStudentId(student.getId());
 		
-		List<RankActivityTypeVO> itemVOs = actItemService.queryRankActivityItemVO(student.getId());
+		List<RankActivityTypeVO> itemVOs = actItemService.queryRankActivityItemVO(dto);
 		
-		model.addAttribute("itemVOs", itemVOs);
-		
-		return "student/time_counter";
+		return itemVOs;
 	}
 	
 	

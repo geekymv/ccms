@@ -3,12 +3,14 @@ package com.ccms.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccms.dao.ActivityItemDAO;
 import com.ccms.dao.RankActivityTypeDAO;
 import com.ccms.dao.StudentDAO;
+import com.ccms.persistence.dto.ActivityItemDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.Rank;
@@ -16,6 +18,7 @@ import com.ccms.persistence.pojo.Student;
 import com.ccms.persistence.vo.ActivityItemVO;
 import com.ccms.persistence.vo.RankActivityTypeVO;
 import com.ccms.service.ActivityItemService;
+import com.ccms.uti.DateUtils;
 import com.ccms.util.SysCode;
 
 @Service
@@ -39,7 +42,7 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 			actItem = new ActivityItem();
 			actItem.setActivity(activity);
 			actItem.setStudent(student);
-			actItem.setAudit(SysCode.ACTITEM_AUDIT_WAIT);
+			actItem.setAudit(SysCode.ActivityItem.ACTITEM_AUDIT_WAIT);
 			actItem.setRecordTime(new Date());
 			int res = actItemDAO.add(actItem);
 			if (res == 1) {
@@ -68,13 +71,21 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 	}
 
 	@Override
-	public List<RankActivityTypeVO> queryRankActivityItemVO(Integer studentId) {
+	public List<RankActivityTypeVO> queryRankActivityItemVO(ActivityItemDto dto) {
+		String startDate = dto.getStartDate();
+		String endDate = dto.getEndDate();
 		
-		Student student = studentDAO.queryById(studentId);
+		if(StringUtils.isBlank(startDate) || StringUtils.isBlank(endDate)) {
+			List<String> years = DateUtils.getCurrentXueNian();
+			dto.setStartDate(years.get(0));
+			dto.setEndDate(years.get(1));
+		}
+		
+		Student student = studentDAO.queryById(dto.getStudentId());
 		// 获得学生受助等级
 		Rank rank = student.getRank();
 		
-		List<ActivityItemVO> itemVOs = actItemDAO.queryActivityItemVO(studentId);
+		List<ActivityItemVO> itemVOs = actItemDAO.queryActivityItemVO(dto.getStudentId(), dto.getStartDate(), dto.getEndDate());
 		List<RankActivityTypeVO> rankActivityTypeVOs = rankActivityTypeDAO.queryByRankId(rank.getId());
 		
 		for (RankActivityTypeVO rankActivityTypeVO : rankActivityTypeVOs) {

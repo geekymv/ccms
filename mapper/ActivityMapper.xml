@@ -11,8 +11,8 @@
 		name, col_id, publish_time, date_time, end_date, location, aim, content, activity_type,
 		duration, act_object, number, contact, phone, assist, status ) 
 		values(#{name}, #{college.id}, #{publishTime}, #{dateTime},
-		#{endDate}, #{location}, #{aim}, #{content}, #{actType.id}, #{duration}, 
-		#{actObject}, #{number}, #{contact}, #{phone}, #{assist}, #{status} );		
+				#{endDate}, #{location}, #{aim}, #{content}, #{actType.id}, #{duration}, 
+				#{actObject}, #{number}, #{contact}, #{phone}, #{assist}, #{status} )	
 	</insert>
 	
 	<!-- 更新 -->

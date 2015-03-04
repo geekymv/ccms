@@ -18,35 +18,6 @@
 	<mvc:view-controller path="/" view-name="redirect:login"/>
  	-->
 	
-	<!-- 配置拦截器 -->
-	<mvc:interceptors>
-		<!-- 拦截学生操作 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/stu/**"/>
-			<bean class="com.ccms.interceptor.StudentInterceptor">
-			<!-- 
-				不需要拦截的url地址
-				<property name="excludeUrls">
-					<list>
-						<value>/ccms/</value>
-						<value>/ccms/login</value>
-					</list>
-				</property>
-			-->	
-			</bean>
-		</mvc:interceptor>
-	
-		<!-- 记录用户登录 -->
-		<mvc:interceptor>
-			<!-- path为被拦截的Controller请求的url，可以配置多个-->
-			<mvc:mapping path="/login"/>
-			<bean class="com.ccms.interceptor.Log4LoginInterceptor">
-				<property name="accessLogService" ref="accessLogService"></property>
-			</bean>
-			
-		</mvc:interceptor>
-		
-	</mvc:interceptors>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

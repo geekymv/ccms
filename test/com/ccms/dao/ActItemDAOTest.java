@@ -29,16 +29,16 @@ public class ActItemDAOTest {
 		
 	}
 	
-	@Test
-	public void testQueryApproveActivityItems() {
-		
-		List<ActivityItemVO> items = actItemDAO.queryActivityItemVO(1);
-		
-		for (ActivityItemVO actItem : items) {
-			System.out.println(actItem);
-		}
-		
-	}
+//	@Test
+//	public void testQueryApproveActivityItems() {
+//		
+//		List<ActivityItemVO> items = actItemDAO.queryActivityItemVO(1);
+//		
+//		for (ActivityItemVO actItem : items) {
+//			System.out.println(actItem);
+//		}
+//		
+//	}
 	
 
 }

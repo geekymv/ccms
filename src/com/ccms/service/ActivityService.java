@@ -21,6 +21,13 @@ public interface ActivityService {
 	 */
 	public Activity detail(Integer id);
 	
+	/**
+	 * 添加活动
+	 * @param activity
+	 * @return
+	 */
+	public int add(Activity activity);
+	
 	
 	
 }

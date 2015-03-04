@@ -10,11 +10,19 @@
 		insert into t_colleges(account, name, pwd, phone, contact, address, authority )
 		values(#{account}, #{name}, #{pwd}, #{phone}, #{contact}, #{address}, #{authority});
 	</insert>
-	
+
 	<!-- 修改 -->
 	<update id="update" parameterType="College">
-		update t_colleges set account=#{account}, name=#{name}, pwd=#{pwd}, phone=#{phone},
-		contact=#{contact}, address=#{address}, authority=#{authority} where id=#{id};
+		update t_colleges 
+		<set> 
+			<if test="account != null">account=#{account},</if>
+			<if test="name != null">name=#{name},</if>
+			<if test="pwd != null and pwd !='' ">pwd=#{pwd},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="contact != null">contact=#{contact},</if>
+			<if test="address != null">address=#{address}</if>
+		</set>
+		where id=#{id};
 	</update>
 	
 	<select id="queryByAccountPwd" resultType="College">
@@ -31,16 +39,18 @@
 		select * from t_colleges;
 	</select>
 	
-	<!-- 根据id查询
+	<!-- 根据id查询 -->
+	
 	<select id="queryById" parameterType="int" resultType="College">
 		select * from t_colleges where id=#{id}	
 	</select>
-	 -->
+	<!-- 
 	<select id="queryById" parameterType="int" resultMap="querySpecialtysMap">
 		select col.id col_id, col.account, col.name col_name, col.phone, col.contact, col.address, col.authority,
 		spe.id spe_id, spe.name spe_name
 		from t_colleges col inner join t_specialties spe on col.id=spe.col_id where col.id=#{id}
 	</select>
+	-->
 	
 	<!-- 查询该学院所有的专业 -->
 	<select id="querySpecialtys" parameterType="int" resultMap="querySpecialtysMap">

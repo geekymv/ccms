@@ -67,7 +67,7 @@ public class Log4LoginInterceptor extends HandlerInterceptorAdapter {
 		accessLog.setIp(ip);
 		accessLog.setLoginTime(new Date());
 		accessLog.setUserId(userId);
-		accessLog.setStatus(SysCode.USER_STATUS_ONLINE);
+		accessLog.setStatus(SysCode.User.USER_STATUS_ONLINE);
 		
 		boolean res = accessLogService.login(accessLog);
 		

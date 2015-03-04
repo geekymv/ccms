@@ -153,7 +153,7 @@
 		</form>
 	</div>
 	
-    <script src="${pageContext.request.contextPath }/resources/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/scripts/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript">

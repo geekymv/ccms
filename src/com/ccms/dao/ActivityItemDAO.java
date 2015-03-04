@@ -30,9 +30,12 @@ public interface ActivityItemDAO extends BaseDAO<ActivityItem> {
 	/**
 	 * 根据学生id分组查询各种类型完成的活动时间
 	 * @param studentId 学生id
+	 * @param startDate 起始时间
+	 * @param endDate 结束时间
 	 * @return
 	 */
-	public List<ActivityItemVO> queryActivityItemVO(Integer studentId);
+	public List<ActivityItemVO> queryActivityItemVO(@Param("studentId")Integer studentId, 
+									@Param("startDate")String startDate, @Param("endDate") String endDate);
 	
 	
 }

@@ -2,6 +2,7 @@ package com.ccms.service;
 
 import java.util.List;
 
+import com.ccms.persistence.dto.ActivityItemDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.Student;
@@ -36,10 +37,10 @@ public interface ActivityItemService {
 	
 	/**
 	 * 根据学生id查询该学生各种类型完成的时间
-	 * @param studentId 学生id
+	 * @param dto
 	 * @return
 	 */
-	public List<RankActivityTypeVO> queryRankActivityItemVO(Integer studentId);
+	public List<RankActivityTypeVO> queryRankActivityItemVO(ActivityItemDto dto);
 }
 
 
