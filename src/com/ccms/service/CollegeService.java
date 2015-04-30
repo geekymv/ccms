@@ -49,4 +49,12 @@ public interface CollegeService {
 	 * @return
 	 */
 	public Pager<College> page(Pager<College> pager);
+	
+	/**
+	 * 添加用工单位
+	 * @param college
+	 * @return
+	 */
+	public String addEmployer(College college);
+	
 }

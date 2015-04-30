@@ -36,4 +36,18 @@ public interface CollegeDAO extends BaseDAO<College>{
 	 */
 	public College queryByAccountPwd(@Param("account")String account, @Param("pwd")String pwd);
 	
+	/**
+	 * 根据名称查询
+	 * @param name
+	 * @return
+	 */
+	public College queryByName(String name);
+	
+	/**
+	 * 根据账号查询
+	 * @param account
+	 * @return
+	 */
+	public College queryByAccount(String account);
+	
 }

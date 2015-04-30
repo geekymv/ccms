@@ -38,7 +38,7 @@
 	            <li>单位列表</li>
         	</ul>
         	<div class="maincontent">
-        	<div class="maincontentinner">
+        	<div class="maincontentinner" style="margin-top: 0px;">
             <div class="widget">
                 <h4 class="widgettitle">单位列表</h4>
             	<table class="table table-bordered responsive">
@@ -75,17 +75,25 @@
 				var html = "";
 				for(var i = 0; i < len; i++) {
 					var col = datas[i];
-				
+					var colType = col.colType;
+					if(colType == 1) {
+						colType = '管理员';
+					}else if (colType == 2) {
+						colType = '学院';
+					}else if (colType == 3) {
+						colType = '用工单位';
+					} 
+					
 					html+="<tr>"
 		            		+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
-		            		+ "<td>"+ (i+1) +"</td>"
+		            		+ "<td><input type='hidden' id='id' value='"+col.id+"'/>"+ (i+1) +"</td>"
 		            		+ "<td>"+ col.account +"</td>"
 		            		+ "<td>"+ col.name +"</td>"
 		            		+ "<td>"+ col.phone +"</td>"
 		            		+ "<td>"+ col.contact +"</td>"
 		            		+ "<td>"+ col.address +"</td>"
-		            		+ "<td>"+ col.colType +"</td>"
-		            		+ "<td>"+ col.id +"</td>"
+		            		+ "<td>"+ colType +"</td>"
+		            		+ "<td>编辑</td>"
 		            	"</tr>";
 				}
 				

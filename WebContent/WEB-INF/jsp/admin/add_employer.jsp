@@ -37,25 +37,23 @@
         	<div class="maincontent">
         	<div class="maincontentinner">
             <div class="widget">
-                <h4 class="widgettitle">我的资料</h4>
+                <h4 class="widgettitle">添加单位</h4>
                 <div class="widgetcontent">
-                    <form id="form1" class="stdform">
+                    <form id="add_form" class="stdform" style="width: 600px;margin-left: 200px;">
                             <div class="par control-group my-par">
-                                <label class="control-label" for="account">账号</label>
+                                <label class="control-label" for="account">账号<span class="tips">*</span></label>
                                 <div class="controls">
-                                	${college.account }
-                                	<input type="hidden" name="id" id="id" value="${college.id }" class="input-large" />
+                                	<input type="text" name="account" id="account" autofocus="autofocus" class="input-large" />
                                 </div>
                             </div>
                             <div class="par control-group my-par">
-                                <label class="control-label" for="password">登录密码</label>
+                                <label class="control-label" for="password">登录密码<span class="tips">*</span></label>
                                 <div class="controls">
-                                	<input type="password" name="password" id="password" class="input-large" />
-                                	<span class="tips">若不改密码，不用填写！</span>
+                                	<input type="password" name="pwd" id="password" class="input-large" />
                                 </div>
                             </div>
                             <div class="par control-group my-par">
-	                                <label class="control-label" for="repassword">密码确认</label>
+	                                <label class="control-label" for="repassword">密码确认<span class="tips">*</span></label>
                                 <div class="controls">
                                 	<input type="password" name="repassword" id="repassword" class="input-large" />
                                 </div>
@@ -66,6 +64,14 @@
                                 	<input type="text" name="name" value="${college.name }" id="name" class="input-large" />
                                 </div>
                             </div>
+                            
+                            <p>
+	                            <label>类别<span class="tips">*</span></label>
+	                            <span class="formwrapper">
+	                            	<input type="radio" name="colType" value="2"  checked="checked" />学院 &nbsp; &nbsp;
+	                            	<input type="radio" name="colType" value="3" />用工单位 &nbsp; &nbsp;
+	                            </span>
+	                        </p>
                             
                             <div class="par control-group my-par">
                                     <label class="control-label" for="phone">电话号码<span class="tips">*</span></label>
@@ -88,7 +94,7 @@
                             </div>
                                                     
                             <p class="stdformbutton">
-                                    <button type="button" class="btn btn-primary" onclick="updateMyInfo();">更新</button>
+                                    <button type="button" class="btn btn-primary" onclick="addEmployer();">添加</button>
                             </p>
                     </form>
                 </div><!--widgetcontent-->
@@ -97,6 +103,33 @@
             </div>      
 		</div>
 	</div><!--end of mainwrapper-->
+	
+	<script type="text/javascript">
+		jQuery(function() {
+			
+		});
+			
+		// 添加用工单位	
+		function addEmployer() {
+			var data = get_form_data('#add_form');
+
+			jQuery.post(contextPath+"/admin/add_employer", data).done(function(msg) {
+				if(msg == 'nameIsExist') {
+					alert('名称已存在');
+				}else if(msg == 'accountIsExist') {
+					alert('账号已存在！');
+				}else if (msg == 'success') {
+					alert('添加成功！');
+				}else if (msg == 'fail') {
+					alert('添加失败！');
+				}
+				
+			}).fail(function(msg) {
+				
+			});
+		}
+	
+	</script>
 
 </body>
 </html>    

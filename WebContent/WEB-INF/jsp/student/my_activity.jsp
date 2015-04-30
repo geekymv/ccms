@@ -77,7 +77,7 @@
 							+ "<td>"+ act.activity.name +"</td>"	
 							+ "<td>"+ formatterDate(act.activity.publishTime) +"</td>"	
 							+ "<td>"+ act.activity.college.name +"</td>"	
-							+ "<td>"+ act.activity.dateTime +"</td>"	
+							+ "<td style='text-align: left;'>"+ act.activity.dateTime +"</td>"	
 							+ "<td>"+ act.activity.actType.name +"</td>"	
 							+ "<td>"+ act.activity.duration +"</td>"	
 							+ "<td>"+ audit +"</td>"	

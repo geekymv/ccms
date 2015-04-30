@@ -5,10 +5,20 @@
 
 <mapper namespace="com.ccms.dao.CollegeDAO">
 	
+	<!-- 根据名称查询 -->
+	<select id="queryByName" parameterType="string" resultType="College">
+		select * from t_colleges col where col.name = #{name};
+	</select>
+	
+	<!-- 根据账号查询 -->
+	<select id="queryByAccount" parameterType="string" resultType="College">
+		select * from t_colleges col where col.account = #{name};
+	</select>
+	
 	<!-- 添加 -->
 	<insert id="add" parameterType="College">
-		insert into t_colleges(account, name, pwd, phone, contact, address, authority )
-		values(#{account}, #{name}, #{pwd}, #{phone}, #{contact}, #{address}, #{authority});
+		insert into t_colleges(account, name, pwd, phone, contact, address, colType, authority )
+		values(#{account}, #{name}, #{pwd}, #{phone}, #{contact}, #{address}, #{colType}, #{authority});
 	</insert>
 
 	<!-- 修改 -->
@@ -40,17 +50,9 @@
 	</select>
 	
 	<!-- 根据id查询 -->
-	
 	<select id="queryById" parameterType="int" resultType="College">
 		select * from t_colleges where id=#{id}	
 	</select>
-	<!-- 
-	<select id="queryById" parameterType="int" resultMap="querySpecialtysMap">
-		select col.id col_id, col.account, col.name col_name, col.phone, col.contact, col.address, col.authority,
-		spe.id spe_id, spe.name spe_name
-		from t_colleges col inner join t_specialties spe on col.id=spe.col_id where col.id=#{id}
-	</select>
-	-->
 	
 	<!-- 查询该学院所有的专业 -->
 	<select id="querySpecialtys" parameterType="int" resultMap="querySpecialtysMap">

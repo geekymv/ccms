@@ -72,6 +72,23 @@ public class SysCode {
 	 * 社团
 	 */
 	public static final Integer COLTYPE_CORPORATION = 3;
+
+	/**
+	 * 管理员权限
+	 * @author miying
+	 */
+	public static interface CollegeAuthority {
+		/**
+		 * 管理员
+		 */
+		public static final Integer ADMIN = 1;
+		
+		/**
+		 * 学院/用工单位
+		 */
+		public static final Integer COMMON = 0;
+		
+	}
 	
 	/**
 	 * 活动状态

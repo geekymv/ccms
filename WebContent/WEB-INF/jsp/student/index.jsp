@@ -26,6 +26,11 @@
 		    -khtml-user-select: none;
 		    user-select: none;
 		}
+    	
+    	td, th {
+    		font-family: "微软雅黑";
+    		text-align: center;
+    	}
     
     </style>
   </head>

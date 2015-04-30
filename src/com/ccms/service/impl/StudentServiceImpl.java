@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.ccms.dao.StudentDAO;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.StudentService;
+import com.ccms.util.EncryptUtil;
 
 @Service("studentService")
 public class StudentServiceImpl implements StudentService {
@@ -25,7 +26,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Student login(String num, String pwd) {
-
+		pwd = EncryptUtil.md5Encrypt(pwd);
 		return studentDAO.queryByNumAndPwd(num, pwd);
 	}
 

@@ -92,9 +92,20 @@ public class AdminController {
 	 * 跳转到添加用工单位页面
 	 * @return
 	 */
-	@RequestMapping("/admin/add_employer")
+	@RequestMapping(value="/admin/add_employer", method=RequestMethod.GET)
 	public String addEmployer() {
 		return "admin/add_employer";
+	}
+	
+	/**
+	 * 处理添加用工单位请求
+	 * @param college
+	 * @return
+	 */
+	@RequestMapping(value="/admin/add_employer", method=RequestMethod.POST)
+	@ResponseBody
+	public String addEmployer(College college) {
+		return collegeService.addEmployer(college);
 	}
 	
 	
