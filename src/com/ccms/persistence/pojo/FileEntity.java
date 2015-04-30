@@ -19,7 +19,8 @@ public class FileEntity {
 	 * 0 一般：管理员和用工单位可以看
 	 * -1 私有：只有本单位可以看
 	 */
-	private Integer authority;	// 查看文件的权限：
+	private Integer authority;	// 查看文件的权限
+	private Integer status = 1; // 文件状态：1默认, -1删除
 
 	public Integer getId() {
 		return id;
@@ -69,5 +70,10 @@ public class FileEntity {
 	public void setAuthority(Integer authority) {
 		this.authority = authority;
 	}
-	
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 }

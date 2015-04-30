@@ -117,6 +117,7 @@ create table t_files(
 	saveUrl varchar(20),		/*文件的保存路径*/
 	fileSize float,	/*文件大小*/
 	uploadDate datetime,	/* 上传时间*/
-	authority int	/*查看文件的权限 1公有：所有用户,0一般：管理员和用工单位,-1 私有：只有本单位*/
+	authority int,	/*查看文件的权限 1公有：所有用户,0一般：管理员和用工单位,-1 私有：只有本单位*/
+	status int default 1 /*文件状态：1默认, -1删除*/
 );
 

@@ -18,6 +18,20 @@
 		   		#{saveUrl}, #{fileSize}, #{uploadDate}, #{authority})
 	</insert>
 	
+	<!--  -->
+	<select id="queryByPage" resultType="FileEntity">
+		select col_id, originalFilename, uploadDate from t_files f 
+			where f.status = 1 
+			and f.authority = #{authority}
+			limit #{pageOffset}, #{pageSize}
+	</select>
+	
+	<!--  -->
+	<select id="totalRecord">
+		select count(*) from t_files f
+			where f.authority = #{authority}
+	</select>
+	
 	
 	
 </mapper>  

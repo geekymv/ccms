@@ -128,12 +128,7 @@
 	                                	加分类型<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	 <select name="actType" class="uniformselect" style="width: 160px;">
-			                            	<option value="">Choose One</option>
-			                                <option value="">Selection One</option>
-			                                <option value="">Selection Two</option>
-			                                <option value="">Selection Three</option>
-			                                <option value="">Selection Four</option>
+	                                	 <select name="actType" id="actType" class="uniformselect" style="width: 160px;">
 			                            </select>
 	                                </div>
 	                            </div>
@@ -220,7 +215,23 @@
 	</div><!--end of mainwrapper-->
 
 	<script src="<c:url value='/resources/scripts/college.js'/>"></script>
-
+	<script type="text/javascript">
+		jQuery(function() {
+			// 加载活动加分类型
+			jQuery.ajax({
+				url: contextPath + "/activityTypes",
+				dataType: "json",
+				success: function(data){
+					var html = "";
+					for(var i = 0; i < data.length; i++) {
+						var type = data[i];
+						html += "<option value="+ type.id +">" + type.name + "</option>";
+					}
+					jQuery("#actType").html(html);
+				}
+			});
+		});
+	</script>
 </body>
 </html>    
 

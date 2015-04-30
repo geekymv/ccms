@@ -19,14 +19,16 @@ import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.FileEntity;
 import com.ccms.persistence.pojo.Specialty;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.persistence.vo.RankActivityTypeVO;
 import com.ccms.service.ActivityItemService;
 import com.ccms.service.ActivityService;
 import com.ccms.service.CollegeService;
+import com.ccms.service.FileEntityService;
 import com.ccms.service.StudentService;
-import com.ccms.uti.DateUtils;
+import com.ccms.util.SysCode;
 
 @Controller
 @RequestMapping("/stu")
@@ -40,6 +42,8 @@ public class StudentController {
 	private ActivityItemService actItemService;
 	@Autowired
 	private CollegeService collegeService;
+	@Autowired
+	private FileEntityService fileService;
 	
 	/**
 	 * 学生登录成功
@@ -231,7 +235,25 @@ public class StudentController {
 		return itemVOs;
 	}
 	
-	
+	/**
+	 * 分页显示文档
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/docs")
+	public String docs(HttpServletRequest request, Model model) {
+		String pagerOffset = request.getParameter("pager.offset");
+		Integer offSet = 0;
+		if(pagerOffset != null && !pagerOffset.trim().equals("")) {
+			offSet = Integer.parseInt(pagerOffset);
+		}
+		
+		Pager<FileEntity> pager = fileService.listByPage(SysCode.FileAuthority.FILE_PUBLIC, offSet, 3);
+		model.addAttribute("pager", pager);
+		
+		return "student/docs";
+	}
 	
 	
 }

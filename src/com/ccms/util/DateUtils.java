@@ -1,4 +1,4 @@
-package com.ccms.uti;
+package com.ccms.util;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

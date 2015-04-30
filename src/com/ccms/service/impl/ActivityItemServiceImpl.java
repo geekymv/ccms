@@ -18,7 +18,7 @@ import com.ccms.persistence.pojo.Student;
 import com.ccms.persistence.vo.ActivityItemVO;
 import com.ccms.persistence.vo.RankActivityTypeVO;
 import com.ccms.service.ActivityItemService;
-import com.ccms.uti.DateUtils;
+import com.ccms.util.DateUtils;
 import com.ccms.util.SysCode;
 
 @Service

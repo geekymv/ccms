@@ -36,6 +36,28 @@ public class SysCode {
 		 */
 		public static final Integer ACTITEM_AUDIT_UNAPPROVE = -1;
 		
+		
+	}
+	
+	/**
+	 * 文件权限
+	 * @author miying
+	 */
+	public static final class FileAuthority {
+		/**
+		 *  公有：所有用户都可以看
+		 */
+		public static final Integer FILE_PUBLIC = 1;
+		
+		/**
+		 * 默认：管理员和用工单位可以看
+		 */
+		public static final Integer FILE_DEFAULT = 0;
+		
+		/**
+		 * 私有：只有本单位可以看
+		 */
+		public static final Integer FILE_PRIVATE = -1;
 	}
 	
 	/**

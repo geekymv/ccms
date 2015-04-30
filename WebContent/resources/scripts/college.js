@@ -2,10 +2,9 @@
  * 添加专业
  */
 function addSpec() {
-	// 判断专业是否已经存在
 	var val = jQuery("#name").val();
 	jQuery.ajax({
-		url : contextPath + "/college/addSpec",
+		url : contextPath + "/admin/addSpec",
 		type : "post",
 		data : {"name": val},
 		dataType : "text",
@@ -67,7 +66,7 @@ function updateMyInfo() {
 
 	// 发送ajax请求
 	jQuery.ajax({
-		url : contextPath + "/college/update",
+		url : contextPath + "/admin/update",
 		type : "post",
 		data : {"id": $("#id").val(), "pwd": password, "name": name, 
 				"phone": phone, "contact": contact, "address": address},
@@ -84,4 +83,16 @@ function updateMyInfo() {
 		}
 	});
 }
+
+
+/**
+ * 发布招聘信息
+ */
+function pubActivity() {
+	var $ = jQuery;
+	
+}
+
+
+
 

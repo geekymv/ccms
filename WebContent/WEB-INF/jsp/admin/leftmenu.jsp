@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
   
 <div class="leftmenu">        
      <ul class="nav nav-tabs nav-stacked">
@@ -33,7 +34,7 @@
               <li><a href="boxes.html">公告管理</a></li>
               <li><a href="boxes.html">时间认证</a></li>
               <li><a href="boxes.html">名单导入</a></li>
-              <li><a href="boxes.html">文档管理</a></li>
+              <li><a href="${pageContext.request.contextPath }/admin/doc">文档管理</a></li>
           </ul>
       </li>
       <li class="dropdown"><a href=""><span class="iconfa-th-list"></span> 年度考核</a>

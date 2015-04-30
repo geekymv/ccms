@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
 import com.ccms.service.FileEntityService;
-import com.ccms.uti.DateUtils;
+import com.ccms.util.DateUtils;
 
 @Controller
 public class CommonController {
@@ -34,18 +34,19 @@ public class CommonController {
 		return DateUtils.getRecent5XueYear();
 	}
 	
-	@RequestMapping("/fileUploadPage")
-	public String fileUpload() {
-		return "fileUpload";
-	}
-	
+	/**
+	 * 文件上传
+	 * @param myFiles
+	 * @param authority 文件权限
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/fileUpload")
 	@ResponseBody
 	public String fileUpload(@RequestParam MultipartFile[] myFiles, Integer authority,
 			HttpServletRequest request) {
-		
-		String realPath = request.getSession().getServletContext().getRealPath("/upload");
 		College college = (College) request.getSession().getAttribute("user");
+		String realPath = request.getSession().getServletContext().getRealPath("/upload");
 		
 		for (MultipartFile multipartFile : myFiles) {
 			if(multipartFile != null && !multipartFile.isEmpty()) {
@@ -59,9 +60,7 @@ public class CommonController {
 				long size = multipartFile.getSize();
 
 				try {
-//					long time = System.currentTimeMillis();
 					String time = DateUtils.getCurrentDate(DateUtils.FORMAT_NORMAL_NO_SIGN);
-				
 					int index = originalFilename.lastIndexOf(".");
 					String newFileName = originalFilename.substring(0, index) + "_" + time + originalFilename.substring(index);
 					// 保存文件
@@ -77,15 +76,15 @@ public class CommonController {
 					
 					// 保存文件信息
 					fileService.upload(fileEntity);	
+					return "success";
 					
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
 		
-		return "success";
+		return "fail";
 	}
 	
 }

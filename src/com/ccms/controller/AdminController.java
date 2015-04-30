@@ -42,14 +42,21 @@ public class AdminController {
 	@RequestMapping("/admin/myinfo")
 	public String myinfo(Model model, HttpSession session) {
 		College college = (College) session.getAttribute("user");
-		
 		college = collegeService.getById(college.getId());
 		model.addAttribute("college", college);
 		
-		System.out.println(college);
-		
 		return "admin/myinfo";
 	}
+	
+	/**
+	 * 跳转到文档管理页面
+	 * @return
+	 */
+	@RequestMapping("/admin/doc")
+	public String fileUpload() {
+		return "admin/doc";
+	}
+	
 }
 
 
