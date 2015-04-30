@@ -24,9 +24,14 @@
 		where id=#{id}
 	</update>
 
-	<!-- 查询已通过审核总记录数 -->
+	<!-- 根据状态查询审核总记录数 -->
 	<select id="queryTotalRecord" parameterType="int" resultType="int">
 		select count(*) from t_activities act where act.status = #{status}
+	</select>
+	
+	<!-- 查询总记录数 -->
+	<select id="totalRecord" parameterType="int" resultType="int">
+		select count(*) from t_activities
 	</select>
 	
 	<!-- 分页查询所有Activity -->
@@ -37,6 +42,18 @@
 		inner join t_colleges col on act.col_id=col.id 
 		inner join t_activity_type a_type on act.activity_type=a_type.id limit #{pageOffset}, #{pageSize};	
 	</select>
+	
+	<!-- 分页查询所有Activity -->
+	<select id="queryAllByPage" parameterType="Pager" resultMap="ActivityResultMap">
+		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
+		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
+		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
+		inner join t_colleges col on act.col_id=col.id 
+		inner join t_activity_type a_type on act.activity_type=a_type.id limit #{pageOffset}, #{pageSize};	
+	</select>
+	
+	
+	
 	
 	<!-- 分页查询所有通过审核的Activity -->
 	<select id="queryAllStatusByPage" parameterType="Pager" resultMap="ActivityResultMap">

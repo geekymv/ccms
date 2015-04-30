@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
   
 <div class="leftmenu">        
      <ul class="nav nav-tabs nav-stacked">
@@ -13,8 +11,7 @@
              <li class="active"><a href="${pageContext.request.contextPath }/admin/myinfo">个人资料</a></li>
              <!-- 学院才会显专业设置 -->	
              <c:if test="${user.colType == 2 }">
-             	<li><a href="${pageContext.request.contextPath }/admin/specialties">专业设置</a></li>
-             </c:if>
+             <li><a href="${pageContext.request.contextPath }/admin/specialties">专业设置</a></li>
              <li class="dropdown"><a href="">活动管理</a>
               	<ul>
                    <li><a href="${pageContext.request.contextPath }/admin/pubActivity">发布活动</a></li>
@@ -24,6 +21,7 @@
               <li><a href="wysiwyg.html">报名管理</a></li>
               <li><a href="wysiwyg.html">学生管理</a></li>
               <li><a href="wysiwyg.html">考核管理</a></li>
+             </c:if>
           </ul>
       </li>
       <%-- 勤管中心显示的菜单  --%>
@@ -37,7 +35,7 @@
               	</ul>
           	</li>
               <li><a href="">学生管理</a></li>
-              <li><a href="">公告管理</a></li>
+              <li><a href="${ctx }/admin/activities">活动管理</a></li>
               <li><a href="">时间认证</a></li>
               <li><a href="">名单导入</a></li>
               <li><a href="${pageContext.request.contextPath }/admin/doc">文档管理</a></li>

@@ -19,7 +19,7 @@ public class ActivityServiceImpl implements ActivityService {
 	private ActivityDAO activityDAO;
 	
 	@Override
-	public Pager<Activity> queryAllStatusByPage(Pager<Activity> pager) {
+	public Pager<Activity> findAllStatusByPage(Pager<Activity> pager) {
 		int totalRecord = activityDAO.queryTotalRecord(SysCode.ActivityStatus.APPROVED); // 通过审核的总记录数
 		pager.setTotalRecord(totalRecord);
 		
@@ -40,6 +40,19 @@ public class ActivityServiceImpl implements ActivityService {
 		activity.setPublishTime(DateUtils.getCurrentGaDate());
 		activity.setStatus(SysCode.ActivityStatus.WAIT); 
 		return activityDAO.add(activity);
+	}
+
+	@Override
+	public Pager<Activity> findAllByPage(Pager<Activity> pager) {
+		int totalRecord = activityDAO.totalRecord();
+		pager.setTotalRecord(totalRecord);
+		
+		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
+		
+		List<Activity> activities = activityDAO.queryAllByPage(pager);
+		pager.setDatas(activities);
+		
+		return pager;
 	}
 
 }

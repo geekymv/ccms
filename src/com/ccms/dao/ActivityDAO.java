@@ -22,5 +22,13 @@ public interface ActivityDAO extends BaseDAO<Activity> {
 	 * @return
 	 */
 	public List<Activity> queryAllStatusByPage(Pager<Activity> pager);
+	
+	/**
+	 * 分页查询所有
+	 * @param pageOffset
+	 * @param pageSize
+	 * @return
+	 */
+	public List<Activity> queryAllByPage(Pager<Activity> pager);
 
 }

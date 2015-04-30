@@ -46,7 +46,16 @@ public class Pager<T> {
 	public void setPageOffset(int pageOffset) {
 		this.pageOffset = pageOffset;
 	}
-
+	
+	/**
+	 * 设置偏移
+	 * @param pageIndex
+	 * @param pageSize
+	 */
+	public void setPageOffset(int pageIndex, int pageSize) {
+		this.pageOffset = pageIndex * pageSize;
+	}
+	
 	public List<T> getDatas() {
 		return datas;
 	}

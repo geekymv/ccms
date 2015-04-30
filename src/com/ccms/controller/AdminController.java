@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.persistence.dto.Pager;
+import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.College;
+import com.ccms.service.ActivityService;
 import com.ccms.service.CollegeService;
 import com.ccms.service.SpecialtyService;
 
@@ -20,6 +22,8 @@ public class AdminController {
 	private CollegeService collegeService;
 	@Autowired
 	private SpecialtyService specialtyService;
+	@Autowired
+	private ActivityService activityService;
 	
 	/**
 	 * 管理员登录成功
@@ -106,7 +110,26 @@ public class AdminController {
 		return res == 1 ? "success" : "fail";
 	}
 	
+	/**
+	 * 跳转到活动列表页面
+	 * @return
+	 */
+	@RequestMapping(value="/admin/activities", method=RequestMethod.GET)
+	public String activities() {
+		return "admin/activities";
+	}
 	
+	/**
+	 * 加载所有活动列表
+	 * @param pager
+	 * @return
+	 */
+	@RequestMapping(value="/admin/activities", method=RequestMethod.POST)
+	@ResponseBody
+	public Pager<Activity> pager(Pager<Activity> pager) {
+		return activityService.findAllByPage(pager);
+	}
+ 	 
 	
 	
 }

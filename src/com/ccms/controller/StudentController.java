@@ -74,7 +74,7 @@ public class StudentController {
 	@RequestMapping("/activities")
 	@ResponseBody
 	public Pager<Activity> pager(Pager<Activity> pager) {
-		return activityService.queryAllStatusByPage(pager);
+		return activityService.findAllStatusByPage(pager);
 	}
  	
 	/**

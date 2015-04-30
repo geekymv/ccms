@@ -9,6 +9,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>单位管理</title>
 <%@ include file="/WEB-INF/jsp/inc/admin_style.jsp"%>
+<link href="<c:url value='/resources/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet"/>
+<style type="text/css">
+/*分页样式*/
+.pagination a {
+	cursor: pointer;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+
+</style>
 
 </head>
 <body>
@@ -84,6 +97,8 @@
 			
 		});		
 	</script>
+	
+	
 
 </body>
 </html>    

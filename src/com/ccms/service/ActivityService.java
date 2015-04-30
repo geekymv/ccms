@@ -12,8 +12,14 @@ public interface ActivityService {
 	 * @param pageSize
 	 * @return
 	 */
-//	public Pager<Activity> queryAllStatusByPage(int pageOffset, int pageSize);
-	public Pager<Activity> queryAllStatusByPage(Pager<Activity> pager);
+	public Pager<Activity> findAllStatusByPage(Pager<Activity> pager);
+	
+	/**
+	 * 查询所有的活动列表
+	 * @param pager
+	 * @return
+	 */
+	public Pager<Activity> findAllByPage(Pager<Activity> pager);
 	
 	/**
 	 * 根据id查看Activity
