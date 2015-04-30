@@ -73,4 +73,23 @@ public class SysCode {
 	 */
 	public static final Integer COLTYPE_CORPORATION = 3;
 	
+	/**
+	 * 活动状态
+	 * @author miying
+	 *
+	 */
+	public static interface ActivityStatus {
+		/**
+		 * 等待审核
+		 */
+		public static final Integer WAIT = 0;
+		/**
+		 * 审核通过
+		 */
+		public static final Integer APPROVED = 1;
+		/**
+		 * 审核未通过
+		 */
+		public static final Integer UNAPPROVED = -1;
+	}
 }

@@ -1,6 +1,5 @@
 package com.ccms.persistence.pojo;
 
-import java.util.Date;
 
 /**
  * 活动类
@@ -11,9 +10,9 @@ public class Activity {
 	private Integer id;
 	private String name; /*活动名称*/
 	private College college; /*发布单位*/
-	private Date publishTime; /*发布时间*/
+	private String publishTime; /*发布时间*/
 	private String dateTime;	/*活动时间*/
-	private Date endDate;/*报名截止日期*/
+	private String endDate;/*报名截止日期*/
 	private String location; /*地点*/
 	private String aim; /*目的*/
 	private String content; /*活动内容*/
@@ -24,7 +23,7 @@ public class Activity {
 	private String contact; /*联系人姓名*/ 
 	private String phone; /*联系方式*/
 	private String assist; /*活动协助人员*/
-	private Integer status; /*状态:通过1， 未通过0， 删除-1*/
+	private Integer status; /*状态:通过1， 待审核0，未通过-1*/
 
 	public Activity() {
 	}
@@ -74,16 +73,16 @@ public class Activity {
 	public void setCollege(College college) {
 		this.college = college;
 	}
-	public Date getPublishTime() {
+	public String getPublishTime() {
 		return publishTime;
 	}
-	public void setPublishTime(Date publishTime) {
+	public void setPublishTime(String publishTime) {
 		this.publishTime = publishTime;
 	}
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 	public String getAim() {

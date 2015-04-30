@@ -35,18 +35,7 @@ public class CollegeController {
 	private ActivityService activityService;
 	@Autowired
 	private ActivityTypeService activityTypeService;
-	/**
-	 * 更新用工单位信息
-	 * @param college
-	 * @return
-	 */
-	@RequestMapping("/admin/update")
-	@ResponseBody
-	public String update(College college) {
-		int res = collegeService.update(college);
-		return res == 1 ? "success" : "fail";
-	}
-	
+
 	/**
 	 * 获得该学院下的所有专业
 	 * @return
@@ -67,7 +56,7 @@ public class CollegeController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/admin/addSpec")
+	@RequestMapping("/college/addSpec")
 	@ResponseBody
 	public String addSpec(String name, HttpSession session) {
 		College college = (College) session.getAttribute("user");
@@ -87,12 +76,23 @@ public class CollegeController {
 	 * @param specialty
 	 * @return
 	 */
-	@RequestMapping("/admin/editSpecialty")
+	@RequestMapping("/college/editSpecialty")
 	@ResponseBody
 	public String editSpecialty(Specialty specialty){
 		
 		return "success";
 	}
+	
+	/**
+	 * 获取到所有的活动类型
+	 * @return
+	 */
+	@RequestMapping("/activityTypes")
+	@ResponseBody
+	public List<ActivityType> activityTypes() {
+		return activityTypeService.getAll();
+	}
+	
 	
 	/**
 	 * 跳转到发布活动页面
@@ -101,13 +101,6 @@ public class CollegeController {
 	@RequestMapping(value="/admin/pubActivity", method=RequestMethod.GET)
 	public String pubActivity() {
 		return "admin/pubActivity";
-	}
-	
-	
-	@RequestMapping("/activityTypes")
-	@ResponseBody
-	public List<ActivityType> activityTypes() {
-		return activityTypeService.getAll();
 	}
 	
 	/**
@@ -124,6 +117,10 @@ public class CollegeController {
 		int res = activityService.add(activity);
 		return res == 1 ? "success" : "fail";
 	}
+	
+	
+	
+	
 }
 
 

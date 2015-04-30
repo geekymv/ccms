@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccms.dao.CollegeDAO;
+import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.Specialty;
 import com.ccms.service.CollegeService;
@@ -47,6 +48,13 @@ public class CollegeServiceImpl implements CollegeService {
 	@Override
 	public int update(College college) {
 		return collegeDAO.update(college);
+	}
+
+	@Override
+	public Pager<College> page(Pager<College> pager) {
+		List<College> colleges = collegeDAO.queryAll();
+		pager.setDatas(colleges);
+		return pager;
 	}
 
 }

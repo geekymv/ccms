@@ -2,6 +2,7 @@ package com.ccms.service;
 
 import java.util.List;
 
+import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.Specialty;
 
@@ -41,4 +42,11 @@ public interface CollegeService {
 	 * @return
 	 */
 	public College login(String account, String pwd);
+	
+	/**
+	 * 获得所有用工单位
+	 * @param pager
+	 * @return
+	 */
+	public Pager<College> page(Pager<College> pager);
 }

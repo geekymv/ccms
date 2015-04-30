@@ -12,7 +12,8 @@ public interface ActivityService {
 	 * @param pageSize
 	 * @return
 	 */
-	public Pager<Activity> queryAllStatusByPage(int pageOffset, int pageSize);
+//	public Pager<Activity> queryAllStatusByPage(int pageOffset, int pageSize);
+	public Pager<Activity> queryAllStatusByPage(Pager<Activity> pager);
 	
 	/**
 	 * 根据id查看Activity

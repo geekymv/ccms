@@ -18,7 +18,6 @@
    		color: red;
    		padding-left: 10px;
     }
-    	
 </style>
 
 </head>
@@ -53,7 +52,7 @@
             <div class="widget">
                 <h4 class="widgettitle">发布活动</h4>
                 <div class="widgetcontent">
-                    <form id="form1" class="stdform">
+                    <form id="pub_form" class="stdform">
                     <table style="width: 850px;">
                     	<tr>
                     		<td>
@@ -128,7 +127,7 @@
 	                                	加分类型<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	 <select name="actType" id="actType" class="uniformselect" style="width: 160px;">
+	                                	 <select name="actType.id" id="actType" class="uniformselect" style="width: 160px;">
 			                            </select>
 	                                </div>
 	                            </div>

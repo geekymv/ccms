@@ -89,8 +89,18 @@ function updateMyInfo() {
  * 发布招聘信息
  */
 function pubActivity() {
-	var $ = jQuery;
+	var data = get_form_data('#pub_form');
 	
+	jQuery.post(contextPath+'/admin/pubActivity', data).done(function(msg){
+		if(msg == 'success') {
+			alert('发布成功！');
+		} if (msg == 'fail') {
+			alert('发布失败！');
+		}
+	}).fail(function(msg){
+		alert('服务器端错误！');
+	});	
+
 }
 
 

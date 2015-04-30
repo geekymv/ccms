@@ -23,6 +23,17 @@
  		<property name="jdbcUrl" value="${jdbc.url}"></property>
  		<property name="user" value="${jdbc.username}"></property>
  		<property name="password" value="${jdbc.password}"></property>
+ 		
+ 		<!-- 设置为true 表示在取得连接的同时将校验连接的有效性 -->
+		<property name="testConnectionOnCheckin" value="true"></property>
+		<property name="automaticTestTable" value="C3P0TestTable"></property>
+		<!-- 每18000秒检查所有连接池中的空闲连接 -->
+		<property name="idleConnectionTestPeriod" value="18000"></property>
+
+		<!-- 最大空闲时间， 25000秒内未使用则连接被丢弃 -->
+		<property name="maxIdleTime" value="25000"></property>
+		<property name="testConnectionOnCheckout" value="true"></property>
+		
  	</bean>
 	
 	<!-- 创建SqlSessionFactory--> 	

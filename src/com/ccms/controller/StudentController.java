@@ -56,29 +56,27 @@ public class StudentController {
 	
 	
 	/**
-	 * 分页显示activity
+	 * 跳转到首页
 	 * @param request
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("/index")
-	public String index(HttpServletRequest request, Model model) {
-		
-		String pagerOffset = request.getParameter("pager.offset");
-		Integer offSet = 0;
-		if(pagerOffset != null && !pagerOffset.trim().equals("")) {
-			offSet = Integer.parseInt(pagerOffset);
-		}
-		
-		System.out.println("offSet = " + offSet);
-		
-		Pager<Activity> pager = activityService.queryAllStatusByPage(offSet, 3);
-		
-		model.addAttribute("pager", pager);
-		
+	public String index() {
 		return "student/index";
 	}
 	
+	/**
+	 * 分页显示通过审核的活动
+	 * @param pager
+	 * @return
+	 */
+	@RequestMapping("/activities")
+	@ResponseBody
+	public Pager<Activity> pager(Pager<Activity> pager) {
+		return activityService.queryAllStatusByPage(pager);
+	}
+ 	
 	/**
 	 * 查看活动
 	 * @param id
@@ -90,9 +88,6 @@ public class StudentController {
 		model.addAttribute("activity", activity);
 		
 		Student student = (Student) session.getAttribute("user");
-
-//		Student student = new Student();
-//		student.setId(1);
 		
 		// 判断该学生是否报名
 		boolean res = actItemService.isApplyed(activity, student);
@@ -113,13 +108,8 @@ public class StudentController {
 	@RequestMapping("/apply")
 	@ResponseBody
 	public String apply(Integer id, HttpSession session){
-		System.out.println("activity id = " + id);	
-
 		Activity activity = activityService.detail(id);
 		Student student = (Student) session.getAttribute("user");
-		
-//		Student student = new Student();
-//		student.setId(1);
 		
 		if(student == null) {
 			return "fail";
@@ -135,18 +125,28 @@ public class StudentController {
 	
 	
 	/**
+	 * 学生查看我的活动列表
+	 * @return
+	 */
+	@RequestMapping(value="/myactivities", method=RequestMethod.GET)
+	public String myactivities() {
+		return "student/my_activity";
+	}
+	
+	/**
 	 * 显示学生报名的活动
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/myactivities")
-	public String applyedActivities(Model model, HttpSession session) {
+	@RequestMapping(value="/myactivities", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ActivityItem> applyedActivities(Model model, HttpSession session) {
 		Student student = (Student) session.getAttribute("user");
 		List<ActivityItem> actItems = actItemService.queryAllActivityItem(student.getId());
 		
-		model.addAttribute("actItems", actItems);
-		
-		return "student/my_activity";
+		return actItems;
+	//	model.addAttribute("actItems", actItems);
+	//	return "student/my_activity";
 	}
 	
 	/**

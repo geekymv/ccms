@@ -50,11 +50,11 @@ public class ActivityDAOTest {
 	@Test
 	public void testQueryAllStatusByPage() {
 		
-		List<Activity> activities = activityDAO.queryAllStatusByPage(0, 3);
-		
-		for (Activity activity : activities) {
-			System.out.println(activity);
-		}
+//		List<Activity> activities = activityDAO.queryAllStatusByPage(0, 3);
+//		
+//		for (Activity activity : activities) {
+//			System.out.println(activity);
+//		}
 	}
 
 }

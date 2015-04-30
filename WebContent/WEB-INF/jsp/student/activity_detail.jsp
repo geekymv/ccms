@@ -51,7 +51,7 @@
 			        <th>发布单位</th> <td>${activity.college.name }</td>
 			    </tr>
 			    <tr>
-			    	<th>发布时间</th> <td><fmt:formatDate value="${activity.publishTime }" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+			    	<th>发布时间</th> <td id='publishTime'></td>
 			    </tr>    
 			    <tr>
 			    	<th>活动对象</th> <td>${activity.actObject }</td>
@@ -78,7 +78,9 @@
 		        	<th>联系方式</th> <td>${activity.phone }</td>
 		      	</tr> 
 		      	<tr>
-		        	<th>报名截止日期</th> <td><fmt:formatDate value="${activity.endDate }" pattern="yyyy-MM-dd"/></td>
+		        	<th>报名截止日期</th> <td id='endDate'></td>
+		        	
+		        	
 		      	</tr> 
 		      	
 		      	<tr>
@@ -98,6 +100,12 @@
 	</div>
     <script type="text/javascript">
 		$(function(){
+			var publishTime = '${activity.publishTime }';
+			$('#publishTime').html(formatterDate(publishTime));
+			
+			var endDate = '${activity.endDate }';
+			$('#endDate').html(formatterDate(endDate));
+			
 			$("#apply").click(function(){
 				$.ajax({
 					url: "${pageContext.request.contextPath}/stu/apply",

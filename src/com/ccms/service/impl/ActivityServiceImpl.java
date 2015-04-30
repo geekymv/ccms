@@ -9,6 +9,8 @@ import com.ccms.dao.ActivityDAO;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.service.ActivityService;
+import com.ccms.util.DateUtils;
+import com.ccms.util.SysCode;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -17,17 +19,11 @@ public class ActivityServiceImpl implements ActivityService {
 	private ActivityDAO activityDAO;
 	
 	@Override
-	public Pager<Activity> queryAllStatusByPage(int pageOffset, int pageSize) {
-		
-		Pager<Activity> pager = new Pager<Activity>();
-
-		int totalRecord = activityDAO.totalRecord(); // 总记录数
-		int totalPage = totalRecord % pageSize == 0 ? 
-				totalRecord / pageSize : totalRecord / pageSize + 1; // 总页数
+	public Pager<Activity> queryAllStatusByPage(Pager<Activity> pager) {
+		int totalRecord = activityDAO.queryTotalRecord(SysCode.ActivityStatus.APPROVED); // 通过审核的总记录数
 		pager.setTotalRecord(totalRecord);
-		pager.setTotalPage(totalPage);
 		
-		List<Activity> activities = activityDAO.queryAllStatusByPage(pageOffset, pageSize);
+		List<Activity> activities = activityDAO.queryAllStatusByPage(pager);
 		pager.setDatas(activities);
 		
 		return pager;
@@ -41,6 +37,8 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public int add(Activity activity) {
+		activity.setPublishTime(DateUtils.getCurrentGaDate());
+		activity.setStatus(SysCode.ActivityStatus.WAIT); 
 		return activityDAO.add(activity);
 	}
 

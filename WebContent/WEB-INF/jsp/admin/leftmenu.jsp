@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
   
@@ -12,7 +13,7 @@
              <li class="active"><a href="${pageContext.request.contextPath }/admin/myinfo">个人资料</a></li>
              <!-- 学院才会显专业设置 -->	
              <c:if test="${user.colType == 2 }">
-             	<li><a href="${pageContext.request.contextPath }/college/specialties">专业设置</a></li>
+             	<li><a href="${pageContext.request.contextPath }/admin/specialties">专业设置</a></li>
              </c:if>
              <li class="dropdown"><a href="">活动管理</a>
               	<ul>
@@ -27,13 +28,18 @@
       </li>
       <%-- 勤管中心显示的菜单  --%>
       <c:if test="${user.colType == 1 }">
-      <li class="dropdown"><a href=""><span class="iconfa-briefcase"></span> 勤管管理</a>
-      	<ul>
-          	<li><a href="elements.html">学院管理</a></li>
-              <li><a href="bootstrap.html">学生管理</a></li>
-              <li><a href="boxes.html">公告管理</a></li>
-              <li><a href="boxes.html">时间认证</a></li>
-              <li><a href="boxes.html">名单导入</a></li>
+      <li class="dropdown active"><a href=""><span class="iconfa-briefcase"></span> 勤管管理</a>
+      	<ul style="display: block">
+          	<li class="dropdown"><a href="">单位管理</a>
+          		<ul>
+                   <li><a href="${ctx }/admin/employers">单位列表</a></li>
+                   <li><a href="${ctx }/admin/add_employer">添加单位</a></li>
+              	</ul>
+          	</li>
+              <li><a href="">学生管理</a></li>
+              <li><a href="">公告管理</a></li>
+              <li><a href="">时间认证</a></li>
+              <li><a href="">名单导入</a></li>
               <li><a href="${pageContext.request.contextPath }/admin/doc">文档管理</a></li>
           </ul>
       </li>
@@ -56,4 +62,5 @@
       </c:if>
   </ul>
   </div><!--leftmenu-->
+
     

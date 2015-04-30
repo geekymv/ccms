@@ -1,0 +1,106 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>
+   
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>单位管理</title>
+<%@ include file="/WEB-INF/jsp/inc/admin_style.jsp"%>
+
+</head>
+<body>
+	<div class="mainwrapper">
+		<jsp:include page="header.jsp"></jsp:include>
+		<div class="leftpanel">
+			<jsp:include page="leftmenu.jsp"></jsp:include>
+		</div>
+		
+		<div class="rightpanel">
+			<ul class="breadcrumbs">
+	            <li><a href="${pageContext.request.contextPath }/admin"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+	            <li>单位管理 <span class="separator"></span></li>
+	            <li>单位列表</li>
+        	</ul>
+        	<div class="maincontent">
+        	<div class="maincontentinner">
+            <div class="widget">
+                <h4 class="widgettitle">单位列表</h4>
+            	<table class="table table-bordered responsive">
+           			<thead>
+                       <tr>
+                       	  <th class="centeralign"><input type="checkbox" class="checkall" /></th>	
+                           <th>序号</th>
+                           <th>账号</th>
+                           <th>名称</th>
+                           <th>电话号码</th>
+                           <th>联系人</th>
+                           <th>地址</th>
+                           <th>类型</th>
+                           <th>操作</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    	
+                    </tbody>
+                </table>
+            </div><!--widget-->
+            </div>
+            </div>      
+        	
+		</div>
+	</div>
+	<script type="text/javascript">
+		jQuery(function(){
+			var $ = jQuery;
+			$.post(contextPath+"/admin/employers").done(function(result){
+				var datas = result.datas;
+				var len = datas.length;
+
+				var html = "";
+				for(var i = 0; i < len; i++) {
+					var col = datas[i];
+				
+					html+="<tr>"
+		            		+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
+		            		+ "<td>"+ (i+1) +"</td>"
+		            		+ "<td>"+ col.account +"</td>"
+		            		+ "<td>"+ col.name +"</td>"
+		            		+ "<td>"+ col.phone +"</td>"
+		            		+ "<td>"+ col.contact +"</td>"
+		            		+ "<td>"+ col.address +"</td>"
+		            		+ "<td>"+ col.colType +"</td>"
+		            		+ "<td>"+ col.id +"</td>"
+		            	"</tr>";
+				}
+				
+				$('tbody').html(html);
+				
+			}).fail(function(msg){
+				alert('服务器端出错！');
+			});
+			
+		});		
+	</script>
+
+</body>
+</html>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
