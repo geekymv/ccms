@@ -23,9 +23,9 @@
 	<!-- 更新 -->
 	<update id="update" parameterType="Activity">
 		update t_activities set 
-		name=#{name}, col_id=#{college.id}, publish_time=#{publishTime}, date_time=#{dateTime}, end_date=#{endDate},
+		name=#{name}, date_time=#{dateTime}, end_date=#{endDate},
 		location=#{location}, aim=#{aim}, content=#{content}, activity_type=#{actType.id}, duration=#{duration},
-		act_object=#{actObject}, number=#{number}, contact=#{contact}, phone=#{phone}, assist=#{assist}, status=#{status}
+		act_object=#{actObject}, number=#{number}, contact=#{contact}, phone=#{phone}, assist=#{assist}
 		where id=#{id}
 	</update>
 

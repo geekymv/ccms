@@ -58,4 +58,10 @@ public interface ActivityService {
 	 */
 	public Pager<Activity> findAllByPage(Pager<Activity> pager, College college);
 	
+	/**
+	 * 更新活动
+	 * @param activity
+	 * @return
+	 */
+	public String updateActivity(Activity activity);
 }

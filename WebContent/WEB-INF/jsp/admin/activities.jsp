@@ -79,9 +79,18 @@
 	<script type="text/javascript">
 		jQuery(function(){
 			var $ = jQuery;
+			var url = "";
+			var user_authority = '${user.authority}'
+			if(user_authority == 1) {	// 管理员
+				url = '/admin/activities';
+			}else if(user_authority == 0) {	// 用工单位
+				url = '/college/activities';
+			}
+			
+			
 			$("#page").page({
 				    remote: {
-				        url: contextPath + '/college/activities',
+				        url: contextPath + url,
 				        callback: function (result) {
 				        	var datas = result.datas;
 				        	var len = datas.length;

@@ -80,9 +80,6 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public Pager<Activity> findAllByPage(Pager<Activity> pager, College college) {
-		college = new College();
-		college.setId(1);
-		
 		int totalRecord = activityDAO.getTotalRecordByCollege(college);
 		pager.setTotalRecord(totalRecord );
 		
@@ -90,6 +87,12 @@ public class ActivityServiceImpl implements ActivityService {
 		pager.setDatas(activities);
 		
 		return pager;
+	}
+
+	@Override
+	public String updateActivity(Activity activity) {
+		int res = activityDAO.update(activity);
+		return res == 1 ? "success" : "fail";
 	}
 
 }

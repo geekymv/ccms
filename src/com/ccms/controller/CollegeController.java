@@ -131,6 +131,16 @@ public class CollegeController {
 		return activityService.findAllByPage(pager, college);
 	}
 	
+	/**
+	 * 更新活动
+	 * @param activity
+	 * @return
+	 */
+	@RequestMapping(value="/college/updateActivity", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateActivity(Activity activity) {
+		return activityService.updateActivity(activity);
+	}
 	
 	
 	

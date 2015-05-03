@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import jxl.Sheet;
 import jxl.Workbook;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -155,18 +156,39 @@ public class AdminController {
 		return activityService.findAllByPage(pager);
 	}
 	
+//	/**
+//	 * 查看活动
+//	 * @param id
+//	 * @return
+//	 */
+//	@RequestMapping("/admin/activity_detail/{id}")
+//	public String detail(@PathVariable Integer id, Model model, HttpSession session) {
+//		Activity activity = activityService.detail(id);
+//		model.addAttribute("activity", activity);
+//		return "admin/activity_detail";
+//	}
+	
 	/**
-	 * 查看活动
+	 * 跳转到活动详情页面
+	 * @return
+	 */
+	@RequestMapping(value="/admin/activity_detail/{id}", method=RequestMethod.GET)
+	public String activityDetail(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("activityId", id);
+		return "admin/activityDetail";
+	}
+	
+	/**
+	 * 活动详情
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/admin/activity_detail/{id}")
-	public String detail(@PathVariable Integer id, Model model, HttpSession session) {
-		Activity activity = activityService.detail(id);
-		model.addAttribute("activity", activity);
-		return "admin/activity_detail";
+	@RequestMapping(value="/admin/activity_detail", method=RequestMethod.POST)
+	@ResponseBody
+	public Activity activityDetail(Integer id) {
+		 return activityService.detail(id);
 	}
-	
+		
 	/**
 	 * 管理员审核活动
 	 * @param actId

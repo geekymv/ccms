@@ -90,12 +90,34 @@ function updateMyInfo() {
  */
 function pubActivity() { 
 	var $ = jQuery;
+	
+	if(activityValidate()) {	// 通过验证
+		alert('ok');
+		
+		var data = get_form_data('#pub_form');
+		
+		jQuery.post(contextPath+'/admin/pubActivity', data).done(function(msg){
+			if(msg == 'success') {
+				alert('发布成功！');
+			} if (msg == 'fail') {
+				alert('发布失败！');
+			}
+		}).fail(function(msg){
+			alert('服务器端错误！');
+		});	
+	}
+	
+}
+
+
+function activityValidate() {
+	var $ = jQuery;
 	// 活动名称
 	var name = $('#name').val();
 	if(name.trim() == '') {
 		alert('活动名称为必选项！');
 		$('#name').focus();
-		return;
+		return false;
 	}
 	
 	// 活动时间
@@ -103,7 +125,7 @@ function pubActivity() {
 	if(dateTime.trim() == '') {
 		alert('活动时间为必选项！');
 		$('#dateTime').focus();
-		return;
+		return false;
 	}
 	
 	// 报名截止时间
@@ -111,7 +133,7 @@ function pubActivity() {
 	if(endDate.trim() == '') {
 		alert('报名截止时间为必选项！');
 		$('#endDate').focus();
-		return;
+		return false;
 	}
 	
 	// 活动地点
@@ -119,7 +141,7 @@ function pubActivity() {
 	if(location.trim() == '') {
 		alert('活动地点为必选项！');
 		$('#location').focus();
-		return;
+		return false;
 	}
 	
 	// 活动目的
@@ -127,7 +149,7 @@ function pubActivity() {
 	if(aim.trim() == '') {
 		alert('活动目的为必选项！');
 		$('#aim').focus();
-		return;
+		return false;
 	}
 	
 	// 活动内容
@@ -135,7 +157,7 @@ function pubActivity() {
 	if(content.trim() == '') {
 		alert('活动内容为必选项！');
 		$('#content').focus();
-		return;
+		return false;
 	}
 	
 	// 加分时长
@@ -145,7 +167,7 @@ function pubActivity() {
 	if(!reg_zzs.test(duration)) {
 		alert('加分时长不合法！');
 		$('#duration').focus();
-		return;
+		return false;
 	}
 	
 	// 参与对象
@@ -153,7 +175,7 @@ function pubActivity() {
 	if(actObject.trim() == '') {
 		alert('参与对象为必填项！');
 		$('#actObject').focus();
-		return;
+		return false;
 	}
 	
 	// 参与人数
@@ -161,7 +183,7 @@ function pubActivity() {
 	if(!reg_zzs.test(number)) {
 		alert('参与人数不合法！');
 		$('#number').focus();
-		return;
+		return false;
 	}
 	
 	// 联系人
@@ -169,7 +191,7 @@ function pubActivity() {
 	if(contact.trim() == '') {
 		alert('联系人为必填项！');
 		$('#contact').focus();
-		return;
+		return false;
 	}
 	
 	// 联系方式
@@ -178,27 +200,12 @@ function pubActivity() {
 	if(!reg_phone.test(phone)) {
 		alert('联系方式不合法！');
 		$('#phone').focus();
-		return;
+		return false;
 	}
 	
+	return true;
 	
-	
-	
-	
-	var data = get_form_data('#pub_form');
-	
-	jQuery.post(contextPath+'/admin/pubActivity', data).done(function(msg){
-		if(msg == 'success') {
-			alert('发布成功！');
-		} if (msg == 'fail') {
-			alert('发布失败！');
-		}
-	}).fail(function(msg){
-		alert('服务器端错误！');
-	});	
-
 }
-
 
 
 
