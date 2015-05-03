@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>
+    
 <div class="header">
 	<div class="logo">
 	    <a href=""><img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" alt="" /></a>
@@ -13,8 +15,10 @@
 	                    <h5>${user.name }</h5>
 	                    <ul>
 	                        <li><a href="${ctx }/admin/myinfo">修改资料</a></li>
+	                        <%--
 	                        <li><a href="">账号设置</a></li>
-	                        <li><a href="${pageContext.request.contextPath }/logout">退出系统</a></li>
+	                         --%>
+	                        <li><a href="${ctx }/logout">退出系统</a></li>
 	                    </ul>
 	                </div>
 	            </div>

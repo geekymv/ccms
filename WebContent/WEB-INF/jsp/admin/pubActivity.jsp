@@ -32,20 +32,6 @@
 	            <li><a href="${pageContext.request.contextPath }/admin"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
 	            <li>活动管理 <span class="separator"></span></li>
 	            <li>发布活动</li>
-	            
-	            <%--
-	            <li class="right">
-	                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
-	                <ul class="dropdown-menu pull-right skin-color">
-	                    <li><a href="default">Default</a></li>
-	                    <li><a href="navyblue">Navy Blue</a></li>
-	                    <li><a href="palegreen">Pale Green</a></li>
-	                    <li><a href="red">Red</a></li>
-	                    <li><a href="green">Green</a></li>
-	                    <li><a href="brown">Brown</a></li>
-	                </ul>
-	            </li>
-	             --%>
         	</ul>
         	<div class="maincontent">
         	<div class="maincontentinner">
@@ -55,16 +41,19 @@
                     <form id="pub_form" class="stdform">
                     <table style="width: 850px;">
                     	<tr>
-                    		<td>
+                    		<td colspan="2">
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="name">
 	                                	活动名称<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	<input type="text" name="name" id="name" class="input-medium" />
+	                                	<input type="text" name="name" id="name" class="input-xxlarge" style="width: 575px;" autofocus="autofocus"/>
 	                                </div>
 	                            </div>
                     		</td>
+                    		
+                    	</tr>
+                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="dateTime">
@@ -75,8 +64,6 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    	</tr>
-                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="endDate">
@@ -87,6 +74,9 @@
 	                                </div>
 	                            </div>
                     		</td>
+                    		
+                    	</tr>
+                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="location">
@@ -97,8 +87,6 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    	</tr>
-                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="aim">
@@ -109,6 +97,9 @@
 	                                </div>
 	                            </div>
                     		</td>
+                    		
+                    	</tr>
+                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="content">
@@ -119,8 +110,6 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    	</tr>
-                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="actType">
@@ -132,18 +121,20 @@
 	                                </div>
 	                            </div>
                     		</td>
+                    		
+                    	</tr>
+                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="duration">
-	                                	加分时长<span class="tips">*</span>
+	                                	加分时长（小时）<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
 	                                	<input type="text" name="duration" id="duration" class="input-small" />
 	                                </div>
 	                            </div>
                     		</td>
-                    	</tr>
-                    	<tr>
+                    		
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="actObject">
@@ -154,6 +145,9 @@
 	                                </div>
 	                            </div>
                     		</td>
+                    		
+                    	</tr>
+                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="number">
@@ -164,8 +158,6 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    	</tr>
-                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="contact">
@@ -176,6 +168,9 @@
 	                                </div>
 	                            </div>
                     		</td>
+                    		
+                    	</tr>
+                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="phone">
@@ -186,12 +181,10 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    	</tr>
-                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="assist">
-	                                	协助人员<span class="tips">*</span>
+	                                	协助人员
 	                                </label>
 	                                <div class="controls">
 	                                	<input type="text" name="assist" id="assist" class="input-medium" />

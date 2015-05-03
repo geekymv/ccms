@@ -3,6 +3,7 @@ package com.ccms.service;
 
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
+import com.ccms.persistence.pojo.College;
 
 public interface ActivityService {
 	
@@ -41,5 +42,20 @@ public interface ActivityService {
 	 * @return "isPastDue" 过期了, "notPastDue" 未过期
 	 */
 	public String isPastDut(Integer actId);
+	
+	/**
+	 * 管理员审核活动
+	 * @param actId
+	 * @return
+	 */
+	public String aduitActivity(Integer actId, Integer status);
+
+	/**
+	 * 用工单位查询所有的活动
+	 * @param pager
+	 * @param college
+	 * @return
+	 */
+	public Pager<Activity> findAllByPage(Pager<Activity> pager, College college);
 	
 }

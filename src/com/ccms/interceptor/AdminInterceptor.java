@@ -9,13 +9,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ccms.persistence.pojo.Student;
+import com.ccms.persistence.pojo.College;
 
 /**
- * 学生合法性验证
+ * 管理员合法性验证
  * @author Geek_ymv
  */
-public class StudentInterceptor implements HandlerInterceptor {
+public class AdminInterceptor implements HandlerInterceptor {
 	/**
 	 * 不要要拦截的url
 	 */
@@ -34,7 +34,7 @@ public class StudentInterceptor implements HandlerInterceptor {
 		if(excludeUrls != null){
 			for (String excludeUrl : excludeUrls) {
 				if(uri.endsWith(excludeUrl) || uri.contains("/resources/")) {
-//					System.out.println("url 不需要拦截...");
+					System.out.println("url 不需要拦截...");
 					return true;
 				}
 			}
@@ -44,7 +44,7 @@ public class StudentInterceptor implements HandlerInterceptor {
 		Object obj = session.getAttribute("user");
 		
 		if(obj == null) {
-//			System.out.println("session拦截木有通过...");
+			System.out.println("session拦截木有通过...");
 			
 			String contextPath = request.getContextPath();
 //			System.out.println("contextPath = " + contextPath);
@@ -53,9 +53,9 @@ public class StudentInterceptor implements HandlerInterceptor {
 			return false;
 		}else {
 			
-//			System.out.println("session拦截通过...");
+			System.out.println("session拦截通过...");
 			
-			if(obj instanceof Student) { // 是学生
+			if(obj instanceof College) { // 是管理员
 				return true;
 			}else {
 				return false;

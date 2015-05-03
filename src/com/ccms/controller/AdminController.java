@@ -11,6 +11,7 @@ import jxl.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +20,6 @@ import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.Rank;
-import com.ccms.persistence.pojo.Specialty;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.ActivityService;
 import com.ccms.service.CollegeService;
@@ -154,6 +154,52 @@ public class AdminController {
 	public Pager<Activity> pager(Pager<Activity> pager) {
 		return activityService.findAllByPage(pager);
 	}
+	
+	/**
+	 * 查看活动
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/admin/activity_detail/{id}")
+	public String detail(@PathVariable Integer id, Model model, HttpSession session) {
+		Activity activity = activityService.detail(id);
+		model.addAttribute("activity", activity);
+		return "admin/activity_detail";
+	}
+	
+	/**
+	 * 管理员审核活动
+	 * @param actId
+	 * @return
+	 */
+	@RequestMapping("/admin/aduitActivity")
+	@ResponseBody
+	public String aduitActivity(Integer actId, Integer status) {
+		return activityService.aduitActivity(actId, status);
+	}
+	
+	
+//	/**
+//	 * 查看活动详情
+//	 * @param actId
+//	 * @return
+//	 */
+//	@RequestMapping(value="/admin/activity_detail", method=RequestMethod.GET)
+//	public String activityDetail() {
+//		return "admin/activity_detail";
+//	}
+//	
+//	/**
+//	 * 查看活动详情
+//	 * @param actId
+//	 * @return
+//	 */
+//	@RequestMapping(value="/admin/activity_detail", method=RequestMethod.POST)
+//	public Activity activityDetail(Integer actId) {
+//		return null;
+//	}
+	
+	
  	 
 	
 	@RequestMapping("/admin/import")

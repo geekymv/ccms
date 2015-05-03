@@ -76,7 +76,7 @@
 				<img src="${pageContext.request.contextPath }/resources/images/apic6146.jpg" alt="">
 			</div>
 			<div class="item">
-				<img src="${pageContext.request.contextPath }/resources/images/apic6146.jpg" alt="">
+				<img src="${pageContext.request.contextPath }/resources/images/22222.jpg" alt="">
 			</div>
 		</div>
 	</div>

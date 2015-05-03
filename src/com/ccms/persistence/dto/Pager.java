@@ -5,7 +5,7 @@ import java.util.List;
 public class Pager<T> {
 	
 	private int pageIndex;	// 第几页
-	private int pageSize;	// 每页显示多少条记录
+	private int pageSize = 10;	// 每页显示多少条记录
 	private int totalRecord; // 总记录数
 	private int totalPage; // 总页数
 	private int pageOffset;

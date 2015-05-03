@@ -88,7 +88,103 @@ function updateMyInfo() {
 /**
  * 发布招聘信息
  */
-function pubActivity() {
+function pubActivity() { 
+	var $ = jQuery;
+	// 活动名称
+	var name = $('#name').val();
+	if(name.trim() == '') {
+		alert('活动名称为必选项！');
+		$('#name').focus();
+		return;
+	}
+	
+	// 活动时间
+	var dateTime = $('#dateTime').val();
+	if(dateTime.trim() == '') {
+		alert('活动时间为必选项！');
+		$('#dateTime').focus();
+		return;
+	}
+	
+	// 报名截止时间
+	var endDate = $('#endDate').val();
+	if(endDate.trim() == '') {
+		alert('报名截止时间为必选项！');
+		$('#endDate').focus();
+		return;
+	}
+	
+	// 活动地点
+	var location = $('#location').val();
+	if(location.trim() == '') {
+		alert('活动地点为必选项！');
+		$('#location').focus();
+		return;
+	}
+	
+	// 活动目的
+	var aim = $('#aim').val();
+	if(aim.trim() == '') {
+		alert('活动目的为必选项！');
+		$('#aim').focus();
+		return;
+	}
+	
+	// 活动内容
+	var content = $('#content').val();
+	if(content.trim() == '') {
+		alert('活动内容为必选项！');
+		$('#content').focus();
+		return;
+	}
+	
+	// 加分时长
+	var reg_zzs = /^\+?[1-9][0-9]*$/;
+	var duration = $('#duration').val();
+
+	if(!reg_zzs.test(duration)) {
+		alert('加分时长不合法！');
+		$('#duration').focus();
+		return;
+	}
+	
+	// 参与对象
+	var actObject = $('#actObject').val();
+	if(actObject.trim() == '') {
+		alert('参与对象为必填项！');
+		$('#actObject').focus();
+		return;
+	}
+	
+	// 参与人数
+	var number = $('#number').val();
+	if(!reg_zzs.test(number)) {
+		alert('参与人数不合法！');
+		$('#number').focus();
+		return;
+	}
+	
+	// 联系人
+	var contact = $('#contact').val();
+	if(contact.trim() == '') {
+		alert('联系人为必填项！');
+		$('#contact').focus();
+		return;
+	}
+	
+	// 联系方式
+	var phone = $('#phone').val();
+	var reg_phone = /(^(\d{3,4}-)?\d{7,8})$|(1[0-9]{10})/;	// 电话号码与手机号码同时验证
+	if(!reg_phone.test(phone)) {
+		alert('联系方式不合法！');
+		$('#phone').focus();
+		return;
+	}
+	
+	
+	
+	
+	
 	var data = get_form_data('#pub_form');
 	
 	jQuery.post(contextPath+'/admin/pubActivity', data).done(function(msg){

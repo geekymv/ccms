@@ -15,7 +15,7 @@
              <li class="dropdown"><a href="">活动管理</a>
               	<ul>
                    <li><a href="${pageContext.request.contextPath }/admin/pubActivity">发布活动</a></li>
-                   <li><a href="">活动列表</a></li>
+                   <li><a href="${ctx }/admin/activities">活动列表</a></li>
               	</ul>
               </li>
               <li><a href="wysiwyg.html">报名管理</a></li>
@@ -34,11 +34,20 @@
                    <li><a href="${ctx }/admin/add_employer">添加单位</a></li>
               	</ul>
           	</li>
-              <li><a href="">学生管理</a></li>
-              <li><a href="${ctx }/admin/activities">活动管理</a></li>
-              <li><a href="">时间认证</a></li>
-              <li><a href="">名单导入</a></li>
-              <li><a href="${pageContext.request.contextPath }/admin/doc">文档管理</a></li>
+        	<li class="dropdown"><a href="">活动管理</a>
+            	<ul>
+            		<li><a href="${ctx }/admin/activities">活动列表</a></li>
+            	</ul>
+            </li>
+            <li class="dropdown"><a href="">学生管理</a>
+              	<ul>
+              		<li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">学生列表</a></li>
+              	</ul>	
+            </li>
+           
+            <li><a href="">时间认证</a></li>
+            <li><a href="">名单导入</a></li>
+            <li><a href="${pageContext.request.contextPath }/admin/doc">文档管理</a></li>
           </ul>
       </li>
       <li class="dropdown"><a href=""><span class="iconfa-th-list"></span> 年度考核</a>

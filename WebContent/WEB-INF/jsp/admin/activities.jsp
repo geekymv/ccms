@@ -53,7 +53,9 @@
 				          <th>发布时间</th>
 				          <th>活动类型</th>
 				          <th>活动时长</th>
-				          <th>查看活动详情</th>
+				          <th>活动状态</th>
+				          <th>活动详情</th>
+				          <th>查看报名</th>
                        </tr>
                     </thead>
                     <tbody id='t_body'>
@@ -79,7 +81,7 @@
 			var $ = jQuery;
 			$("#page").page({
 				    remote: {
-				        url: contextPath + '/admin/activities',
+				        url: contextPath + '/college/activities',
 				        callback: function (result) {
 				        	var datas = result.datas;
 				        	var len = datas.length;
@@ -89,6 +91,15 @@
 				        		var html = "";
 				        		for(var i = 0; i < len; i++) {
 				        			var act = datas[i];
+				        			var status = act.status;
+				        			
+				        			if(status == 0) {
+				        				status = '待审核';
+				        			}else if(status == 1) {
+				        				status = '审核通过';
+				        			}else if(status == -1) {
+				        				status = '未通过';
+				        			}
 				        			
 				        			html += "<tr>"
 				        					+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
@@ -98,7 +109,9 @@
 				        					+ "<td>"+ formatterDate(act.publishTime) +"</td>"
 				        					+ "<td>"+ act.actType.name +"</td>"
 				        					+ "<td>"+ act.duration +"</td>"
-				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='show(this)'></span></td>"
+				        					+ "<td>"+ status +"</td>"
+				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='showDetail(this)'></span></td>"
+				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='showApply(this)'></span></td>"
 				        					
 				        				+"</tr>";
 				        		}
@@ -112,6 +125,17 @@
 					totalName: 'totalRecord'       //指定返回数据的总数据量
 				});
 		});
+		
+		function showDetail(t) {
+			var $this = jQuery(t);
+			var id = $this.data('id');
+			window.location.href = contextPath+"/admin/activity_detail/" + id;
+		
+		} 
+		
+		function showApply() {
+			alert('攻城狮们正在努力开发中...');
+		}
 		
 	</script>
 </body>

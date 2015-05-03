@@ -17,6 +17,43 @@
 	<!--  
 	<mvc:view-controller path="/" view-name="redirect:login"/>
  	-->
+ 	
+ 	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<!-- 拦截学生操作 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/stu/**"/>
+			<bean class="com.ccms.interceptor.StudentInterceptor">
+			<!-- 
+				不需要拦截的url地址	
+				<property name="excludeUrls">
+					<list>
+						<value>/ccms/</value>
+						<value>/ccms/login</value>
+					</list>
+				</property>
+			-->	
+			</bean>
+		</mvc:interceptor>
+		
+		<!-- 拦截管理员操作 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<bean class="com.ccms.interceptor.AdminInterceptor">
+			<!-- 
+				不需要拦截的url地址	
+				<property name="excludeUrls">
+					<list>
+						<value>/ccms/</value>
+						<value>/ccms/login</value>
+					</list>
+				</property>
+			-->	
+			</bean>
+		</mvc:interceptor>
+
+	</mvc:interceptors>
+ 	
 	
 
 	<bean

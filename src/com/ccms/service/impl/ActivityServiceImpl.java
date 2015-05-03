@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ccms.dao.ActivityDAO;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
+import com.ccms.persistence.pojo.College;
 import com.ccms.service.ActivityService;
 import com.ccms.util.DateUtils;
 import com.ccms.util.SysCode;
@@ -71,6 +72,26 @@ public class ActivityServiceImpl implements ActivityService {
 		return "notPastDue";
 	}
 
+	@Override
+	public String aduitActivity(Integer actId, Integer status) {
+		int res = activityDAO.aduitActivity(actId, status);
+		return res == 1 ? "success" : "fail";
+	}
+
+	@Override
+	public Pager<Activity> findAllByPage(Pager<Activity> pager, College college) {
+		college = new College();
+		college.setId(1);
+		
+		int totalRecord = activityDAO.getTotalRecordByCollege(college);
+		pager.setTotalRecord(totalRecord );
+		
+		List<Activity> activities = activityDAO.queryAllByPageAndCollege(pager, college);
+		pager.setDatas(activities);
+		
+		return pager;
+	}
+
 }
 
 
@@ -90,4 +111,4 @@ public class ActivityServiceImpl implements ActivityService {
 
 
 
-
+ 

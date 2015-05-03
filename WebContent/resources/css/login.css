@@ -4,7 +4,7 @@ body, button, input, select, textarea, h1, h2, h3,
 }
 
 .navbar {
-	height: 144px;
+	height: 80px;
 	margin-bottom: 0;
 }
 
@@ -13,7 +13,7 @@ body, button, input, select, textarea, h1, h2, h3,
 }
 
 .navbar-right {
-	margin-top: 40px;
+	margin-top: 10px;
 }
 
 .reg-modal {
