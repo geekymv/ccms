@@ -16,11 +16,10 @@
 	
 	<!-- 更新学生 -->
 	<update id="update" parameterType="Student">
-		<![CDATA[
 			update t_students 
 			<set> 
 				<if test="num != null">num=#{num}, </if>
-				<if test="pwd != null and pwd != '' ">pwd=#{pwd}, </if>
+				<if test="pwd != null and pwd!='' ">pwd=#{pwd}, </if>
 				<if test="name != null">name=#{name}, </if>
 				<if test="gender != null">gender=#{gender}, </if>
 				<if test="phone != null">phone=#{phone}, </if>
@@ -34,7 +33,6 @@
 				<if test="status != null"> status=#{status}</if>
 			</set>
 			where id=#{id};
-		]]>
 	</update>
 	
 	

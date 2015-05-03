@@ -23,6 +23,8 @@ public class ActivityServiceImpl implements ActivityService {
 		int totalRecord = activityDAO.queryTotalRecord(SysCode.ActivityStatus.APPROVED); // 通过审核的总记录数
 		pager.setTotalRecord(totalRecord);
 		
+		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
+		
 		List<Activity> activities = activityDAO.queryAllStatusByPage(pager);
 		pager.setDatas(activities);
 		
@@ -53,6 +55,20 @@ public class ActivityServiceImpl implements ActivityService {
 		pager.setDatas(activities);
 		
 		return pager;
+	}
+
+	@Override
+	public String isPastDut(Integer actId) {
+		// 判断招聘信息是否到截止日期了
+		String endDate = activityDAO.queryByIdGetEndDate(actId);
+		String nowDate = DateUtils.getCurrentGaDate();
+		long e = Long.valueOf(endDate);
+		long n = Long.valueOf(nowDate);
+		if(e < n) {
+			return "isPastDue";	// 过期
+		}
+		
+		return "notPastDue";
 	}
 
 }

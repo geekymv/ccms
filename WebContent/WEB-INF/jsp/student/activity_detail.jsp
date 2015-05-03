@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>   
+
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -79,15 +79,14 @@
 		      	</tr> 
 		      	<tr>
 		        	<th>报名截止日期</th> <td id='endDate'></td>
-		        	
-		        	
 		      	</tr> 
-		      	
 		      	<tr>
-		      		<th colspan="2">
+		      		<th colspan="2" id='apply_activity'>
 		      			<c:if test="${isApplyed == 'isApplyed' }">
-		      				<span style="color:red;">已报名</span>
+		      				<span style="color:blue;">已报名</span>
+			      			<%--
 			      			<button class="btn btn-primary" id="cancel" onclick="alert('暂未提供取消报名功能！敬请期待...')">取消报名</button>
+		      				 --%>
 		      			</c:if>
 		      			<c:if test="${isApplyed == 'unApply' }">
 		      				<button class="btn btn-primary" id="apply">我要报名</button>
@@ -120,6 +119,17 @@
 					}
 				});
 			});			
+			
+			// 
+			$.post(contextPath+"/stu/isPastDue", {'actId': '${activity.id}'}).done(function(msg){
+				if(msg == 'isPastDue') {
+					$('#apply').hide();
+					$('#apply_activity').html('<span style="color: red;">报名截止</span>');
+				}
+			}).fail(function(){
+				
+			});
+			
 		});    	
     	
     </script>

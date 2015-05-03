@@ -59,8 +59,10 @@
 			$.post(contextPath+'/stu/myactivities').done(function(result){
 				var len = result.length;
 				if(len == 0) {
-					alert('暂无数据！');
+					$('thead').hide();
+					$('tbody').html('<div style="text-align: center; color: blue">暂无数据！</div>');
 				} else {
+					$('thead').show();
 					var html = "";
 					for(var i = 0; i < len; i++) {
 						var act = result[i];

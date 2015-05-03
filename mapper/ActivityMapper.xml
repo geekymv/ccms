@@ -73,6 +73,11 @@
 		inner join t_activity_type a_type on act.activity_type=a_type.id where act.id=#{id};
 	</select>
 	
+	<!-- 根据id查询截止日期 -->
+	<select id="queryByIdGetEndDate" parameterType="int" resultType="String">
+		select act.end_date from t_activities act where act.id = #{actId}
+	</select>
+	
 	<resultMap type="Activity" id="ActivityResultMap">
 		<id column="act_id" property="id"/>
 		<result column="act_name" property="name"/>

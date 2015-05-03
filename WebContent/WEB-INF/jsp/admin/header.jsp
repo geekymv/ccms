@@ -12,7 +12,7 @@
 	                <div class="userinfo">
 	                    <h5>${user.name }</h5>
 	                    <ul>
-	                        <li><a href="editprofile.html">修改资料</a></li>
+	                        <li><a href="${ctx }/admin/myinfo">修改资料</a></li>
 	                        <li><a href="">账号设置</a></li>
 	                        <li><a href="${pageContext.request.contextPath }/logout">退出系统</a></li>
 	                    </ul>

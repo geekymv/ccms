@@ -140,7 +140,7 @@
 			    </tr>
 			    
 			    <tr>
-			    	<th>联系电话</th> 
+			    	<th>联系方式</th> 
 			    	<td>
 			    		<input type="text" name="phone" id="phone" value="${student.phone}" />
 			    		<span>*</span>
@@ -158,7 +158,6 @@
 			    	<th>QQ</th> 
 			    	<td>
 			    		<input type="text" name="qq" id="qq" value="${student.qq }" />
-			    		<span>*</span>
 			    	</td>
 			    </tr> 
 			    <tr>
@@ -222,16 +221,39 @@
 				var spe_id = $("#spe_id").val(); // 专业id	
 							
 				var name = $("#name").val().trim(); // 姓名
+				if(name == '') {
+					alert('姓名不能为空！');
+					$("#name").focus();
+					return;
+				}
+				
 				var gender = $("input[name='gender']").val(); // 性别
+				
 				var phone = $("#phone").val();
+				var reg = /^1\d{10}/;
+				if(!reg.test(phone)) {
+					alert('联系方式不合法！');
+					$("#phone").focus();
+					return;
+				}
+				
 				var email = $("#email").val();
+				var reg_email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+				if(!reg_email.test(email)) {
+					alert('邮箱格式不合法！');
+					$("#email").focus();
+					return;
+				}
+				
 				var qq = $("#qq").val();
+				if(qq.length > 11) {
+					alert('qq不合法！');
+				}
+				
 				var introduce = $("#introduce").val();
 	
 				var data = $("#stuform").serialize();
 				data = decodeURIComponent(data,true); /* 解决中文乱码问题 */
-				
-				alert(data);
 				
 				$.ajax({
 					url: '${pageContext.request.contextPath}/stu/updateInfo',
@@ -239,7 +261,12 @@
 					data: data,
 					dataType: 'text',
 					success: function(data){
-						alert(data);
+						if(data == 'success') {
+							alert('更新成功！');
+						}else if (data == 'fail') {
+							alert('更新失败！');
+						}
+						
 						window.location.reload(); //刷新当前页面						
 					}
 				});

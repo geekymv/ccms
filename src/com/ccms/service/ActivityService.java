@@ -35,6 +35,11 @@ public interface ActivityService {
 	 */
 	public int add(Activity activity);
 	
-	
+	/**
+	 * 判断活动报名是否截止
+	 * @param actId
+	 * @return "isPastDue" 过期了, "notPastDue" 未过期
+	 */
+	public String isPastDut(Integer actId);
 	
 }

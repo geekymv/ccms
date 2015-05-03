@@ -100,6 +100,18 @@ public class StudentController {
 		return "student/activity_detail";
 	}
 	
+	
+
+	/**
+	 * 判断活动报名是否截止
+	 * @return
+	 */
+	@RequestMapping("/isPastDue")
+	@ResponseBody
+	public String isPastDue(Integer actId) {
+		return activityService.isPastDut(actId);
+	}
+	
 	/**
 	 * 学生报名活动
 	 * @param id 活动id
@@ -142,11 +154,7 @@ public class StudentController {
 	@ResponseBody
 	public List<ActivityItem> applyedActivities(Model model, HttpSession session) {
 		Student student = (Student) session.getAttribute("user");
-		List<ActivityItem> actItems = actItemService.queryAllActivityItem(student.getId());
-		
-		return actItems;
-	//	model.addAttribute("actItems", actItems);
-	//	return "student/my_activity";
+		return actItemService.queryAllActivityItem(student.getId());
 	}
 	
 	/**
@@ -200,10 +208,10 @@ public class StudentController {
 	@ResponseBody
 	public String updateInfo(Student student){
 		
-		Integer speId = student.getSpecialty().getId();
-		if(speId == -1){
-			student.getSpecialty().setId(null);
-		}
+//		Integer speId = student.getSpecialty().getId();
+//		if(speId == -1){
+//			student.getSpecialty().setId(null);
+//		}
 		
 		boolean res = studentService.updateInfo(student);
 		if(res){

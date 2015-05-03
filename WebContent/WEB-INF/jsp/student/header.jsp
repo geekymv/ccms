@@ -41,7 +41,7 @@
 						</li>
 					</c:when>
 					<c:otherwise>
-						欢迎${user.name }
+						当前用户：${user.name }
 						<li class="logout"><a style="cursor: pointer;" id="logout">退出</a></li>
 					</c:otherwise>
 				</c:choose>
@@ -61,18 +61,18 @@
 			<div class="social-links">
 				<ul>
 					<li>
-						<a href="http://qgzx.ahau.edu.cn/qgzx/" target="_blank">
-							<img src="${pageContext.request.contextPath }/resources/images/about_qg.png" title="关于勤管" />
+						<a title="勤工助学管理中心" href="http://qgzx.ahau.edu.cn/qgzx/" target="_blank">
+							<img src="${pageContext.request.contextPath }/resources/images/about_qg.png" title="勤工助学管理中心" />
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a title="问题解答" href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">
 						<img src="${pageContext.request.contextPath }/resources/images/question.png" title="问题解答" />
 						</a>
 					</li>
 					<li>
-						<a href="hkjs/gyhk.html" target="_blank">
-						<img src="${pageContext.request.contextPath }/resources/images/team.png" title="开发团队" />
+						<a title="嘿客科技传媒" href="http://hkkj.aliapp.com" target="_blank">
+						<img src="${pageContext.request.contextPath }/resources/images/team.png" title="嘿客科技传媒" />
 						</a>
 					</li>
 				</ul>
@@ -89,8 +89,10 @@
 				<li><a href="${pageContext.request.contextPath }/stu/timeCounter" target="_parent">时间统计</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu/${user.num }/infocenter" target="_parent">账号管理</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu/index" target="_parent">活动公告</a></li>
-
+				
+				 <%--
 				<li><a href="" target="_parent">文档下载</a></li>
+				 --%>
 				<div class="clear"> </div>
 			</ul>
 		</div>

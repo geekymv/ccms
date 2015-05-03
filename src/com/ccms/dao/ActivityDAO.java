@@ -30,5 +30,12 @@ public interface ActivityDAO extends BaseDAO<Activity> {
 	 * @return
 	 */
 	public List<Activity> queryAllByPage(Pager<Activity> pager);
+	
+	/**
+	 * 根据id查询截止日期
+	 * @param actId
+	 * @return
+	 */
+	public String queryByIdGetEndDate(Integer actId);
 
 }

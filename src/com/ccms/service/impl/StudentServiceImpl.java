@@ -1,5 +1,6 @@
 package com.ccms.service.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,11 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public boolean updateInfo(Student student) {
-
+		String pwd = student.getPwd();
+		if(StringUtils.isNotBlank(pwd)) {
+			student.setPwd(EncryptUtil.md5Encrypt(pwd));
+		}
+		
 		int res = studentDAO.update(student);
 		
 		return res == 1 ? true : false;

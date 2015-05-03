@@ -13,7 +13,7 @@ $(function(){
 		        			var act = datas[i];
 		        			
 		        			html += "<tr>"
-		        					+ "<td>"+ act.name +"</td>"
+		        					+ "<td style='text-align:left;'>"+ act.name +"</td>"
 		        					+ "<td>"+ act.college.name +"</td>"
 		        					+ "<td>"+ act.actObject +"</td>"
 		        					+ "<td>"+ formatterDate(act.publishTime) +"</td>"
