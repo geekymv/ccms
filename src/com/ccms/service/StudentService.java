@@ -32,6 +32,7 @@ public interface StudentService {
 	 * @return
 	 */
 	public boolean updateInfo(Student student);
+	
 }
 
 

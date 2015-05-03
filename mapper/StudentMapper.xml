@@ -7,13 +7,11 @@
 	
 	<!-- 添加学生 -->
 	<insert id="add" parameterType="Student">
-		<!-- 
 		<![CDATA[
-			INSERT INTO T_STUDENTS( NUM, PWD, NAME, GENDER, PHONE, EMAIL, QQ, RANK_ID, COL_ID, SPEC_ID, INTRODUCE )
-			VALUES(#{NUM}, #{PWD}, #{NAME}, #{GENDER}, #{PHONE}, 
-			#{EMAIL}, #{QQ}, #{RANK.ID}, #{COLLEGE.ID}, #{SPECIALTY.ID}, #{INTRODUCE});	
+			insert into t_students( num, pwd, name, gender, phone, email, qq, rank_id, col_id, spec_id, introduce, year )
+			values(#{num}, #{pwd}, #{name}, #{gender}, #{phone}, 
+			#{email}, #{qq}, #{rank.id}, #{college.id}, #{specialty.id}, #{introduce}, #{year});	
 		]]>
-		 -->
 	</insert>
 	
 	<!-- 更新学生 -->

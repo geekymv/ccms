@@ -161,8 +161,9 @@ public class StudentController {
 		Student student = studentService.getInfo(num);
 		model.addAttribute("student", student);
 		
+		College college = student.getCollege();
 		// 获得该学生所在学院的所有专业
-		List<Specialty> specialties = collegeService.getSpecialties(student.getCollege().getId());
+		List<Specialty> specialties = collegeService.getSpecialties(college.getId());
 		model.addAttribute("specialties", specialties);
 		
 		// 查询所有学院

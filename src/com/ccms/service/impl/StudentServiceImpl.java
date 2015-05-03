@@ -20,6 +20,8 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public boolean register(Student student) {
+		student.setPwd(EncryptUtil.md5Encrypt(student.getPwd()));
+		studentDAO.add(student);
 		return false;
 	}
 

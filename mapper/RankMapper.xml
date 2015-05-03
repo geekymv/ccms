@@ -5,6 +5,10 @@
 
 <mapper namespace="com.ccms.dao.RankDAO">
 
+	<select id="queryAll" resultType="Rank">
+		select * from t_ranks;
+	</select>
+
 <!-- 
 	<select id="queryAll" resultMap="RankDTOResultMap">
 		 select 

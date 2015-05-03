@@ -5,6 +5,34 @@ package com.ccms.persistence.pojo;
  * @author Geek_ymv
  */
 public class Student {
+
+	public Student(String num, String pwd, String name, String gender,
+			String year, Rank rank, College college, Specialty specialty,
+			Integer status) {
+		this.num = num;
+		this.pwd = pwd;
+		this.name = name;
+		this.gender = gender;
+		this.year = year;
+		this.rank = rank;
+		this.college = college;
+		this.specialty = specialty;
+		this.status = status;
+	}
+	
+	public Student(String num, String pwd, String name, String gender,
+			String year, Rank rank, College college,
+			Integer status) {
+		this.num = num;
+		this.pwd = pwd;
+		this.name = name;
+		this.gender = gender;
+		this.year = year;
+		this.rank = rank;
+		this.college = college;
+		this.status = status;
+	}
+	
 	/**
 	 * id
 	 */

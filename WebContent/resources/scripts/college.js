@@ -4,7 +4,7 @@
 function addSpec() {
 	var val = jQuery("#name").val();
 	jQuery.ajax({
-		url : contextPath + "/admin/addSpec",
+		url : contextPath + "/college/addSpec",
 		type : "post",
 		data : {"name": val},
 		dataType : "text",
