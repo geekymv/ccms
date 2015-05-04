@@ -30,6 +30,8 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 	private StudentDAO studentDAO;
 	@Autowired
 	private RankActivityTypeDAO rankActivityTypeDAO;
+	@Autowired
+	private ActivityItemDAO activityItemDAO;
 
 	@Override
 	public boolean apply(Activity activity, Student student) {
@@ -98,6 +100,11 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 		}
 		
 		return rankActivityTypeVOs;
+	}
+
+	@Override
+	public void auditActivityItem(Integer itemId, Integer status) {
+		activityItemDAO.auditActivityItem(itemId, status);
 	}
 }
 

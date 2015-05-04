@@ -5,6 +5,13 @@
 
 <mapper namespace="com.ccms.dao.ActivityItemDAO">
 	
+	<!-- 更新Item的审核状态 -->
+	<update id="auditActivityItem">
+		update t_activity_item item set item.audit = #{status} 
+		where item.id = #{itemId};
+	</update>
+	
+	
 	<!-- 学生报名活动 -->
 	<insert id="add" parameterType="ActivityItem">
 	    insert into t_activity_item (act_id, stu_id , audit, recordTime) 

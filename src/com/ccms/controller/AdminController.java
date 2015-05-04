@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import jxl.Sheet;
 import jxl.Workbook;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +21,7 @@ import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.Student;
+import com.ccms.service.ActivityItemService;
 import com.ccms.service.ActivityService;
 import com.ccms.service.CollegeService;
 import com.ccms.service.RankService;
@@ -40,6 +40,9 @@ public class AdminController {
 	private RankService rankService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private ActivityItemService activityItemService;
+	
 	/**
 	 * 管理员登录成功
 	 * @return
@@ -155,19 +158,7 @@ public class AdminController {
 	public Pager<Activity> pager(Pager<Activity> pager) {
 		return activityService.findAllByPage(pager);
 	}
-	
-//	/**
-//	 * 查看活动
-//	 * @param id
-//	 * @return
-//	 */
-//	@RequestMapping("/admin/activity_detail/{id}")
-//	public String detail(@PathVariable Integer id, Model model, HttpSession session) {
-//		Activity activity = activityService.detail(id);
-//		model.addAttribute("activity", activity);
-//		return "admin/activity_detail";
-//	}
-	
+
 	/**
 	 * 跳转到活动详情页面
 	 * @return
@@ -200,30 +191,22 @@ public class AdminController {
 		return activityService.aduitActivity(actId, status);
 	}
 	
+	/**
+	 * 待审核的学生报名Item
+	 * @param itemId
+	 * @param status
+	 * @return
+	 */
+	@RequestMapping("/admin/auditActivityItem")
+	@ResponseBody
+	public String auditActivityItem(Integer itemId, Integer status) {
+		activityItemService.auditActivityItem(itemId, status);
+		return "success";
+	}
 	
-//	/**
-//	 * 查看活动详情
-//	 * @param actId
-//	 * @return
-//	 */
-//	@RequestMapping(value="/admin/activity_detail", method=RequestMethod.GET)
-//	public String activityDetail() {
-//		return "admin/activity_detail";
-//	}
-//	
-//	/**
-//	 * 查看活动详情
-//	 * @param actId
-//	 * @return
-//	 */
-//	@RequestMapping(value="/admin/activity_detail", method=RequestMethod.POST)
-//	public Activity activityDetail(Integer actId) {
-//		return null;
-//	}
-	
-	
- 	 
-	
+	/**
+	 * 导入学生名单
+	 */
 	@RequestMapping("/admin/import")
 	public void importStudents() {
 		readExcel2();

@@ -42,6 +42,11 @@ public class ActivityServiceImpl implements ActivityService {
 	public int add(Activity activity) {
 		activity.setPublishTime(DateUtils.getCurrentGaDate());
 		activity.setStatus(SysCode.ActivityStatus.WAIT); 
+		
+		String endDate = activity.getEndDate();
+		endDate = endDate.replaceAll("-", "") + "240000"; 
+		activity.setEndDate(endDate);
+		
 		return activityDAO.add(activity);
 	}
 
@@ -91,6 +96,11 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public String updateActivity(Activity activity) {
+		
+		String endDate = activity.getEndDate();
+		endDate = endDate.replaceAll("-", "") + "240000"; 
+		activity.setEndDate(endDate);
+		
 		int res = activityDAO.update(activity);
 		return res == 1 ? "success" : "fail";
 	}

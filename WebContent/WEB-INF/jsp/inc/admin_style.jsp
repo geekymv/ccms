@@ -6,6 +6,7 @@
 <link href="<c:url value='/resources/admin/css/responsive-tables.css'/>" rel="stylesheet"/>
 
 <script src="<c:url value='/resources/scripts/utils/bootstrap.page-1.1.2.js'/>"></script>
+<script src="<c:url value='/resources/scripts/my97datePicker/WdatePicker.js'/>"></script>
 
 <script type="text/javascript">
 	var contextPath = "${ctx}";

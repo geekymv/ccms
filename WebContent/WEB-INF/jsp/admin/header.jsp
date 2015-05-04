@@ -4,7 +4,7 @@
     
 <div class="header">
 	<div class="logo">
-	    <a href=""><img src="${pageContext.request.contextPath }/resources/admin/images/logo.png" alt="" /></a>
+	    <a href=""><img src="${pageContext.request.contextPath }/resources/admin/images/logo.png"/></a>
 	</div>
 	<div class="headerinner">
 	    <ul class="headmenu">

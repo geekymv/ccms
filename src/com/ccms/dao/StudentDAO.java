@@ -1,8 +1,11 @@
 package com.ccms.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.ccms.base.dao.BaseDAO;
+import com.ccms.persistence.dto.StudentDto;
 import com.ccms.persistence.pojo.Student;
 
 public interface StudentDAO extends BaseDAO<Student>{
@@ -21,4 +24,18 @@ public interface StudentDAO extends BaseDAO<Student>{
 	 */
 	public Student queryByNumAndPwd(@Param("num")String num, @Param("pwd")String pwd);
 
+	/**
+	 * 根据活动id查看报名学生
+	 * @param actId
+	 * @return
+	 */
+	public List<StudentDto> queryByActivityId(Integer actId);
+	
+	/**
+	 * 根据活动id查看报名学生总记录数
+	 * @param actId
+	 * @return
+	 */
+	public int getTotalRecordByActivityId(Integer actId);
+	
 }

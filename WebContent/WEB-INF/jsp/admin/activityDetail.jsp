@@ -74,7 +74,8 @@
 	                                	报名截止日期<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	<input type="text" name="endDate" id="endDate" class="input-medium" />
+	                                	<input type="text" name="endDate" id="endDate" class="input-medium"
+	                                	onFocus="WdatePicker({dateFmt:'yyyy-MM-dd', minDate:'%y-%M-%d', isShowClear:false})" />
 	                                </div>
 	                            </div>
                     		</td>
@@ -226,6 +227,8 @@
 		</div>
 	</div><!--end of mainwrapper-->
 
+	<script type="text/javascript" src='<c:url value="/resources/scripts/college.js" />'></script>
+
 	<script type="text/javascript">
 		var $ = jQuery;
 		
@@ -250,17 +253,18 @@
 			
 			//  更新活动信息
 			$('#updateActivity').click(function() {
-				var data = get_form_data('#pub_form');
-				
-				$.post(contextPath+"/college/updateActivity", data).done(function(msg){
-					if(msg == 'success') {
-						alert('更新成功！');
-					}else if(msg == 'fail') {
-						alert('更新失败！');
-					}
-				}).fail(function(){
-					alert('服务器端错误！');						
-				});
+				if(activityValidate()) {
+					var data = get_form_data('#pub_form');
+					$.post(contextPath+"/college/updateActivity", data).done(function(msg){
+						if(msg == 'success') {
+							alert('更新成功！');
+						}else if(msg == 'fail') {
+							alert('更新失败！');
+						}
+					}).fail(function(){
+						alert('服务器端错误！');						
+					});
+				}
 			});
 			
 			// 加载活动信息

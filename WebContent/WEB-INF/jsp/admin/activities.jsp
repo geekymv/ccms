@@ -48,7 +48,7 @@
                        <tr>
                        	  <th class="centeralign"><input type="checkbox" class="checkall" /></th>	
                           <th>活动名称</th>
-				          <th>发布单位</th>
+				          <th id="publish_college">发布单位</th>
 				          <th>活动对象</th>
 				          <th>发布时间</th>
 				          <th>活动类型</th>
@@ -85,6 +85,9 @@
 				url = '/admin/activities';
 			}else if(user_authority == 0) {	// 用工单位
 				url = '/college/activities';
+				// 隐藏发布单位
+				$('#publish_college').hide();
+				
 			}
 			
 			
@@ -112,9 +115,11 @@
 				        			
 				        			html += "<tr>"
 				        					+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
-				        					+ "<td>"+ act.name +"</td>"
-				        					+ "<td>"+ act.college.name +"</td>"
-				        					+ "<td>"+ act.actObject +"</td>"
+				        					+ "<td>"+ act.name +"</td>";
+					        			if(user_authority == 1){
+					        				html += "<td>"+ act.college.name +"</td>";
+					        			}		 
+				        			html += "<td>"+ act.actObject +"</td>"
 				        					+ "<td>"+ formatterDate(act.publishTime) +"</td>"
 				        					+ "<td>"+ act.actType.name +"</td>"
 				        					+ "<td>"+ act.duration +"</td>"
@@ -142,8 +147,10 @@
 		
 		} 
 		
-		function showApply() {
-			alert('攻城狮们正在努力开发中...');
+		function showApply(t) {
+			var $this = jQuery(t);
+			var id = $this.data('id');
+			window.location.href = contextPath + "/admin/activity_students/" + id;
 		}
 		
 	</script>

@@ -92,8 +92,6 @@ function pubActivity() {
 	var $ = jQuery;
 	
 	if(activityValidate()) {	// 通过验证
-		alert('ok');
-		
 		var data = get_form_data('#pub_form');
 		
 		jQuery.post(contextPath+'/admin/pubActivity', data).done(function(msg){

@@ -18,7 +18,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
- <body>
+ <body onkeydown="on_login();">
 	<!--导航条-->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container">
@@ -70,13 +70,13 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="${pageContext.request.contextPath }/resources/images/123.jpg" alt="">
+				<img src="${pageContext.request.contextPath }/resources/images/num1.jpg" alt="">
+			</div>
+			<div class="item">
+				<img src="${pageContext.request.contextPath }/resources/images/2.jpg" alt="">
 			</div>
 			<div class="item">
 				<img src="${pageContext.request.contextPath }/resources/images/apic6146.jpg" alt="">
-			</div>
-			<div class="item">
-				<img src="${pageContext.request.contextPath }/resources/images/22222.jpg" alt="">
 			</div>
 		</div>
 	</div>
@@ -110,6 +110,7 @@
     <script src="${pageContext.request.contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript">
+		
 		$(function(){
 			$('.sub-btn').on('click', function(){
 				var account = $("#account").val();
@@ -134,6 +135,14 @@
 				});
 			});
 		});
+		
+		function on_login() {
+			// 回车登录
+			if(window.event.keyCode == 13) {
+				$('.sub-btn').click();
+			}
+		}
+		
 	</script>    
     
   </body>

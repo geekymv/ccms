@@ -1,5 +1,9 @@
 package com.ccms.service;
 
+import java.util.List;
+
+import com.ccms.persistence.dto.Pager;
+import com.ccms.persistence.dto.StudentDto;
 import com.ccms.persistence.pojo.Student;
 
 public interface StudentService {
@@ -32,6 +36,13 @@ public interface StudentService {
 	 * @return
 	 */
 	public boolean updateInfo(Student student);
+	
+	/**
+	 * 根据活动id查看报名学生
+	 * @param actId
+	 * @return
+	 */
+	public Pager<StudentDto> findStudentByActivityId(Pager<StudentDto> pager, Integer actId);
 	
 }
 

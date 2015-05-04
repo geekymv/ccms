@@ -7,11 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.persistence.dto.Pager;
+import com.ccms.persistence.dto.StudentDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
@@ -20,6 +22,7 @@ import com.ccms.service.ActivityService;
 import com.ccms.service.ActivityTypeService;
 import com.ccms.service.CollegeService;
 import com.ccms.service.SpecialtyService;
+import com.ccms.service.StudentService;
 
 /**
  * 学院/社团Controller
@@ -35,6 +38,8 @@ public class CollegeController {
 	private ActivityService activityService;
 	@Autowired
 	private ActivityTypeService activityTypeService;
+	@Autowired
+	private StudentService studentService;
 
 	/**
 	 * 获得该学院下的所有专业
@@ -142,7 +147,25 @@ public class CollegeController {
 		return activityService.updateActivity(activity);
 	}
 	
+	/**
+	 * 查看学生报名列表
+	 * @return
+	 */
+	@RequestMapping(value="/admin/activity_students/{actId}", method=RequestMethod.GET)
+	public String findStudents(@PathVariable("actId")Integer actId, Model model) {
+		model.addAttribute("actId", actId);
+		return "admin/activityStudents";
+	}
 	
+	/**
+	 * 报名学生列表
+	 * @return
+	 */
+	@RequestMapping("/admin/students")
+	@ResponseBody
+	public Pager<StudentDto> findStudents(HttpSession session, Pager<StudentDto> pager, Integer actId) {
+		return studentService.findStudentByActivityId(pager, actId);
+	}
 	
 }
 

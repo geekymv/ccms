@@ -37,7 +37,12 @@ public interface ActivityItemDAO extends BaseDAO<ActivityItem> {
 	public List<ActivityItemVO> queryActivityItemVO(@Param("studentId")Integer studentId, 
 									@Param("startDate")String startDate, @Param("endDate") String endDate);
 	
-	
+	/**
+	 * 根据id更新状态
+	 * @param itemId
+	 * @param status
+	 */
+	public void auditActivityItem(@Param("itemId")Integer itemId, @Param("status")Integer status);
 }
 
 

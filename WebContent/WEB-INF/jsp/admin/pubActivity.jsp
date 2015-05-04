@@ -70,7 +70,8 @@
 	                                	报名截止日期<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	<input type="text" name="endDate" id="endDate" class="input-medium" />
+	                                	<input type="text" name="endDate" id="endDate" class="input-medium" 
+	                                	onFocus="WdatePicker({dateFmt:'yyyy-MM-dd', minDate:'%y-%M-%d', isShowClear:false})"/>
 	                                </div>
 	                            </div>
                     		</td>

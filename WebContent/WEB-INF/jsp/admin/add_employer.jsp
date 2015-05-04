@@ -105,12 +105,78 @@
 	</div><!--end of mainwrapper-->
 	
 	<script type="text/javascript">
-		jQuery(function() {
-			
-		});
+		var $ = jQuery;
 			
 		// 添加用工单位	
 		function addEmployer() {
+			var account = $('#account').val();
+			var password = $('#password').val();
+			var repassword = $('#repassword').val();
+			var name = $('#name').val();
+			var phone = $('#phone').val();
+			var contact = $('#contact').val();
+			var address = $('#address').val();
+			
+			if(account.trim() == '') {
+				alert('账号为必填项！');
+				$('#account').focus();
+				return;
+			}
+			
+			if(password.trim() == '') {
+				alert('密码为必填项！');
+				$('#password').focus();
+				return;
+			}
+			if(password.length < 6) {
+				alert('密码长度不能小于6！');
+				$('#password').focus();
+				return;
+			}
+			if(password.length > 15) {
+				alert('密码长度不能大于15！');
+				$('#password').focus();
+				return;
+			}
+			
+			if(password != repassword) {
+				alert('密码不相等！');
+				$('#repassword').focus();
+				return;
+			}
+			
+			if(account.trim() == '') {
+				alert('账号为必填项！');
+				$('#account').focus();
+				return;
+			}
+			
+			if(name.trim() == '') {
+				alert('名称为必填项！');
+				$('#name').focus();
+				return;
+			}
+			
+			var reg_phone = /(^(\d{3,4}-)?\d{7,8})$|(1[0-9]{10})/;	// 电话号码与手机号码同时验证
+			if(!reg_phone.test(phone)) {
+				alert('电话号码不合法！');
+				$('#phone').focus();
+				return;
+			}
+			
+			if(contact.trim() == '') {
+				alert('联系人为必填项！');
+				$('#contact').focus();
+				return;
+			}
+			
+			if(address.trim() == '') {
+				alert('地址为必填项！');
+				$('#address').focus();
+				return;
+			}
+		
+			
 			var data = get_form_data('#add_form');
 
 			jQuery.post(contextPath+"/admin/add_employer", data).done(function(msg) {
