@@ -5,7 +5,7 @@ function get_form_data(form_id) {
 }
 
 function formatterDate(time) {
-	if(time == null || time.trim() == '') {
+	if(time == null || jQuery.trim(time) == '') {	// $.trim(str) 取代str.trim() ie下不可用
 		return "";
 	}
 	if (time.length == 14) {

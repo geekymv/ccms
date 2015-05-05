@@ -75,23 +75,47 @@
             </div>      
         	
 		</div>
+		
+		<div style="display: none; margin-top: 10px;text-align: center;" id="auditNotPassReason">
+			<table style="margin: 80px;">
+				<tr>
+					<td>选择原因：</td>
+					<td>
+						 <select name="reason" id="reason" class="uniformselect" style="width: 160px;">
+			             	<option value="未参加活动">未参加活动</option>
+			             	<option value="不符合报名要求">不符合报名要求</option>
+			             </select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center; padding-top: 30px;">
+						<button class="" onclick="submitAuditNotPass();">确定</button>		
+					</td>
+				</tr>
+			</table>
+		</div>
+		
 	</div>
+	
+	<script type="text/javascript" src="${ctx }/resources/layer-v1.9.1/layer/layer.js"></script>
+	<script type="text/javascript" src="${ctx }/resources/layer-v1.9.1/layer/extend/layer.ext.js"></script>
+	
 	<script type="text/javascript">
 		jQuery(function(){
 			var $ = jQuery;
-	
 			var user_authority = '${user.authority}'
-			
 			$("#page").page({
 				    remote: {
-				        url: contextPath + "/admin/students",
+				        url: contextPath + "/admin/apply_students",
 				        params: {"actId": '${actId}'},
 				        callback: function (result) {
 				        	var datas = result.datas;
 				        	var len = datas.length;
 				        	if(len == 0) {
-				        		
+				        		$('thead').hide();
+				        		$('tbody').html('<div style="text-align: center; color: blue">暂无学生报名！</div>');
 				        	}else {
+				        		$('thead').show();
 				        		var html = "";
 				        		for(var i = 0; i < len; i++) {
 				        			var stu = datas[i];
@@ -103,30 +127,8 @@
 				        				}else if(status == 2 ){
 				        					status = '审核通过';
 				        				}else if (status == 3) {
-											status = '未通过';				        					
+											status = '审核未通过';				        					
 				        				}	        			
-				        			
-				        				html += "<tr>"
-					        		   		+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
-					        				+ "<td>"+(i+1)+"</td>"
-					        				+ "<td>"+ stu.num +"</td>"
-					        				+ "<td>"+ stu.name +"</td>"
-					        				+ "<td>"+ stu.gender +"</td>"
-					        				+ "<td>"+ stu.phone +"</td>"
-					        				+ "<td>"+ stu.collegeName +"</td>"
-					        				+ "<td>"+ stu.specialtyName +"</td>"
-					        				+ "<td>"+ status +"</td>"
-					        				+ "<td>通过&nbsp;&nbsp;不通过</td>"
-					        			"</tr>"
-				        			
-				        			}else if(user_authority == 0) { // 用工单位
-				        				if(status == 0) {
-					        				status = '待审核';
-					        			}else if(status == 1) {
-					        				status = '审核通过';
-					        			}else if(status == -1) {
-					        				status = '未通过';
-					        			}
 				        			
 				        				html += "<tr>"
 					        		   		+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
@@ -138,10 +140,34 @@
 					        				+ "<td>"+ stu.collegeName +"</td>"
 					        				+ "<td>"+ stu.specialtyName +"</td>"
 					        				+ "<td>"+ status +"</td>"
-					        				+ "<td><span style='cursor:pointer;' onclick='audit(1, this)'>通过</span>"
-					        					+"&nbsp;&nbsp;<span style='cursor:pointer;' onclick='audit(-1, this)'>不通过</span>"
+					        				+ "<td><span title='审核通过' style='cursor:pointer;' class='glyphicon glyphicon-ok' onclick='audit(2, this)'></span>"
+				        						+"&nbsp;&nbsp;&nbsp;&nbsp;<span tilte='审核不通过' style='cursor:pointer;' class='glyphicon glyphicon-remove' onclick='auditNotPass(3, this)'></span>"
+				        					+"</td>"
+					        			+"</tr>";
+				        			
+				        			}else if(user_authority == 0) { // 用工单位
+				        				if(status == 0) {
+					        				status = '待审核';
+					        			}else if(status == 1) {
+					        				status = '认证通过';
+					        			}else if(status == -1) {
+					        				status = '认证未通过';
+					        			}
+				        			
+				        				html += "<tr>"
+					        		   		+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
+					        				+ "<td>"+(i+1)+"<input type='hidden' id='itemId' value='"+stu.itemId+"'/></td>"
+					        				+ "<td>"+ stu.num +"</td>"
+					        				+ "<td>"+ stu.name +"</td>"
+					        				+ "<td>"+ stu.gender +"</td>"
+					        				+ "<td>"+ stu.phone +"</td>"
+					        				+ "<td>"+ stu.collegeName +"</td>"
+					        				+ "<td>"+ stu.specialtyName +"</td>"
+					        				+ "<td><span style='color: blue'>"+ status +"</span></td>"
+					        				+ "<td><span title='认证通过' style='cursor:pointer;' class='glyphicon glyphicon-ok' onclick='audit(1, this)'></span>"
+					        					+"&nbsp;&nbsp;&nbsp;&nbsp;<span tilte='认证不通过' style='cursor:pointer;' class='glyphicon glyphicon-remove' onclick='auditNotPass(-1, this)'></span>"
 					        				+"</td>"
-					        			"</tr>"
+					        			+"</tr>";
 				        			}
 				        			
 				        		}
@@ -156,18 +182,40 @@
 				});
 		});
 		
+		// 学院认证通过
 		function audit(status, t) {
 			var $this = jQuery(t);
 			var itemId = $this.parent().parent().find('#itemId').val();
 			
-			jQuery.post(contextPath+'/admin/auditActivityItem', {'itemId': itemId, 'status': status}).done(function(msg) {
-				alert(msg);			
+			jQuery.post(contextPath+'/admin/auditActivityItem', {'id': itemId, 'audit': status}).done(function(msg) {
+				if(msg == 'success') {
+					alert('操作成功！');
+				}			
 				window.location.reload();
 			}).fail(function() {
 				alert('服务器端错误！');				
 			});
 		}
-		
+		// 学院认证未通过
+		function auditNotPass(status, t) {
+			var $this = jQuery(t);
+			var itemId = $this.parent().parent().find('#itemId').val();
+
+			//默认prompt
+			layer.prompt({
+				title: '不通过原因',
+			},
+			function(val){
+				// post请求
+				$.post(contextPath+"/admin/auditActivityItem", {'id': itemId, 'audit': status, 'reason': val}).done(function(msg){
+					if(msg == 'success') {
+						layer.msg('操作成功');
+					}
+				}).fail(function(msg){
+					alert('服务器端错误！');
+				});
+			});
+		}
 		
 	</script>
 </body>

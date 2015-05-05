@@ -2,9 +2,12 @@ package com.ccms.dao;
 
 import java.util.List;
 
+import javax.validation.constraints.Pattern;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.ccms.base.dao.BaseDAO;
+import com.ccms.persistence.dto.ActivitySearchDto;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.College;
@@ -24,7 +27,7 @@ public interface ActivityDAO extends BaseDAO<Activity> {
 	 * @param pageSize
 	 * @return
 	 */
-	public List<Activity> queryAllStatusByPage(Pager<Activity> pager);
+	public List<Activity> queryAllStatusByPage(@Param("pager")Pager<Activity> pager, @Param("dto")ActivitySearchDto dto);
 	
 	/**
 	 * 分页查询所有
@@ -46,8 +49,7 @@ public interface ActivityDAO extends BaseDAO<Activity> {
 	 * @param actId
 	 * @return
 	 */
-	public int aduitActivity(@Param("actId")Integer actId, 
-			@Param("status")Integer status);
+	public int aduitActivity(Activity activity);
 	
 	/**
 	 * 用工单位查询自己发布的活动信息

@@ -26,7 +26,7 @@
             remote: {
                 url: null,
                 params: null,
-                callback: null,
+                callback: null
             },
             pageIndexName: 'pageIndex',
             pageSizeName: 'pageSize',
@@ -172,7 +172,7 @@
                     firstBtnText: $this.data("first-btn-text"),
                     lastBtnText: $this.data("last-btn-text"),
                     prevBtnText: $this.data("prev-btn-text"),
-                    nextBtnText: $this.data("next-btn-text"),
+                    nextBtnText: $this.data("next-btn-text")
                 }
                 options = $.extend(options, data_api_options);
                 $this.data('page', (data = new Page(this, options)));
@@ -200,7 +200,7 @@
         remote: {
             url: null,
             params: null,
-            callback: null,
+            callback: null
         },
         pageIndexName: 'pageIndex',
         pageSizeName: 'pageSize',

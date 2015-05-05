@@ -14,13 +14,18 @@
              <li><a href="${pageContext.request.contextPath }/admin/specialties">专业设置</a></li>
              <li class="dropdown"><a href="">活动管理</a>
               	<ul>
-                   <li><a href="${pageContext.request.contextPath }/admin/pubActivity">发布活动</a></li>
+                   <li><a href="${pageContext.request.contextPath }/admin/pubActivity">申请活动</a></li>
                    <li><a href="${ctx }/admin/activities">活动列表</a></li>
               	</ul>
               </li>
-              <li><a href="wysiwyg.html">报名管理</a></li>
-              <li><a href="wysiwyg.html">学生管理</a></li>
-              <li><a href="wysiwyg.html">考核管理</a></li>
+              <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">报名管理</a></li>
+              <li class="dropdown"><a href="">学生管理</a>
+              	<ul>
+                   <li><a href="${ctx }/admin/students">学生列表</a></li>
+              	</ul>
+              	
+              </li>
+              <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">考核管理</a></li>
              </c:if>
           </ul>
       </li>
@@ -45,8 +50,8 @@
               	</ul>	
             </li>
            
-            <li><a href="">时间认证</a></li>
-            <li><a href="">名单导入</a></li>
+            <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">时间认证</a></li>
+            <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">名单导入</a></li>
             <li><a href="${pageContext.request.contextPath }/admin/doc">文档管理</a></li>
           </ul>
       </li>

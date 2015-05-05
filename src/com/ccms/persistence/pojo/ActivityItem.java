@@ -17,7 +17,9 @@ public class ActivityItem {
 	 * 等待勤管中心认证1， 勤管中心认证通过2， 勤管中心未通过3，
 	 */
 	private Integer audit;
+	private String reason;	// 认证/审核不通过原因
 	private Date recordTime;
+	private Float duration; // '加分时长(包括附加分)',
 	
 	
 	public Integer getId() {
@@ -44,6 +46,14 @@ public class ActivityItem {
 	public void setAudit(Integer audit) {
 		this.audit = audit;
 	}
+
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	
 	public Date getRecordTime() {
 		return recordTime;
 	}
@@ -51,4 +61,10 @@ public class ActivityItem {
 		this.recordTime = recordTime;
 	}
 	
+	public Float getDuration() {
+		return duration;
+	}
+	public void setDuration(Float duration) {
+		this.duration = duration;
+	}
 }

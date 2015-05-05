@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>发布活动</title>
+<title>申请活动</title>
 <%@ include file="/WEB-INF/jsp/inc/admin_style.jsp"%>
 
 <style type="text/css">
@@ -31,12 +31,12 @@
 			<ul class="breadcrumbs">
 	            <li><a href="${pageContext.request.contextPath }/admin"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
 	            <li>活动管理 <span class="separator"></span></li>
-	            <li>发布活动</li>
+	            <li>申请活动</li>
         	</ul>
         	<div class="maincontent">
         	<div class="maincontentinner">
             <div class="widget">
-                <h4 class="widgettitle">发布活动</h4>
+                <h4 class="widgettitle">申请活动</h4>
                 <div class="widgetcontent">
                     <form id="pub_form" class="stdform">
                     <table style="width: 850px;">
@@ -88,29 +88,7 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    		<td>
-	                    		<div class="par control-group my-par">
-	                                <label class="control-label" for="aim">
-	                                	活动目的<span class="tips">*</span>
-	                                </label>
-	                                <div class="controls">
-	                                	<input type="text" name="aim" id="aim" class="input-medium" />
-	                                </div>
-	                            </div>
-                    		</td>
                     		
-                    	</tr>
-                    	<tr>
-                    		<td>
-	                    		<div class="par control-group my-par">
-	                                <label class="control-label" for="content">
-	                                	活动内容<span class="tips">*</span>
-	                                </label>
-	                                <div class="controls">
-	                                	<input type="text" name="content" id="content" class="input-medium" />
-	                                </div>
-	                            </div>
-                    		</td>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="actType">
@@ -124,6 +102,39 @@
                     		</td>
                     		
                     	</tr>
+                    	<tr>
+                    		<td colspan="2">
+                    			<div class="par control-group my-par">
+	                               	<label class="control-label" for="aim">
+	                                	活动目的<span class="tips">*</span>
+	                                </label>
+	                                 <div class="controls">
+    	                            	<textarea cols="30" rows="3" name="aim" id="aim" class="span6"></textarea>
+                            		</div>
+                            	</div>
+                            	
+                            </td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2">&nbsp;</td>
+                    	</tr>
+                    	
+                    	<tr>
+                    		<td colspan="2">
+                    			<div class="par control-group my-par">
+	                               	<label class="control-label" for="aim">
+	                                	活动内容<span class="tips">*</span>
+	                                </label>
+	                                 <div class="controls">
+    	                            	<textarea cols="30" rows="3" name="content" id="content" class="span6"></textarea>
+                            		</div>
+                            	</div>
+                            </td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2">&nbsp;</td>
+                    	</tr>
+                    	
                     	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
@@ -197,7 +208,7 @@
                     
                     </table>
                       <p class="stdformbutton" style="margin-left: 400px;">
-                      	<button type="button" class="btn btn-primary" onclick="pubActivity();">发布活动</button>
+                      	<button type="button" class="btn btn-primary" onclick="pubActivity();">申请</button>
                       </p>
                     </form>
                 </div><!--widgetcontent-->
@@ -208,23 +219,7 @@
 	</div><!--end of mainwrapper-->
 
 	<script src="<c:url value='/resources/scripts/college.js'/>"></script>
-	<script type="text/javascript">
-		jQuery(function() {
-			// 加载活动加分类型
-			jQuery.ajax({
-				url: contextPath + "/activityTypes",
-				dataType: "json",
-				success: function(data){
-					var html = "";
-					for(var i = 0; i < data.length; i++) {
-						var type = data[i];
-						html += "<option value="+ type.id +">" + type.name + "</option>";
-					}
-					jQuery("#actType").html(html);
-				}
-			});
-		});
-	</script>
+	<script src="<c:url value='/resources/scripts/common.js' />"></script>
 </body>
 </html>    
 

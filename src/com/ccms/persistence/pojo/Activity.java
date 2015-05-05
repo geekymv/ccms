@@ -17,30 +17,19 @@ public class Activity {
 	private String aim; /*目的*/
 	private String content; /*活动内容*/
 	private ActivityType actType;/*活动加分类型*/
-	private Integer duration;  /*活动加分时长*/
+	private Float duration;  /*活动加分时长*/
 	private String actObject; /*参与对象*/
 	private Integer number; /*参与人数*/
 	private String contact; /*联系人姓名*/ 
 	private String phone; /*联系方式*/
 	private String assist; /*活动协助人员*/
 	private Integer status; /*状态:通过1， 待审核0，未通过-1*/
+	private String reason;	// 审核不通过原因
 
 	public Activity() {
 	}
 	public Activity(Integer id) {
 		this.id = id;
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "Activity [id=" + id + ", name=" + name + ", college=" + college
-				+ ", publishTime=" + publishTime + ", dateTime=" + dateTime
-				+ ", endDate=" + endDate + ", location=" + location + ", aim="
-				+ aim + ", content=" + content + ", actType=" + actType
-				+ ", duration=" + duration + ", actObject=" + actObject
-				+ ", number=" + number + ", contact=" + contact + ", phone="
-				+ phone + ", assist=" + assist + ", status=" + status + "]";
 	}
 	
 	public Integer getId() {
@@ -103,10 +92,10 @@ public class Activity {
 	public void setActType(ActivityType actType) {
 		this.actType = actType;
 	}
-	public Integer getDuration() {
+	public Float getDuration() {
 		return duration;
 	}
-	public void setDuration(Integer duration) {
+	public void setDuration(Float duration) {
 		this.duration = duration;
 	}
 	public String getActObject() {
@@ -144,5 +133,11 @@ public class Activity {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 }

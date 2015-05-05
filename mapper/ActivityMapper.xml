@@ -17,7 +17,12 @@
 	
 	<!-- 管理员审核活动  -->
 	<update id="aduitActivity" parameterType="int">
-		update t_activities set status=#{status} where id=#{actId};
+		update t_activities 
+		<set>
+			<if test="status != null">status=#{status}</if>
+			<if test="reason != null and reason != ''">,reason = #{reason}</if>
+		</set>
+		 where id=#{id}; 
 	</update>
 	
 	<!-- 更新 -->
@@ -54,7 +59,10 @@
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
-		inner join t_activity_type a_type on act.activity_type=a_type.id limit #{pageOffset}, #{pageSize};	
+		inner join t_activity_type a_type on act.activity_type=a_type.id 
+		order by act.publish_time desc
+		limit #{pageOffset}, #{pageSize};
+			
 	</select>
 	
 	<!-- 用工单位查看自己发布的活动信息 -->
@@ -64,6 +72,7 @@
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
 		inner join t_activity_type a_type on act.activity_type=a_type.id  where act.col_id = #{college.id}  
+		order by act.publish_time desc
 		limit #{pager.pageOffset}, #{pager.pageSize};	
 	</select>
 	<select id="getTotalRecordByCollege" parameterType="College" resultType="int">
@@ -71,18 +80,28 @@
 	</select>
 	
 	<!-- 分页查询所有通过审核的Activity -->
-	<select id="queryAllStatusByPage" parameterType="Pager" resultMap="ActivityResultMap">
+	<select id="queryAllStatusByPage" resultMap="ActivityResultMap">
 		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
-		inner join t_activity_type a_type on act.activity_type=a_type.id where act.status=1 limit #{pageOffset}, #{pageSize};	
+		inner join t_activity_type a_type on act.activity_type=a_type.id
+		<where>
+			act.status=1 
+			and col.name like CONCAT('%', #{dto.collegeName},'%')  
+			<if test="dto.actType != -1">
+				and a_type.id = #{dto.actType}
+			</if>
+			
+		</where>
+		order by act.end_date desc
+		limit #{pager.pageOffset}, #{pager.pageSize};	
 	</select>
 	
 	<!-- 根据id查询 -->
 	<select id="queryById" parameterType="int" resultMap="ActivityResultMap">
 		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
-		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
+		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status, act.reason,
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
 		inner join t_activity_type a_type on act.activity_type=a_type.id where act.id=#{id};
@@ -109,6 +128,7 @@
 		<result column="phone" property="phone"/>
 		<result column="assist" property="assist"/>
 		<result column="status" property="status"/>
+		<result column="reason" property="reason" />
 		
 		<association property="college" javaType="College">
 			<id column="col_id" property="id"/>

@@ -18,6 +18,7 @@ import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.Specialty;
+import com.ccms.persistence.pojo.Student;
 import com.ccms.service.ActivityService;
 import com.ccms.service.ActivityTypeService;
 import com.ccms.service.CollegeService;
@@ -152,7 +153,7 @@ public class CollegeController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/activity_students/{actId}", method=RequestMethod.GET)
-	public String findStudents(@PathVariable("actId")Integer actId, Model model) {
+	public String findApplyStudents(@PathVariable("actId")Integer actId, Model model) {
 		model.addAttribute("actId", actId);
 		return "admin/activityStudents";
 	}
@@ -161,10 +162,34 @@ public class CollegeController {
 	 * 报名学生列表
 	 * @return
 	 */
-	@RequestMapping("/admin/students")
+	@RequestMapping("/admin/apply_students")
 	@ResponseBody
-	public Pager<StudentDto> findStudents(HttpSession session, Pager<StudentDto> pager, Integer actId) {
+	public Pager<StudentDto> findApplyStudents(HttpSession session, Pager<StudentDto> pager, Integer actId) {
 		return studentService.findStudentByActivityId(pager, actId);
+	}
+	
+	
+	/**
+	 * 本院学生列表页面
+	 * @return
+	 */
+	@RequestMapping(value="/admin/students", method=RequestMethod.GET)
+	public String getStudents() {
+		return "admin/collegeStudents";
+	}
+	
+	/**
+	 * 加载学生列表
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/admin/students", method=RequestMethod.POST)
+	@ResponseBody
+	public Pager<Student> getStudents(Pager<Student> pager, HttpSession session) {
+		College college = (College)session.getAttribute("user");
+		studentService.findStudentsByColId(pager, college.getId());
+		
+		return pager;
 	}
 	
 }

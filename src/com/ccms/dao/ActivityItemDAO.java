@@ -39,10 +39,8 @@ public interface ActivityItemDAO extends BaseDAO<ActivityItem> {
 	
 	/**
 	 * 根据id更新状态
-	 * @param itemId
-	 * @param status
 	 */
-	public void auditActivityItem(@Param("itemId")Integer itemId, @Param("status")Integer status);
+	public void auditActivityItem(ActivityItem item);
 }
 
 

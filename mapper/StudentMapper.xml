@@ -100,9 +100,9 @@
 			inner join t_activity_item item on item.stu_id = stu.id
 			inner join t_activities act on item.act_id = act.id
 			inner join t_colleges col_1 on stu.col_id = col_1.id
-			inner join t_specialties spec on stu.spec_id = spec.id
+			left join t_specialties spec on stu.spec_id = spec.id
 			inner join t_colleges col_2 on act.col_id = col_2.id
-			where spec.col_id = col_1.id and act.id = #{actId};
+			where act.id = #{actId};
 	</select>
 	
 	<!--  根据活动id查看报名学生总记录数 -->
@@ -114,7 +114,23 @@
 			inner join t_colleges col_1 on stu.col_id = col_1.id
 			inner join t_specialties spec on stu.spec_id = spec.id
 			inner join t_colleges col_2 on act.col_id = col_2.id
-			where spec.col_id = col_1.id and act.id = #{actId};
+			where act.id = #{actId};
+	</select>
+	
+	<!-- 根据学院id查看学生 -->
+	<select id="queryStudentsByColId" resultMap="StudentResultMap">
+		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
+		rank.id rank_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
+		from t_students stu 
+		inner join t_ranks rank on stu.rank_id=rank.id
+		inner join t_colleges col on stu.col_id=col.id 
+		inner join t_specialties spe on stu.spec_id=spe.id 
+		where stu.col_id=#{colId} 
+		limit #{pager.pageOffset}, #{pager.pageSize};	
+	</select>
+	
+	<select id="getTotalStudentsByColId" resultType="int">
+		select count(*) from t_students stu where stu.col_id = #{colId}
 	</select>
 	
 	

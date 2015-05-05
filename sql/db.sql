@@ -103,7 +103,8 @@ create table t_activity_item (
 	act_id int, /*活动编号*/
 	stu_id int, /*学生编号*/
 	audit int, /*审核：认证通过1，等待认证0， 认证不通过-1*/
-	record_time datetime /*记录时间*/ 
+	record_time datetime, /*记录时间*/ 
+	reason varchar(255)	// 认证/审核不通过原因
 );
 
 /**

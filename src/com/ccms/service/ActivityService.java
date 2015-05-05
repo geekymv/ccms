@@ -1,6 +1,7 @@
 package com.ccms.service;
 
 
+import com.ccms.persistence.dto.ActivitySearchDto;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.College;
@@ -13,7 +14,7 @@ public interface ActivityService {
 	 * @param pageSize
 	 * @return
 	 */
-	public Pager<Activity> findAllStatusByPage(Pager<Activity> pager);
+	public Pager<Activity> findAllStatusByPage(Pager<Activity> pager, ActivitySearchDto dto);
 	
 	/**
 	 * 查询所有的活动列表
@@ -48,7 +49,7 @@ public interface ActivityService {
 	 * @param actId
 	 * @return
 	 */
-	public String aduitActivity(Integer actId, Integer status);
+	public String aduitActivity(Activity activity);
 
 	/**
 	 * 用工单位查询所有的活动

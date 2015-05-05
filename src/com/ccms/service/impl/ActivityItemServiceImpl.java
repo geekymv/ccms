@@ -46,6 +46,8 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 			actItem.setStudent(student);
 			actItem.setAudit(SysCode.ActivityItem.ACTITEM_AUDIT_WAIT);
 			actItem.setRecordTime(new Date());
+			actItem.setDuration(activity.getDuration());
+			
 			int res = actItemDAO.add(actItem);
 			if (res == 1) {
 				return true;
@@ -103,8 +105,8 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 	}
 
 	@Override
-	public void auditActivityItem(Integer itemId, Integer status) {
-		activityItemDAO.auditActivityItem(itemId, status);
+	public void auditActivityItem(ActivityItem item) {
+		activityItemDAO.auditActivityItem(item);
 	}
 }
 

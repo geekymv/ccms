@@ -2,8 +2,6 @@ package com.ccms.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.ccms.persistence.dto.ActivityItemDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
@@ -46,10 +44,8 @@ public interface ActivityItemService {
 	
 	/**
 	 * 根据id更新状态
-	 * @param itemId
-	 * @param status
 	 */
-	public void auditActivityItem(@Param("itemId")Integer itemId, @Param("status")Integer status);
+	public void auditActivityItem(ActivityItem item);
 }
 
 

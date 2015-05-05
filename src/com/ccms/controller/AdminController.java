@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
+import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.Student;
@@ -187,20 +188,18 @@ public class AdminController {
 	 */
 	@RequestMapping("/admin/aduitActivity")
 	@ResponseBody
-	public String aduitActivity(Integer actId, Integer status) {
-		return activityService.aduitActivity(actId, status);
+	public String aduitActivity(Activity activity) {
+		return activityService.aduitActivity(activity);
 	}
 	
 	/**
 	 * 待审核的学生报名Item
-	 * @param itemId
-	 * @param status
 	 * @return
 	 */
 	@RequestMapping("/admin/auditActivityItem")
 	@ResponseBody
-	public String auditActivityItem(Integer itemId, Integer status) {
-		activityItemService.auditActivityItem(itemId, status);
+	public String auditActivityItem(ActivityItem item) {
+		activityItemService.auditActivityItem(item);
 		return "success";
 	}
 	

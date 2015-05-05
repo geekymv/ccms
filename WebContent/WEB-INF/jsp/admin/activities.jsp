@@ -79,6 +79,7 @@
 	<script type="text/javascript">
 		jQuery(function(){
 			var $ = jQuery;
+			
 			var url = "";
 			var user_authority = '${user.authority}'
 			if(user_authority == 1) {	// 管理员
@@ -91,7 +92,7 @@
 			}
 			
 			
-			$("#page").page({
+			jQuery("#page").page({
 				    remote: {
 				        url: contextPath + url,
 				        callback: function (result) {
@@ -113,9 +114,15 @@
 				        				status = '未通过';
 				        			}
 				        			
+				        			var name = act.name;	// 活动名称
+				        			
+				        			if(name.length > 10) {
+				        				name = name.substring(0, 11);
+				        			}
+				        			
 				        			html += "<tr>"
 				        					+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
-				        					+ "<td>"+ act.name +"</td>";
+				        					+ "<td><span title='"+act.name+"'>"+ name +"</span></td>";
 					        			if(user_authority == 1){
 					        				html += "<td>"+ act.college.name +"</td>";
 					        			}		 

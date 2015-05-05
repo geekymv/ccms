@@ -81,6 +81,13 @@
 		        	<th>报名截止日期</th> <td id='endDate'></td>
 		      	</tr> 
 		      	<tr>
+		        	<th colspan="2" style="text-align: left;">活动目的：${activity.aim }</th>
+		      	</tr> 
+		      	<tr>
+		        	<th colspan="2" style="text-align: left;">活动内容：${activity.content }</th>
+		      	</tr> 
+		      	
+		      	<tr>
 		      		<th colspan="2" id='apply_activity'>
 		      			<c:if test="${isApplyed == 'isApplyed' }">
 		      				<span style="color:blue;">已报名</span>

@@ -30,13 +30,16 @@
     		margin-left: 20px;
     	}
     	
-    	td span {
-    		color: red;
-    		padding-left: 10px;
+    	#tip {
+    		color: blue;
     	}
     	
     	#td-submit {
     		text-align: center;
+    	}
+    	
+    	.div-top {
+    		margin-top: 5px;
     	}
     </style>
     
@@ -49,6 +52,140 @@
 			  <li><a href="${pageContext.request.contextPath }/stu/index">首页</a></li>
 			  <li class="active">账号管理</li>
 			</ol>
+			<form class="form-horizontal" id="stuform">
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">学号：</label>
+			    <div class="col-sm-3 div-top">
+			     	${student.num }
+			     	<input type="hidden" name="id" value="${student.id }"/>
+			    	<input type="hidden" name="num" value="${student.num }"/>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="pwd" class="col-sm-4 control-label">登录密码：</label>
+			    <div class="col-sm-3">
+			      <input type="password" class="form-control" name="pwd" id="pwd" />
+			    </div>
+			    <div class="col-sm-3 div-top">
+			    	<span id="tip">若不修改密码，不用填写</span>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">密码确认：</label>
+			    <div class="col-sm-3">
+			    	<input type="password" class="form-control" name="repwd" id="repwd" />
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">姓名：</label>
+			    <div class="col-sm-3">
+			    	<input type="text" class="form-control" name="name" id="name" value="${student.name}" autofocus="autofocus" />
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">性别：</label>
+			    <div class="col-sm-3">
+			    	<c:choose>
+		        		<c:when test="${student.gender == '男'}">
+		        			<label class="radio-inline">
+							  <input type="radio" name="gender" value="男" checked="checked"> 男
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="gender" value="女"> 女
+							</label>
+		        		</c:when>
+		        		<c:when test="${student.gender == '女'}">
+		        			<label class="radio-inline">
+							  <input type="radio" name="gender" value="男"> 男
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="gender" value="女" checked="checked"> 女
+							</label>
+		        		</c:when>
+		        	</c:choose>
+			    </div>
+			  </div>
+ 
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">学院：</label>
+			    <div class="col-sm-3">
+			    	<select name="college.id" id="col_name" class="form-control">
+		    			<c:forEach items="${colleges }" var="college">
+		    			<c:choose>
+		    				<c:when test="${college.id == student.college.id }">
+		    					<option value="${college.id }" selected="selected">${college.name }</option>
+		    				</c:when>
+		    				<c:otherwise>
+		    					<option value="${college.id }">${college.name }</option>
+		    				</c:otherwise>
+		    			</c:choose>
+		    			</c:forEach>
+		    		</select>
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">专业：</label>
+			    <div class="col-sm-3">
+			    	<select name="specialty.id" id="spe_id" class="form-control">
+			    		<c:forEach items="${specialties }" var="specialty">
+			    		<c:choose>
+			    			<c:when test="${student.specialty.id == specialty.id}">
+			    				<option value="${specialty.id }" selected="selected">${specialty.name }</option>
+			    			</c:when>
+			    			<c:otherwise>
+				    			<option value="${specialty.id }">${specialty.name }</option>
+			    			</c:otherwise>
+			    		</c:choose>
+			    		</c:forEach>
+			    	</select>	
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">受助等级：</label>
+			    <div class="col-sm-3 div-top">
+			    	${student.rank.name }
+			    	<input type="hidden" name="rank.id" value="${student.rank.id }" />
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">联系电话：</label>
+			    <div class="col-sm-3">
+			    	<input type="text" class="form-control" name="phone" id="phone" value="${student.phone}" />
+			    </div>
+			  </div>
+			 
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">邮箱：</label>
+			    <div class="col-sm-3">
+			    	<input type="text" class="form-control" name="email" id="email" value="${student.email }"/>
+			    </div>
+			  </div>
+			 
+			  <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">QQ：</label>
+			    <div class="col-sm-3">
+			    	<input type="text" class="form-control" name="qq" id="qq" value="${student.qq }" />
+			    </div>
+			  </div>
+			 
+			 <div class="form-group">
+			    <label for="num" class="col-sm-4 control-label">个人简介：</label>
+			    <div class="col-sm-3">
+			    	 <textarea class="form-control" name="introduce" id="introduce" rows="2"><c:if test="${empty student.introduce }">暂无介绍...</c:if></textarea>
+			    </div>
+			  </div>
+			 
+			  <div class="form-group">
+			    <div class="col-sm-offset-4 col-sm-10">
+			    	<button type="button"  class="btn btn-primary" id="submit">确认修改</button>
+			    </div>
+			  </div>
+			</form>
+			<%--
 			<form id="stuform">
 			<table class="table table-bordered table-hover table-condensed table-responsive" style="width: 500px;">
 				<tr>
@@ -174,6 +311,7 @@
 			    </tr>
 			</table>
 			</form>
+			 --%>
 		</div>
 	</div>
     

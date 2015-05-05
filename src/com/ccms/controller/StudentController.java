@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.persistence.dto.ActivityItemDto;
+import com.ccms.persistence.dto.ActivitySearchDto;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
@@ -73,8 +74,8 @@ public class StudentController {
 	 */
 	@RequestMapping("/activities")
 	@ResponseBody
-	public Pager<Activity> pager(Pager<Activity> pager) {
-		return activityService.findAllStatusByPage(pager);
+	public Pager<Activity> pager(Pager<Activity> pager, ActivitySearchDto dto) {
+		return activityService.findAllStatusByPage(pager, dto);
 	}
  	
 	/**

@@ -142,6 +142,13 @@ function activityValidate() {
 		return false;
 	}
 	
+	// 加分类型
+	var actType = $('#actType').val();
+	if(actType == -1) {
+		alert('请选择加分类型！');
+		return;
+	}
+	
 	// 活动目的
 	var aim = $('#aim').val();
 	if(aim.trim() == '') {
@@ -159,10 +166,12 @@ function activityValidate() {
 	}
 	
 	// 加分时长
-	var reg_zzs = /^\+?[1-9][0-9]*$/;
+	var reg_zzs = /^\+?[1-9][0-9]*$/;	// 正整数
+	var reg_zfds = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/; // 正浮点数 
+	
 	var duration = $('#duration').val();
 
-	if(!reg_zzs.test(duration)) {
+	if(!reg_zzs.test(duration) && !reg_zfds.test(duration)) {
 		alert('加分时长不合法！');
 		$('#duration').focus();
 		return false;

@@ -92,29 +92,7 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    		<td>
-	                    		<div class="par control-group my-par">
-	                                <label class="control-label" for="aim">
-	                                	活动目的<span class="tips">*</span>
-	                                </label>
-	                                <div class="controls">
-	                                	<input type="text" name="aim" id="aim" class="input-medium" />
-	                                </div>
-	                            </div>
-                    		</td>
                     		
-                    	</tr>
-                    	<tr>
-                    		<td>
-	                    		<div class="par control-group my-par">
-	                                <label class="control-label" for="content">
-	                                	活动内容<span class="tips">*</span>
-	                                </label>
-	                                <div class="controls">
-	                                	<input type="text" name="content" id="content" class="input-medium" />
-	                                </div>
-	                            </div>
-                    		</td>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="actType">
@@ -128,6 +106,37 @@
                     		</td>
                     		
                     	</tr>
+                    	<tr>
+                    		<td colspan="2">
+                    			<div class="par control-group my-par">
+	                               	<label class="control-label" for="aim">
+	                                	活动目的<span class="tips">*</span>
+	                                </label>
+	                                 <div class="controls">
+    	                            	<textarea cols="30" rows="3" name="aim" id="aim" class="span6"></textarea>
+                            		</div>
+                            	</div>
+                            </td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2">&nbsp;</td>
+                    	</tr>
+                    	<tr>
+                    		<td colspan="2">
+                    			<div class="par control-group my-par">
+	                               	<label class="control-label" for="aim">
+	                                	活动内容<span class="tips">*</span>
+	                                </label>
+	                                 <div class="controls">
+    	                            	<textarea cols="30" rows="3" name="content" id="content" class="span6"></textarea>
+                            		</div>
+                            	</div>
+                            </td>
+                    	</tr>
+                    	 <tr>
+                    		<td colspan="2">&nbsp;</td>
+                    	</tr>
+
                     	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
@@ -199,7 +208,7 @@
                     		
                     	</tr>
                     		<tr>
-                    		<td>
+                    		<td colspan="2">
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="assist">
 	                                	活动状态
@@ -216,7 +225,7 @@
                       	  
                       	<c:if test="${user.authority == 1}">
                       	   <button type="button" class="btn btn-primary" onclick="audit(1)">通过</button>
-                          &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="audit(-1)">不通过</button>
+                          &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="audit(-1)">撤回</button>
                       	</c:if>
                       </p>
                     </form>
@@ -232,20 +241,57 @@
 	<script type="text/javascript">
 		var $ = jQuery;
 		
+		function formatterDate2(time) {
+			if(time == null || time.trim() == '') {
+				return "";
+			}
+			if (time.length == 14) {
+				return time.substring(0, 4) + "-" + time.substring(4, 6) + "-"
+						+ time.substring(6, 8);
+			}
+			return "";
+		}
+		
+		
 		// 管理员审核活动
 		function audit(status) {
-			jQuery.post(contextPath+"/admin/aduitActivity", 
-					{'actId': $('#id').val(), "status": status}).done(function(msg){
-				if(msg == 'success') {
-					alert('操作成功！');
-					window.location.reload();
-				}else if(msg == 'fail') {
-					alert('操作失败！');
-				}
-						
-			}).fail(function(){
-				alert('服务器端错误！');
-			});
+			var datas = null;
+			if(status == -1) { // 审核不通过
+				// 原因弹框
+				layer.prompt({
+					title: '撤回原因'
+				}, function(val){	// 输入框中的值
+					datas = {'id': $('#id').val(), "status": status, 'reason': $.trim(val)};
+					jQuery.post(contextPath+"/admin/aduitActivity", datas).done(function(msg){
+						if(msg == 'success') {
+							alert('操作成功！');
+							window.location.reload();
+						}else if(msg == 'fail') {
+							alert('操作失败！');
+						}
+								
+					}).fail(function(){
+						alert('服务器端错误！');
+					});
+				});
+				
+			} else if(status == 1) {	// 审核通过
+				datas = {'id': $('#id').val(), "status": status};
+			
+				jQuery.post(contextPath+"/admin/aduitActivity", datas).done(function(msg){
+					if(msg == 'success') {
+						alert('操作成功！');
+						window.location.reload();
+					}else if(msg == 'fail') {
+						alert('操作失败！');
+					}
+							
+				}).fail(function(){
+					alert('服务器端错误！');
+				});
+			}
+			
+			
 		}
 		
 		
@@ -283,6 +329,7 @@
 				var contact = result.contact;
 				var phone = result.phone;
 				var assist = result.assist;
+				var reason = result.reason;
 				
 				// 用户身份
 				var user_authority = '${user.authority}'
@@ -311,14 +358,14 @@
 				// 活动审核状态
 				var status = result.status;
 				
-				if(status != 0) {	// 不是待审核（是通过、未通过）
+				if(status == 1) {	// 通过，不可编辑
 					$('#updateActivity').hide();
 				}				
 				
 				$('#id').val(id);
 				$('#name').val(name);
 				$('#dateTime').val(dateTime);
-				$('#endDate').val(formatterDate(endDate));
+				$('#endDate').val(formatterDate2(endDate));
 				$('#location').val(location);
 				$('#aim').val(aim);
 				$('#content').val(content);
@@ -334,7 +381,10 @@
     			}else if(status == 1) {
     				status = '审核通过';
     			}else if(status == -1) {
-    				status = '未通过';
+    				status = '未通过' + '（<span style="color: red">原因：'+ reason +'</span>）';
+    				if(user_authority == 0) {	// 用工单位
+    					status = '未通过' + '（<span style="color: red">原因：'+ reason +'。请编辑后更新活动...</span>）';    					
+    				}
     			}
 				
 				$('#activity_status').html(status);

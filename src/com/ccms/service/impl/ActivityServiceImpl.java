@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccms.dao.ActivityDAO;
+import com.ccms.persistence.dto.ActivitySearchDto;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.College;
@@ -20,13 +21,13 @@ public class ActivityServiceImpl implements ActivityService {
 	private ActivityDAO activityDAO;
 	
 	@Override
-	public Pager<Activity> findAllStatusByPage(Pager<Activity> pager) {
+	public Pager<Activity> findAllStatusByPage(Pager<Activity> pager, ActivitySearchDto dto) {
 		int totalRecord = activityDAO.queryTotalRecord(SysCode.ActivityStatus.APPROVED); // 通过审核的总记录数
 		pager.setTotalRecord(totalRecord);
 		
 		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
 		
-		List<Activity> activities = activityDAO.queryAllStatusByPage(pager);
+		List<Activity> activities = activityDAO.queryAllStatusByPage(pager, dto);
 		pager.setDatas(activities);
 		
 		return pager;
@@ -78,8 +79,8 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public String aduitActivity(Integer actId, Integer status) {
-		int res = activityDAO.aduitActivity(actId, status);
+	public String aduitActivity(Activity activity) {
+		int res = activityDAO.aduitActivity(activity);
 		return res == 1 ? "success" : "fail";
 	}
 
@@ -87,6 +88,7 @@ public class ActivityServiceImpl implements ActivityService {
 	public Pager<Activity> findAllByPage(Pager<Activity> pager, College college) {
 		int totalRecord = activityDAO.getTotalRecordByCollege(college);
 		pager.setTotalRecord(totalRecord );
+		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
 		
 		List<Activity> activities = activityDAO.queryAllByPageAndCollege(pager, college);
 		pager.setDatas(activities);

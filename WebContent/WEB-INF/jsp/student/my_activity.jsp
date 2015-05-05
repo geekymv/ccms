@@ -68,11 +68,17 @@
 						var act = result[i];
 						var audit = act.audit;
 						if(audit == 1) {
-							audit = '<span class="glyphicon glyphicon-ok-circle"></span> 认证通过';
+							audit = '<span class="glyphicon glyphicon-ok-circle"></span> 认证通过，等待审核';
 						}else if (audit == 0) {
 							audit = '<span class="glyphicon glyphicon-ban-circle" style="color: blue"></span> 等待认证';
 						}else if (audit == -1) {
-							audit = '<span class="glyphicon glyphicon-remove-circle" style="color: red"></span> 认证未通过';
+							audit = '<span class="glyphicon glyphicon-remove-circle" style="color: red"></span> 未通过认证' 
+							+ '(原因：'+act.reason+')';
+						}else if(audit == 2) {
+							audit = '<span class="glyphicon glyphicon glyphicon-leaf" style="color: orange"></span> 审核通过';
+						}else if(audit == 3) {
+							audit = '<span class="glyphicon glyphicon-remove-circle" style="color: red"></span> 未通过审核' 
+								+ '(原因：'+act.reason+')';
 						}		
 						
 						html += "<tr>"	
@@ -82,7 +88,7 @@
 							+ "<td style='text-align: left;'>"+ act.activity.dateTime +"</td>"	
 							+ "<td>"+ act.activity.actType.name +"</td>"	
 							+ "<td>"+ act.activity.duration +"</td>"	
-							+ "<td>"+ audit +"</td>"	
+							+ "<td style='text-align: left;'>"+ audit +"</td>"	
 							+ "</tr>";
 					}
 					

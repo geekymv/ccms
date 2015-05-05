@@ -6,16 +6,19 @@
 <mapper namespace="com.ccms.dao.ActivityItemDAO">
 	
 	<!-- 更新Item的审核状态 -->
-	<update id="auditActivityItem">
-		update t_activity_item item set item.audit = #{status} 
-		where item.id = #{itemId};
+	<update  id="auditActivityItem" parameterType="ActivityItem">
+		update t_activity_item
+		<set>
+			<if test="reason != null and reason != ''">reason = #{reason}, </if>
+			<if test="audit != null">audit = #{audit}</if>		
+		</set>
+		where id = #{id};
 	</update>
-	
 	
 	<!-- 学生报名活动 -->
 	<insert id="add" parameterType="ActivityItem">
-	    insert into t_activity_item (act_id, stu_id , audit, recordTime) 
-	    VALUES (#{activity.id}, #{student.id}, #{audit}, #{recordTime});
+	    insert into t_activity_item (act_id, stu_id , audit, recordTime, duration) 
+	    VALUES (#{activity.id}, #{student.id}, #{audit}, #{recordTime}, #{duration});
 	</insert>
 	
 	<!--  根据活动id和学生id查询  -->
@@ -25,11 +28,11 @@
 	
 	<!-- 根据学生id分组查询各种类型完成的活动时间-->
 	<select id="queryActivityItemVO" resultMap="ActivityItemVOResultMap">
-		select act_type.id, act_type.name, sum(act.duration) finishedDuration 
+		select act_type.id, act_type.name, sum(act_item.duration) finishedDuration 
 		from t_activity_item act_item 
 		inner join t_activities act on act_item.act_id=act.id
 		inner join t_activity_type act_type on act_type.id=act.activity_type
-		where act_item.stu_id=#{studentId} and act_item.audit=1 
+		where act_item.stu_id=#{studentId} and act_item.audit=2 
 		and recordTime between #{startDate} and #{endDate}
 		group by act.activity_type;
 	</select>
@@ -45,14 +48,15 @@
 	
 	<!-- 根据学生id查询学生报名的活动  -->
 	<select id="queryAllActivityItem" parameterType="int" resultMap="ActItemResultMap">
-		SELECT ACT_ITEM.ID ITEM_ID, ACT_ITEM.AUDIT, ACT.ID ACT_ID
-		FROM T_ACTIVITY_ITEM ACT_ITEM
-		INNER JOIN T_ACTIVITIES ACT ON ACT_ITEM.ACT_ID=ACT.ID 
-		WHERE ACT_ITEM.STU_ID=#{ID}; 
+		select act_item.id item_id, act_item.audit, act_item.reason, act.id act_id
+		from t_activity_item act_item
+		inner join t_activities act on act_item.act_id=act.id 
+		where act_item.stu_id=#{id}; 
 	</select>
 	<resultMap type="ActivityItem" id="ActItemResultMap">
 		<id column="item_id" property="id" />
 		<result column="audit" property="audit" />
+		<result column="reason" property="reason"/>
 		<association property="activity" javaType="Activity" column="act_id" 
 						select="com.ccms.dao.ActivityDAO.queryById">
 		</association>
