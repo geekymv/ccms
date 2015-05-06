@@ -84,9 +84,15 @@ public class CollegeController {
 	 */
 	@RequestMapping("/college/editSpecialty")
 	@ResponseBody
-	public String editSpecialty(Specialty specialty){
+	public String editSpecialty(HttpSession session, Specialty specialty){
+		College college = (College) session.getAttribute("user");
+		Specialty spec = specialtyService.getByName(specialty.getName(), college);
 		
-		return "success";
+		if(spec != null) {
+			return "isexist";
+		}
+		
+		return specialtyService.edit(specialty);
 	}
 	
 	/**

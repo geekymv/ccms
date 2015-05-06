@@ -52,76 +52,15 @@
 			      </tr>
 			   </thead>
 			   <tbody>
-			   		<!-- 
-			   	  <c:forEach items="${itemVOs }" var="itemVO" varStatus="status">
-			      <tr>
-			         <td>${itemVO.activityType.name }</td>
-			         <td>${itemVO.finishedDuration }小时</td>
-			         <td>${itemVO.duration }小时</td>
-			         <c:if test="${status.count == 1 }">
-			         <td rowspan="${fn:length(itemVOs) }" style="vertical-align: middle;color: blue; font-size: 16px;">
-			         	等待审核
-			         </td>
-			         </c:if>	
-			      </tr>
-			      </c:forEach>	
-			       -->
 			   </tbody>
 			</table>
 					
 					
-			<!--  
-			<c:choose>
-				<c:when test="${empty itemVOs}">
-					<span style="color: red; margin-left: 500px;">还未报名活动！</span>	
-				</c:when>
-				<c:otherwise>
-					<div style="width: 900px; height: 50px;margin-left: 100px;">
-					<form class="form-inline">
-					  <div class="form-group">
-					    <p class="form-control-static">
-					   		选择学年：
-					    </p>
-					  </div>
-					  <div class="form-group">
-					     <select class="form-control" id="select">
-						  </select>
-					  </div>
-					  <button type="button" class="btn btn-default" id="query">查询</button>
-					</form>
-					</div>
-								
-					<table class="table table-bordered table-hover table-condensed table-responsive">
-					   <thead>
-					      <tr>
-					         <th>活动类型</th>
-					         <th>已完成时长</th>
-					         <th>应完成时长</th>
-					         <th>年度考核</th>
-					      </tr>
-					   </thead>
-					   <tbody>
-					   	  <c:forEach items="${itemVOs }" var="itemVO" varStatus="status">
-					      <tr>
-					         <td>${itemVO.activityType.name }</td>
-					         <td>${itemVO.finishedDuration }小时</td>
-					         <td>${itemVO.duration }小时</td>
-					         <c:if test="${status.count == 1 }">
-					         <td rowspan="${fn:length(itemVOs) }" style="vertical-align: middle;color: blue; font-size: 16px;">
-					         	等待审核
-					         </td>
-					         </c:if>	
-					      </tr>
-					      </c:forEach>	
-					   </tbody>
-					</table>
-				</c:otherwise>
-			</c:choose>
-			-->
+			
 		</div>
 	</div>
 
-	<script src="<c:url value='/resources/scripts/time_counter.js'/>"></script>
+	<script src="<c:url value='/resources/scripts/ui/student/time_counter.js'/>"></script>
   </body>
 </html>
 

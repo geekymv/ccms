@@ -11,19 +11,24 @@
              <li class="active"><a href="${pageContext.request.contextPath }/admin/myinfo">个人资料</a></li>
              <!-- 学院才会显专业设置 -->	
              <c:if test="${user.colType == 2 }">
-             <li><a href="${pageContext.request.contextPath }/admin/specialties">专业设置</a></li>
-             <li class="dropdown"><a href="">活动管理</a>
-              	<ul>
-                   <li><a href="${pageContext.request.contextPath }/admin/pubActivity">申请活动</a></li>
-                   <li><a href="${ctx }/admin/activities">活动列表</a></li>
-              	</ul>
-              </li>
-              <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">报名管理</a></li>
+             	<li><a href="${pageContext.request.contextPath }/admin/specialties">专业设置</a></li>
+             </c:if>
+             
+             <c:if test="${user.colType == 2 || user.colType == 3 }">
+	             <li class="dropdown"><a href="">活动管理</a>
+	              	<ul>
+	                   <li><a href="${pageContext.request.contextPath }/admin/pubActivity">申请活动</a></li>
+	                   <li><a href="${ctx }/admin/activities">活动列表</a></li>
+	              	</ul>
+	             </li>
+             	 <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">报名管理</a></li>
+             </c:if>
+             
+             <c:if test="${user.colType == 2 }">
               <li class="dropdown"><a href="">学生管理</a>
               	<ul>
                    <li><a href="${ctx }/admin/students">学生列表</a></li>
               	</ul>
-              	
               </li>
               <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">考核管理</a></li>
              </c:if>

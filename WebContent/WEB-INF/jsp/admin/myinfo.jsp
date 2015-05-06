@@ -18,7 +18,9 @@
    		color: red;
    		padding-left: 10px;
     }
-    	
+    .div-top {
+    	padding-top: 5px;
+    }	
 </style>
 
 </head>
@@ -56,7 +58,7 @@
                     <form id="form1" class="stdform">
                             <div class="par control-group my-par">
                                 <label class="control-label" for="account">账号</label>
-                                <div class="controls">
+                                <div class="controls div-top">
                                 	${college.account }
                                 	<input type="hidden" name="id" id="id" value="${college.id }" class="input-large" />
                                 </div>

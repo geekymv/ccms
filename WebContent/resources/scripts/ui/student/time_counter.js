@@ -11,8 +11,8 @@
 		$("#query").click(function(){
 			var val = $("#select").val();
 			val = val.split("-");
-			params.startDate = val[0] + "-09";
-			params.endDate = val[1] + "-07";
+			params.startDate = val[0] + "0901000000";
+			params.endDate = val[1] + "0701000000";
 			
 			timeCounter();
 		});
@@ -50,7 +50,7 @@
 					var duration = item.beginDuration + '-' + item.endDuration + "小时";
 					html += "<tr>"
 			         +"<td>" + name + "</td>"
-			         +"<td>" + finishedDuration + "</td>"
+			         +"<td>" + finishedDuration + "小时</td>"
 			         +"<td>" + duration + "</td>";
 					
 			         if(i == 0){

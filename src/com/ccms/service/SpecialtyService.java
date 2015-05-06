@@ -21,4 +21,11 @@ public interface SpecialtyService {
 	 * @return
 	 */
 	public boolean add(String name, College college);
+	
+	/**
+	 * 修改专业名称
+	 * @param specialty
+	 * @return
+	 */
+	public String edit(Specialty specialty);
 }

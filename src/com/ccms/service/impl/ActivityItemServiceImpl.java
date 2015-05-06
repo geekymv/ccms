@@ -1,6 +1,5 @@
 package com.ccms.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -45,7 +44,7 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 			actItem.setActivity(activity);
 			actItem.setStudent(student);
 			actItem.setAudit(SysCode.ActivityItem.ACTITEM_AUDIT_WAIT);
-			actItem.setRecordTime(new Date());
+			actItem.setApplyTime(DateUtils.getCurrentGaDate());
 			actItem.setDuration(activity.getDuration());
 			
 			int res = actItemDAO.add(actItem);
@@ -61,7 +60,6 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 
 	@Override
 	public boolean isApplyed(Activity activity, Student student) {
-
 		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(
 				activity.getId(), student.getId());
 

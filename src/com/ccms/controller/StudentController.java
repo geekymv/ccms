@@ -208,12 +208,6 @@ public class StudentController {
 	@RequestMapping(value="/updateInfo", method=RequestMethod.POST)
 	@ResponseBody
 	public String updateInfo(Student student){
-		
-//		Integer speId = student.getSpecialty().getId();
-//		if(speId == -1){
-//			student.getSpecialty().setId(null);
-//		}
-		
 		boolean res = studentService.updateInfo(student);
 		if(res){
 			return "success";

@@ -3,18 +3,36 @@
  */
 function addSpec() {
 	var val = jQuery("#name").val();
+	
+	if($.trim(val) == null || $.trim(val) == '') {
+		alert('专业名称不能为空！');
+		return;
+	}
+	
+	var url = '';
+	var data = null;
+	
+	if($('#add_spec').html() == '添加专业') {	// 添加专业
+		url = "/college/addSpec";
+		data = {"name": val};
+	}else if($('#add_spec').html() == '修改专业') {	// 修改专业
+		url = '/college/editSpecialty';
+		data = {'id': $('#spec_id').val(), "name": val};
+	}
+	
 	jQuery.ajax({
-		url : contextPath + "/college/addSpec",
+		url : contextPath + url,
 		type : "post",
-		data : {"name": val},
+		data :data,
 		dataType : "text",
 		success : function(data) {
 			if(data == "isexist"){
 				alert(val + " 专业已经存在了！");
 			}else if (data == "success") {
-				alert("添加成功！");
+				alert("操作成功！");
+				window.location.reload();
 			}else if (data == "fail"){
-				alert("添加失败！");
+				alert("操作失败！");
 			}
 		}
 	});

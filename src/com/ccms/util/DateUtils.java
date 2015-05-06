@@ -49,16 +49,12 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
 		String endDate = "";
 		
 		if(currentMonth >= 9) {
-			startDate = currentYear + "-09";
-			endDate = (currentYear + 1) + "-07";
+			startDate = currentYear + "0901000000";
+			endDate = (currentYear + 1) + "0701000000";
 		}else {
-			startDate = (currentYear-1) + "-09";
-			endDate = currentYear + "-07";
+			startDate = (currentYear-1) + "0901000000";
+			endDate = currentYear + "0701000000";
 		}
-		
-		System.out.println("s = " + startDate);
-		System.out.println("e = " + endDate);
-		
 		return Arrays.asList(startDate, endDate);
 	}
 	

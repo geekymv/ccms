@@ -17,8 +17,8 @@
 	
 	<!-- 学生报名活动 -->
 	<insert id="add" parameterType="ActivityItem">
-	    insert into t_activity_item (act_id, stu_id , audit, recordTime, duration) 
-	    VALUES (#{activity.id}, #{student.id}, #{audit}, #{recordTime}, #{duration});
+	    insert into t_activity_item (act_id, stu_id , audit, applyTime, duration) 
+	    VALUES (#{activity.id}, #{student.id}, #{audit}, #{applyTime}, #{duration});
 	</insert>
 	
 	<!--  根据活动id和学生id查询  -->
@@ -33,7 +33,7 @@
 		inner join t_activities act on act_item.act_id=act.id
 		inner join t_activity_type act_type on act_type.id=act.activity_type
 		where act_item.stu_id=#{studentId} and act_item.audit=2 
-		and recordTime between #{startDate} and #{endDate}
+		and applyTime between #{startDate} and #{endDate}
 		group by act.activity_type;
 	</select>
 	<resultMap type="ActivityItemVO" id="ActivityItemVOResultMap">

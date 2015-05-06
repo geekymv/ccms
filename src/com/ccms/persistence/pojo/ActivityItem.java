@@ -1,6 +1,5 @@
 package com.ccms.persistence.pojo;
 
-import java.util.Date;
 
 /**
  * 活动报名明细
@@ -18,7 +17,7 @@ public class ActivityItem {
 	 */
 	private Integer audit;
 	private String reason;	// 认证/审核不通过原因
-	private Date recordTime;
+	private String applyTime;
 	private Float duration; // '加分时长(包括附加分)',
 	
 	
@@ -54,13 +53,13 @@ public class ActivityItem {
 		this.reason = reason;
 	}
 	
-	public Date getRecordTime() {
-		return recordTime;
+	public String getApplyTime() {
+		return applyTime;
 	}
-	public void setRecordTime(Date recordTime) {
-		this.recordTime = recordTime;
+	public void setApplyTime(String applyTime) {
+		this.applyTime = applyTime;
 	}
-	
+
 	public Float getDuration() {
 		return duration;
 	}

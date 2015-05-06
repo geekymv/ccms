@@ -36,4 +36,10 @@ public class SpecialtyServiceImpl implements SpecialtyService {
 		return res == 1 ? true : false;
 	}
 
+	@Override
+	public String edit(Specialty specialty) {
+		specialtyDAO.update(specialty);
+		return "success";
+	}
+
 }
