@@ -125,7 +125,7 @@
 		inner join t_ranks rank on stu.rank_id=rank.id
 		inner join t_colleges col on stu.col_id=col.id 
 		inner join t_specialties spe on stu.spec_id=spe.id 
-		where stu.col_id=#{colId} 
+		where stu.col_id=#{colId} order by rank.id
 		limit #{pager.pageOffset}, #{pager.pageSize};	
 	</select>
 	

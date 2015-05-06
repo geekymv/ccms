@@ -105,8 +105,8 @@
 				        				+ "<td>"+ phone +"</td>"
 				        				+ "<td>"+ stu.specialty.name +"</td>"
 				        				+ "<td>"+ stu.rank.name +"</td>"
-				        				+ "<td>编辑</td>"
-				        			"</tr>"
+				        				+ "<td><span onclick='edit(this)' style='cursor: pointer;'>编辑</span></td>"
+				        			+"</tr>";
 				        		}
 				        		$('#t_body').html(html);
 				        	}
@@ -116,7 +116,12 @@
 					pageSizeName: 'pageSize',       //请求参数，每页数量
 					totalName: 'totalRecord'       //指定返回数据的总数据量
 				});
-		});
+		})
+		
+		function edit(t) {
+			var $this = $(t);
+			alert('攻城狮们正在努力研发中...');
+		} 
 		
 	</script>
 </body>
