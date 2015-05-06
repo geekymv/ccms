@@ -358,7 +358,7 @@
 				var col_id = $("#col_name").val(); // 学院id
 				var spe_id = $("#spe_id").val(); // 专业id	
 							
-				var name = $("#name").val().trim(); // 姓名
+				var name = $.trim($("#name").val()); // 姓名
 				if(name == '') {
 					alert('姓名不能为空！');
 					$("#name").focus();

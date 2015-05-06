@@ -1,5 +1,4 @@
-$(function() {
-
+jQuery(function() {
 	// 加载活动加分类型
 	$.ajax({
 		url : contextPath + "/activityTypes",

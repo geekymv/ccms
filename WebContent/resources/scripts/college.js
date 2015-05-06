@@ -25,12 +25,12 @@ function addSpec() {
  */
 function updateMyInfo() {
 	var $ = jQuery;
-	var password = $("#password").val().trim();
-	var repassword = $("#repassword").val().trim();
-	var name = $("#name").val().trim();
-	var phone = $("#phone").val().trim();
-	var contact = $("#contact").val().trim();
-	var address = $("#address").val().trim();
+	var password = $.trim($("#password").val());
+	var repassword = $.trim($("#repassword").val());
+	var name = $.trim($("#name").val());
+	var phone = $.trim($("#phone").val());
+	var contact = $.trim($("#contact").val());
+	var address = $.trim($("#address").val());
 	
 	// 输入验证
 	if(password != ""){
@@ -112,7 +112,7 @@ function activityValidate() {
 	var $ = jQuery;
 	// 活动名称
 	var name = $('#name').val();
-	if(name.trim() == '') {
+	if($.trim(name) == '') {
 		alert('活动名称为必选项！');
 		$('#name').focus();
 		return false;
@@ -120,7 +120,7 @@ function activityValidate() {
 	
 	// 活动时间
 	var dateTime = $('#dateTime').val();
-	if(dateTime.trim() == '') {
+	if($.trim(dateTime) == '') {
 		alert('活动时间为必选项！');
 		$('#dateTime').focus();
 		return false;
@@ -128,7 +128,7 @@ function activityValidate() {
 	
 	// 报名截止时间
 	var endDate = $('#endDate').val();
-	if(endDate.trim() == '') {
+	if($.trim(endDate) == '') {
 		alert('报名截止时间为必选项！');
 		$('#endDate').focus();
 		return false;
@@ -136,7 +136,7 @@ function activityValidate() {
 	
 	// 活动地点
 	var location = $('#location').val();
-	if(location.trim() == '') {
+	if($.trim(location) == '') {
 		alert('活动地点为必选项！');
 		$('#location').focus();
 		return false;
@@ -151,7 +151,7 @@ function activityValidate() {
 	
 	// 活动目的
 	var aim = $('#aim').val();
-	if(aim.trim() == '') {
+	if($.trim(aim) == '') {
 		alert('活动目的为必选项！');
 		$('#aim').focus();
 		return false;
@@ -159,7 +159,7 @@ function activityValidate() {
 	
 	// 活动内容
 	var content = $('#content').val();
-	if(content.trim() == '') {
+	if($.trim(content) == '') {
 		alert('活动内容为必选项！');
 		$('#content').focus();
 		return false;
@@ -179,7 +179,7 @@ function activityValidate() {
 	
 	// 参与对象
 	var actObject = $('#actObject').val();
-	if(actObject.trim() == '') {
+	if($.trim(actObject) == '') {
 		alert('参与对象为必填项！');
 		$('#actObject').focus();
 		return false;
@@ -195,7 +195,7 @@ function activityValidate() {
 	
 	// 联系人
 	var contact = $('#contact').val();
-	if(contact.trim() == '') {
+	if($.trim(contact) == '') {
 		alert('联系人为必填项！');
 		$('#contact').focus();
 		return false;

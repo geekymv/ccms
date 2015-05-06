@@ -150,7 +150,7 @@
 
 			// 修改商品输入验证
 			var validate= function() {
-				var name = $('.name').val().trim();
+				var name = $.trim($('.name').val());
 				if(!name) { // javascript中false,0,空字符串,NaN,null,undefined都会自动转化为false
 					alert("商品名称不能为空！");
 					return false;

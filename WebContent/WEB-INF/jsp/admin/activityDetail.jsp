@@ -242,7 +242,7 @@
 		var $ = jQuery;
 		
 		function formatterDate2(time) {
-			if(time == null || time.trim() == '') {
+			if(time == null || $.trim(time) == '') {
 				return "";
 			}
 			if (time.length == 14) {

@@ -117,13 +117,13 @@
 			var contact = $('#contact').val();
 			var address = $('#address').val();
 			
-			if(account.trim() == '') {
+			if($.trim(account) == '') {
 				alert('账号为必填项！');
 				$('#account').focus();
 				return;
 			}
 			
-			if(password.trim() == '') {
+			if($.trim(password) == '') {
 				alert('密码为必填项！');
 				$('#password').focus();
 				return;
@@ -145,13 +145,13 @@
 				return;
 			}
 			
-			if(account.trim() == '') {
+			if($.trim(account) == '') {
 				alert('账号为必填项！');
 				$('#account').focus();
 				return;
 			}
 			
-			if(name.trim() == '') {
+			if($.trim(name) == '') {
 				alert('名称为必填项！');
 				$('#name').focus();
 				return;
@@ -164,13 +164,13 @@
 				return;
 			}
 			
-			if(contact.trim() == '') {
+			if($.trim(contact) == '') {
 				alert('联系人为必填项！');
 				$('#contact').focus();
 				return;
 			}
 			
-			if(address.trim() == '') {
+			if($.trim(address) == '') {
 				alert('地址为必填项！');
 				$('#address').focus();
 				return;
