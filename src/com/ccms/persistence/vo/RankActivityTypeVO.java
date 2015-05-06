@@ -7,20 +7,13 @@ public class RankActivityTypeVO {
 	private Integer id;
 	private Rank rank; // 所属等级
 	private ActivityType activityType; // 所属活动类型
-	private int duration;	// 时长
+	private int beginDuration;	// 开始时长
+	private int endDuration;	// 结束时长
+	
 	/**
 	 * 已完成的总时长
 	 */
 	private Integer finishedDuration = 0;
-	
-	
-	
-	@Override
-	public String toString() {
-		return "RankActivityTypeVO [id=" + id + ", rank=" + rank
-				+ ", activityType=" + activityType + ", duration=" + duration
-				+ ", finishedDuration=" + finishedDuration + "]";
-	}
 	
 	public void setId(Integer id) {
 		this.id = id;
@@ -41,11 +34,17 @@ public class RankActivityTypeVO {
 	public void setActivityType(ActivityType activityType) {
 		this.activityType = activityType;
 	}
-	public int getDuration() {
-		return duration;
+	public int getBeginDuration() {
+		return beginDuration;
 	}
-	public void setDuration(int duration) {
-		this.duration = duration;
+	public void setBeginDuration(int beginDuration) {
+		this.beginDuration = beginDuration;
+	}
+	public int getEndDuration() {
+		return endDuration;
+	}
+	public void setEndDuration(int endDuration) {
+		this.endDuration = endDuration;
 	}
 	public void setFinishedDuration(Integer finishedDuration) {
 		this.finishedDuration = finishedDuration;

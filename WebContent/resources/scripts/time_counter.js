@@ -45,10 +45,9 @@
 				var html = "";
 				for(var i = 0; i < data.length; i++) {
 					var item = data[i];
-				//	console.log(item.activityType.name + "--" + item.finishedDuration +"--" + item.duration);
 					var name = item.activityType.name;
 					var finishedDuration = item.finishedDuration;
-					var duration = item.duration;
+					var duration = item.beginDuration + '-' + item.endDuration + "小时";
 					html += "<tr>"
 			         +"<td>" + name + "</td>"
 			         +"<td>" + finishedDuration + "</td>"

@@ -47,7 +47,7 @@
 	                                	活动名称<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	<input type="text" name="name" id="name" class="input-xxlarge" style="width: 575px;" autofocus="autofocus"/>
+	                                	<input type="text" name="name" id="name" class="input-xxlarge" style="width: 575px;" maxlength="120" autofocus="autofocus"/>
 	                                </div>
 	                            </div>
                     		</td>

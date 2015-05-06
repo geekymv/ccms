@@ -42,8 +42,13 @@ function pager() {
 	        		for(var i = 0; i < len; i++) {
 	        			var act = datas[i];
 	        			
+	        			var name = act.name;
+	        			if(name.length > 10) {
+	        				name = name.substring(0, 11);
+	        			}
+	        			
 	        			html += "<tr>"
-	        					+ "<td style='text-align:left;'>"+ act.name +"</td>"
+	        					+ "<td style='text-align:left;'><span title='"+act.name+"'>"+ name +"</span></td>"
 	        					+ "<td>"+ act.college.name +"</td>"
 	        					+ "<td>"+ act.actObject +"</td>"
 	        					+ "<td>"+ formatterDate(act.endDate) +"</td>"
