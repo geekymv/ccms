@@ -2,8 +2,6 @@ package com.ccms.dao;
 
 import java.util.List;
 
-import javax.validation.constraints.Pattern;
-
 import org.apache.ibatis.annotations.Param;
 
 import com.ccms.base.dao.BaseDAO;
