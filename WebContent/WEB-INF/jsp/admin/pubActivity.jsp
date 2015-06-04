@@ -10,6 +10,10 @@
 <title>申请活动</title>
 <%@ include file="/WEB-INF/jsp/inc/admin_style.jsp"%>
 
+<script src="${ctx}/resources/kindeditor/kindeditor-all-min.js"></script>
+<script src="${ctx}/resources/kindeditor/lang/zh-CN.js"></script>
+	
+
 <style type="text/css">
 	.my-par {
 		height: 32px;
@@ -118,7 +122,7 @@
                     	<tr>
                     		<td colspan="2">&nbsp;</td>
                     	</tr>
-                    	
+                    	<!-- 
                     	<tr>
                     		<td colspan="2">
                     			<div class="par control-group my-par">
@@ -131,6 +135,28 @@
                             	</div>
                             </td>
                     	</tr>
+                    	 -->
+                    	 <tr>
+                    		<td colspan="2">
+                    			<div class="par control-group my-par">
+	                               	<label class="control-label" for="aim">
+	                                	活动内容<span class="tips">*</span>
+	                                </label>
+	                                 <div class="controls">
+    	                            	<textarea cols="30" rows="3" name="content" id="content" class="span6" style="width: 400px;"></textarea>
+                            		</div>
+                            	</div>
+                            </td>
+                    	</tr>
+                    	<!--  
+                   		<div class="form-group">
+					  	 <label for="summary" class="col-sm-2 control-label">正文</label>
+					  	 <div class="col-sm-10">
+					  	 	<textarea class="form-control" id="content" name="content" style="width: 400px;"></textarea>
+					  	 </div>
+					  </div>
+					   -->
+                    	
                     	<tr>
                     		<td colspan="2">&nbsp;</td>
                     	</tr>
@@ -220,6 +246,23 @@
 
 	<script src="<c:url value='/resources/scripts/college.js'/>"></script>
 	<script src="<c:url value='/resources/scripts/common.js' />"></script>
+	<script>
+	 	KindEditor.ready(function(K) {
+           	window.editor = K.create('#content',{
+           	 	width : "70%", //编辑器的宽度为70%
+           	 	height: "300px",
+       			items:['source', '|', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
+      			        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+      			        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+      			        'superscript', 'clearhtml', '/', 'quickformat', 'selectall', '|', 
+      			        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+      			        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 
+      			        'table', 'hr', 'fullscreen'],
+      				resizeType : '1'
+      			});
+    		});
+   </script>
+	
 </body>
 </html>    
 
