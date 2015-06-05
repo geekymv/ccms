@@ -35,6 +35,16 @@
 			where id=#{id};
 	</update>
 	
+	<!-- 根据id更新部分信息 -->
+	<update id="updatePartInfo" parameterType="Student">
+		update t_students 
+		<set>
+			<if test="pwd != null and pwd != '' ">pwd=#{pwd},</if>
+			<if test="name != null and name != '' ">name=#{name}</if>
+		</set>
+		where id=#{id};
+	</update>
+	
 	
 	<!-- 根据学号查询学生 -->
 	<select id="queryByNum" parameterType="string" resultMap="StudentResultMap">
@@ -126,7 +136,7 @@
 		inner join t_ranks rank on stu.rank_id=rank.id
 		inner join t_colleges col on stu.col_id=col.id 
 		inner join t_specialties spe on stu.spec_id=spe.id 
-		where stu.col_id=#{colId} order by rank.id
+		where stu.col_id=#{colId} order by stu.num
 		limit #{pager.pageOffset}, #{pager.pageSize};	
 	</select>
 	

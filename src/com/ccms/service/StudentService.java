@@ -36,6 +36,13 @@ public interface StudentService {
 	public boolean updateInfo(Student student);
 	
 	/**
+	 * 更新部分信息
+	 * @param student
+	 * @return
+	 */
+	public String updatePartInfo(Student student);
+	
+	/**
 	 * 根据活动id查看报名学生
 	 * @param actId
 	 * @return

@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -131,6 +133,18 @@ public class CollegeController {
 	}
 	
 	/**
+	 * 删除活动
+	 * @param activityId
+	 * @return
+	 */
+	@RequestMapping("/admin/deleteActivity")
+	@ResponseBody
+	public String deleteActivity(Integer activityId) {
+		activityService.delete(activityId);
+		return "success";
+	}
+	
+	/**
 	 * 加载所有活动列表
 	 * @param pager
 	 * @return
@@ -174,7 +188,6 @@ public class CollegeController {
 		return studentService.findStudentByActivityId(pager, actId);
 	}
 	
-	
 	/**
 	 * 本院学生列表页面
 	 * @return
@@ -194,8 +207,31 @@ public class CollegeController {
 	public Pager<Student> getStudents(Pager<Student> pager, HttpSession session) {
 		College college = (College)session.getAttribute("user");
 		studentService.findStudentsByColId(pager, college.getId());
-		
 		return pager;
+	}
+	
+	/**
+	 * 查看学生信息
+	 * @param stuId
+	 * @return
+	 */
+	@RequestMapping("/admin/student/{stuNum}")
+	public String student(@PathVariable("stuNum") String stuNum, Model model) {
+		Student student = studentService.getInfo(stuNum);
+		model.addAttribute("student", student);
+		
+		return "admin/student";
+	}
+	
+	/**
+	 * 学院更新学生信息
+	 * @param student
+	 * @return
+	 */
+	@RequestMapping(value="/admin/updateStudentInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateStudentInfo(Student student) {
+		return studentService.updatePartInfo(student);
 	}
 	
 }

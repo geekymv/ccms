@@ -107,6 +107,11 @@ public class ActivityServiceImpl implements ActivityService {
 		return res == 1 ? "success" : "fail";
 	}
 
+	@Override
+	public void delete(Integer activityId) {
+		activityDAO.delete(activityId);
+	}
+
 }
 
 

@@ -38,6 +38,13 @@ public interface ActivityService {
 	public int add(Activity activity);
 	
 	/**
+	 * 根据活动id删除活动
+	 * @param activityId
+	 * @return
+	 */
+	public void delete(Integer activityId);
+	
+	/**
 	 * 判断活动报名是否截止
 	 * @param actId
 	 * @return "isPastDue" 过期了, "notPastDue" 未过期

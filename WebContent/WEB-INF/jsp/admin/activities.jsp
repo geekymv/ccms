@@ -52,10 +52,11 @@
 				          <th>活动对象</th>
 				          <th>发布时间</th>
 				          <th>活动类型</th>
-				          <th>活动时长</th>
+				          <th>认证时长</th>
 				          <th>活动状态</th>
 				          <th>活动详情</th>
 				          <th>查看报名</th>
+				          <th>删除</th>
                        </tr>
                     </thead>
                     <tbody id='t_body'>
@@ -88,7 +89,6 @@
 				url = '/college/activities';
 				// 隐藏发布单位
 				$('#publish_college').hide();
-				
 			}
 			
 			
@@ -130,9 +130,10 @@
 				        					+ "<td>"+ formatterDate(act.publishTime) +"</td>"
 				        					+ "<td>"+ act.actType.name +"</td>"
 				        					+ "<td>"+ act.duration +"</td>"
-				        					+ "<td>"+ status +"</td>"
+				        					+ "<td id='status'>"+ status +"</td>"
 				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='showDetail(this)'></span></td>"
 				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='showApply(this)'></span></td>"
+				        					+ "<td><span title='删除' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-trash' onclick='deleteActivity(this)'></span></td>"
 				        					
 				        				+"</tr>";
 				        		}
@@ -147,6 +148,22 @@
 				});
 		});
 		
+		// 删除活动
+		function deleteActivity(t) {
+			var $this = $(t);
+			var status = $this.parent().parent().find('#status').html();
+			if(status == '审核通过') {
+				alert('审核已通过，不能删除！');
+			}else {	// 删除活动
+				var id = $this.data('id');
+				$.post(contextPath+"/admin/deleteActivity", {'activityId':id}).done(function(msg){
+					if('success' == msg) {
+						alert('删除成功！');
+					}	
+				});
+			}
+		}
+		// 查看活动详情
 		function showDetail(t) {
 			var $this = jQuery(t);
 			var id = $this.data('id');
@@ -154,6 +171,7 @@
 		
 		} 
 		
+		// 查看报名情况
 		function showApply(t) {
 			var $this = jQuery(t);
 			var id = $this.data('id');

@@ -15,6 +15,12 @@
 				#{actObject}, #{number}, #{contact}, #{phone}, #{assist}, #{status} )	
 	</insert>
 	
+	<!-- 根据id删除活动 -->
+	<delete id="delete" parameterType="int">
+		delete from t_activities where id = #{id}
+	</delete>
+	
+	
 	<!-- 管理员审核活动  -->
 	<update id="aduitActivity" parameterType="int">
 		update t_activities 

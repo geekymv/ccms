@@ -85,6 +85,18 @@ public class StudentServiceImpl implements StudentService {
 		return pager;
 	}
 
+
+	@Override
+	public String updatePartInfo(Student student) {
+		String pwd = student.getPwd();
+		if(StringUtils.isNotBlank(pwd)) {
+			student.setPwd(EncryptUtil.md5Encrypt(pwd));
+		}
+		
+		int res = studentDAO.updatePartInfo(student);
+		return res == 1 ? "success" : "fail";
+	}
+
 }
 
 

@@ -105,7 +105,7 @@
 				        				+ "<td>"+ phone +"</td>"
 				        				+ "<td>"+ stu.specialty.name +"</td>"
 				        				+ "<td>"+ stu.rank.name +"</td>"
-				        				+ "<td><span onclick='edit(this)' style='cursor: pointer;'>编辑</span></td>"
+				        				+ "<td><span onclick='edit(this)'data-num='"+stu.num+"' style='cursor: pointer;'>编辑</span></td>"
 				        			+"</tr>";
 				        		}
 				        		$('#t_body').html(html);
@@ -120,7 +120,7 @@
 		
 		function edit(t) {
 			var $this = $(t);
-			alert('攻城狮们正在努力研发中...');
+			window.location.href = contextPath + "/admin/student/" + $this.data('num');
 		} 
 		
 	</script>

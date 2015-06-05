@@ -18,7 +18,7 @@ public interface BaseDAO<T> {
 	 * @param id
 	 * @return
 	 */
-	public int delete(Integer id);
+	public void delete(Integer id);
 	
 	/**
 	 * 修改

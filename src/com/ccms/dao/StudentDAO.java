@@ -55,4 +55,11 @@ public interface StudentDAO extends BaseDAO<Student>{
 	 */
 	public int getTotalStudentsByColId(Integer colId);
 	
+	/**
+	 * 更新学生部分信息
+	 * @param student
+	 * @return
+	 */
+	public int updatePartInfo(Student student);
+	
 }
