@@ -30,7 +30,7 @@
 		update t_activities set 
 		name=#{name}, date_time=#{dateTime}, end_date=#{endDate},
 		location=#{location}, aim=#{aim}, content=#{content}, activity_type=#{actType.id}, duration=#{duration},
-		act_object=#{actObject}, number=#{number}, contact=#{contact}, phone=#{phone}, assist=#{assist}
+		act_object=#{actObject}, number=#{number}, contact=#{contact}, phone=#{phone}, assist=#{assist}, status=#{status}
 		where id=#{id}
 	</update>
 

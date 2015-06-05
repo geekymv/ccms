@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ccms.dao.ActivityDAO;
 import com.ccms.dao.ActivityItemDAO;
 import com.ccms.dao.RankActivityTypeDAO;
 import com.ccms.dao.StudentDAO;
@@ -22,7 +23,8 @@ import com.ccms.util.SysCode;
 
 @Service
 public class ActivityItemServiceImpl implements ActivityItemService {
-
+	@Autowired
+	private ActivityDAO activityDAO;
 	@Autowired
 	private ActivityItemDAO actItemDAO;
 	@Autowired
@@ -33,13 +35,25 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 	private ActivityItemDAO activityItemDAO;
 
 	@Override
-	public boolean apply(Activity activity, Student student) {
-
+	public String apply(Activity activity, Student student) {
+		int activityId = activity.getId();
+		
 		// 判断学生是否已经报名了
 		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(
 				activity.getId(), student.getId());
 
 		if (actItem == null) { // 学生还没有报名
+			
+			// 判断报名人数是否已满
+			Activity act = activityDAO.queryById(activityId);
+			int totalNumber = act.getNumber();	// 参与人数
+			
+			// 计算已报名人数
+			int total = actItemDAO.queryAllActivityItemByActivityId(activityId);
+			if(total >= totalNumber) {	// 人数已满 
+				return "overflow";
+			}
+			
 			actItem = new ActivityItem();
 			actItem.setActivity(activity);
 			actItem.setStudent(student);
@@ -49,13 +63,13 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 			
 			int res = actItemDAO.add(actItem);
 			if (res == 1) {
-				return true;
+				return "success";
+			}else {
+				return "fail";
 			}
 		} else { // 学生已经报名了
-			return false;
+			return "applyed";
 		}
-
-		return false;
 	}
 
 	@Override
@@ -105,6 +119,20 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 	@Override
 	public void auditActivityItem(ActivityItem item) {
 		activityItemDAO.auditActivityItem(item);
+	}
+
+	@Override
+	public String cancel(Integer activityId, Integer studentId) {
+		// 判断报名时间是否截止
+		String currentDate = DateUtils.getCurrentDate(DateUtils.FORMAT_NORMAL_NO_SIGN);
+		// 获取该活动报名截止时间
+		String endDate = activityDAO.queryByIdGetEndDate(activityId);
+		if(Long.parseLong(currentDate) - Long.parseLong(endDate) >= 0) {	// 报名截止
+			return "end";
+		} 
+		
+		activityItemDAO.deleteByActIdAndStuId(activityId, studentId);
+		return "success";
 	}
 }
 

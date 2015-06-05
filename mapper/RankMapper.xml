@@ -4,25 +4,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ccms.dao.RankDAO">
-
+	<!-- 查询所有等级 -->
 	<select id="queryAll" resultType="Rank">
 		select * from t_ranks;
 	</select>
-
-<!-- 
-	<select id="queryAll" resultMap="RankDTOResultMap">
-		 select 
-	     rank.id, rank.name,sum(rank_act_type.duration) totalDuration
-	     from t_ranks rank
-	     inner join t_rank_activity_type rank_act_type on rank.id=rank_act_type.rank_id group by rank.id;
+	
+	<!-- 根据id查询  -->	
+	<select id="queryById" parameterType="int" resultType="Rank">
+		select * from t_ranks where id = #{id}
 	</select>
-	<resultMap type="RankDTO" id="RankDTOResultMap">
-		<result column="totalDuration" property="totalDuration"/>
-		<association property="rank" javaType="Rank">
-			<id column="id" property="id"/>
-			<result column="name" property="name"/>
-		</association>
-	</resultMap>
- -->
  	 
 </mapper>  

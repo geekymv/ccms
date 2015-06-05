@@ -140,7 +140,7 @@
 			}
 			
 			if(password != repassword) {
-				alert('密码不相等！');
+				alert('密码不一致！');
 				$('#repassword').focus();
 				return;
 			}

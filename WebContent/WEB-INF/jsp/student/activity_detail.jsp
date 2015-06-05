@@ -91,9 +91,7 @@
 		      		<th colspan="2" id='apply_activity'>
 		      			<c:if test="${isApplyed == 'isApplyed' }">
 		      				<span style="color:blue;">已报名</span>
-			      			<%--
-			      			<button class="btn btn-primary" id="cancel" onclick="alert('暂未提供取消报名功能！敬请期待...')">取消报名</button>
-		      				 --%>
+			      			<button class="btn btn-primary" id="cancel">取消报名</button>
 		      			</c:if>
 		      			<c:if test="${isApplyed == 'unApply' }">
 		      				<button class="btn btn-primary" id="apply">我要报名</button>
@@ -112,22 +110,41 @@
 			var endDate = '${activity.endDate }';
 			$('#endDate').html(formatterDate(endDate));
 			
+			// 报名活动
 			$("#apply").click(function(){
 				$.ajax({
-					url: "${pageContext.request.contextPath}/stu/apply",
+					url: contextPath+"/stu/apply",
 					type: "post",
 					data: {"id": '${activity.id}'},	
 					dataType: "text",
 					success: function(data){
-						if(data == "success") {
-							alert("报名成功");
+						if(data == 'overflow') {
+							alert('你来晚了！人数已满...');
+						}else if(data == "success") {
+							alert("报名成功！");
 							window.location.reload();	// 刷新当前页面
+						}else if(data == 'fail') {
+							alert('报名失败！');
 						}
 					}
 				});
-			});			
+			});		
 			
-			// 
+			// 取消报名
+			$('#cancel').click(function(){
+				$.post(contextPath+"/stu/cancelActivity", {'activityId': '${activity.id }'}).done(function(msg){
+					if(msg == 'end') {
+						layer.msg('报名已截止！不能取消...');
+					}else if(msg == 'success'){
+						layer.msg('取消成功！');
+						window.location.reload();
+					}
+					
+					
+				});
+			});
+			
+			// 判断报名是否截止
 			$.post(contextPath+"/stu/isPastDue", {'actId': '${activity.id}'}).done(function(msg){
 				if(msg == 'isPastDue') {
 					$('#apply').hide();

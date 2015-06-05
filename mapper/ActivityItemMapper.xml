@@ -26,6 +26,11 @@
 		select id, audit from t_activity_item where act_id=#{activityId} and stu_id=#{studentId};
 	</select>
 	
+	<!--  根据活动id和学生id删除  -->
+	<delete id="deleteByActIdAndStuId">
+		delete from t_activity_item where act_id=#{activityId} and stu_id=#{studentId}; 
+	</delete>
+	
 	<!-- 根据学生id分组查询各种类型完成的活动时间-->
 	<select id="queryActivityItemVO" resultMap="ActivityItemVOResultMap">
 		select act_type.id, act_type.name, sum(act_item.duration) finishedDuration 
@@ -61,6 +66,10 @@
 						select="com.ccms.dao.ActivityDAO.queryById">
 		</association>
 	</resultMap>
+	
+	<select id="queryAllActivityItemByActivityId" resultType="int">
+		select COUNT(*) totalNumber from t_activity_item where act_id = #{activityId};
+	</select>
 	
 </mapper>  
 

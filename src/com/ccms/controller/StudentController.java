@@ -21,6 +21,7 @@ import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
+import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.Specialty;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.persistence.vo.RankActivityTypeVO;
@@ -28,6 +29,7 @@ import com.ccms.service.ActivityItemService;
 import com.ccms.service.ActivityService;
 import com.ccms.service.CollegeService;
 import com.ccms.service.FileEntityService;
+import com.ccms.service.RankService;
 import com.ccms.service.StudentService;
 import com.ccms.util.SysCode;
 
@@ -45,6 +47,8 @@ public class StudentController {
 	private CollegeService collegeService;
 	@Autowired
 	private FileEntityService fileService;
+	@Autowired
+	private RankService rankService;
 	
 	/**
 	 * 学生登录成功
@@ -128,12 +132,20 @@ public class StudentController {
 			return "fail";
 		}
 		
-		boolean res = actItemService.apply(activity, student);
-		if(res){
-			return "success";
-		} else {
-			return "fail";
-		}
+		return actItemService.apply(activity, student);
+	}
+	
+	/**
+	 * 取消报名
+	 * @param session
+	 * @param activityId
+	 * @return
+	 */
+	@RequestMapping("/cancelActivity")
+	@ResponseBody
+	public String cancel(HttpSession session, Integer activityId) {
+		Student student = (Student) session.getAttribute("user");
+		return actItemService.cancel(activityId, student.getId());
 	}
 	
 	
@@ -237,6 +249,18 @@ public class StudentController {
 		List<RankActivityTypeVO> itemVOs = actItemService.queryRankActivityItemVO(dto);
 		
 		return itemVOs;
+	}
+	
+	/**
+	 * 获取学生对应等级的要完成的总时长
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/getTotalDuration")
+	@ResponseBody
+	public int totalTime(HttpSession session) {
+		Student student = (Student)session.getAttribute("user");
+		return rankService.getTotalDuration(student);	
 	}
 	
 	/**

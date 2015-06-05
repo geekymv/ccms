@@ -104,25 +104,40 @@ function updateMyInfo() {
 
 
 /**
- * 发布招聘信息
+ * 申请招聘信息
  */
 function pubActivity() { 
 	var $ = jQuery;
 	
 	if(activityValidate()) {	// 通过验证
-		var data = get_form_data('#pub_form');
+		var data = {
+				'name': $('#name').val(),
+				'dateTime': $('#dateTime').val(),
+				'endDate': $('#endDate').val(),
+				'location': $('#location').val(),
+				'actType.id': $('#actType').val(),
+				'aim': aim_editor.html(),
+				'content': content_editor.html(),
+				'duration': $('#duration').val(),
+				'actObject': $('#actObject').val(),
+				'number': $('#number').val(),
+				'contact': $('#contact').val(),
+				'phone': $('#phone').val(),
+				'assist': $('#assist').val()
+		};
 		
 		jQuery.post(contextPath+'/admin/pubActivity', data).done(function(msg){
 			if(msg == 'success') {
 				alert('发布成功！');
+				window.location.href = contextPath + "/admin/activities";
+				
 			} if (msg == 'fail') {
 				alert('发布失败！');
 			}
 		}).fail(function(msg){
 			alert('服务器端错误！');
-		});	
+		});
 	}
-	
 }
 
 
@@ -168,7 +183,7 @@ function activityValidate() {
 	}
 	
 	// 活动目的
-	var aim = $('#aim').val();
+	var aim = aim_editor.html();
 	if($.trim(aim) == '') {
 		alert('活动目的为必选项！');
 		$('#aim').focus();
@@ -176,7 +191,7 @@ function activityValidate() {
 	}
 	
 	// 活动内容
-	var content = $('#content').val();
+	var content = content_editor.html();
 	if($.trim(content) == '') {
 		alert('活动内容为必选项！');
 		$('#content').focus();

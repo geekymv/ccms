@@ -21,11 +21,29 @@ public interface ActivityItemDAO extends BaseDAO<ActivityItem> {
 			@Param("studentId") Integer studentId);
 	
 	/**
+	 * 根据活动id和学生id删除
+	 * 
+	 * @param activityId
+	 * @param studentId
+	 * @return
+	 */
+	public void deleteByActIdAndStuId(@Param("activityId") Integer activityId,
+			@Param("studentId") Integer studentId);
+	
+	
+	/**
 	 * 根据学生id查询学生报名的活动
 	 * @param studentId
 	 * @return
 	 */
 	public List<ActivityItem> queryAllActivityItem(Integer studentId);
+	
+	/**
+	 * 根据活动id查询该活动已报名人数
+	 * @param activityId
+	 * @return
+	 */
+	public int queryAllActivityItemByActivityId(@Param("activityId")Integer activityId);
 	
 	/**
 	 * 根据学生id分组查询各种类型完成的活动时间

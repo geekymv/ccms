@@ -45,7 +45,7 @@ public class ActivityServiceImpl implements ActivityService {
 		activity.setStatus(SysCode.ActivityStatus.WAIT); 
 		
 		String endDate = activity.getEndDate();
-		endDate = endDate.replaceAll("-", "") + "240000"; 
+		endDate = endDate.replaceAll("-", "").replaceAll(":", "").replaceAll(" ", "") + "00"; 
 		activity.setEndDate(endDate);
 		
 		return activityDAO.add(activity);
@@ -100,7 +100,7 @@ public class ActivityServiceImpl implements ActivityService {
 	public String updateActivity(Activity activity) {
 		
 		String endDate = activity.getEndDate();
-		endDate = endDate.replaceAll("-", "") + "240000"; 
+		endDate = endDate.replaceAll("-", "").replaceAll(":", "").replaceAll(" ", "") + "00"; 
 		activity.setEndDate(endDate);
 		
 		int res = activityDAO.update(activity);

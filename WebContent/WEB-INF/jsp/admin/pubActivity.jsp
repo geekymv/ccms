@@ -75,7 +75,7 @@
 	                                </label>
 	                                <div class="controls">
 	                                	<input type="text" name="endDate" id="endDate" class="input-medium" 
-	                                	onFocus="WdatePicker({dateFmt:'yyyy-MM-dd', minDate:'%y-%M-%d', isShowClear:false})"/>
+	                                	onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', minDate:'%y-%M-%d', isShowClear:false})"/>
 	                                </div>
 	                            </div>
                     		</td>
@@ -113,7 +113,7 @@
 	                                	活动目的<span class="tips">*</span>
 	                                </label>
 	                                 <div class="controls">
-    	                            	<textarea cols="30" rows="3" name="aim" id="aim" class="span6"></textarea>
+    	                            	<textarea cols="30" rows="3" name="aim" id="aim" class="span6" style="width: 400px;"></textarea>
                             		</div>
                             	</div>
                             	
@@ -122,20 +122,6 @@
                     	<tr>
                     		<td colspan="2">&nbsp;</td>
                     	</tr>
-                    	<!-- 
-                    	<tr>
-                    		<td colspan="2">
-                    			<div class="par control-group my-par">
-	                               	<label class="control-label" for="aim">
-	                                	活动内容<span class="tips">*</span>
-	                                </label>
-	                                 <div class="controls">
-    	                            	<textarea cols="30" rows="3" name="content" id="content" class="span6"></textarea>
-                            		</div>
-                            	</div>
-                            </td>
-                    	</tr>
-                    	 -->
                     	 <tr>
                     		<td colspan="2">
                     			<div class="par control-group my-par">
@@ -148,15 +134,6 @@
                             	</div>
                             </td>
                     	</tr>
-                    	<!--  
-                   		<div class="form-group">
-					  	 <label for="summary" class="col-sm-2 control-label">正文</label>
-					  	 <div class="col-sm-10">
-					  	 	<textarea class="form-control" id="content" name="content" style="width: 400px;"></textarea>
-					  	 </div>
-					  </div>
-					   -->
-                    	
                     	<tr>
                     		<td colspan="2">&nbsp;</td>
                     	</tr>
@@ -165,7 +142,7 @@
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="duration">
-	                                	加分时长（小时）<span class="tips">*</span>
+	                                	申请认证时长（小时）<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
 	                                	<input type="text" name="duration" id="duration" class="input-small" />
@@ -248,19 +225,23 @@
 	<script src="<c:url value='/resources/scripts/common.js' />"></script>
 	<script>
 	 	KindEditor.ready(function(K) {
-           	window.editor = K.create('#content',{
-           	 	width : "70%", //编辑器的宽度为70%
-           	 	height: "300px",
-       			items:['source', '|', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
-      			        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-      			        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-      			        'superscript', 'clearhtml', '/', 'quickformat', 'selectall', '|', 
-      			        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-      			        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 
-      			        'table', 'hr', 'fullscreen'],
-      				resizeType : '1'
-      			});
-    		});
+	 		var control = {
+	           	 	width : "69%", //编辑器的宽度为70%
+	           	 	height: "200px",
+	       			items:['source', '|', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
+	      			        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+	      			        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+	      			        'superscript', 'clearhtml', '/', 'quickformat', 'selectall', '|', 
+	      			        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+	      			        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 
+	      			        'table', 'hr', 'fullscreen'],
+	      				resizeType : '1'
+	      			};
+	 	
+           	window.content_editor = K.create('#content',control);
+        	window.aim_editor = K.create('#aim', control);
+    	});
+	 	
    </script>
 	
 </body>

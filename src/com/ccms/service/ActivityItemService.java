@@ -22,9 +22,17 @@ public interface ActivityItemService {
 	 * 学生报名活动
 	 * @param activityId
 	 * @param studentId
-	 * @return
+	 * @return overflow 人数已满， success 报名成功，fail 报名失败
 	 */
-	public boolean apply(Activity activity, Student student);
+	public String apply(Activity activity, Student student);
+	
+	/**
+	 * 学生取消报名活动
+	 * @param activityId
+	 * @param studentId
+	 * @return overflow 人数已满， success 报名成功，fail 报名失败
+	 */
+	public String cancel(Integer activityId, Integer studentId);
 	
 	
 	/**

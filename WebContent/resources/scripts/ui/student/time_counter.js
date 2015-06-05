@@ -51,10 +51,12 @@
 					html += "<tr>"
 			         +"<td>" + name + "</td>"
 			         +"<td>" + finishedDuration + "小时</td>"
-			         +"<td>" + duration + "</td>";
+			         +"<td>" + duration + "</td>"
+					 
 					
 			         if(i == 0){
-				        html +=	 '<td rowspan="3" style="vertical-align: middle;color: blue; font-size: 16px;">'
+			        	html += "<td rowspan='3' style='vertical-align: middle;' id='total_duration'></td>";
+				        html +=	'<td rowspan="3" style="vertical-align: middle;color: blue; font-size: 16px;">'
 					         +	'等待审核'
 					         +'</td>';
 			         }
@@ -63,6 +65,10 @@
 				}
 				sel.html(html);
 			}
+		});
+		
+		$.post(contextPath+"/stu/getTotalDuration").done(function(data) {
+			$('#total_duration').html(data + '小时');
 		});
 	}
 

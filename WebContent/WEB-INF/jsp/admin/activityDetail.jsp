@@ -9,6 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>详情活动</title>
 <%@ include file="/WEB-INF/jsp/inc/admin_style.jsp"%>
+<script src="${ctx}/resources/kindeditor/kindeditor-all-min.js"></script>
+<script src="${ctx}/resources/kindeditor/lang/zh-CN.js"></script>
 
 <style type="text/css">
 	.my-par {
@@ -75,7 +77,7 @@
 	                                </label>
 	                                <div class="controls">
 	                                	<input type="text" name="endDate" id="endDate" class="input-medium"
-	                                	onFocus="WdatePicker({dateFmt:'yyyy-MM-dd', minDate:'%y-%M-%d', isShowClear:false})" />
+	                                	onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', minDate:'%y-%M-%d', isShowClear:false})" />
 	                                </div>
 	                            </div>
                     		</td>
@@ -113,7 +115,7 @@
 	                                	活动目的<span class="tips">*</span>
 	                                </label>
 	                                 <div class="controls">
-    	                            	<textarea cols="30" rows="3" name="aim" id="aim" class="span6"></textarea>
+    	                            	<textarea cols="30" rows="3" name="aim" id="aim" class="span6" style="width: 400px;"></textarea>
                             		</div>
                             	</div>
                             </td>
@@ -128,7 +130,7 @@
 	                                	活动内容<span class="tips">*</span>
 	                                </label>
 	                                 <div class="controls">
-    	                            	<textarea cols="30" rows="3" name="content" id="content" class="span6"></textarea>
+    	                            	<textarea cols="30" rows="3" name="content" id="content" class="span6" style="width: 400px;"></textarea>
                             		</div>
                             	</div>
                             </td>
@@ -247,7 +249,8 @@
 			}
 			if (time.length == 14) {
 				return time.substring(0, 4) + "-" + time.substring(4, 6) + "-"
-						+ time.substring(6, 8);
+					+ time.substring(6, 8) + " " + time.substring(8, 10) + ":"
+					+ time.substring(10, 12);
 			}
 			return "";
 		}
@@ -300,7 +303,24 @@
 			//  更新活动信息
 			$('#updateActivity').click(function() {
 				if(activityValidate()) {
-					var data = get_form_data('#pub_form');
+					var data = {
+						'id': $('#id').val(),
+						'name': $('#name').val(),
+						'dateTime': $('#dateTime').val(),
+						'endDate': $('#endDate').val(),
+						'location': $('#location').val(),
+						'actType.id': $('#actType').val(),
+						'aim': aim_editor.html(),
+						'content': content_editor.html(),
+						'duration': $('#duration').val(),
+						'actObject': $('#actObject').val(),
+						'number': $('#number').val(),
+						'contact': $('#contact').val(),
+						'phone': $('#phone').val(),
+						'assist': $('#assist').val(),
+						'status': 0
+					};
+				
 					$.post(contextPath+"/college/updateActivity", data).done(function(msg){
 						if(msg == 'success') {
 							alert('更新成功！');
@@ -367,8 +387,8 @@
 				$('#dateTime').val(dateTime);
 				$('#endDate').val(formatterDate2(endDate));
 				$('#location').val(location);
-				$('#aim').val(aim);
-				$('#content').val(content);
+				aim_editor.html(aim);
+				content_editor.html(content);
 				$('#duration').val(duration);
 				$('#actObject').val(actObject);
 				$('#number').val(number);
@@ -415,6 +435,26 @@
 		
 		
 	</script>
+	<script>
+		KindEditor.ready(function(K) {
+	 		var control = {
+	           	 	width : "69%", //编辑器的宽度为70%
+	           	 	height: "200px",
+	       			items:['source', '|', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
+	      			        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+	      			        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+	      			        'superscript', 'clearhtml', '/', 'quickformat', 'selectall', '|', 
+	      			        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+	      			        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 
+	      			        'table', 'hr', 'fullscreen'],
+	      				resizeType : '1'
+	      			};
+	 	
+	       	window.content_editor = K.create('#content',control);
+	    	window.aim_editor = K.create('#aim', control);
+		});
+   </script>
+	
 </body>
 </html>    
 
