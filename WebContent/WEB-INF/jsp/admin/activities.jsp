@@ -56,7 +56,10 @@
 				          <th>活动状态</th>
 				          <th>活动详情</th>
 				          <th>查看报名</th>
-				          <th>删除</th>
+						  <%-- 用工单位 --%>					          
+				          <c:if test="${user.authority == 0 }">
+				          	<th>删除</th>
+				          </c:if>
                        </tr>
                     </thead>
                     <tbody id='t_body'>
@@ -115,6 +118,22 @@
 				        			}
 				        			
 				        			var name = act.name;	// 活动名称
+				        			var actObject = act.actObject;
+				        			var newActObject = '';
+				        			if(actObject == -1) {
+				        				newActObject = '全校学生';
+				        			}else {
+				        				$.ajax({
+				        					url: contextPath+"/getCollegeById",
+				        					data: {'colId': actObject},
+				        					type: 'POST',	
+				        					async: false, // 同步
+											dataType: 'json',
+											success: function(data){
+												newActObject = data.name;
+											}
+				        				});
+				        			}
 				        			
 				        			if(name.length > 10) {
 				        				name = name.substring(0, 11);
@@ -126,16 +145,18 @@
 					        			if(user_authority == 1){
 					        				html += "<td>"+ act.college.name +"</td>";
 					        			}		 
-				        			html += "<td>"+ act.actObject +"</td>"
+				        			html += "<td>"+newActObject+"学生</td>"
 				        					+ "<td>"+ formatterDate(act.publishTime) +"</td>"
 				        					+ "<td>"+ act.actType.name +"</td>"
 				        					+ "<td>"+ act.duration +"</td>"
 				        					+ "<td id='status'>"+ status +"</td>"
 				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='showDetail(this)'></span></td>"
-				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='showApply(this)'></span></td>"
-				        					+ "<td><span title='删除' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-trash' onclick='deleteActivity(this)'></span></td>"
+				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='showApply(this)'></span></td>";
+				        			if(user_authority == 0) {
+				        				html += "<td><span title='删除' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-trash' onclick='deleteActivity(this)'></span></td>"
+				        			}		
 				        					
-				        				+"</tr>";
+				        				html += "</tr>";
 				        		}
 				        		
 				        		$('#t_body').html(html);

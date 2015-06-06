@@ -1,5 +1,7 @@
 package com.ccms.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +42,11 @@ public class SpecialtyServiceImpl implements SpecialtyService {
 	public String edit(Specialty specialty) {
 		specialtyDAO.update(specialty);
 		return "success";
+	}
+
+	@Override
+	public List<Specialty> getAllByCollegeId(Integer collegeId) {
+		return specialtyDAO.queryByCollegeId(collegeId);
 	}
 
 }

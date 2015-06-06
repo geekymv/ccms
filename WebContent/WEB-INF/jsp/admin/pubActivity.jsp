@@ -156,7 +156,13 @@
 	                                	参与对象<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
+	                                	<!-- 
 	                                	<input type="text" name="actObject" id="actObject" class="input-medium" />
+	                                	 -->
+	                                	 <select name="actObject" id="actObject" style="width: 160px;">
+	                                	 	<option value="-1">全校学生</option>
+	                                	 	<option value="${user.id }">${user.name }学生</option>
+	                                	 </select>
 	                                </div>
 	                            </div>
                     		</td>

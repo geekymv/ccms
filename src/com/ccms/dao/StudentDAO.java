@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.ccms.base.dao.BaseDAO;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.dto.StudentDto;
+import com.ccms.persistence.dto.StudentQueryDto;
 import com.ccms.persistence.pojo.Student;
 
 public interface StudentDAO extends BaseDAO<Student>{
@@ -46,14 +47,14 @@ public interface StudentDAO extends BaseDAO<Student>{
 	 * @return
 	 */
 	public List<Student> queryStudentsByColId(@Param("pager")Pager<Student> pager, 
-			@Param("colId")Integer colId);
+			@Param("colId")Integer colId, @Param("dto")StudentQueryDto dto);
 	
 	/**
 	 * 根据学院id查看学生总记录数
 	 * @param colId
 	 * @return
 	 */
-	public int getTotalStudentsByColId(Integer colId);
+	public int getTotalStudentsByColId(@Param("colId")Integer colId, @Param("dto")StudentQueryDto dto);
 	
 	/**
 	 * 更新学生部分信息

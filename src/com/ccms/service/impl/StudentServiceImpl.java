@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ccms.dao.StudentDAO;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.dto.StudentDto;
+import com.ccms.persistence.dto.StudentQueryDto;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.StudentService;
 import com.ccms.util.EncryptUtil;
@@ -73,13 +74,12 @@ public class StudentServiceImpl implements StudentService {
 
 
 	@Override
-	public Pager<Student> findStudentsByColId(Pager<Student> pager, Integer colId) {
-		
-		int totalRecord = studentDAO.getTotalStudentsByColId(colId);
+	public Pager<Student> findStudentsByColId(Pager<Student> pager, StudentQueryDto dto, Integer colId) {
+		int totalRecord = studentDAO.getTotalStudentsByColId(colId, dto);
 		pager.setTotalRecord(totalRecord);
 		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
 		
-		List<Student> lists = studentDAO.queryStudentsByColId(pager, colId);
+		List<Student> lists = studentDAO.queryStudentsByColId(pager, colId, dto);
 		pager.setDatas(lists);
 		
 		return pager;

@@ -157,7 +157,8 @@
 	                                	参与对象<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	<input type="text" name="actObject" id="actObject" class="input-medium" />
+	                                	<select name="actObject" id="actObject" style="width: 160px;">
+	                                	 </select>
 	                                </div>
 	                            </div>
                     		</td>
@@ -293,13 +294,9 @@
 					alert('服务器端错误！');
 				});
 			}
-			
-			
 		}
-		
-		
+
 		$(function() {
-			
 			//  更新活动信息
 			$('#updateActivity').click(function() {
 				if(activityValidate()) {
@@ -390,7 +387,27 @@
 				aim_editor.html(aim);
 				content_editor.html(content);
 				$('#duration').val(duration);
-				$('#actObject').val(actObject);
+				var html = '';
+				if(actObject == -1) {
+					html += '<option value="-1" selected="selected">全校学生</option>'
+					+'<option value="${user.id }">${user.name}学生</option>';
+				}else {
+					var newActObject = '';
+					$.ajax({
+    					url: contextPath+"/getCollegeById",
+    					data: {'colId': actObject},
+    					type: 'POST',	
+    					async: false, // 同步
+						dataType: 'json',
+						success: function(data){
+							newActObject = data.name;
+						}
+    				});
+					html += '<option value="-1">全校学生</option>'
+						+'<option value="'+actObject+'" selected="selected">'+newActObject+'学生</option>';
+				}
+				$('#actObject').append(html);
+				
 				$('#number').val(number);
 				$('#contact').val(contact);
 				$('#phone').val(phone);

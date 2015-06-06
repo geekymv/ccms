@@ -122,3 +122,15 @@ create table t_files(
 	status int default 1 /*文件状态：1默认, -1删除*/
 );
 
+/**
+ * 评论表
+ */
+create table t_comments(
+	id int primary key auto_increment,
+	object_id int, /*被评论对象id*/
+	category int, /*被评论对象的类别：1活动，2学生*/
+	user_id int, /*评论人id*/
+	content varchar(240), /*评论内容*/
+  com_date varchar(14) /*评论时间*/
+);
+

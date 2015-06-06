@@ -1,10 +1,17 @@
 package com.ccms.service;
 
+import java.util.List;
+
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.Specialty;
 
 public interface SpecialtyService {
-	
+	/**
+	 * 根据学院id查询该学院的专业
+	 * @param collegeId
+	 * @return
+	 */
+	public List<Specialty> getAllByCollegeId(Integer collegeId);
 	
 	/**
 	 * 根据专业名称查询该学院的专业

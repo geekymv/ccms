@@ -21,7 +21,9 @@
 	                   <li><a href="${ctx }/admin/activities">活动列表</a></li>
 	              	</ul>
 	             </li>
+	             <!-- 
              	 <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">报名管理</a></li>
+            	 -->
              </c:if>
              
              <c:if test="${user.colType == 2 }">

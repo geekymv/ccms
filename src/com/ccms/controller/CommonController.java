@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,14 +16,28 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
+import com.ccms.persistence.pojo.Specialty;
 import com.ccms.service.FileEntityService;
+import com.ccms.service.SpecialtyService;
 import com.ccms.util.DateUtils;
 
 @Controller
 public class CommonController {
+	@Autowired
+	private SpecialtyService specialtyService;
 	
 	@Autowired
 	private FileEntityService fileService;
+	/**
+	 * 根据学院id获取该学院的所有抓野
+	 * @param collegeId
+	 * @return
+	 */
+	@RequestMapping("/getAllSpecialty")
+	@ResponseBody
+	public List<Specialty> getAllSpecialty(Integer collegeId) {
+		return specialtyService.getAllByCollegeId(collegeId);
+	}
 	
 	/**
 	 * 学生时间统计，获得最近5个学年

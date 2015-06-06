@@ -4,7 +4,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ccms.dao.SpecialtyDAO">
-	
+	<!-- 根据学院id查询该学院的专业 -->
+	<select id="queryByCollegeId" resultType="Specialty">
+		select id, name from t_specialties 
+		where col_id=#{collegeId}
+	</select>
 	
 	<select id="queryByName" resultType="Specialty">
 		select id, name from t_specialties where col_id=#{college.id} and name=#{name};

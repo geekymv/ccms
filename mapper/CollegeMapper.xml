@@ -9,7 +9,7 @@
 	<select id="queryByName" parameterType="string" resultType="College">
 		select * from t_colleges col where col.name = #{name};
 	</select>
-	
+
 	<!-- 根据账号查询 -->
 	<select id="queryByAccount" parameterType="string" resultType="College">
 		select * from t_colleges col where col.account = #{name};

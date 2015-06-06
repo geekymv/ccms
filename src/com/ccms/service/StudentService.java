@@ -2,6 +2,7 @@ package com.ccms.service;
 
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.dto.StudentDto;
+import com.ccms.persistence.dto.StudentQueryDto;
 import com.ccms.persistence.pojo.Student;
 
 public interface StudentService {
@@ -55,7 +56,7 @@ public interface StudentService {
 	 * @param colId
 	 * @return
 	 */
-	public Pager<Student> findStudentsByColId(Pager<Student> pager, Integer colId);
+	public Pager<Student> findStudentsByColId(Pager<Student> pager, StudentQueryDto dto, Integer colId);
 	
 }
 

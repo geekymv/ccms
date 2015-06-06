@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.dto.StudentDto;
+import com.ccms.persistence.dto.StudentQueryDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
@@ -43,6 +44,12 @@ public class CollegeController {
 	private ActivityTypeService activityTypeService;
 	@Autowired
 	private StudentService studentService;
+	
+	@RequestMapping(value="/getCollegeById", method=RequestMethod.POST)
+	@ResponseBody
+	public College getById(Integer colId) {
+		return collegeService.getById(colId);
+	}
 
 	/**
 	 * 获得该学院下的所有专业
@@ -204,9 +211,9 @@ public class CollegeController {
 	 */
 	@RequestMapping(value="/admin/students", method=RequestMethod.POST)
 	@ResponseBody
-	public Pager<Student> getStudents(Pager<Student> pager, HttpSession session) {
+	public Pager<Student> getStudents(Pager<Student> pager, StudentQueryDto dto, HttpSession session) {
 		College college = (College)session.getAttribute("user");
-		studentService.findStudentsByColId(pager, college.getId());
+		studentService.findStudentsByColId(pager, dto, college.getId());
 		return pager;
 	}
 	

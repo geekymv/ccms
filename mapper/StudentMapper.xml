@@ -130,6 +130,7 @@
 	
 	<!-- 根据学院id查看学生 -->
 	<select id="queryStudentsByColId" resultMap="StudentResultMap">
+	<!-- 
 		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 		rank.id rank_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
 		from t_students stu 
@@ -138,10 +139,36 @@
 		inner join t_specialties spe on stu.spec_id=spe.id 
 		where stu.col_id=#{colId} order by stu.num
 		limit #{pager.pageOffset}, #{pager.pageSize};	
+	 -->
+	 select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
+		rank.id rank_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
+		from t_students stu 
+		inner join t_ranks rank on stu.rank_id=rank.id
+		inner join t_colleges col on stu.col_id=col.id 
+		inner join t_specialties spe on stu.spec_id=spe.id 
+		<where>
+			stu.col_id=#{colId} 
+			<if test="dto.num != null and dto.num != '' ">and stu.num=#{dto.num}</if>
+			<if test="dto.name != null and dto.name != '' ">and stu.name like "%"#{dto.name}"%"</if>
+			<if test="dto.specId != null and dto.specId != -1">and spe.id=#{dto.specId}</if>
+			order by stu.num
+			limit #{pager.pageOffset}, #{pager.pageSize};
+		</where>
+	
+	 
 	</select>
 	
 	<select id="getTotalStudentsByColId" resultType="int">
-		select count(*) from t_students stu where stu.col_id = #{colId}
+		select count(*) from t_students stu
+		inner join t_specialties spe on stu.spec_id=spe.id 
+		<where>
+			stu.col_id = #{colId}
+			<if test="dto.num != null and dto.num != '' ">and stu.num=#{dto.num}</if>
+			<if test="dto.name != null and dto.name != '' ">and stu.name like "%"#{dto.name}"%"</if>
+			<if test="dto.specId != null and dto.specId != -1">and spe.id=#{dto.specId}</if>
+		</where>
+		
+		
 	</select>
 	
 	

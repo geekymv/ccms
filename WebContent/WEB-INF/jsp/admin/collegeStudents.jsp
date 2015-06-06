@@ -43,6 +43,16 @@
         	<div class="maincontentinner">
             <div class="widget">
                 <h4 class="widgettitle">学生列表</h4>
+                
+                <div class="controls" style="text-align: center;">
+                	<input type="text" id="query_num" style="width: 180px; height: 30px;" placeholder="学号"/>
+                	<input type="text" id="query_name" style="width: 180px; height: 30px;" placeholder="姓名"/>
+                	<select id="specialty" style="margin-bottom: 10px;">
+                		<option value="-1">专业</option>
+                	</select>
+		        	<input type="button" class="btn btn-default" id="query" style="margin-bottom: 10px;" value="查询"/>
+                </div>
+                
             	<table class="table table-bordered responsive">
            			<thead>
                        <tr>
@@ -78,50 +88,77 @@
 	<script type="text/javascript">
 		jQuery(function(){
 			var $ = jQuery;
+			// 加载专业
+			$.post(contextPath+"/getAllSpecialty", {'collegeId': '${user.id}'}).done(function(data) {
+				var len = data.length;
+				if(len > 0) {
+					var html = '';
+					for(var i = 0; i < len; i++) {
+						var spec = data[i];
+						html += '<option value="'+spec.id+'">'+spec.name+'</option>'
+					}	
+					
+					$('#specialty').append(html);
+					
+				}
+			});
 	
-			$("#page").page({
-				    remote: {
-				        url: contextPath + "/admin/students",
-				        callback: function (result) {
-				        	var datas = result.datas;
-				        	var len = datas.length;
-				        	if(len == 0) {
-				        		
-				        	}else {
-				        		var html = "";
-				        		for(var i = 0; i < len; i++) {
-				        			var stu = datas[i];
-						        	var phone = stu.phone;
-						        	if(phone == null || phone == '') {
-						        		phone = '暂无';
-						        	}
-
-						        	html += "<tr>"
-				        		   		+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
-				        				+ "<td>"+(i+1)+"</td>"
-				        				+ "<td>"+ stu.num +"</td>"
-				        				+ "<td>"+ stu.name +"</td>"
-				        				+ "<td>"+ stu.gender +"</td>"
-				        				+ "<td>"+ phone +"</td>"
-				        				+ "<td>"+ stu.specialty.name +"</td>"
-				        				+ "<td>"+ stu.rank.name +"</td>"
-				        				+ "<td><span onclick='edit(this)'data-num='"+stu.num+"' style='cursor: pointer;'>编辑</span></td>"
-				        			+"</tr>";
-				        		}
-				        		$('#t_body').html(html);
-				        	}
-				        }
-				    },
-					pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
-					pageSizeName: 'pageSize',       //请求参数，每页数量
-					totalName: 'totalRecord'       //指定返回数据的总数据量
-				});
+			// 分页显示学生列表
+			pager();
+		
+			// 查询
+			$('#query').click(function() {
+				$('#page').page('destroy')
+				pager();
+			});
+			
 		})
 		
 		function edit(t) {
 			var $this = $(t);
 			window.location.href = contextPath + "/admin/student/" + $this.data('num');
 		} 
+		
+		function pager() {
+			$("#page").page({
+			    remote: {
+			        url: contextPath + "/admin/students",
+			        params: {"num": $('#query_num').val(), 'name': $('#query_name').val(), 'specId': $('#specialty').val()},
+			        callback: function (result) {
+			        	var datas = result.datas;
+			        	var len = datas.length;
+			        	var html = "";
+			        	if(len == 0) {
+							html = '暂无数据';			        		
+			        	}else {
+			        		for(var i = 0; i < len; i++) {
+			        			var stu = datas[i];
+					        	var phone = stu.phone;
+					        	if(phone == null || phone == '') {
+					        		phone = '暂无';
+					        	}
+
+					        	html += "<tr>"
+			        		   		+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
+			        				+ "<td>"+(i+1)+"</td>"
+			        				+ "<td>"+ stu.num +"</td>"
+			        				+ "<td>"+ stu.name +"</td>"
+			        				+ "<td>"+ stu.gender +"</td>"
+			        				+ "<td>"+ phone +"</td>"
+			        				+ "<td>"+ stu.specialty.name +"</td>"
+			        				+ "<td>"+ stu.rank.name +"</td>"
+			        				+ "<td><span onclick='edit(this)'data-num='"+stu.num+"' style='cursor: pointer;'>编辑</span></td>"
+			        			+"</tr>";
+			        		}
+			        	}
+			        	$('#t_body').html(html);
+			        }
+			    },
+				pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
+				pageSizeName: 'pageSize',       //请求参数，每页数量
+				totalName: 'totalRecord'       //指定返回数据的总数据量
+			});
+		}
 		
 	</script>
 </body>

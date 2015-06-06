@@ -63,14 +63,14 @@
                                 </div>
                             </div>
                             <div class="control-group my-par">
-                                    <label class="control-label" for="name">姓名：<span class="tips">*</span></label>
+                                    <label class="control-label" for="name">姓名：</label>
                                 <div class="controls">
                                	 <input type="text" name="name" id="name" class="input-large" value="${student.name }" />
                                 </div>
                             </div>
                             
                             <div class="par control-group my-par">
-                                    <label class="control-label" for="phone">性别：<span class="tips">*</span></label>
+                                    <label class="control-label" for="phone">性别：</label>
                                 <div class="controls">
 									${student.gender }
                                 </div>

@@ -1,5 +1,7 @@
 package com.ccms.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.ccms.base.dao.BaseDAO;
@@ -19,5 +21,12 @@ public interface SpecialtyDAO extends BaseDAO<Specialty>{
 	 * @return
 	 */
 	public Specialty queryByName(@Param("name")String name, @Param("college")College college);
+	
+	/**
+	 * 根据学院id查询该学院的专业
+	 * @param collegeId
+	 * @return
+	 */
+	public List<Specialty> queryByCollegeId(Integer collegeId);
 
 }
