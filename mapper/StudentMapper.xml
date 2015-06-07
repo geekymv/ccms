@@ -58,9 +58,19 @@
 	</select>	
 	
 	<!-- 根据学号和密码查询学生 status=1学生账号可用-->
-	<select id="queryByNumAndPwd" resultType="Student">
+	<select id="queryByNumAndPwd" resultMap="StudentResultMap">
+		<!-- 
 		select id, num, pwd, name FROM t_students 
 			where num=#{num} and pwd=#{pwd} and status=1;
+		 -->
+	select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
+		rank.id rank_id, rank.name rank_name, duration, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
+		FROM t_students stu 
+		inner join t_ranks rank on stu.rank_id=rank.id
+		inner join t_colleges col on stu.col_id=col.id 
+		inner join t_specialties spe on stu.spec_id=spe.id 
+		where stu.num=#{num} and stu.pwd=#{pwd} and status=1;
+		 
 	</select>
 	
 	

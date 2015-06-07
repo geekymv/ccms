@@ -28,7 +28,7 @@ function pager() {
 	$("#page").page({
 	    remote: {
 	        url: contextPath + '/stu/activities',
-	        params: {"collegeName": $('#search').val(), 'actType': $('#actType').val()},
+	        params: {"collegeName": $('#search').val(), 'actType': $('#actType').val(), 'colId': $('#user_college_id').val()},
 	        callback: function (result) {
 	        	var datas = result.datas;
 	        	var len = datas.length;
@@ -47,10 +47,27 @@ function pager() {
 	        				name = name.substring(0, 11);
 	        			}
 	        			
+	        			var actObject = act.actObject;
+	        			var newActObject = '';
+	        			if(actObject == -1) {
+	        				newActObject = '全校学生';
+	        			}else {
+	        				$.ajax({
+	        					url: contextPath+"/getCollegeById",
+	        					data: {'colId': actObject},
+	        					type: 'POST',	
+	        					async: false, // 同步
+								dataType: 'json',
+ 								success: function(data){
+									newActObject = data.name + '学生';
+								}
+	        				});
+	        			}
+	        			
 	        			html += "<tr>"
 	        					+ "<td style='text-align:left;'><span title='"+act.name+"'>"+ name +"</span></td>"
 	        					+ "<td>"+ act.college.name +"</td>"
-	        					+ "<td>"+ act.actObject +"</td>"
+	        					+ "<td>"+ newActObject +"</td>"
 	        					+ "<td>"+ formatterDate(act.endDate) +"</td>"
 	        					+ "<td>"+ act.actType.name +"</td>"
 	        					+ "<td>"+ act.duration +"</td>"

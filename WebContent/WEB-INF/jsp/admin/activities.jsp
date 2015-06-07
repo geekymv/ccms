@@ -130,7 +130,7 @@
 				        					async: false, // 同步
 											dataType: 'json',
 											success: function(data){
-												newActObject = data.name;
+												newActObject = data.name + '学生';
 											}
 				        				});
 				        			}
@@ -145,7 +145,7 @@
 					        			if(user_authority == 1){
 					        				html += "<td>"+ act.college.name +"</td>";
 					        			}		 
-				        			html += "<td>"+newActObject+"学生</td>"
+				        			html += "<td>"+newActObject+"</td>"
 				        					+ "<td>"+ formatterDate(act.publishTime) +"</td>"
 				        					+ "<td>"+ act.actType.name +"</td>"
 				        					+ "<td>"+ act.duration +"</td>"

@@ -21,7 +21,6 @@ import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
-import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.Specialty;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.persistence.vo.RankActivityTypeVO;
@@ -49,7 +48,7 @@ public class StudentController {
 	private FileEntityService fileService;
 	@Autowired
 	private RankService rankService;
-	
+
 	/**
 	 * 学生登录成功
 	 */
@@ -73,6 +72,7 @@ public class StudentController {
 	
 	/**
 	 * 分页显示通过审核的活动
+	 * 学生只可以查看自己学院发布的和面向全校的活动
 	 * @param pager
 	 * @return
 	 */
@@ -219,9 +219,10 @@ public class StudentController {
 	 */
 	@RequestMapping(value="/updateInfo", method=RequestMethod.POST)
 	@ResponseBody
-	public String updateInfo(Student student){
+	public String updateInfo(Student student, HttpSession session){
 		boolean res = studentService.updateInfo(student);
-		if(res){
+		if(res){ // 更新session
+			session.setAttribute("user", student);	
 			return "success";
 		}else {
 			return "fail";
@@ -281,6 +282,21 @@ public class StudentController {
 		model.addAttribute("pager", pager);
 		
 		return "student/docs";
+	}
+	
+	/**
+	 * 学生评论活动
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/comment/{id}", method=RequestMethod.GET)
+	public String comment(@PathVariable Integer id, Model model) {
+		model.addAttribute("comment", "comment");
+		
+		Activity activity = activityService.detail(id);
+		model.addAttribute("activity", activity);
+		
+		return "student/activity_detail";
 	}
 	
 	

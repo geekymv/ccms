@@ -82,7 +82,7 @@
 						}		
 						
 						html += "<tr>"	
-							+ "<td>"+ act.activity.name +"</td>"	
+							+ "<td><a href="+contextPath+"/stu/comment/"+act.activity.id+">"+ act.activity.name +"</a></td>"	
 							+ "<td>"+ formatterDate(act.activity.publishTime) +"</td>"	
 							+ "<td>"+ act.activity.college.name +"</td>"	
 							+ "<td style='text-align: left;'>"+ act.activity.dateTime +"</td>"	

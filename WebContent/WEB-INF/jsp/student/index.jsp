@@ -9,8 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>欢迎访问公益活动时间认证系统</title>
     <%@ include file="/WEB-INF/jsp/inc/style.jsp"%>
-    
-    
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,6 +44,8 @@
 			  <li><a href="${pageContext.request.contextPath }/stu/index">首页</a></li>
 			  <li class="active">活动公告</li>
 			</ol>
+			<input type="hidden" id="user_college_id"  value="${user.college.id }"/>
+			
 			<div class="col-md-offset-3 col-md-8">
 			<form class="form-inline">
 			  <div class="form-group">

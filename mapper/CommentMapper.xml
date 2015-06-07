@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+"-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccms.dao.CommentDAO">
+	
+	<!-- 查询所有的活动类型 -->
+	<insert id="add" parameterType="Comment">
+		insert into t_comments(
+		   objectId
+		  ,category
+		  ,userId
+		  ,content
+		  ,comDate) values(#{objectId}, #{category}, #{userId}, #{content}, #{comDate});
+	</insert>
+	
+	<select id="queryAllByPage" resultType="CommentDto">
+		select com.id id, com.objectId objectId, stu.id userId, stu.name username, 
+		com.content content, com.comDate comDate
+		from t_comments com 
+		inner join t_students stu on com.userId = stu.id
+		where com.objectId = #{activityId} order by com.comDate desc
+		limit #{pageOffset}, #{pageSize};
+
+	</select>
+	
+	
+ 	 
+</mapper>  

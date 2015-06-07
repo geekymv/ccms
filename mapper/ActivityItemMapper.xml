@@ -6,7 +6,7 @@
 <mapper namespace="com.ccms.dao.ActivityItemDAO">
 	
 	<!-- 更新Item的审核状态 -->
-	<update  id="auditActivityItem" parameterType="ActivityItem">
+	<update id="auditActivityItem" parameterType="ActivityItem">
 		update t_activity_item
 		<set>
 			<if test="reason != null and reason != ''">reason = #{reason}, </if>

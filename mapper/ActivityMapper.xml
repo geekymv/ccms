@@ -89,12 +89,14 @@
 	<select id="queryAllStatusByPage" resultMap="ActivityResultMap">
 		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
-		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
+		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name 
+		from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
 		inner join t_activity_type a_type on act.activity_type=a_type.id
 		<where>
 			act.status=1 
 			and col.name like CONCAT('%', #{dto.collegeName},'%')  
+			and act.act_object = #{dto.colId} or act.act_object = '-1' 
 			<if test="dto.actType != -1">
 				and a_type.id = #{dto.actType}
 			</if>
