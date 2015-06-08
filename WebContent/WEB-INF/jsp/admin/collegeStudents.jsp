@@ -99,7 +99,6 @@
 					}	
 					
 					$('#specialty').append(html);
-					
 				}
 			});
 	

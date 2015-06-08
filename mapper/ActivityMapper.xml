@@ -8,10 +8,10 @@
 	<!-- 添加活动 -->
 	<insert id="add" parameterType="Activity">
 		insert into t_activities( 
-		name, col_id, publish_time, date_time, end_date, location, aim, content, activity_type,
+		name, col_id, publish_time, date_time, end_date, location, aim, content, activity_type, second_level,
 		duration, act_object, number, contact, phone, assist, status ) 
 		values(#{name}, #{college.id}, #{publishTime}, #{dateTime},
-				#{endDate}, #{location}, #{aim}, #{content}, #{actType.id}, #{duration}, 
+				#{endDate}, #{location}, #{aim}, #{content}, #{actType.id}, #{secondLevel.id}, #{duration}, 
 				#{actObject}, #{number}, #{contact}, #{phone}, #{assist}, #{status} )	
 	</insert>
 	
@@ -35,7 +35,7 @@
 	<update id="update" parameterType="Activity">
 		update t_activities set 
 		name=#{name}, date_time=#{dateTime}, end_date=#{endDate},
-		location=#{location}, aim=#{aim}, content=#{content}, activity_type=#{actType.id}, duration=#{duration},
+		location=#{location}, aim=#{aim}, content=#{content}, activity_type=#{actType.id}, second_level=#{secondLevel.id}, duration=#{duration},
 		act_object=#{actObject}, number=#{number}, contact=#{contact}, phone=#{phone}, assist=#{assist}, status=#{status}
 		where id=#{id}
 	</update>
@@ -56,7 +56,9 @@
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
-		inner join t_activity_type a_type on act.activity_type=a_type.id limit #{pageOffset}, #{pageSize};	
+		inner join t_activity_type a_type on act.activity_type=a_type.id
+		inner join t_secondlevels s_level on act.second_level=s_level.id
+		limit #{pageOffset}, #{pageSize};	
 	</select>
 	
 	<!-- 分页查询所有Activity -->
@@ -110,9 +112,13 @@
 	<select id="queryById" parameterType="int" resultMap="ActivityResultMap">
 		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status, act.reason,
-		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
+		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name, 
+		s_level.id s_level_id, s_level.name s_level_name, s_level.superiorId superiorId 
+		from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
-		inner join t_activity_type a_type on act.activity_type=a_type.id where act.id=#{id};
+		inner join t_activity_type a_type on act.activity_type=a_type.id 
+		inner join t_secondlevels s_level on act.second_level=s_level.id
+		where act.id=#{id};
 	</select>
 	
 	<!-- 根据id查询截止日期 -->
@@ -147,6 +153,12 @@
 			<id column="a_type_id" property="id"/>
 			<result column="a_type_name" property="name"/>
 		</association>
+		<association property="secondLevel" javaType="SecondLevel">
+			<id column="s_level_id" property="id"/>
+			<result column="s_level_name" property="name"/>
+			<result column="superiorId" property="superior"/>
+		</association>
+		
 	</resultMap>
 	
 </mapper>  

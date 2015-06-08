@@ -15,8 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
+import com.ccms.persistence.pojo.SecondLevel;
 import com.ccms.persistence.pojo.Specialty;
 import com.ccms.service.FileEntityService;
+import com.ccms.service.SecondLevelService;
 import com.ccms.service.SpecialtyService;
 import com.ccms.util.DateUtils;
 
@@ -24,11 +26,13 @@ import com.ccms.util.DateUtils;
 public class CommonController {
 	@Autowired
 	private SpecialtyService specialtyService;
+	@Autowired
+	private SecondLevelService secondLevelService;
 	
 	@Autowired
 	private FileEntityService fileService;
 	/**
-	 * 根据学院id获取该学院的所有抓野
+	 * 根据学院id获取该学院的所有专业
 	 * @param collegeId
 	 * @return
 	 */
@@ -36,6 +40,17 @@ public class CommonController {
 	@ResponseBody
 	public List<Specialty> getAllSpecialty(Integer collegeId) {
 		return specialtyService.getAllByCollegeId(collegeId);
+	}
+	
+	/**
+	 * 根据一级分类id获得所有二级分类
+	 * @param superiorId
+	 * @return
+	 */
+	@RequestMapping("/secondLevels")
+	@ResponseBody
+	public List<SecondLevel> listAll(Integer superiorId) {
+		return secondLevelService.listAll(superiorId);
 	}
 	
 	/**

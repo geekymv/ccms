@@ -116,6 +116,7 @@ function pubActivity() {
 				'endDate': $('#endDate').val(),
 				'location': $('#location').val(),
 				'actType.id': $('#actType').val(),
+				'secondLevel.id': $('#secondLevel').val(),
 				'aim': aim_editor.html(),
 				'content': content_editor.html(),
 				'duration': $('#duration').val(),

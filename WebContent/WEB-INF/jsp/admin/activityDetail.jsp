@@ -84,17 +84,18 @@
                     		
                     	</tr>
                     	<tr>
-                    		<td>
+                    		<td colspan="2">
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="location">
 	                                	活动地点<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	<input type="text" name="location" id="location" class="input-medium" />
+	                                	<input type="text" name="location" id="location" style="width: 575px;" class="input-medium" />
 	                                </div>
 	                            </div>
                     		</td>
-                    		
+                    	</tr>
+                    	<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="actType">
@@ -106,8 +107,15 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    		
-                    	</tr>
+                    		<td id="second_level">
+	                    		<div class="par control-group my-par">
+	                                <div class="controls">
+	                                	 <select name="secondLevel.id" id="secondLevel" class="uniformselect" style="width: 160px;">
+			                            </select>
+	                                </div>
+	                            </div>
+                    		</td>
+						</tr>
                     	<tr>
                     		<td colspan="2">
                     			<div class="par control-group my-par">
@@ -307,6 +315,7 @@
 						'endDate': $('#endDate').val(),
 						'location': $('#location').val(),
 						'actType.id': $('#actType').val(),
+						'secondLevel.id': $('#secondLevel').val(),
 						'aim': aim_editor.html(),
 						'content': content_editor.html(),
 						'duration': $('#duration').val(),
@@ -339,7 +348,8 @@
 				var location = result.location;
 				var aim = result.aim;
 				var content = result.content;
-				var actTypeId = result.actType.id; // 加分类型
+				var actTypeId = result.actType.id; // 加分类型id
+				var secondLevelId = result.secondLevel.id; // 二级分类类型id
 				var duration = result.duration;
 				var actObject = result.actObject;
 				var number = result.number;
@@ -430,6 +440,7 @@
 				jQuery.ajax({
 					url: contextPath + "/activityTypes",
 					dataType: "json",
+					async: false,
 					success: function(data){
 						var html = "";
 						for(var i = 0; i < data.length; i++) {
@@ -444,10 +455,56 @@
 					}
 				});
 				
+				// 加载二级分类类型
+				var superiorId = $('#actType').val();
+				/**
+				 * 根据一级分类id获取所有二级分类
+				 */
+				$.post(contextPath + "/secondLevels", {'superiorId': superiorId}).done(function(data) {
+					var len = data.length;
+					var html = '';
+					if(len == 0) {
+						html = '<option value="1">其他</option>';	
+					}
+					for(var i = 0; i < len; i++) {
+						var secondLevel = data[i];
+						var op = '<option value="'+secondLevel.id+'">'+secondLevel.name+'</option>';	
+						if(secondLevelId == secondLevel.id) {
+							op = '<option value="'+secondLevel.id+'" selected="selected">'+secondLevel.name+'</option>';
+						}
+						html += op;
+					}
+					
+					$('#secondLevel').html(html);
+					
+				});
+				
+				
 			}).fail(function(){
 				alert('服务器端错误！');				
 			});
 			
+			/**
+			 * 一级分类改变事件
+			 */
+			$("#actType").change(function(){
+				var superiorId = $('#actType').val();
+				/**
+				 * 根据一级分类id获取所有二级分类
+				 */
+				$.post(contextPath + "/secondLevels", {'superiorId': superiorId}).done(function(data) {
+					var len = data.length;
+					var html = '';
+					if(len == 0) {
+						html = '<option value="1">其他</option>';	
+					}
+					for(var i = 0; i < len; i++) {
+						var secondLevel = data[i];
+						html += '<option value="'+secondLevel.id+'">'+secondLevel.name+'</option>';	
+					}
+					$('#secondLevel').html(html);
+				});
+			});
 		});
 		
 		

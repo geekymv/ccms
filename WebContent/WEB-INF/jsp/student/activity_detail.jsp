@@ -43,6 +43,10 @@
     		float: right;
     	}
     	
+    	span.td_title {
+    		font-weight: bold;
+    	}
+    	
     </style>
     
   </head>
@@ -58,47 +62,47 @@
 			<input type="hidden" id="is_comment" value="${comment }"/>
 			<table class="table table-bordered table-hover table-condensed table-responsive" style="width: 600px; text-align: left;">
 				<tr>
-			    	<th colspan="2">
-			    		活动名称：${activity.name }
+			    	<td colspan="2">
+			    		<span class="td_title">活动名称：</span>${activity.name }
 			    		<input type="hidden" id="activityId" value="${activity.id }"/>
-			    	</th>
+			    	</td>
 			    </tr>  
 			    <tr>
-			        <th colspan="2">发布单位：${activity.college.name }</th>
+			        <td colspan="2"><span class="td_title">发布单位：</span>${activity.college.name }</td>
 			    </tr>
 			    <tr>
-			    	<th colspan="2" id="actObject">活动对象：${activity.actObject }</th>
+			    	<td colspan="2" id="actObject"><span class="td_title">活动对象：</span>${activity.actObject }</td>
 			    </tr>  
 			    <tr>
-			    	<th colspan="2" >活动时间：${activity.dateTime }</th>
+			    	<td colspan="2" ><span class="td_title">活动时间：</span>${activity.dateTime }</td>
 			    </tr> 
 			    <tr>
-			    	<th colspan="2">活动类型：${activity.actType.name }，&nbsp;&nbsp;活动加分时长：${activity.duration }小时</th>
+			    	<td colspan="2"><span class="td_title">活动类型：</span>${activity.actType.name }，&nbsp;&nbsp;<span class="td_title">活动加分时长：</span>${activity.duration }小时</td>
 			    </tr> 
 			    <tr>
-			    	<th>活动地点：${activity.location }</th>
+			    	<td><span class="td_title">活动地点：</span>${activity.location }</td>
 			    </tr> 
 		      	<tr>
-		        	<th>参与人数：${activity.number }人</th>
+		        	<td><span class="td_title">参与人数：</span>${activity.number }人</td>
 		      	</tr>  
 		      	<tr>
-		        	<th>联系人：${activity.contact }，&nbsp;&nbsp;联系方式：${activity.phone }</th>
+		        	<td><span class="td_title">联系人：</span>${activity.contact }，&nbsp;&nbsp;<span class="td_title">联系方式：</span>${activity.phone }</td>
 		      	</tr> 
 		      	<tr>
-		        	<th id='endDate'></th>
+		        	<td id='endDate'></td>
 		      	</tr> 
 		      	<tr>
-		        	<th colspan="2" style="text-align: left;">活动目的：${activity.aim }</th>
+		        	<td colspan="2" style="text-align: left;"><span class="td_title">活动目的：</span>${activity.aim }</td>
 		      	</tr> 
 		      	<tr>
-		        	<th colspan="2" style="text-align: left;">活动内容：${activity.content }</th>
+		        	<td colspan="2" style="text-align: left;"><span class="td_title">活动内容：</span>${activity.content }</td>
 		      	</tr> 
 		      	 <tr>
-			    	<th colspan="2" id='publishTime'></th>
+			    	<td colspan="2" id='publishTime'></td>
 			    </tr>
 		      	
 		      	<tr>
-		      		<th colspan="2" id='apply_activity' style="text-align: center;">
+		      		<td colspan="2" id='apply_activity' style="text-align: center;">
 		      			<c:if test="${isApplyed == 'isApplyed' }">
 		      				<span style="color:blue;">已报名</span>
 			      			<button class="btn btn-primary" id="cancel">取消报名</button>
@@ -106,28 +110,28 @@
 		      			<c:if test="${isApplyed == 'unApply' }">
 		      				<button class="btn btn-primary" id="apply">我要报名</button>
 		      			</c:if>
-		      		</th>
+		      		</td>
 		      	</tr>
 		      	<tr id="comment_tip">
-		      		<th colspan="2" style="text-align: left;">
-		      			评论
-		      		</th>
+		      		<td colspan="2" style="text-align: left;">
+		      			<span class="td_title">评论</span>
+		      		</td>
 		      	</tr>
 		      	<tr id="comment_tr">
-		      		<th colspan="2">
+		      		<td colspan="2">
 		      			<textarea cols="30" rows="3" name="content" id="content" style="width: 800px;"></textarea>
-		      		</th>
+		      		</td>
 		      	</tr>
 		      	<tr id="comment_btn">
-		      		<th colspan="2" style="text-align: right;">
+		      		<td colspan="2" style="text-align: right;">
 		      			<button class="btn btn-success" id="pub_comment">发表评论</button>
-		      		</th>
+		      		</td>
 		      	</tr>
 			</table>
 			
 			<div id="comment_list" style="border: 1px solid #ccc; width: 600px; margin-left: 285px;" >
 	      	</div>
-	      	<div style="width: 600px; margin-left: 285px; text-align: center;" >
+	      	<div id="load_div" style="width: 600px; margin-left: 285px; text-align: center;" >
 	      		<button id="load_more" class="btn btn-primary">更多评论</button>
 	      	</div>
 	      	
@@ -139,10 +143,10 @@
     	
 		$(function(){
 			var publishTime = '${activity.publishTime }';
-			$('#publishTime').html('发布时间：'+formatterDate(publishTime));
+			$('#publishTime').html('<span class="td_title">发布时间：</span>'+formatterDate(publishTime));
 			
 			var endDate = '${activity.endDate }';
-			$('#endDate').html('报名截止时间：'+formatterDate(endDate));
+			$('#endDate').html('<span class="td_title">报名截止时间：</span>'+formatterDate(endDate));
 			
 			// 活动对象
 			var actObject = '${activity.actObject }';
@@ -162,7 +166,7 @@
 				});
 			}
 			
-			$('#actObject').html('活动对象：'+newActObject);
+			$('#actObject').html('<span class="td_title">活动对象：</span>'+newActObject);
 			
 			// 判断是否可以评论
 			if($('#is_comment').val() == 'comment') {
@@ -170,11 +174,13 @@
 				$('#comment_list').show();
 				$('#comment_btn').show();
 				$('#comment_tip').show();
+				$('#load_div').show();
 			}else {
 				$('#comment_tr').hide();
 				$('#comment_list').hide();
 				$('#comment_btn').hide();
 				$('#comment_tip').hide();
+				$('#load_div').hide();
 			}
 			
 			// 报名活动
@@ -221,44 +227,51 @@
 			
 			// 发表评论
 			$('#pub_comment').click(function() {
+				var content = content_editor.html();
+				if($.trim(content) == '') {
+					alert('内容不能为空！');
+					return;
+				}
+				if(content.length > 500) {
+					alert('评论内容不能超过500字！');
+					return;
+				}
+				
 				var data = {
 					'objectId': $('#activityId').val(),
 					'category': 1,
 					'userId': '${user.id}',
 					'content': content_editor.html()
 				};	
-				
 				$.post(contextPath+"/comment/publish", data).done(function(msg){
 					if(msg == 'success') {
 						alert('评论成功！');
 						window.location.reload();
 					}
 				}).fail(function(msg) {
-					
+					alert('服务器端错误！');
 				});		
 			});
 			
+			
 			commentList();
 			
-			// 加载评论列表
+			// 加载更多评论列表
 			$('#load_more').click(function(){
 				pageIndex++;
 				commentList();
 			});
-		
 		});    	
 		
-		
-		
+		// 加载评论列表
 		function commentList() {
 			$.post(contextPath+"/comment/pager", {'pageIndex': pageIndex, 'activityId': $('#activityId').val()}).done(function(data){
 				var comments = data.datas;
 				var len = comments.length;
-				
 				var html = '';
 				
 				if(len == 0) {
-					
+					html = '暂无评论';
 				}else {
 					if(len < 10) {
 						$('#load_more').hide();
@@ -271,7 +284,9 @@
 									+ '<span class="pub_date">'+formatterDate(comment.comDate)+'</span>'	
 								+'</div>'
 								+ '<div class="content">&nbsp;&nbsp;'+comment.content+'</div>'	
+								/*
 								+ '<div class="answer"><a style="javascript:void(0);">回复</a></div>'	
+								*/
 								+ '<hr/>'
 							+ '</div>';
 					}

@@ -109,6 +109,7 @@
 				        url: contextPath + "/admin/apply_students",
 				        params: {"actId": '${actId}'},
 				        callback: function (result) {
+				        	debugger
 				        	var datas = result.datas;
 				        	var len = datas.length;
 				        	if(len == 0) {

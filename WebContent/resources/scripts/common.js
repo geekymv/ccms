@@ -13,4 +13,34 @@ jQuery(function() {
 			jQuery("#actType").html(html);
 		}
 	});
+	
+	$('#second_level').hide();
+	
+	/**
+	 * 一级分类改变事件
+	 */
+	$("#actType").change(function(){
+		var superiorId = $('#actType').val();
+		$('#second_level').show();
+		/**
+		 * 根据一级分类id获取所有二级分类
+		 */
+		$.post(contextPath + "/secondLevels", {'superiorId': superiorId}).done(function(data) {
+			var len = data.length;
+			var html = '';
+			if(len == 0) {
+				html = '<option value="1">其他</option>';	
+			}
+			for(var i = 0; i < len; i++) {
+				var secondLevel = data[i];
+				html += '<option value="'+secondLevel.id+'">'+secondLevel.name+'</option>';	
+			}
+			
+			$('#secondLevel').html(html);
+			
+		});
+	});
+	
+
+	
 });

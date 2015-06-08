@@ -82,17 +82,18 @@
                     		
                     	</tr>
                     	<tr>
-                    		<td>
+                    		<td colspan="2">
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="location">
 	                                	活动地点<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	<input type="text" name="location" id="location" class="input-medium" />
+	                                	<input type="text" name="location" id="location" style="width: 575px;" class="input-medium" />
 	                                </div>
 	                            </div>
                     		</td>
-                    		
+                    	</tr>
+						<tr>
                     		<td>
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="actType">
@@ -104,8 +105,16 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    		
-                    	</tr>
+                    		<td id="second_level">
+	                    		<div class="par control-group my-par">
+	                                <div class="controls">
+	                                	 <select name="secondLevel.id" id="secondLevel" class="uniformselect" style="width: 160px;">
+			                            </select>
+	                                </div>
+	                            </div>
+                    		</td>
+						</tr>
+
                     	<tr>
                     		<td colspan="2">
                     			<div class="par control-group my-par">
@@ -156,9 +165,6 @@
 	                                	参与对象<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-	                                	<!-- 
-	                                	<input type="text" name="actObject" id="actObject" class="input-medium" />
-	                                	 -->
 	                                	 <select name="actObject" id="actObject" style="width: 160px;">
 	                                	 	<option value="-1">全校学生</option>
 	                                	 	<option value="${user.id }">${user.name }学生</option>

@@ -134,3 +134,14 @@ create table t_comments(
   com_date varchar(14) /*评论时间*/
 );
 
+/**
+ * 活动二级分类
+ */
+create table t_secondLevels(
+	id int primary key auto_increment,
+	name varchar(20), /*名称*/
+	superiorId int /*上级id*/
+);
+
+
+

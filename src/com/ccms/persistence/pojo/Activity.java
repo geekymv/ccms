@@ -17,6 +17,7 @@ public class Activity {
 	private String aim; /*目的*/
 	private String content; /*活动内容*/
 	private ActivityType actType;/*活动加分类型*/
+	private SecondLevel secondLevel; /*加分二级分类*/
 	private Float duration;  /*活动加分时长*/
 	private String actObject; /*参与对象*/
 	private Integer number; /*参与人数*/
@@ -91,6 +92,12 @@ public class Activity {
 	}
 	public void setActType(ActivityType actType) {
 		this.actType = actType;
+	}
+	public SecondLevel getSecondLevel() {
+		return secondLevel;
+	}
+	public void setSecondLevel(SecondLevel secondLevel) {
+		this.secondLevel = secondLevel;
 	}
 	public Float getDuration() {
 		return duration;
