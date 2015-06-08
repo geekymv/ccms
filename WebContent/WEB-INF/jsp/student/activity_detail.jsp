@@ -77,7 +77,7 @@
 			    	<td colspan="2" ><span class="td_title">活动时间：</span>${activity.dateTime }</td>
 			    </tr> 
 			    <tr>
-			    	<td colspan="2"><span class="td_title">活动类型：</span>${activity.actType.name }，&nbsp;&nbsp;<span class="td_title">活动加分时长：</span>${activity.duration }小时</td>
+			    	<td colspan="2"><span class="td_title">活动类型：</span>${activity.actType.name }、${activity.secondLevel.name }，&nbsp;&nbsp;<span class="td_title">活动加分时长：</span>${activity.duration }小时</td>
 			    </tr> 
 			    <tr>
 			    	<td><span class="td_title">活动地点：</span>${activity.location }</td>
@@ -198,6 +198,8 @@
 							window.location.reload();	// 刷新当前页面
 						}else if(data == 'fail') {
 							alert('报名失败！');
+						}else if(data == 'overtimes') {
+							alert('该类活动你已参加过2次！');
 						}
 					}
 				});

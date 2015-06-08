@@ -25,8 +25,8 @@ import com.ccms.util.SysCode;
 public class ActivityItemServiceImpl implements ActivityItemService {
 	@Autowired
 	private ActivityDAO activityDAO;
-	@Autowired
-	private ActivityItemDAO actItemDAO;
+//	@Autowired
+//	private ActivityItemDAO actItemDAO;
 	@Autowired
 	private StudentDAO studentDAO;
 	@Autowired
@@ -39,7 +39,7 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 		int activityId = activity.getId();
 		
 		// 判断学生是否已经报名了
-		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(
+		ActivityItem actItem = activityItemDAO.queryByActIdAndStuId(
 				activity.getId(), student.getId());
 
 		if (actItem == null) { // 学生还没有报名
@@ -49,9 +49,15 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 			int totalNumber = act.getNumber();	// 参与人数
 			
 			// 计算已报名人数
-			int total = actItemDAO.queryAllActivityItemByActivityId(activityId);
+			int total = activityItemDAO.queryAllActivityItemByActivityId(activityId);
 			if(total >= totalNumber) {	// 人数已满 
 				return "overflow";
+			}
+			
+			// 根据活动id判断学生报名这类活动活的二级分类是否超过2次
+			int times = activityItemDAO.getTotalTimes(student.getId(), activity.getSecondLevel().getId());
+			if(times >= 2) {
+				return "overtimes";	// 超过两次
 			}
 			
 			actItem = new ActivityItem();
@@ -61,7 +67,7 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 			actItem.setApplyTime(DateUtils.getCurrentGaDate());
 			actItem.setDuration(activity.getDuration());
 			
-			int res = actItemDAO.add(actItem);
+			int res = activityItemDAO.add(actItem);
 			if (res == 1) {
 				return "success";
 			}else {
@@ -74,7 +80,7 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 
 	@Override
 	public boolean isApplyed(Activity activity, Student student) {
-		ActivityItem actItem = actItemDAO.queryByActIdAndStuId(
+		ActivityItem actItem = activityItemDAO.queryByActIdAndStuId(
 				activity.getId(), student.getId());
 
 		return actItem == null ? false : true;
@@ -82,8 +88,7 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 
 	@Override
 	public List<ActivityItem> queryAllActivityItem(Integer studentId) {
-
-		return actItemDAO.queryAllActivityItem(studentId);
+		return activityItemDAO.queryAllActivityItem(studentId);
 	}
 
 	@Override
@@ -101,7 +106,7 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 		// 获得学生受助等级
 		Rank rank = student.getRank();
 		
-		List<ActivityItemVO> itemVOs = actItemDAO.queryActivityItemVO(dto.getStudentId(), dto.getStartDate(), dto.getEndDate());
+		List<ActivityItemVO> itemVOs = activityItemDAO.queryActivityItemVO(dto.getStudentId(), dto.getStartDate(), dto.getEndDate());
 		List<RankActivityTypeVO> rankActivityTypeVOs = rankActivityTypeDAO.queryByRankId(rank.getId());
 		
 		for (RankActivityTypeVO rankActivityTypeVO : rankActivityTypeVOs) {

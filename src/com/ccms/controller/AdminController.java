@@ -204,6 +204,15 @@ public class AdminController {
 	}
 	
 	/**
+	 * 设置活动二级类别
+	 * @return
+	 */
+	@RequestMapping("/admin/setsecondlevel")
+	public String setSecondLevel() {
+		return "admin/setSecondLevel";
+	}
+	
+	/**
 	 * 导入学生名单
 	 */
 	@RequestMapping("/admin/import")

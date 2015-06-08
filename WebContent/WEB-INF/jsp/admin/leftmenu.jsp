@@ -60,8 +60,15 @@
             <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">时间认证</a></li>
             <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">名单导入</a></li>
             <li><a href="${pageContext.request.contextPath }/admin/doc">文档管理</a></li>
+            <li class="dropdown"><a href="">系统设置</a>
+            	<ul>
+					<li><a href="${ctx }/admin/setsecondlevel">设置活动二级类别</a></li>            	
+            	</ul>
+            </li>
           </ul>
       </li>
+      
+      <!-- 
       <li class="dropdown"><a href=""><span class="iconfa-th-list"></span> 年度考核</a>
       	<ul>
           	<li><a href="table-static.html">考核时间</a></li>
@@ -78,6 +85,7 @@
            </li>
           </ul>
       </li>
+       -->
       </c:if>
   </ul>
   </div><!--leftmenu-->

@@ -59,6 +59,15 @@ public interface ActivityItemDAO extends BaseDAO<ActivityItem> {
 	 * 根据id更新状态
 	 */
 	public void auditActivityItem(ActivityItem item);
+	
+	
+	/**
+	 * 根据学生id和活动二级类别id获得学生参加该类别活动次数
+	 * @param stuId
+	 * @param secondLevel
+	 * @return
+	 */
+	public int getTotalTimes(@Param("stuId")Integer stuId, @Param("secondLevel")Integer secondLevel);
 }
 
 

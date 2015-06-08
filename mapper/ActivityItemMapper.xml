@@ -26,6 +26,13 @@
 		select id, audit from t_activity_item where act_id=#{activityId} and stu_id=#{studentId};
 	</select>
 	
+	<select id="getTotalTimes" resultType="int">
+		select count(*) from t_activity_item item
+		inner join t_activities act
+		on item.act_id = act.id
+		where item.stu_id = #{stuId} and act.second_level = #{secondLevel}
+	</select>
+	
 	<!--  根据活动id和学生id删除  -->
 	<delete id="deleteByActIdAndStuId">
 		delete from t_activity_item where act_id=#{activityId} and stu_id=#{studentId}; 

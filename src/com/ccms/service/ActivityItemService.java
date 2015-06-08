@@ -2,6 +2,8 @@ package com.ccms.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ccms.persistence.dto.ActivityItemDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
@@ -54,6 +56,7 @@ public interface ActivityItemService {
 	 * 根据id更新状态
 	 */
 	public void auditActivityItem(ActivityItem item);
+
 }
 
 
