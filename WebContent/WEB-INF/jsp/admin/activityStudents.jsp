@@ -109,7 +109,6 @@
 				        url: contextPath + "/admin/apply_students",
 				        params: {"actId": '${actId}'},
 				        callback: function (result) {
-				        	debugger
 				        	var datas = result.datas;
 				        	var len = datas.length;
 				        	if(len == 0) {
@@ -117,7 +116,7 @@
 				        		$('tbody').html('<div style="text-align: center; color: blue">暂无学生报名！</div>');
 				        	}else {
 				        		$('thead').show();
-				        		var html = "";
+				        		var html = '';
 				        		for(var i = 0; i < len; i++) {
 				        			var stu = datas[i];
 				        			
@@ -172,7 +171,10 @@
 				        			}
 				        			
 				        		}
-				        		
+				        		if(html == '') {
+				        			$('thead').hide();
+									html = '<div style="text-align: center; color: blue">暂无通过认证的学生！</div>';				        			
+				        		}
 				        		$('#t_body').html(html);
 				        	}
 				        }

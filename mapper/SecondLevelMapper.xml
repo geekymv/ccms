@@ -9,5 +9,17 @@
 	<select id="listAll" resultType="SecondLevel">
 		select * from t_secondlevels where superiorId = #{superiorId};
 	</select>
+	
+	<!-- 根据名称查询 -->
+	<select id="queryByName" resultType="SecondLevel">
+		select * from t_secondlevels where name = #{name};
+	</select>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="SecondLevel">
+		update t_secondlevels set name = #{name} where id = #{id}
+	</update>
+	
+	
  	 
 </mapper>  

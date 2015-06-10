@@ -19,13 +19,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
+import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.Rank;
+import com.ccms.persistence.pojo.SecondLevel;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.ActivityItemService;
 import com.ccms.service.ActivityService;
+import com.ccms.service.ActivityTypeService;
 import com.ccms.service.CollegeService;
 import com.ccms.service.RankService;
+import com.ccms.service.SecondLevelService;
 import com.ccms.service.SpecialtyService;
 import com.ccms.service.StudentService;
 
@@ -43,6 +47,10 @@ public class AdminController {
 	private StudentService studentService;
 	@Autowired
 	private ActivityItemService activityItemService;
+	@Autowired
+	private ActivityTypeService activityTypeService;
+	@Autowired
+	private SecondLevelService secondLevelService;
 	
 	/**
 	 * 管理员登录成功
@@ -204,12 +212,54 @@ public class AdminController {
 	}
 	
 	/**
-	 * 设置活动二级类别
+	 * 设置活动类别
 	 * @return
 	 */
-	@RequestMapping("/admin/setsecondlevel")
+	@RequestMapping("/admin/setCategory")
 	public String setSecondLevel() {
-		return "admin/setSecondLevel";
+		return "admin/setCategory";
+	}
+	
+	/**
+	 * 加载所有一级类别
+	 * @return
+	 */
+	@RequestMapping(value="/admin/categories", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ActivityType> categories() {
+		return activityTypeService.getAll();
+	}
+
+	/**
+	 * 跳转到二级分类页面
+	 * @return
+	 */
+	@RequestMapping(value="/admin/secondLevels/{superiorId}", method=RequestMethod.GET)
+	public String secondLevels(@PathVariable("superiorId")Integer superiorId, Model model) {
+		model.addAttribute("superiorId", superiorId);
+		return "admin/secondLevels";
+	}
+	
+	/**
+	 * 根据一级活动类别id加载二级类别
+	 * @param superiorId
+	 * @return
+	 */
+	@RequestMapping(value="/admin/secondLevels", method=RequestMethod.POST)
+	@ResponseBody
+	public List<SecondLevel> secondLevels(Integer superiorId) {
+		return secondLevelService.listAll(superiorId);
+	}
+
+	/**
+	 * 编辑二级分类
+	 * @param level
+	 * @return
+	 */
+	@RequestMapping(value="/admin/editLevel", method=RequestMethod.POST)
+	@ResponseBody
+	public String editLevel(SecondLevel level) {
+		return secondLevelService.update(level);
 	}
 	
 	/**

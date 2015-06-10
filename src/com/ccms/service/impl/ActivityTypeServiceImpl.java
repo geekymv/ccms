@@ -19,6 +19,11 @@ public class ActivityTypeServiceImpl implements ActivityTypeService {
 		
 		return activityTypeDAO.list();
 	}
+
+	@Override
+	public ActivityType getById(Integer id) {
+		return activityTypeDAO.queryById(id);
+	}
 	
 	
 }

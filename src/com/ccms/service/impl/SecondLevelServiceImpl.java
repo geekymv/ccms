@@ -19,4 +19,14 @@ public class SecondLevelServiceImpl implements SecondLevelService {
 		return secondLevelDAO.listAll(superiorId);
 	}
 
+	@Override
+	public String update(SecondLevel secondLevel) {
+		SecondLevel level = secondLevelDAO.queryByName(secondLevel.getName());
+		if(level != null) {
+			return "isexist";
+		}
+		int res = secondLevelDAO.update(secondLevel);
+		return res == 1 ? "success" : "fail";
+	}
+
 }

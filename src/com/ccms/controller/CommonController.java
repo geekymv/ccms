@@ -1,26 +1,35 @@
 package com.ccms.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
 import com.ccms.persistence.pojo.SecondLevel;
 import com.ccms.persistence.pojo.Specialty;
+import com.ccms.service.ActivityTypeService;
+import com.ccms.service.CommonService;
 import com.ccms.service.FileEntityService;
 import com.ccms.service.SecondLevelService;
 import com.ccms.service.SpecialtyService;
 import com.ccms.util.DateUtils;
+import com.ccms.util.RandomValidateCode;
 
 @Controller
 public class CommonController {
@@ -28,9 +37,12 @@ public class CommonController {
 	private SpecialtyService specialtyService;
 	@Autowired
 	private SecondLevelService secondLevelService;
-	
 	@Autowired
 	private FileEntityService fileService;
+	@Autowired
+	private ActivityTypeService activityTypeService;
+	@Autowired
+	private CommonService commonService;
 	/**
 	 * 根据学院id获取该学院的所有专业
 	 * @param collegeId
@@ -51,6 +63,17 @@ public class CommonController {
 	@ResponseBody
 	public List<SecondLevel> listAll(Integer superiorId) {
 		return secondLevelService.listAll(superiorId);
+	}
+
+	/**
+	 * 根据id加载活动一级类型
+	 * @param activityTypeId
+	 * @return
+	 */
+	@RequestMapping("/getActivityTypeById")
+	@ResponseBody
+	public ActivityType getActivityTypeById(Integer activityTypeId) {
+		return activityTypeService.getById(activityTypeId);
 	}
 	
 	/**
@@ -114,6 +137,28 @@ public class CommonController {
 		}
 		
 		return "fail";
+	}
+	
+	/**
+	 * 生成验证码
+	 * @param request
+	 * @param response
+	 * @param session
+	 */
+	@RequestMapping("/image")
+	public void image(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		try {
+			String str = RandomValidateCode.createRandomString();
+			BufferedImage image = commonService.createImage();
+			
+			session.removeAttribute("authCode");
+			session.setAttribute("authCode", str);
+			
+			ImageIO.write(image, "JPEG", response.getOutputStream());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

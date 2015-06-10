@@ -14,4 +14,11 @@ public interface SecondLevelDAO extends BaseDAO<SecondLevel> {
 	 */
 	public List<SecondLevel> listAll(Integer superiorId);
 	
+	/**
+	 * 根据名称查询
+	 * @param name
+	 * @return
+	 */
+	public SecondLevel queryByName(String name);
+	
 }

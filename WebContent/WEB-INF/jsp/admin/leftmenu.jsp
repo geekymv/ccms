@@ -62,7 +62,7 @@
             <li><a href="${pageContext.request.contextPath }/admin/doc">文档管理</a></li>
             <li class="dropdown"><a href="">系统设置</a>
             	<ul>
-					<li><a href="${ctx }/admin/setsecondlevel">设置活动二级类别</a></li>            	
+					<li><a href="${ctx }/admin/setCategory">设置活动类别</a></li>            	
             	</ul>
             </li>
           </ul>

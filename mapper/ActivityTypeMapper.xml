@@ -7,7 +7,13 @@
 	
 	<!-- 查询所有的活动类型 -->
 	<select id="list" resultType="ActivityType">
-		select * from t_activity_type
+		select * from t_activity_type type order by type.id
 	</select>
+	
+	<!-- 根据id查询 -->
+	<select id="queryById" resultType="ActivityType">
+		select * from t_activity_type type where type.id = #{id}
+	</select>
+	
  	 
 </mapper>  

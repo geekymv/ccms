@@ -13,4 +13,11 @@ public interface SecondLevelService {
 	 */
 	public List<SecondLevel> listAll(Integer superiorId);
 	
+	/**
+	 * 更新
+	 * @param secondLevel
+	 * @return
+	 */
+	public String update(SecondLevel secondLevel);
+	
 }
