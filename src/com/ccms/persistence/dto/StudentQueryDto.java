@@ -2,6 +2,10 @@ package com.ccms.persistence.dto;
 
 public class StudentQueryDto {
 	/**
+	 * 学年
+	 */
+	private String year;
+	/**
 	 * 学号
 	 */
 	private String num;
@@ -18,6 +22,13 @@ public class StudentQueryDto {
 	 * 等级id
 	 */
 	private Integer rankId;
+	
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
 	
 	public String getNum() {
 		return num;

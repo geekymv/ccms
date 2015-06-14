@@ -174,108 +174,13 @@
 					if('success' == msg) {
 						alert('添加成功！');
 						window.location.href = contextPath+'/admin/students';
+					}else if('fail' == msg) {
+						alert('添加失败！');
 					}
 				});
 			});
-			
-		});
-	
+		});	
 	</script>
-	
-	<!-- 
-	<script type="text/javascript">
-		var $ = jQuery;
-			
-		// 添加用工单位	
-		function addEmployer() {
-			var account = $('#account').val();
-			var password = $('#password').val();
-			var repassword = $('#repassword').val();
-			var name = $('#name').val();
-			var phone = $('#phone').val();
-			var contact = $('#contact').val();
-			var address = $('#address').val();
-			
-			if($.trim(account) == '') {
-				alert('账号为必填项！');
-				$('#account').focus();
-				return;
-			}
-			
-			if($.trim(password) == '') {
-				alert('密码为必填项！');
-				$('#password').focus();
-				return;
-			}
-			if(password.length < 6) {
-				alert('密码长度不能小于6！');
-				$('#password').focus();
-				return;
-			}
-			if(password.length > 15) {
-				alert('密码长度不能大于15！');
-				$('#password').focus();
-				return;
-			}
-			
-			if(password != repassword) {
-				alert('密码不一致！');
-				$('#repassword').focus();
-				return;
-			}
-			
-			if($.trim(account) == '') {
-				alert('账号为必填项！');
-				$('#account').focus();
-				return;
-			}
-			
-			if($.trim(name) == '') {
-				alert('名称为必填项！');
-				$('#name').focus();
-				return;
-			}
-			
-			var reg_phone = /(^(\d{3,4}-)?\d{7,8})$|(1[0-9]{10})/;	// 电话号码与手机号码同时验证
-			if(!reg_phone.test(phone)) {
-				alert('电话号码不合法！');
-				$('#phone').focus();
-				return;
-			}
-			
-			if($.trim(contact) == '') {
-				alert('联系人为必填项！');
-				$('#contact').focus();
-				return;
-			}
-			
-			if($.trim(address) == '') {
-				alert('地址为必填项！');
-				$('#address').focus();
-				return;
-			}
-		
-			
-			var data = get_form_data('#add_form');
-
-			jQuery.post(contextPath+"/admin/add_employer", data).done(function(msg) {
-				if(msg == 'nameIsExist') {
-					alert('名称已存在');
-				}else if(msg == 'accountIsExist') {
-					alert('账号已存在！');
-				}else if (msg == 'success') {
-					alert('添加成功！');
-				}else if (msg == 'fail') {
-					alert('添加失败！');
-				}
-				
-			}).fail(function(msg) {
-				
-			});
-		}
-	
-	</script>
-	 -->
 
 </body>
 </html>    

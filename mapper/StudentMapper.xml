@@ -163,6 +163,7 @@
 		inner join t_specialties spe on stu.spec_id=spe.id 
 		<where>
 			stu.col_id=#{colId} 
+			and stu.year = #{dto.year}
 			<if test="dto.num != null and dto.num != '' ">and stu.num=#{dto.num}</if>
 			<if test="dto.name != null and dto.name != '' ">and stu.name like "%"#{dto.name}"%"</if>
 			<if test="dto.specId != null and dto.specId != -1">and spe.id=#{dto.specId}</if>

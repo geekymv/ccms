@@ -45,11 +45,14 @@
                 <h4 class="widgettitle">学生列表</h4>
                 
                 <div class="controls" style="text-align: center;">
-                	<input type="text" id="query_num" style="width: 180px; height: 30px;" placeholder="学号"/>
-                	<input type="text" id="query_name" style="width: 180px; height: 30px;" placeholder="姓名"/>
+                	<span>学年</span>
+                	<select id="year" style="width: 120px; margin-bottom: 10px;">
+                	</select>&nbsp;&nbsp;
+                	<input type="text" id="query_num" style="width: 180px; height: 30px;" placeholder="学号"/>&nbsp;&nbsp;
+                	<input type="text" id="query_name" style="width: 180px; height: 30px;" placeholder="姓名"/>&nbsp;&nbsp;
                 	<select id="specialty" style="margin-bottom: 10px;">
                 		<option value="-1">专业</option>
-                	</select>
+                	</select>&nbsp;&nbsp;
 		        	<input type="button" class="btn btn-default" id="query" style="margin-bottom: 10px;" value="查询"/>
                 </div>
                 
@@ -68,7 +71,6 @@
                        </tr>
                     </thead>
                     <tbody id='t_body'>
-                    	
                     </tbody>
                 </table>
                 
@@ -88,6 +90,23 @@
 	<script type="text/javascript">
 		jQuery(function(){
 			var $ = jQuery;
+			
+			// 加载学年
+			$.ajax({
+				url: contextPath+"/recent5Years",
+				type: 'POST',
+				async: false,
+				dataType: 'json',
+				success: function(data){
+					var html = '';
+					for(var i = data.length-1; i >= 0; i--) {
+						var y = data[i];
+						html += '<option value="'+y+'">'+y+'</option>';					
+					}
+					$('#year').html(html);
+				}
+			});
+			
 			// 加载专业
 			$.post(contextPath+"/getAllSpecialty", {'collegeId': '${user.id}'}).done(function(data) {
 				var len = data.length;
@@ -122,14 +141,16 @@
 			$("#page").page({
 			    remote: {
 			        url: contextPath + "/admin/students",
-			        params: {"num": $('#query_num').val(), 'name': $('#query_name').val(), 'specId': $('#specialty').val()},
+			        params: {'year': $('#year').val(), "num": $('#query_num').val(), 'name': $('#query_name').val(), 'specId': $('#specialty').val()},
 			        callback: function (result) {
 			        	var datas = result.datas;
 			        	var len = datas.length;
 			        	var html = "";
 			        	if(len == 0) {
-							html = '暂无数据';			        		
+			        		$('thead').hide();
+							html = '<div style="text-align: center; color: blue;">暂无数据</div>';			        		
 			        	}else {
+			        		$('thead').show();
 			        		for(var i = 0; i < len; i++) {
 			        			var stu = datas[i];
 					        	var phone = stu.phone;

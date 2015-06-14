@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ccms.dao.RankDAO;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
