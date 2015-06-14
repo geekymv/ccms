@@ -12,7 +12,7 @@ public interface StudentService {
 	 * @param student
 	 * @return
 	 */
-	public boolean register(Student student);
+	public String register(Student student);
 	
 	/**
 	 * 学生登录
@@ -57,6 +57,14 @@ public interface StudentService {
 	 * @return
 	 */
 	public Pager<Student> findStudentsByColId(Pager<Student> pager, StudentQueryDto dto, Integer colId);
+
+	/**
+	 * 根据学号和学年判断学生是否已存在
+	 * @param num
+	 * @param year
+	 * @return
+	 */
+	public String isExist(String num, String year);
 	
 }
 

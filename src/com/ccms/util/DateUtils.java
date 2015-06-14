@@ -59,6 +59,29 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
 	}
 	
 	/**
+	 * 获得当年的学年 2014--2015
+	 * @return
+	 */
+	public static List<Integer> getCurrentYear() {
+		// 当前时间		
+		String currentDate = new SimpleDateFormat(FORMAT_YEAR_MONTH).format(new Date());
+		Integer currentYear = Integer.valueOf(currentDate.substring(0, 4));
+		Integer currentMonth = Integer.valueOf(currentDate.substring(5));
+
+		int startDate = 0;
+		int endDate = 0;
+		
+		if(currentMonth >= 9) {
+			startDate = currentYear;
+			endDate = currentYear + 1;
+		}else {
+			startDate = currentYear - 1;
+			endDate = currentYear;
+		}
+		return Arrays.asList(startDate, endDate);
+	}
+	
+	/**
 	 * 获得最近5学年的
 	 * @return
 	 */
@@ -894,8 +917,9 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
 	
 	
 	public static void main(String[] args) {
-		getRecent5XueYear();
+	//	getRecent5XueYear();
 		
+		System.out.println(DateUtils.getCurrentYear());
 		
 	}
 	

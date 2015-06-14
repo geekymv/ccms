@@ -239,6 +239,35 @@ public class CollegeController {
 		return studentService.updatePartInfo(student);
 	}
 	
+	/**
+	 * 跳转到添加学生页面
+	 * @return
+	 */
+	@RequestMapping(value="/admin/addStudent", method=RequestMethod.GET)
+	public String addStudent() {
+		return "admin/add_student";
+	}
+	
+	/**
+	 * 学院添加学生请求
+	 * @param student
+	 * @return
+	 */
+	@RequestMapping(value="/admin/addStudent", method=RequestMethod.POST)
+	@ResponseBody
+	public String addStudent(Student student, HttpSession session) {
+		College college = (College) session.getAttribute("user");
+		student.setCollege(college);
+		
+		return studentService.register(student);
+	}
+	
+	@RequestMapping(value="/studentIsExist", method=RequestMethod.POST)
+	@ResponseBody
+	public String studentIsExist(String num, String year) {
+		return studentService.isExist(num, year);
+	}
+	
 }
 
 

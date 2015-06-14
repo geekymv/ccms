@@ -12,20 +12,22 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ccms.dao.RankDAO;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
+import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.SecondLevel;
 import com.ccms.persistence.pojo.Specialty;
 import com.ccms.service.ActivityTypeService;
 import com.ccms.service.CommonService;
 import com.ccms.service.FileEntityService;
+import com.ccms.service.RankService;
 import com.ccms.service.SecondLevelService;
 import com.ccms.service.SpecialtyService;
 import com.ccms.util.DateUtils;
@@ -43,6 +45,9 @@ public class CommonController {
 	private ActivityTypeService activityTypeService;
 	@Autowired
 	private CommonService commonService;
+	@Autowired
+	private RankService rankService;
+	
 	/**
 	 * 根据学院id获取该学院的所有专业
 	 * @param collegeId
@@ -159,6 +164,16 @@ public class CommonController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 获取所有的受助等级
+	 * @return
+	 */
+	@RequestMapping("/getRanks")
+	@ResponseBody
+	public List<Rank> getAll() {
+		return rankService.findAll();
 	}
 	
 }

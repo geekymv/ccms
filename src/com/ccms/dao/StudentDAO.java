@@ -19,6 +19,14 @@ public interface StudentDAO extends BaseDAO<Student>{
 	public Student queryByNum(String num);
 	
 	/**
+	 * 根据学号和学年查询学生
+	 * @param num
+	 * @param year
+	 * @return
+	 */
+	public Student queryNumAndYear(@Param("num")String num, @Param("year")String year);
+	
+	/**
 	 * 根据学号和密码查询
 	 * @param num
 	 * @param pwd

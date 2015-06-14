@@ -50,13 +50,13 @@ create table t_access_log(
 	status int /*用户状态：已登录1， 未登录0*/
 );
 
-/*字典表
-create table t_dicts(
-	id int primary key auto_increment,
-	name varchar(20),
-	type_ varchar(20)
+/*字典表*/
+create table t_dicts (
+  id int primary key auto_increment, 
+  name varchar(30), /*名称*/
+  val varchar(60) not null, /*值*/
+  category varchar(60) /*类别*/
 );
-*/
 
 /*受助等级：甲乙丙*/
 create table t_rank(

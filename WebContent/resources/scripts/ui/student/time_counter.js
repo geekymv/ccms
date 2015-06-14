@@ -38,6 +38,7 @@
 		$.ajax({
 			url: contextPath + "/stu/timeCounter",
 			type: "POST",
+			async: false,
 			data: params,
 			dataType: "json",
 			success: function(data) {

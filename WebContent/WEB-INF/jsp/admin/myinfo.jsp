@@ -77,8 +77,8 @@
                                 </div>
                             </div>
                             <div class="control-group my-par">
-                                    <label class="control-label" for="name">名称<span class="tips">*</span></label>
-                                <div class="controls">
+                                    <label class="control-label" for="name">名称</label>
+                                <div class="controls" id="col_name">
                                 	<input type="text" name="name" value="${college.name }" id="name" class="input-large" />
                                 </div>
                             </div>
@@ -115,6 +115,17 @@
 	</div><!--end of mainwrapper-->
 
 	<script src="<c:url value='/resources/scripts/college.js'/>"></script>
+	<script type="text/javascript">
+		$(function() {
+			var authority = '${user.authority}';
+			if(authority == 0) {	// 普通用工单位
+				$('#col_name').addClass('controls div-top')
+				$('#col_name').html('${college.name }');
+			}
+			
+		});
+	
+	</script>
 
 </body>
 </html>    

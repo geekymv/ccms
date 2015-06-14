@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+"-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccms.dao.DictDao">
+	<insert id="add">
+		insert into t_dicts( name, val, category ) values(#{name}, #{val}, #{category} );
+	</insert>
+
+	<!-- 根据id查询 -->
+	<select id="queryById" parameterType="int" resultType="Dict">
+		select * from t_dicts where id = #{id};
+	</select>
+	
+	<!-- 根据类别查询 -->
+	<select id="queryByCategory" parameterType="string" resultType="Dict">
+		select * from t_dicts where category = #{category};
+	</select>
+	
+	
+</mapper>  

@@ -12,6 +12,7 @@ import com.ccms.persistence.dto.StudentDto;
 import com.ccms.persistence.dto.StudentQueryDto;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.StudentService;
+import com.ccms.util.DateUtils;
 import com.ccms.util.EncryptUtil;
 
 @Service("studentService")
@@ -25,12 +26,26 @@ public class StudentServiceImpl implements StudentService {
 	
 	
 	@Override
-	public boolean register(Student student) {
-		student.setPwd(EncryptUtil.md5Encrypt(student.getPwd()));
-		studentDAO.add(student);
-		return false;
+	public String register(Student student) {
+		String num = student.getNum();
+		// 默认密码和学号相同
+		student.setPwd(EncryptUtil.md5Encrypt(num));
+		
+		List<Integer> years = DateUtils.getCurrentYear();
+		String year = years.get(0) + "-" + years.get(1);
+		
+		// 判断学号是否存在
+		Student stu = studentDAO.queryNumAndYear(num, year);
+		if(stu != null) { // 本学年学生已存在
+			return "isexist";
+		}
+		
+		student.setYear(year);
+		student.setStatus(1);
+		
+		int res = studentDAO.add(student);
+		return res == 1 ? "success": "fail";
 	}
-
 
 	@Override
 	public Student login(String num, String pwd) {
@@ -95,6 +110,23 @@ public class StudentServiceImpl implements StudentService {
 		
 		int res = studentDAO.updatePartInfo(student);
 		return res == 1 ? "success" : "fail";
+	}
+
+
+	@Override
+	public String isExist(String num, String year) {
+		if(StringUtils.isBlank(year)) {
+			List<Integer> years = DateUtils.getCurrentYear();
+			year = years.get(0) + "-" + years.get(1);
+		}
+		
+		// 判断学号是否存在
+		Student stu = studentDAO.queryNumAndYear(num, year);
+		if(stu != null) { // 本学年学生已存在
+			return "isexist";
+		}
+		
+		return "notexist";
 	}
 
 }

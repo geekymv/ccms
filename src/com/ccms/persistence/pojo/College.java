@@ -3,7 +3,7 @@ package com.ccms.persistence.pojo;
 import java.util.List;
 
 /**
- * 学院类
+ * 管理员、学院、社团等单位
  * @author Geek_ymv
  */
 public class College {

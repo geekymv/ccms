@@ -30,6 +30,7 @@
               <li class="dropdown"><a href="">学生管理</a>
               	<ul>
                    <li><a href="${ctx }/admin/students">学生列表</a></li>
+                   <li><a href="${ctx }/admin/addStudent">添加学生</a></li>
               	</ul>
               </li>
               <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">考核管理</a></li>

@@ -14,6 +14,11 @@
 		]]>
 	</insert>
 	
+	<!-- 根据学号和学年查询学生 -->
+	<select id="queryNumAndYear" resultType="Student">
+		select num, year from t_students where num = #{num} and year = #{year};
+	</select>
+	
 	<!-- 更新学生 -->
 	<update id="update" parameterType="Student">
 			update t_students 
