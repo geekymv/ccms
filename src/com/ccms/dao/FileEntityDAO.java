@@ -25,4 +25,11 @@ public interface FileEntityDAO extends BaseDAO<FileEntity> {
 	 * @return
 	 */
 	public int totalRecord(@Param("authority") Integer authority);
+	
+	/**
+	 * 根据文件新名称查询
+	 * @param newFileName
+	 * @return
+	 */
+	public FileEntity queryByNewFileName(String newFileName);
 }

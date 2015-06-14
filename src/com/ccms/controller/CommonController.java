@@ -30,6 +30,7 @@ import com.ccms.service.RankService;
 import com.ccms.service.SecondLevelService;
 import com.ccms.service.SpecialtyService;
 import com.ccms.util.DateUtils;
+import com.ccms.util.FileUtil;
 import com.ccms.util.RandomValidateCode;
 
 @Controller
@@ -91,6 +92,61 @@ public class CommonController {
 	}
 	
 	/**
+	 * 添加活动附件
+	 * @param myFiles
+	 * @param authority
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/addAttach")
+	@ResponseBody
+	public FileEntity addAttach(@RequestParam MultipartFile[] myFiles, Integer authority,
+			HttpServletRequest request) {
+		String realPath = request.getSession().getServletContext().getRealPath("/upload");
+		for (MultipartFile multipartFile : myFiles) {
+			if(multipartFile != null && !multipartFile.isEmpty()) {
+				// 获得原始文件名称
+				String originalFilename = multipartFile.getOriginalFilename();
+				// 获得文件类型
+			//	String contentType = multipartFile.getContentType();
+				// 获得文件扩展名
+			//	String extension = FilenameUtils.getExtension(originalFilename);
+				// 获得文件大小
+				long size = multipartFile.getSize();
+
+				try {
+					String time = DateUtils.getCurrentDate(DateUtils.FORMAT_NORMAL_NO_SIGN);
+					int index = originalFilename.lastIndexOf(".");
+					String newFileName = originalFilename.substring(0, index) + "_" + time + originalFilename.substring(index);
+					// 保存文件
+					multipartFile.transferTo(new File(realPath, newFileName));
+					
+					FileEntity fileEntity = new FileEntity();
+					fileEntity.setUploadDate(new Date());
+
+					String fileSize = FileUtil.convertFileSize(size);
+					fileEntity.setFileSize(fileSize);
+					
+					fileEntity.setAuthority(authority);
+					fileEntity.setNewFileName(newFileName);
+					fileEntity.setOriginalFilename(originalFilename);
+					
+					// 保存文件信息
+					fileService.upload(fileEntity);	
+					
+					// 根据文件新名称查询
+					return fileService.queryByNewFileName(newFileName);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * 文件上传
 	 * @param myFiles
 	 * @param authority 文件权限
@@ -125,7 +181,10 @@ public class CommonController {
 					FileEntity fileEntity = new FileEntity();
 					fileEntity.setCollege(college);
 					fileEntity.setUploadDate(new Date());
-					fileEntity.setFileSize(Float.parseFloat(size + ""));
+
+					String fileSize = FileUtil.convertFileSize(size);
+					fileEntity.setFileSize(fileSize);
+					
 					fileEntity.setAuthority(authority);
 					fileEntity.setNewFileName(newFileName);
 					fileEntity.setOriginalFilename(originalFilename);

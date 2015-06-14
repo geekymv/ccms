@@ -21,4 +21,11 @@ public interface FileEntityService {
 	 */
 	public Pager<FileEntity> listByPage(int authority, int pageOffset, int pageSize);
 
+	/**
+	 * 根据文件新名称查询
+	 * @param newFileName
+	 * @return
+	 */
+	public FileEntity queryByNewFileName(String newFileName);
+	
 }

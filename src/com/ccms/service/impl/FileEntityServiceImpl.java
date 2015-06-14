@@ -37,6 +37,11 @@ public class FileEntityServiceImpl implements FileEntityService {
 		return pager;
 	}
 
+	@Override
+	public FileEntity queryByNewFileName(String newFileName) {
+		return fileDao.queryByNewFileName(newFileName);
+	}
+
 }
 
 

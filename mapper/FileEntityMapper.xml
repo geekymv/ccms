@@ -32,6 +32,9 @@
 			where f.authority = #{authority}
 	</select>
 	
+	<select id="queryByNewFileName" parameterType="string" resultType="FileEntity">
+		select * from t_files f where f.newFileName = #{newFileName}
+	</select>
 	
 	
 </mapper>  

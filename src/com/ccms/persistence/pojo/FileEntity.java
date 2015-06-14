@@ -12,7 +12,7 @@ public class FileEntity {
 	private String originalFilename; // 文件原始名称
 	private String newFileName;	// 文件新的名称
 	private String saveUrl;		// 文件的保存路径
-	private Float fileSize;	// 文件大小
+	private String fileSize;	// 文件大小
 	private Date uploadDate;	// 上传时间
 	/**
 	 * 1 公有：所有用户都可以看
@@ -52,10 +52,10 @@ public class FileEntity {
 	public void setSaveUrl(String saveUrl) {
 		this.saveUrl = saveUrl;
 	}
-	public Float getFileSize() {
+	public String getFileSize() {
 		return fileSize;
 	}
-	public void setFileSize(Float fileSize) {
+	public void setFileSize(String fileSize) {
 		this.fileSize = fileSize;
 	}
 	public Date getUploadDate() {
