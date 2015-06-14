@@ -33,9 +33,9 @@ public interface ActivityService {
 	/**
 	 * 添加活动
 	 * @param activity
-	 * @return
+	 * @return 返回新添加文件的uuid
 	 */
-	public int add(Activity activity);
+	public String add(Activity activity);
 	
 	/**
 	 * 根据活动id删除活动

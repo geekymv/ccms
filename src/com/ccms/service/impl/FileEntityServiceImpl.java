@@ -42,6 +42,18 @@ public class FileEntityServiceImpl implements FileEntityService {
 		return fileDao.queryByNewFileName(newFileName);
 	}
 
+	@Override
+	public String delete(Integer id) {
+		fileDao.delete(id);
+		return "success";
+	}
+
+	@Override
+	public String linkFileAndActivity(Integer fileId, String uuid) {
+		int res = fileDao.linkFileAndActivity(fileId, uuid);
+		return res == 1 ? "success" : "fail";
+	}
+
 }
 
 

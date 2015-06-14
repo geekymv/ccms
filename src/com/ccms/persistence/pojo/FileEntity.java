@@ -9,6 +9,7 @@ import java.util.Date;
 public class FileEntity {
 	private Integer id;
 	private College college;	// 所属用工单位
+	private String activityUuid;	// 活动的uuid
 	private String originalFilename; // 文件原始名称
 	private String newFileName;	// 文件新的名称
 	private String saveUrl;		// 文件的保存路径
@@ -75,5 +76,12 @@ public class FileEntity {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	
+	public String getActivityUuid() {
+		return activityUuid;
+	}
+	public void setActivityUuid(String activityUuid) {
+		this.activityUuid = activityUuid;
 	}
 }

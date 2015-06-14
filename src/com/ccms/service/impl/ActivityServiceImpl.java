@@ -1,6 +1,7 @@
 package com.ccms.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,15 +41,22 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public int add(Activity activity) {
+	public String add(Activity activity) {
 		activity.setPublishTime(DateUtils.getCurrentGaDate());
 		activity.setStatus(SysCode.ActivityStatus.WAIT); 
+		String uuid = UUID.randomUUID().toString();
+		activity.setActivityUuid(uuid);
 		
 		String endDate = activity.getEndDate();
 		endDate = endDate.replaceAll("-", "").replaceAll(":", "").replaceAll(" ", "") + "00"; 
 		activity.setEndDate(endDate);
 		
-		return activityDAO.add(activity);
+		int res = activityDAO.add(activity);
+		if(res == 1) {
+			return uuid;
+		}else {
+			return "";
+		}
 	}
 
 	@Override

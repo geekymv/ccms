@@ -222,10 +222,11 @@
                     	</tr>
                     	
                     	<tr id="file_list">
-							<td>
+							<td colspan="2">
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="phone">
 	                                	附件列表
+	                                	<input type="hidden" id="fileIds" />
 	                                </label>
 	                                <div class="controls">
 										<div id="attach_list" style="margin-left: 220px;">
@@ -264,22 +265,11 @@
 			        autoSubmit: true,//选择文件后,是否自动提交.这里可以变成true,自己去看看效果吧.
 			        name:'myFiles',//提交的名字
 			        onChange:function(file,ext){//当选择文件后执行的方法,ext存在文件后续,可以在这里判断文件格式
-					//	jQuery("#show").attr("value",file);
 			        },
 			        onSubmit: function (file, ext) {//提交文件时执行的方法
-			        	/*  button.text('文件上传中！！！');
-		               	 interval = window.setInterval(function(){
-		                   var text = button.text();
-		                   if (text.length < 14){
-		                       button.text(text + '.');                   
-		                   } else {
-		                       button.text('文件上传中....');            
-		                   }
-		               	}, 200); */
 			        },
 			        // 文件提交完成后可执行的方法
 			        onComplete: function (fileName, response) {
-			        	debugger
 			        	if(response != null) {
 			        		var reg = /<pre.+?>(.+)<\/pre>/g;  
 			        		var result = response.match(reg);  
@@ -293,35 +283,37 @@
 							var newFileName = response.newFileName;
 							var size = response.fileSize;
 							
-						//	var content = '<div>文件名称：<a href="${ctx}/upload/'+newFileName+'">'+fileName+'</a>&nbsp;&nbsp;文件大小：'+size+'<div>';
-							var content = '<div>文件名称 '+fileName+'&nbsp;&nbsp;，文件大小 '+size+'<a data-id="'+fileId+'" onclick="deleteFile(this)">&nbsp;&nbsp;删除</a><div>';
+							var fileIds = $('#fileIds').val();
+							if($.trim(fileIds) == '') {
+								$('#fileIds').val(fileId)
+							}else {
+								$('#fileIds').val(fileIds+","+ fileId)
+							}
+							
+							var content = '<div>文件名称 '+fileName+'&nbsp;&nbsp;，文件大小 '+size+'<a name="fileName" data-id="'+fileId+'" onclick="deleteFile(this)">&nbsp;&nbsp;删除</a><div>';
 							$('#attach_list').append(content);
 			        	}
-			        	
-			        /* 	if(response == "success") {
-			        		alert("上传成功！");
-			        	}else {
-			        		alert("上传失败！");
-			        	}
-		                button.text('文件上传');
-		                window.clearInterval(interval);
-		                this.enable(); */
 			        }
 			    }); // end of AjaxUpload
-			    
-			    
-				/* var submit=jQuery('#submit').click(function(){//触发提交的事件.与autoSubmit的设置有关,是否采用
-					load.submit();
-				}); */
-				
-				// 删除附件
-				function deleteFile(t) {
-					var $this = $(t);
-					
-					
-				}
+
+			   
 		});
-	
+		
+		 // 删除附件
+		function deleteFile(t) {
+	    	var res = confirm('确定要删除附件么？');
+			if(res) {
+				var $this = $(t);
+				var id = $this.data('id');
+				
+				$.post(contextPath+"/deleteAttach", {'id': id}).done(function(msg) {
+					if(msg == 'success') {
+						layer.msg('删除成功！');
+						$this.parent().remove();						
+					}
+				});
+			}			    	
+		}
 	</script>
 	
 	<script>

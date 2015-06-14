@@ -26,6 +26,8 @@ public class Activity {
 	private String assist; /*活动协助人员*/
 	private Integer status; /*状态:通过1， 待审核0，未通过-1*/
 	private String reason;	// 审核不通过原因
+	private String activityUuid;	// 活动uuid
+	
 
 	public Activity() {
 	}
@@ -141,10 +143,19 @@ public class Activity {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	
 	public String getReason() {
 		return reason;
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	
+	public String getActivityUuid() {
+		return activityUuid;
+	}
+	public void setActivityUuid(String activityUuid) {
+		this.activityUuid = activityUuid;
+	}
+
 }

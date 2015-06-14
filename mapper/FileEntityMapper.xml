@@ -32,9 +32,23 @@
 			where f.authority = #{authority}
 	</select>
 	
+	<!-- 根据文件新名称查询 -->
 	<select id="queryByNewFileName" parameterType="string" resultType="FileEntity">
 		select * from t_files f where f.newFileName = #{newFileName}
 	</select>
+	
+	<!-- 根据id查询 -->
+	<select id="queryById" parameterType="int" resultType="FileEntity">
+		select * from t_files f where f.id = #{id}
+	</select>
+	
+	<update id="delete" parameterType="int">
+		update t_files f set f.status = -1 where f.id = #{id};
+	</update>
+	
+	<update id="linkFileAndActivity">
+		update t_files f set f.activityUuid = #{uuid} where f.id = #{fileId};
+	</update>
 	
 	
 </mapper>  

@@ -133,8 +133,7 @@ public class CollegeController {
 		College college = (College) session.getAttribute("user");
 		activity.setCollege(college);
 		
-		int res = activityService.add(activity);
-		return res == 1 ? "success" : "fail";
+		return activityService.add(activity);
 	}
 	
 	/**

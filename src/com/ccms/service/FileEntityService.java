@@ -1,5 +1,7 @@
 package com.ccms.service;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.FileEntity;
 
@@ -27,5 +29,20 @@ public interface FileEntityService {
 	 * @return
 	 */
 	public FileEntity queryByNewFileName(String newFileName);
+	
+	/**
+	 * 根据id删除附件
+	 * @param id
+	 * @return
+	 */
+	public String delete(Integer id);
+	
+	/**
+	 * 将活动和附件关联起来
+	 * @param fileId 附件id
+	 * @param uuid 活动的uuid
+	 * @return
+	 */
+	public String linkFileAndActivity(Integer fileId, String uuid);
 	
 }

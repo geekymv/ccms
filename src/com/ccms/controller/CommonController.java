@@ -101,7 +101,9 @@ public class CommonController {
 	@RequestMapping("/addAttach")
 	@ResponseBody
 	public FileEntity addAttach(@RequestParam MultipartFile[] myFiles, Integer authority,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
+		College college = (College) session.getAttribute("user");
+		
 		String realPath = request.getSession().getServletContext().getRealPath("/upload");
 		for (MultipartFile multipartFile : myFiles) {
 			if(multipartFile != null && !multipartFile.isEmpty()) {
@@ -117,11 +119,18 @@ public class CommonController {
 				try {
 					String time = DateUtils.getCurrentDate(DateUtils.FORMAT_NORMAL_NO_SIGN);
 					int index = originalFilename.lastIndexOf(".");
-					String newFileName = originalFilename.substring(0, index) + "_" + time + originalFilename.substring(index);
+					String newFileName = "";
+					if(index != -1) {	// 没有扩展名
+						newFileName = originalFilename.substring(0, index) + "_" + time + originalFilename.substring(index);
+					}else {
+						newFileName = originalFilename + "_" + time;
+					}
+					
 					// 保存文件
 					multipartFile.transferTo(new File(realPath, newFileName));
 					
 					FileEntity fileEntity = new FileEntity();
+					fileEntity.setCollege(college);
 					fileEntity.setUploadDate(new Date());
 
 					String fileSize = FileUtil.convertFileSize(size);
@@ -145,6 +154,25 @@ public class CommonController {
 		
 		return null;
 	}
+	
+	@RequestMapping("/deleteAttach")
+	@ResponseBody
+	public String deleteAttach(Integer id) {
+		return fileService.delete(id);
+	}
+	
+	/**
+	 * 将活动和附件关联起来
+	 * @param fileId 附件id
+	 * @param uuid 活动的uuid
+	 * @return
+	 */
+	@RequestMapping("/linkFileAndActivity")
+	@ResponseBody
+	public String linkFileAndActivity(Integer fileId, String uuid) {
+		return fileService.linkFileAndActivity(fileId, uuid);
+	}
+	
 	
 	/**
 	 * 文件上传

@@ -9,10 +9,10 @@
 	<insert id="add" parameterType="Activity">
 		insert into t_activities( 
 		name, col_id, publish_time, date_time, end_date, location, aim, content, activity_type, second_level,
-		duration, act_object, number, contact, phone, assist, status ) 
+		duration, act_object, number, contact, phone, assist, status, activityUuid ) 
 		values(#{name}, #{college.id}, #{publishTime}, #{dateTime},
 				#{endDate}, #{location}, #{aim}, #{content}, #{actType.id}, #{secondLevel.id}, #{duration}, 
-				#{actObject}, #{number}, #{contact}, #{phone}, #{assist}, #{status} )	
+				#{actObject}, #{number}, #{contact}, #{phone}, #{assist}, #{status}, #{activityUuid} )	
 	</insert>
 	
 	<!-- 根据id删除活动 -->
