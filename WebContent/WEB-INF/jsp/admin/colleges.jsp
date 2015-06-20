@@ -93,8 +93,8 @@
 		            		+ "<td>"+ col.contact +"</td>"
 		            		+ "<td>"+ col.address +"</td>"
 		            		+ "<td>"+ colType +"</td>"
-		            		+ "<td>编辑</td>"
-		            	"</tr>";
+		            		+ '<td data-id="'+col.id+'" onclick="editEmployer(this)"><span style="cursor: pointer;">编辑</span></td>'
+		            	+"</tr>";
 				}
 				
 				$('tbody').html(html);
@@ -104,6 +104,14 @@
 			});
 			
 		});		
+		
+		// 编辑
+		function editEmployer(t) {
+			var $this = $(t);
+			var id = $this.data('id');
+			window.location.href = contextPath + "/admin/editEmployer/" + id;
+		}
+		
 	</script>
 	
 	

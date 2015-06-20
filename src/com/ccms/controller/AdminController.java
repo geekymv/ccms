@@ -270,6 +270,39 @@ public class AdminController {
 		readExcel2();
 	}
 	
+	/**
+	 * 编辑用工单位
+	 * @return
+	 */
+	@RequestMapping("/admin/editEmployer/{id}")
+	public String editEmployer(@PathVariable("id")Integer id, Model model) {
+		model.addAttribute("empId", id);
+		return "admin/edit_employer";
+	}
+	
+	/**
+	 * 查询详情
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/admin/getCollege", method=RequestMethod.POST)
+	@ResponseBody
+	public College getCollege(Integer id) {
+		return collegeService.getById(id);
+	}
+	
+	/**
+	 * 更新
+	 * @param college
+	 * @return
+	 */
+	@RequestMapping(value="/admin/editCollege", method=RequestMethod.POST)
+	@ResponseBody
+	public String editCollege(College college) {
+		int res = collegeService.update(college);
+		return res == 1 ? "success": "fail";
+	}
+	
 	// 循环读取Excel的内容
 	public void readExcel2() {
 		try {

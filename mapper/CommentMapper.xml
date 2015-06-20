@@ -14,15 +14,15 @@
 		  ,content
 		  ,comDate) values(#{objectId}, #{category}, #{userId}, #{content}, #{comDate});
 	</insert>
-	
+
+	<!-- 评论列表 -->	
 	<select id="queryAllByPage" resultType="CommentDto">
-		select com.id id, com.objectId objectId, stu.id userId, stu.name username, 
+		select com.id id, com.objectId objectId, stu.num userId, stu.name username, 
 		com.content content, com.comDate comDate
 		from t_comments com 
 		inner join t_students stu on com.userId = stu.id
 		where com.objectId = #{activityId} order by com.comDate desc
 		limit #{pageOffset}, #{pageSize};
-
 	</select>
 	
 	

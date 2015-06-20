@@ -224,7 +224,7 @@
 	                                <label class="control-label" for="assist">
 	                                	活动状态
 	                                </label>
-	                                <div class="controls div-top" id='activity_status'>
+	                                <div class="controls div-top" id='activity_status' style="color: blue;">
 										
 	                                </div>
 	                            </div>
@@ -233,7 +233,6 @@
                     </table>
                       <p class="stdformbutton" style="margin-left: 400px;">
                       	<button type="button" id="updateActivity" class="btn btn-primary">更新活动</button>
-                      	  
                       	<c:if test="${user.authority == 1}">
                       	   <button type="button" class="btn btn-primary" onclick="audit(1)">通过</button>
                           &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="audit(-1)">撤回</button>
@@ -251,7 +250,6 @@
 
 	<script type="text/javascript">
 		var $ = jQuery;
-		
 		function formatterDate2(time) {
 			if(time == null || $.trim(time) == '') {
 				return "";
@@ -263,8 +261,6 @@
 			}
 			return "";
 		}
-		
-		
 		// 管理员审核活动
 		function audit(status) {
 			var datas = null;

@@ -50,4 +50,6 @@ public interface CollegeDAO extends BaseDAO<College>{
 	 */
 	public College queryByAccount(String account);
 	
+	
+	
 }

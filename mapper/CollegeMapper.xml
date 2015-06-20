@@ -27,6 +27,7 @@
 		<set> 
 			<if test="account != null">account=#{account},</if>
 			<if test="name != null">name=#{name},</if>
+			<if test="colType != null">colType=#{colType},</if>
 			<if test="pwd != null and pwd !='' ">pwd=#{pwd},</if>
 			<if test="phone != null">phone=#{phone},</if>
 			<if test="contact != null">contact=#{contact},</if>

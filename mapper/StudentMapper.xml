@@ -63,20 +63,32 @@
 	</select>	
 	
 	<!-- 根据学号和密码查询学生 status=1学生账号可用-->
-	<select id="queryByNumAndPwd" resultMap="StudentResultMap">
-		<!-- 
-		select id, num, pwd, name FROM t_students 
-			where num=#{num} and pwd=#{pwd} and status=1;
-		 -->
+	<select id="queryByNumAndPwd" resultMap="StudentResultMap2">
 	select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
-		rank.id rank_id, rank.name rank_name, duration, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
+		rank.id rank_id, rank.name rank_name, duration
 		FROM t_students stu 
 		inner join t_ranks rank on stu.rank_id=rank.id
-		inner join t_colleges col on stu.col_id=col.id 
-		inner join t_specialties spe on stu.spec_id=spe.id 
 		where stu.num=#{num} and stu.pwd=#{pwd} and status=1;
-		 
+
 	</select>
+		<resultMap type="Student" id="StudentResultMap2">
+		<id column="stu_id" property="id"/>
+		<result column="pwd" property="pwd"/>
+		<result column="num" property="num"/>
+		<result column="stu_name" property="name"/>
+		<result column="gender" property="gender"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="qq" property="qq"/>
+		<result column="year" property="year"/>
+		
+		<association property="rank" javaType="Rank">
+			<id column="rank_id" property="id"/>
+			<result column="rank_name" property="name"/>
+			<result column="duration" property="duration"/>
+		</association>
+	</resultMap>
+	
 	
 	
 	<!-- 根据id查询学生 -->

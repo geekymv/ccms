@@ -90,7 +90,7 @@
 			var td_name = $tr.find('#name');
 			var td_name_val = td_name.html();
 			if(td_name_val.indexOf('input') == -1) {
-				td_name.html('<input type="text" id="level_val" value="'+td_name_val+'"/>&nbsp;&nbsp;<span id="save" onclick="save(this)">保存</span>&nbsp;&nbsp;<span id="save" onclick="cancel(this)">取消</span>');
+				td_name.html('<input type="text" id="level_val" value="'+td_name_val+'"/>&nbsp;&nbsp;<span id="save" style="cursor: pointer;" onclick="save(this)">保存</span>&nbsp;&nbsp;<span id="save" style="cursor: pointer;" onclick="cancel(this)">取消</span>');
 			}
 		}
 		
