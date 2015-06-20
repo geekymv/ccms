@@ -19,6 +19,11 @@ public class StudentQueryDto {
 	private Integer specId;
 	
 	/**
+	 * 学院id
+	 */
+	private Integer colId;
+	
+	/**
 	 * 等级id
 	 */
 	private Integer rankId;
@@ -47,6 +52,12 @@ public class StudentQueryDto {
 	}
 	public void setSpecId(Integer specId) {
 		this.specId = specId;
+	}
+	public Integer getColId() {
+		return colId;
+	}
+	public void setColId(Integer colId) {
+		this.colId = colId;
 	}
 	public Integer getRankId() {
 		return rankId;

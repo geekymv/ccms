@@ -196,7 +196,7 @@ public class CollegeController {
 	 * 本院学生列表页面
 	 * @return
 	 */
-	@RequestMapping(value="/admin/students", method=RequestMethod.GET)
+	@RequestMapping(value="/college/students", method=RequestMethod.GET)
 	public String getStudents() {
 		return "admin/collegeStudents";
 	}
@@ -206,11 +206,12 @@ public class CollegeController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value="/admin/students", method=RequestMethod.POST)
+	@RequestMapping(value="/college/students", method=RequestMethod.POST)
 	@ResponseBody
 	public Pager<Student> getStudents(Pager<Student> pager, StudentQueryDto dto, HttpSession session) {
 		College college = (College)session.getAttribute("user");
-		studentService.findStudentsByColId(pager, dto, college.getId());
+		dto.setColId(college.getId());
+		studentService.findStudents(pager, dto);
 		return pager;
 	}
 	
@@ -242,7 +243,7 @@ public class CollegeController {
 	 * 跳转到添加学生页面
 	 * @return
 	 */
-	@RequestMapping(value="/admin/addStudent", method=RequestMethod.GET)
+	@RequestMapping(value="/college/addStudent", method=RequestMethod.GET)
 	public String addStudent() {
 		return "admin/add_student";
 	}

@@ -50,8 +50,8 @@
                 	</select>&nbsp;&nbsp;
                 	<input type="text" id="query_num" style="width: 180px; height: 30px;" placeholder="学号"/>&nbsp;&nbsp;
                 	<input type="text" id="query_name" style="width: 180px; height: 30px;" placeholder="姓名"/>&nbsp;&nbsp;
-                	<select id="specialty" style="margin-bottom: 10px;">
-                		<option value="-1">专业</option>
+                	<select id="college" style="margin-bottom: 10px;">
+                		<option value="-1">选择学院</option>
                 	</select>&nbsp;&nbsp;
 		        	<input type="button" class="btn btn-default" id="query" style="margin-bottom: 10px;" value="查询"/>
                 </div>
@@ -65,7 +65,7 @@
 				          <th>姓名</th>
 				          <th>性别</th>
 				          <th>联系方式</th>
-				          <th>专业</th>
+				          <th>学院</th>
 				          <th>等级</th>
 				          <th>操作</th>
                        </tr>
@@ -79,18 +79,14 @@
 					    <ul id="page" class="pagination" data-first-btn-text="首页" data-last-btn-text="尾页"></ul>
 					</nav>
 	            </div>
-			
-			
             </div><!--widget-->
             </div>
             </div>      
-        	
 		</div>
 	</div>
 	<script type="text/javascript">
 		jQuery(function(){
 			var $ = jQuery;
-			
 			// 加载学年
 			$.ajax({
 				url: contextPath+"/recent5Years",
@@ -107,17 +103,17 @@
 				}
 			});
 			
-			// 加载专业
-			$.post(contextPath+"/getAllSpecialty", {'collegeId': '${user.id}'}).done(function(data) {
-				var len = data.length;
+			// 加载学院
+			$.post(contextPath+"/getAllCollege").done(function(data) {
+ 				var len = data.length;
 				if(len > 0) {
 					var html = '';
 					for(var i = 0; i < len; i++) {
-						var spec = data[i];
-						html += '<option value="'+spec.id+'">'+spec.name+'</option>'
+						var col = data[i];
+						html += '<option value="'+col.id+'">'+col.name+'</option>'
 					}	
 					
-					$('#specialty').append(html);
+					$('#college').append(html);
 				}
 			});
 	
@@ -140,8 +136,9 @@
 		function pager() {
 			$("#page").page({
 			    remote: {
-			        url: contextPath + "/college/students",
-			        params: {'year': $('#year').val(), "num": $('#query_num').val(), 'name': $('#query_name').val(), 'specId': $('#specialty').val()},
+			        url: contextPath + "/admin/students",
+			        params: {'year': $('#year').val(), "num": $('#query_num').val(),
+			        	'name': $('#query_name').val(), 'colId': $('#college').val()},
 			        callback: function (result) {
 			        	var datas = result.datas;
 			        	var len = datas.length;
@@ -157,7 +154,6 @@
 					        	if(phone == null || phone == '') {
 					        		phone = '暂无';
 					        	}
-
 					        	html += "<tr>"
 			        		   		+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
 			        				+ "<td>"+(i+1)+"</td>"
@@ -165,7 +161,7 @@
 			        				+ "<td>"+ stu.name +"</td>"
 			        				+ "<td>"+ stu.gender +"</td>"
 			        				+ "<td>"+ phone +"</td>"
-			        				+ "<td>"+ stu.specialty.name +"</td>"
+			        				+ "<td>"+ stu.college.name +"</td>"
 			        				+ "<td>"+ stu.rank.name +"</td>"
 			        				+ "<td><span onclick='edit(this)'data-num='"+stu.num+"' style='cursor: pointer;'>编辑</span></td>"
 			        			+"</tr>";

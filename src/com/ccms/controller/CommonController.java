@@ -24,6 +24,7 @@ import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.SecondLevel;
 import com.ccms.persistence.pojo.Specialty;
 import com.ccms.service.ActivityTypeService;
+import com.ccms.service.CollegeService;
 import com.ccms.service.CommonService;
 import com.ccms.service.FileEntityService;
 import com.ccms.service.RankService;
@@ -47,6 +48,8 @@ public class CommonController {
 	private CommonService commonService;
 	@Autowired
 	private RankService rankService;
+	@Autowired
+	private CollegeService collegeService;
 	
 	/**
 	 * 根据学院id获取该学院的所有专业
@@ -57,6 +60,16 @@ public class CommonController {
 	@ResponseBody
 	public List<Specialty> getAllSpecialty(Integer collegeId) {
 		return specialtyService.getAllByCollegeId(collegeId);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/getAllCollege")
+	@ResponseBody
+	public List<College> getAllCollege() {
+		return collegeService.getColleges();
 	}
 	
 	/**

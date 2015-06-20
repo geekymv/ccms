@@ -172,16 +172,21 @@
 		// 删除活动
 		function deleteActivity(t) {
 			var $this = $(t);
-			var status = $this.parent().parent().find('#status').html();
+			var $tr = $this.parent().parent();
+			var status = $tr.find('#status').html();
 			if(status == '审核通过') {
 				alert('审核已通过，不能删除！');
 			}else {	// 删除活动
-				var id = $this.data('id');
-				$.post(contextPath+"/admin/deleteActivity", {'activityId':id}).done(function(msg){
-					if('success' == msg) {
-						alert('删除成功！');
-					}	
-				});
+				if(confirm('确定要删除活动么？')) {
+					var id = $this.data('id');
+					$.post(contextPath+"/admin/deleteActivity", {'activityId':id}).done(function(msg){
+						if('success' == msg) {
+							alert('删除成功！');
+							$tr.remove();
+						}	
+					});
+				}
+				
 			}
 		}
 		// 查看活动详情

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.persistence.dto.Pager;
+import com.ccms.persistence.dto.StudentQueryDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.ActivityType;
@@ -301,6 +302,24 @@ public class AdminController {
 	public String editCollege(College college) {
 		int res = collegeService.update(college);
 		return res == 1 ? "success": "fail";
+	}
+	
+	@RequestMapping(value="/admin/students", method=RequestMethod.GET)
+	public String students() {
+		return "admin/adminStudents";
+	}
+	
+	/**
+	 * 管理员-学生列表
+	 * @param pager
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping("/admin/students")
+	@ResponseBody
+	public Pager<Student> students(Pager<Student> pager, StudentQueryDto dto) {
+		studentService.findStudents(pager, dto);
+		return pager;
 	}
 	
 	// 循环读取Excel的内容

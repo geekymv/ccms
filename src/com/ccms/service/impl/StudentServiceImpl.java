@@ -89,12 +89,12 @@ public class StudentServiceImpl implements StudentService {
 
 
 	@Override
-	public Pager<Student> findStudentsByColId(Pager<Student> pager, StudentQueryDto dto, Integer colId) {
-		int totalRecord = studentDAO.getTotalStudentsByColId(colId, dto);
+	public Pager<Student> findStudents(Pager<Student> pager, StudentQueryDto dto) {
+		int totalRecord = studentDAO.getTotalStudents(dto);
 		pager.setTotalRecord(totalRecord);
 		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
 		
-		List<Student> lists = studentDAO.queryStudentsByColId(pager, colId, dto);
+		List<Student> lists = studentDAO.queryStudents(pager, dto);
 		pager.setDatas(lists);
 		
 		return pager;

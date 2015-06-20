@@ -54,15 +54,15 @@ public interface StudentDAO extends BaseDAO<Student>{
 	 * @param colId
 	 * @return
 	 */
-	public List<Student> queryStudentsByColId(@Param("pager")Pager<Student> pager, 
-			@Param("colId")Integer colId, @Param("dto")StudentQueryDto dto);
+	public List<Student> queryStudents(@Param("pager")Pager<Student> pager, 
+			@Param("dto")StudentQueryDto dto);
 	
 	/**
 	 * 根据学院id查看学生总记录数
 	 * @param colId
 	 * @return
 	 */
-	public int getTotalStudentsByColId(@Param("colId")Integer colId, @Param("dto")StudentQueryDto dto);
+	public int getTotalStudents(@Param("dto")StudentQueryDto dto);
 	
 	/**
 	 * 更新学生部分信息

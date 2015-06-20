@@ -56,7 +56,7 @@ public interface StudentService {
 	 * @param colId
 	 * @return
 	 */
-	public Pager<Student> findStudentsByColId(Pager<Student> pager, StudentQueryDto dto, Integer colId);
+	public Pager<Student> findStudents(Pager<Student> pager, StudentQueryDto dto);
 
 	/**
 	 * 根据学号和学年判断学生是否已存在
