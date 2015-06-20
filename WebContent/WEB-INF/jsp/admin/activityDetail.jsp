@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +51,8 @@
 	                                	活动名称<span class="tips">*</span>
 	                                </label>
 	                                <div class="controls">
-										<input type="hidden" name="id" id="id" />	                               
+										<input type="hidden" name="id" id="id" />
+										<input type="hidden" name="activityUuid" id="activityUuid" />	                               
 	                                	<input type="text" name="name" id="name" class="input-xxlarge" style="width: 575px;" autofocus="autofocus"/>
 	                                </div>
 	                            </div>
@@ -216,9 +216,22 @@
 	                                </div>
 	                            </div>
                     		</td>
-                    		
+                    	</tr>	
+                    	<tr id="file_list">
+							<td colspan="2">
+	                    		<div class="par control-group my-par">
+	                                <label class="control-label" for="phone">
+	                                	附件列表
+	                                	<input type="hidden" id="fileIds" />
+	                                </label>
+	                                <div class="controls">
+										<div id="attach_list" style="margin-left: 220px;">
+										</div>
+	                                </div>
+	                            </div>
+                    		</td>                    	
                     	</tr>
-                    		<tr>
+                    	<tr>
                     		<td colspan="2">
 	                    		<div class="par control-group my-par">
 	                                <label class="control-label" for="assist">
@@ -232,6 +245,9 @@
                     	</tr>
                     </table>
                       <p class="stdformbutton" style="margin-left: 400px;">
+                      	<c:if test="${user.authority != 1}">
+                      	<button type="button" class="btn btn-primary" id="select">添加附件</button>&nbsp;&nbsp;
+                      	</c:if>
                       	<button type="button" id="updateActivity" class="btn btn-primary">更新活动</button>
                       	<c:if test="${user.authority == 1}">
                       	   <button type="button" class="btn btn-primary" onclick="audit(1)">通过</button>
@@ -245,9 +261,30 @@
             </div>      
 		</div>
 	</div><!--end of mainwrapper-->
-
 	<script type="text/javascript" src='<c:url value="/resources/scripts/college.js" />'></script>
-
+	<!-- 附件上传 -->
+	<script src="<c:url value='/resources/scripts/jquery.ajaxupload.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/resources/scripts/activity_attach.js'/>"></script>
+	<script>
+		KindEditor.ready(function(K) {
+	 		var control = {
+	           	 	width : "69%", //编辑器的宽度为70%
+	           	 	height: "200px",
+	       			items:['source', '|', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
+	      			        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+	      			        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+	      			        'superscript', 'clearhtml', '/', 'quickformat', 'selectall', '|', 
+	      			        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+	      			        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 
+	      			        'table', 'hr', 'fullscreen'],
+	      				resizeType : '1'
+	      			};
+	 	
+	       	window.content_editor = K.create('#content',control);
+	    	window.aim_editor = K.create('#aim', control);
+		});
+   </script>
+	
 	<script type="text/javascript">
 		var $ = jQuery;
 		function formatterDate2(time) {
@@ -306,6 +343,7 @@
 				if(activityValidate()) {
 					var data = {
 						'id': $('#id').val(),
+						'activityUuid': $('#activityUuid').val(),
 						'name': $('#name').val(),
 						'dateTime': $('#dateTime').val(),
 						'endDate': $('#endDate').val(),
@@ -324,8 +362,20 @@
 					};
 				
 					$.post(contextPath+"/college/updateActivity", data).done(function(msg){
-						if(msg == 'success') {
+						if($.trim(msg) != '') {
 							alert('更新成功！');
+							var as = $('a[name=fileName]');
+							if(as != null) {
+								for(var i = 0; i < as.size(); i++) {
+									var id = $(as.get(i)).data('id');
+									// 将活动和文件关联
+									$.post(contextPath+"/linkFileAndActivity" , {'fileId': id, 'uuid': msg}).done(function(msg) {
+									//	alert(msg);
+									});
+									
+								}
+							}
+							
 						}else if(msg == 'fail') {
 							alert('更新失败！');
 						}
@@ -334,150 +384,177 @@
 					});
 				}
 			});
-			
+
 			// 加载活动信息
-			jQuery.post(contextPath+"/admin/activity_detail", {"id": '${activityId}'}).done(function(result){
-				var id = result.id;
-				var name = result.name;
-				var dateTime = result.dateTime;
-				var endDate = result.endDate;
-				var location = result.location;
-				var aim = result.aim;
-				var content = result.content;
-				var actTypeId = result.actType.id; // 加分类型id
-				var secondLevelId = result.secondLevel.id; // 二级分类类型id
-				var duration = result.duration;
-				var actObject = result.actObject;
-				var number = result.number;
-				var contact = result.contact;
-				var phone = result.phone;
-				var assist = result.assist;
-				var reason = result.reason;
-				
-				// 用户身份
-				var user_authority = '${user.authority}'
-				
-				if(user_authority == 1) {	// 管理员
-					$('#updateActivity').hide();
-					// 将输入框置为不可编辑状态
-					$('#name').attr('readonly', 'readonly');
-					$('#dateTime').attr('readonly', 'readonly');
-					$('#endDate').attr('readonly', 'readonly');
-					$('#location').attr('readonly', 'readonly');
-					$('#aim').attr('readonly', 'readonly');
-					$('#content').attr('readonly', 'readonly');
-					$('#duration').attr('readonly', 'readonly');
-					$('#actObject').attr('readonly', 'readonly');
-					$('#number').attr('readonly', 'readonly');
-					$('#contact').attr('readonly', 'readonly');
-					$('#phone').attr('readonly', 'readonly');
-					$('#assist').attr('readonly', 'readonly');
-					
-				
-				}else if(user_authority == 0) {	// 用工单位
-					$('#updateActivity').show();
-				}
-				
-				// 活动审核状态
-				var status = result.status;
-				
-				if(status == 1) {	// 通过，不可编辑
-					$('#updateActivity').hide();
-				}				
-				
-				$('#id').val(id);
-				$('#name').val(name);
-				$('#dateTime').val(dateTime);
-				$('#endDate').val(formatterDate2(endDate));
-				$('#location').val(location);
-				aim_editor.html(aim);
-				content_editor.html(content);
-				$('#duration').val(duration);
-				var html = '';
-				if(actObject == -1) {
-					html += '<option value="-1" selected="selected">全校学生</option>'
-					+'<option value="${user.id }">${user.name}学生</option>';
-				}else {
-					var newActObject = '';
-					$.ajax({
-    					url: contextPath+"/getCollegeById",
-    					data: {'colId': actObject},
-    					type: 'POST',	
-    					async: false, // 同步
-						dataType: 'json',
-						success: function(data){
-							newActObject = data.name;
+			$.ajax({
+				url: contextPath+"/admin/activity_detail",
+				type: 'POST',
+				data: {"id": '${activityId}'},
+				async: true,
+				success: function(result) {
+					var id = result.id;
+
+					var activityUuid = result.activityUuid;
+					// 加载活动附件
+					$.post(contextPath+"/admin/getFileByActivityUuid", 
+							{'activityUuid': activityUuid}).done(function(data) {
+						// 渲染附件列表
+						var len = data.length;
+						if(len == 0) {
+							// TODO							
+						}else {
+							for(var i = 0; i < len; i++) {
+								var file = data[i];								
+								var fileName = file.originalFilename;
+								var fileId = file.id;
+								var size = file.fileSize;
+								
+								var content = '<div>文件名称 '+fileName+'&nbsp;&nbsp;，文件大小 '+size+'<a name="fileName" data-id="'+fileId+'" style="cursor: pointer;" onclick="deleteFile(this)">&nbsp;&nbsp;删除</a><div>';
+								$('#attach_list').append(content);
+							}
 						}
-    				});
-					html += '<option value="-1">全校学生</option>'
-						+'<option value="'+actObject+'" selected="selected">'+newActObject+'学生</option>';
-				}
-				$('#actObject').append(html);
-				
-				$('#number').val(number);
-				$('#contact').val(contact);
-				$('#phone').val(phone);
-				$('#assist').val(assist);
-				
-				if(status == 0) {
-    				status = '待审核';
-    			}else if(status == 1) {
-    				status = '审核通过';
-    			}else if(status == -1) {
-    				status = '未通过' + '（<span style="color: red">原因：'+ reason +'</span>）';
-    				if(user_authority == 0) {	// 用工单位
-    					status = '未通过' + '（<span style="color: red">原因：'+ reason +'。请编辑后更新活动...</span>）';    					
-    				}
-    			}
-				
-				$('#activity_status').html(status);
+								
+					}).fail(function(msg) {
+					});
 					
-				// 加载活动加分类型
-				jQuery.ajax({
-					url: contextPath + "/activityTypes",
-					dataType: "json",
-					async: false,
-					success: function(data){
-						var html = "";
-						for(var i = 0; i < data.length; i++) {
-							var type = data[i];
-							var op = "<option value="+ type.id +">" + type.name + "</option>";
-							if(type.id == actTypeId) {
-								op = "<option value="+ type.id +" selected='selected'>" + type.name + "</option>";
+					
+					var name = result.name;
+					var dateTime = result.dateTime;
+					var endDate = result.endDate;
+					var location = result.location;
+					var aim = result.aim;
+					var content = result.content;
+					var actTypeId = result.actType.id; // 加分类型id
+					var secondLevelId = result.secondLevel.id; // 二级分类类型id
+					var duration = result.duration;
+					var actObject = result.actObject;
+					var number = result.number;
+					var contact = result.contact;
+					var phone = result.phone;
+					var assist = result.assist;
+					var reason = result.reason;
+					
+					// 用户身份
+					var user_authority = '${user.authority}'
+					
+					if(user_authority == 1) {	// 管理员
+						$('#updateActivity').hide();
+						// 将输入框置为不可编辑状态
+						$('#name').attr('readonly', 'readonly');
+						$('#dateTime').attr('readonly', 'readonly');
+						$('#endDate').attr('readonly', 'readonly');
+						$('#location').attr('readonly', 'readonly');
+						$('#aim').attr('readonly', 'readonly');
+						$('#content').attr('readonly', 'readonly');
+						$('#duration').attr('readonly', 'readonly');
+						$('#actObject').attr('readonly', 'readonly');
+						$('#number').attr('readonly', 'readonly');
+						$('#contact').attr('readonly', 'readonly');
+						$('#phone').attr('readonly', 'readonly');
+						$('#assist').attr('readonly', 'readonly');
+						
+					
+					}else if(user_authority == 0) {	// 用工单位
+						$('#updateActivity').show();
+					}
+					
+					// 活动审核状态
+					var status = result.status;
+					
+					if(status == 1) {	// 通过，不可编辑
+						$('#updateActivity').hide();
+					}				
+					
+					$('#id').val(id);
+					$('#activityUuid').val(activityUuid);
+					$('#name').val(name);
+					$('#dateTime').val(dateTime);
+					$('#endDate').val(formatterDate2(endDate));
+					$('#location').val(location);
+					aim_editor.html(aim);
+					content_editor.html(content);
+					$('#duration').val(duration);
+					var html = '';
+					if(actObject == -1) {
+						html += '<option value="-1" selected="selected">全校学生</option>'
+						+'<option value="${user.id }">${user.name}学生</option>';
+					}else {
+						var newActObject = '';
+						$.ajax({
+	    					url: contextPath+"/getCollegeById",
+	    					data: {'colId': actObject},
+	    					type: 'POST',	
+	    					async: false, // 同步
+							dataType: 'json',
+							success: function(data){
+								newActObject = data.name;
+							}
+	    				});
+						html += '<option value="-1">全校学生</option>'
+							+'<option value="'+actObject+'" selected="selected">'+newActObject+'学生</option>';
+					}
+					$('#actObject').append(html);
+					
+					$('#number').val(number);
+					$('#contact').val(contact);
+					$('#phone').val(phone);
+					$('#assist').val(assist);
+					
+					if(status == 0) {
+	    				status = '待审核';
+	    			}else if(status == 1) {
+	    				status = '审核通过';
+	    			}else if(status == -1) {
+	    				status = '未通过' + '（<span style="color: red">原因：'+ reason +'</span>）';
+	    				if(user_authority == 0) {	// 用工单位
+	    					status = '未通过' + '（<span style="color: red">原因：'+ reason +'。请编辑后更新活动...</span>）';    					
+	    				}
+	    			}
+					
+					$('#activity_status').html(status);
+					
+					// 加载活动加分类型
+					jQuery.ajax({
+						url: contextPath + "/activityTypes",
+						dataType: "json",
+						async: false,
+						success: function(data){
+							var html = "";
+							for(var i = 0; i < data.length; i++) {
+								var type = data[i];
+								var op = "<option value="+ type.id +">" + type.name + "</option>";
+								if(type.id == actTypeId) {
+									op = "<option value="+ type.id +" selected='selected'>" + type.name + "</option>";
+								}
+								html += op;
+							}
+							jQuery("#actType").html(html);
+						}
+					});
+					
+					// 加载二级分类类型
+					var superiorId = $('#actType').val();
+					/**
+					 * 根据一级分类id获取所有二级分类
+					 */
+					$.post(contextPath + "/secondLevels", {'superiorId': superiorId}).done(function(data) {
+						var len = data.length;
+						var html = '';
+						if(len == 0) {
+							html = '<option value="1">其他</option>';	
+						}
+						for(var i = 0; i < len; i++) {
+							var secondLevel = data[i];
+							var op = '<option value="'+secondLevel.id+'">'+secondLevel.name+'</option>';	
+							if(secondLevelId == secondLevel.id) {
+								op = '<option value="'+secondLevel.id+'" selected="selected">'+secondLevel.name+'</option>';
 							}
 							html += op;
 						}
-						jQuery("#actType").html(html);
-					}
-				});
-				
-				// 加载二级分类类型
-				var superiorId = $('#actType').val();
-				/**
-				 * 根据一级分类id获取所有二级分类
-				 */
-				$.post(contextPath + "/secondLevels", {'superiorId': superiorId}).done(function(data) {
-					var len = data.length;
-					var html = '';
-					if(len == 0) {
-						html = '<option value="1">其他</option>';	
-					}
-					for(var i = 0; i < len; i++) {
-						var secondLevel = data[i];
-						var op = '<option value="'+secondLevel.id+'">'+secondLevel.name+'</option>';	
-						if(secondLevelId == secondLevel.id) {
-							op = '<option value="'+secondLevel.id+'" selected="selected">'+secondLevel.name+'</option>';
-						}
-						html += op;
-					}
+						$('#secondLevel').html(html);
+					});
 					
-					$('#secondLevel').html(html);
-					
-				});
-				
-				
-			}).fail(function(){
-				alert('服务器端错误！');				
+				}
 			});
 			
 			/**
@@ -503,27 +580,8 @@
 			});
 		});
 		
-		
 	</script>
-	<script>
-		KindEditor.ready(function(K) {
-	 		var control = {
-	           	 	width : "69%", //编辑器的宽度为70%
-	           	 	height: "200px",
-	       			items:['source', '|', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
-	      			        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-	      			        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-	      			        'superscript', 'clearhtml', '/', 'quickformat', 'selectall', '|', 
-	      			        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-	      			        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 
-	      			        'table', 'hr', 'fullscreen'],
-	      				resizeType : '1'
-	      			};
-	 	
-	       	window.content_editor = K.create('#content',control);
-	    	window.aim_editor = K.create('#aim', control);
-		});
-   </script>
+	
 	
 </body>
 </html>    

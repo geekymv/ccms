@@ -40,5 +40,12 @@ public interface FileEntityDAO extends BaseDAO<FileEntity> {
 	 * @return
 	 */
 	public int linkFileAndActivity(@Param("fileId")Integer fileId, @Param("uuid")String uuid);
+	
+	/**
+	 * 根据活动id加载附件
+	 * @param activityUuid
+	 * @return
+	 */
+	public List<FileEntity> queryByActivityUuid(String activityUuid);
 
 }

@@ -163,7 +163,7 @@
 			        				+ "<td>"+ phone +"</td>"
 			        				+ "<td>"+ stu.college.name +"</td>"
 			        				+ "<td>"+ stu.rank.name +"</td>"
-			        				+ "<td><span onclick='edit(this)'data-num='"+stu.num+"' style='cursor: pointer;'>编辑</span></td>"
+			        				+ "<td><span onclick='edit(this)'data-num='"+stu.num+"' style='cursor: pointer;'>查看</span></td>"
 			        			+"</tr>";
 			        		}
 			        	}

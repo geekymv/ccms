@@ -148,7 +148,7 @@
 				        			html += "<td>"+newActObject+"</td>"
 				        					+ "<td>"+ formatterDate(act.publishTime) +"</td>"
 				        					+ "<td>"+ act.actType.name +"</td>"
-				        					+ "<td>"+ act.duration +"</td>"
+				        					+ "<td>"+ act.duration +"小时</td>"
 				        					+ "<td id='status'>"+ status +"</td>"
 				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='showDetail(this)'></span></td>"
 				        					+ "<td><span title='查看' style='cursor:pointer;' data-id='"+act.id+"' class='glyphicon glyphicon-eye-open' onclick='showApply(this)'></span></td>";

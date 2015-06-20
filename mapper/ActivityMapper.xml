@@ -52,7 +52,7 @@
 	
 	<!-- 分页查询所有Activity -->
 	<select id="queryByPage" resultMap="ActivityResultMap">
-		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
+		select act.id act_id, act.activityUuid, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
@@ -63,7 +63,7 @@
 	
 	<!-- 分页查询所有Activity -->
 	<select id="queryAllByPage" parameterType="Pager" resultMap="ActivityResultMap">
-		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
+		select act.id act_id, act.activityUuid, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
@@ -75,7 +75,7 @@
 	
 	<!-- 用工单位查看自己发布的活动信息 -->
 	<select id="queryAllByPageAndCollege" resultMap="ActivityResultMap">
-		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
+		select act.id act_id, act.activityUuid, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name from t_activities act 
 		inner join t_colleges col on act.col_id=col.id 
@@ -89,7 +89,7 @@
 	
 	<!-- 分页查询所有通过审核的Activity -->
 	<select id="queryAllStatusByPage" resultMap="ActivityResultMap">
-		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
+		select act.id act_id, act.activityUuid, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status,
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name 
 		from t_activities act 
@@ -110,7 +110,7 @@
 	
 	<!-- 根据id查询 -->
 	<select id="queryById" parameterType="int" resultMap="ActivityResultMap">
-		select act.id act_id, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
+		select act.id act_id, act.activityUuid, act.name act_name, act.publish_time, act.date_time, act.end_date, act.location,
 		act.aim, act.content, act.duration, act.act_object, act.number, act.contact, act.phone, act.assist, act.status, act.reason,
 		col.id col_id, col.name col_name, a_type.id a_type_id, a_type.name a_type_name, 
 		s_level.id s_level_id, s_level.name s_level_name, s_level.superiorId superiorId 
@@ -128,6 +128,7 @@
 	
 	<resultMap type="Activity" id="ActivityResultMap">
 		<id column="act_id" property="id"/>
+		<result column="activityUuid" property="activityUuid" />
 		<result column="act_name" property="name"/>
 		<result column="publish_time" property="publishTime"/>
 		<result column="date_time" property="dateTime"/>

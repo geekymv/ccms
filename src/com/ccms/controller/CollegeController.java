@@ -18,11 +18,13 @@ import com.ccms.persistence.dto.StudentQueryDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.FileEntity;
 import com.ccms.persistence.pojo.Specialty;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.ActivityService;
 import com.ccms.service.ActivityTypeService;
 import com.ccms.service.CollegeService;
+import com.ccms.service.FileEntityService;
 import com.ccms.service.SpecialtyService;
 import com.ccms.service.StudentService;
 
@@ -42,6 +44,8 @@ public class CollegeController {
 	private ActivityTypeService activityTypeService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private FileEntityService fileEntityService;
 	
 	@RequestMapping(value="/getCollegeById", method=RequestMethod.POST)
 	@ResponseBody
@@ -162,6 +166,17 @@ public class CollegeController {
 	}
 	
 	/**
+	 * 根据活动activityUuid加载附件
+	 * @param activityUuid
+	 * @return
+	 */
+	@RequestMapping(value="/admin/getFileByActivityUuid", method=RequestMethod.POST)
+	@ResponseBody
+	public List<FileEntity> getFileByActivityUuid(String activityUuid) {
+		return fileEntityService.getByActivityUuid(activityUuid);
+	}
+	
+	/**
 	 * 更新活动
 	 * @param activity
 	 * @return
@@ -169,7 +184,12 @@ public class CollegeController {
 	@RequestMapping(value="/college/updateActivity", method=RequestMethod.POST)
 	@ResponseBody
 	public String updateActivity(Activity activity) {
-		return activityService.updateActivity(activity);
+		String res = activityService.updateActivity(activity);
+		if("success" == res) {
+			return activity.getActivityUuid();
+		}
+		
+		return "";
 	}
 	
 	/**

@@ -54,6 +54,11 @@ public class FileEntityServiceImpl implements FileEntityService {
 		return res == 1 ? "success" : "fail";
 	}
 
+	@Override
+	public List<FileEntity> getByActivityUuid(String activityUuid) {
+		return fileDao.queryByActivityUuid(activityUuid);
+	}
+
 }
 
 

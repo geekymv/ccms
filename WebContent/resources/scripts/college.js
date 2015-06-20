@@ -130,19 +130,16 @@ function pubActivity() {
 		jQuery.post(contextPath+'/admin/pubActivity', data).done(function(msg){
 			if($.trim(msg) != '') {
 				alert('发布成功！');
-				debugger
 				var as = $('a[name=fileName]');
 				if(as != null) {
 					for(var i = 0; i < as.size(); i++) {
 						var id = $(as.get(i)).data('id');
 						// 将活动和文件关联
 						$.post(contextPath+"/linkFileAndActivity" , {'fileId': id, 'uuid': msg}).done(function(msg) {
-							alert(msg);
+						//	alert(msg);
 						});
-						
 					}
 				}
-
 				window.location.href = contextPath + "/admin/activities";
 				
 			} else{

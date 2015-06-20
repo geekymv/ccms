@@ -50,5 +50,10 @@
 		update t_files f set f.activityUuid = #{uuid} where f.id = #{fileId};
 	</update>
 	
+	<!-- 根据活动activityUuid加载附件 -->
+	<select id="queryByActivityUuid" resultType="FileEntity">
+		select * from t_files f where f.activityUuid = #{activityUuid} and status = 1;
+	</select>
+	
 	
 </mapper>  
