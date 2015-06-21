@@ -2,19 +2,27 @@ package com.ccms.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ccms.persistence.pojo.ActivityType;
@@ -35,7 +43,7 @@ import com.ccms.util.FileUtil;
 import com.ccms.util.RandomValidateCode;
 
 @Controller
-public class CommonController {
+public class CommonController implements ServletContextAware{
 	@Autowired
 	private SpecialtyService specialtyService;
 	@Autowired
@@ -275,7 +283,47 @@ public class CommonController {
 		return rankService.findAll();
 	}
 	
+	/**
+	 * 附件下载
+	 * @param fileName
+	 * @return
+	 */
+	@RequestMapping("/download")
+	public ResponseEntity<byte[]> download(String fileName) {
+		try {
+			fileName = URLDecoder.decode(fileName,"utf-8");
+			String path = servletContext.getRealPath("/upload");
+			File file = new File(path+"/"+fileName);
+			
+			int index = fileName.lastIndexOf("_");
+			String realFileName = fileName.substring(0, index) + fileName.substring(index+15);
+			
+			HttpHeaders headers = new HttpHeaders();
+			
+			String filename = new String(realFileName.getBytes("utf-8"), "iso-8859-1");
+			headers.setContentDispositionFormData("attachment", filename);
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			
+			return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null; 
+	}
+
+	private ServletContext servletContext;
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		this.servletContext = servletContext;
+	}
 }
+
+
+
+
+
+
 
 
 

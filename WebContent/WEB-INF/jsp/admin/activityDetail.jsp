@@ -392,7 +392,11 @@
 				data: {"id": '${activityId}'},
 				async: true,
 				success: function(result) {
+					// 用户身份
+					var user_authority = '${user.authority}'
 					var id = result.id;
+					// 活动审核状态
+					var status = result.status;
 
 					var activityUuid = result.activityUuid;
 					// 加载活动附件
@@ -408,8 +412,19 @@
 								var fileName = file.originalFilename;
 								var fileId = file.id;
 								var size = file.fileSize;
+								var content = '';
+								if(user_authority == 1 || status == 1) {	// 管理员
+									content = '<div>'+fileName+'<input type="hidden" id="fileName" value="'+file.newFileName+'" />';
+									content += '&nbsp;&nbsp;，'+size+'<a style="cursor: pointer;" onclick="downloadAttach(this)">下载</a><div>';
+								}else {
+									content = '<div>'+fileName+'<input type="hidden" id="fileName" value="'+file.newFileName+'" />';
+									content += '&nbsp;&nbsp;'+size+'<a style="cursor: pointer;" onclick="downloadAttach(this)">&nbsp;&nbsp;下载</a>';
+									content += '<a name="fileName" data-id="'+fileId+'" style="cursor: pointer;" onclick="deleteFile(this)">&nbsp;&nbsp;删除</a><div>';
+							//		content += '<div>文件名称 '+fileName+'&nbsp;&nbsp;，文件大小 '+size+'<a name="fileName" data-id="'+fileId+'" style="cursor: pointer;" onclick="deleteFile(this)">&nbsp;&nbsp;删除</a><div>';
+								}
 								
-								var content = '<div>文件名称 '+fileName+'&nbsp;&nbsp;，文件大小 '+size+'<a name="fileName" data-id="'+fileId+'" style="cursor: pointer;" onclick="deleteFile(this)">&nbsp;&nbsp;删除</a><div>';
+								
+								
 								$('#attach_list').append(content);
 							}
 						}
@@ -434,8 +449,7 @@
 					var assist = result.assist;
 					var reason = result.reason;
 					
-					// 用户身份
-					var user_authority = '${user.authority}'
+					
 					
 					if(user_authority == 1) {	// 管理员
 						$('#updateActivity').hide();
@@ -458,11 +472,11 @@
 						$('#updateActivity').show();
 					}
 					
-					// 活动审核状态
-					var status = result.status;
+					
 					
 					if(status == 1) {	// 通过，不可编辑
 						$('#updateActivity').hide();
+						$('#select').hide();
 					}				
 					
 					$('#id').val(id);
@@ -499,19 +513,19 @@
 					$('#contact').val(contact);
 					$('#phone').val(phone);
 					$('#assist').val(assist);
-					
+					var status_str = '';
 					if(status == 0) {
-	    				status = '待审核';
+	    				status_str = '待审核';
 	    			}else if(status == 1) {
-	    				status = '审核通过';
+	    				status_str = '审核通过';
 	    			}else if(status == -1) {
-	    				status = '未通过' + '（<span style="color: red">原因：'+ reason +'</span>）';
+	    				status_str = '未通过' + '（<span style="color: red">原因：'+ reason +'</span>）';
 	    				if(user_authority == 0) {	// 用工单位
-	    					status = '未通过' + '（<span style="color: red">原因：'+ reason +'。请编辑后更新活动...</span>）';    					
+	    					status_str = '未通过' + '（<span style="color: red">原因：'+ reason +'。请编辑后更新活动...</span>）';    					
 	    				}
 	    			}
 					
-					$('#activity_status').html(status);
+					$('#activity_status').html(status_str);
 					
 					// 加载活动加分类型
 					jQuery.ajax({
