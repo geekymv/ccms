@@ -144,7 +144,7 @@
 	</select>
 	
 	<!-- 查看活动报名学生列表分页 -->
-	<select id="queryByActivityId" parameterType="int" resultType="StudentDto">
+	<select id="queryByActivityId" resultType="StudentDto">
 		select item.id itemId, stu.id as stuId, stu.num, stu.name, stu.gender, stu.phone,
 		col_1.name as collegeName, spec.name as specialtyName, item.audit as status 
 		from t_students stu
@@ -153,7 +153,8 @@
 			inner join t_colleges col_1 on stu.col_id = col_1.id
 			left join t_specialties spec on stu.spec_id = spec.id
 			inner join t_colleges col_2 on act.col_id = col_2.id
-			where act.id = #{actId};
+			where act.id = #{actId}
+			limit #{pager.pageOffset}, #{pager.pageSize};
 	</select>
 	
 	<!--  根据活动id查看报名学生总记录数 -->

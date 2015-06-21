@@ -76,13 +76,14 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Pager<StudentDto> findStudentByActivityId(Pager<StudentDto> pager, Integer actId) {
-		List<StudentDto> lists = studentDAO.queryByActivityId(actId);
-		
 		int totalRecord = studentDAO.getTotalRecordByActivityId(actId);
 		pager.setTotalRecord(totalRecord );
 		
 		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
+		
+		List<StudentDto> lists = studentDAO.queryByActivityId(pager, actId);
 		pager.setDatas(lists);
+		
 		
 		return pager;
 	}

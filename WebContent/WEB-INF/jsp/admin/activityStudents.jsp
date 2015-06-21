@@ -130,7 +130,14 @@
 				        					status = '审核通过';
 				        				}else if (status == 3) {
 											status = '审核未通过';				        					
-				        				}	        			
+				        				}	 
+				        				var phone = stu.phone;
+				        				debugger;
+				        				alert(phone);
+				        				
+				        				if(phone == 'null') {
+				        					phone = "暂无";
+				        				}
 				        			
 				        				html += "<tr>"
 					        		   		+ "<th class='centeralign'><input type='checkbox' class='checkall' /></th>"
@@ -138,7 +145,7 @@
 					        				+ "<td>"+ stu.num +"</td>"
 					        				+ "<td>"+ stu.name +"</td>"
 					        				+ "<td>"+ stu.gender +"</td>"
-					        				+ "<td>"+ stu.phone +"</td>"
+					        				+ "<td>"+ phone +"</td>"
 					        				+ "<td>"+ stu.collegeName +"</td>"
 					        				+ "<td>"+ stu.specialtyName +"</td>"
 					        				+ "<td>"+ status +"</td>"

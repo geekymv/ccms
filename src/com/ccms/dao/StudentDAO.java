@@ -35,11 +35,12 @@ public interface StudentDAO extends BaseDAO<Student>{
 	public Student queryByNumAndPwd(@Param("num")String num, @Param("pwd")String pwd);
 
 	/**
-	 * 根据活动id查看报名学生
+	 * 根据活动id查看报名学生分页
 	 * @param actId
 	 * @return
 	 */
-	public List<StudentDto> queryByActivityId(Integer actId);
+	public List<StudentDto> queryByActivityId(@Param("pager")Pager<StudentDto> pager, 
+			@Param("actId")Integer actId);
 	
 	/**
 	 * 根据活动id查看报名学生总记录数
