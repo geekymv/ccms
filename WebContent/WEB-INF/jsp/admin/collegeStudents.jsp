@@ -54,6 +54,7 @@
                 		<option value="-1">专业</option>
                 	</select>&nbsp;&nbsp;
 		        	<input type="button" class="btn btn-default" id="query" style="margin-bottom: 10px;" value="查询"/>
+		        	<input type="button" class="btn btn-default" id="downloadStudent" style="margin-bottom: 10px;" value="下载"/>
                 </div>
                 
             	<table class="table table-bordered responsive">
@@ -130,8 +131,14 @@
 				pager();
 			});
 			
+			$('#downloadStudent').click(function() {
+				alert('aa');				
+			});
+			
 		})
 		
+		
+		// 编辑
 		function edit(t) {
 			var $this = $(t);
 			window.location.href = contextPath + "/admin/student/" + $this.data('num');

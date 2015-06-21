@@ -1,5 +1,7 @@
 package com.ccms.service;
 
+import java.util.List;
+
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.dto.StudentDto;
 import com.ccms.persistence.dto.StudentQueryDto;
@@ -65,6 +67,13 @@ public interface StudentService {
 	 * @return
 	 */
 	public String isExist(String num, String year);
+
+	/**
+	 * 根据学生id获取报名列表
+	 * @param actId
+	 * @return
+	 */
+	public List<StudentDto> getAllStudentByActivityId(Integer actId);
 	
 }
 

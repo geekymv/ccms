@@ -54,6 +54,7 @@
                 		<option value="-1">选择学院</option>
                 	</select>&nbsp;&nbsp;
 		        	<input type="button" class="btn btn-default" id="query" style="margin-bottom: 10px;" value="查询"/>
+		        	<input type="button" class="btn btn-default" id="downloadStudents" style="margin-bottom: 10px;" value="下载"/>
                 </div>
                 
             	<table class="table table-bordered responsive">

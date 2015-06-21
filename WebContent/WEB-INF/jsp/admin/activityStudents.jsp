@@ -43,6 +43,8 @@
         	<div class="maincontentinner">
             <div class="widget">
                 <h4 class="widgettitle">学生列表</h4>
+                	<input type="hidden" name="actId" id="actId" value="${actId }" />
+                	<a style="cursor: pointer;" onclick="downloadApplyStudents();">下载</a>
             	<table class="table table-bordered responsive">
            			<thead>
                        <tr>
@@ -99,7 +101,7 @@
 	
 	<script type="text/javascript" src="${ctx }/resources/layer-v1.9.1/layer/layer.js"></script>
 	<script type="text/javascript" src="${ctx }/resources/layer-v1.9.1/layer/extend/layer.ext.js"></script>
-	
+	<script type="text/javascript" src="${ctx }/resources/scripts/ui/student/downloadApplyStudents.js"></script>
 	<script type="text/javascript">
 		jQuery(function(){
 			var $ = jQuery;

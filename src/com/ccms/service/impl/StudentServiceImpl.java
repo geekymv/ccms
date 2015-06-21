@@ -129,21 +129,13 @@ public class StudentServiceImpl implements StudentService {
 		return "notexist";
 	}
 
+
+	@Override
+	public List<StudentDto> getAllStudentByActivityId(Integer actId) {
+		return studentDAO.getAllStudentByActivityId(actId);
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -415,7 +415,7 @@
 								var content = '';
 								if(user_authority == 1 || status == 1) {	// 管理员
 									content = '<div>'+fileName+'<input type="hidden" id="fileName" value="'+file.newFileName+'" />';
-									content += '&nbsp;&nbsp;，'+size+'<a style="cursor: pointer;" onclick="downloadAttach(this)">下载</a><div>';
+									content += ',&nbsp;&nbsp;'+size+'<a style="cursor: pointer;" onclick="downloadAttach(this)">&nbsp;&nbsp;下载</a><div>';
 								}else {
 									content = '<div>'+fileName+'<input type="hidden" id="fileName" value="'+file.newFileName+'" />';
 									content += '&nbsp;&nbsp;'+size+'<a style="cursor: pointer;" onclick="downloadAttach(this)">&nbsp;&nbsp;下载</a>';

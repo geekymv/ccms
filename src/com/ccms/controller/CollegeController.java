@@ -1,7 +1,10 @@
 package com.ccms.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,7 @@ import com.ccms.service.CollegeService;
 import com.ccms.service.FileEntityService;
 import com.ccms.service.SpecialtyService;
 import com.ccms.service.StudentService;
+import com.ccms.util.ExcelUtil;
 
 /**
  * 学院/社团Controller
@@ -208,8 +212,22 @@ public class CollegeController {
 	 */
 	@RequestMapping("/admin/apply_students")
 	@ResponseBody
-	public Pager<StudentDto> findApplyStudents(HttpSession session, Pager<StudentDto> pager, Integer actId) {
+	public Pager<StudentDto> findApplyStudents(Pager<StudentDto> pager, Integer actId) {
 		return studentService.findStudentByActivityId(pager, actId);
+	}
+	
+	/**
+	 * 下载报名学生名单
+	 * @param actId
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/downloadApplyStudents")
+	public void downloadApplyStudents(Integer actId, HttpServletResponse response) {
+		List<String> titles = Arrays.asList("序号", "学号", "姓名", "联系方式", "学院", "专业");
+		List<StudentDto> dtos = studentService.getAllStudentByActivityId(actId);
+		
+		ExcelUtil.downloadApplyStudents(dtos, titles , response);
 	}
 	
 	/**

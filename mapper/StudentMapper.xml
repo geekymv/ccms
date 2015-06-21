@@ -130,7 +130,20 @@
 				
 	</resultMap>
 	
-	<!-- 查看活动报名学生列表 -->
+	<!-- 根据学生id获取报名列表 -->
+	<select id="getAllStudentByActivityId"  parameterType="int" resultType="StudentDto">
+		select item.id itemId, stu.id as stuId, stu.num, stu.name, stu.gender, stu.phone,
+			col_1.name as collegeName, spec.name as specialtyName, item.audit as status 
+			from t_students stu
+				inner join t_activity_item item on item.stu_id = stu.id
+				inner join t_activities act on item.act_id = act.id
+				inner join t_colleges col_1 on stu.col_id = col_1.id
+				left join t_specialties spec on stu.spec_id = spec.id
+				inner join t_colleges col_2 on act.col_id = col_2.id
+				where act.id = #{actId};
+	</select>
+	
+	<!-- 查看活动报名学生列表分页 -->
 	<select id="queryByActivityId" parameterType="int" resultType="StudentDto">
 		select item.id itemId, stu.id as stuId, stu.num, stu.name, stu.gender, stu.phone,
 		col_1.name as collegeName, spec.name as specialtyName, item.audit as status 

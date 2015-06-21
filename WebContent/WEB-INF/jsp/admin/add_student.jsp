@@ -133,7 +133,7 @@
 			$('#num').blur(function() {
 				var num = $('#num').val();
 				if($.trim(num) == '') {
-					alert('学号不能为空！')
+					$('#num').append('<span>学号不能为空！</span>')
 					$('#num').focus();
 					return;
 				}
