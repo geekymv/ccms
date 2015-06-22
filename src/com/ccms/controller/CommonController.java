@@ -3,6 +3,7 @@ package com.ccms.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URLDecoder;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -25,12 +26,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ccms.persistence.dto.StudentQueryDto;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
 import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.SecondLevel;
 import com.ccms.persistence.pojo.Specialty;
+import com.ccms.persistence.pojo.Student;
 import com.ccms.service.ActivityTypeService;
 import com.ccms.service.CollegeService;
 import com.ccms.service.CommonService;
@@ -38,7 +41,9 @@ import com.ccms.service.FileEntityService;
 import com.ccms.service.RankService;
 import com.ccms.service.SecondLevelService;
 import com.ccms.service.SpecialtyService;
+import com.ccms.service.StudentService;
 import com.ccms.util.DateUtils;
+import com.ccms.util.ExcelUtil;
 import com.ccms.util.FileUtil;
 import com.ccms.util.RandomValidateCode;
 
@@ -58,6 +63,8 @@ public class CommonController implements ServletContextAware{
 	private RankService rankService;
 	@Autowired
 	private CollegeService collegeService;
+	@Autowired
+	private StudentService studentService;
 	
 	/**
 	 * 根据学院id获取该学院的所有专业
@@ -312,6 +319,22 @@ public class CommonController implements ServletContextAware{
 		return null; 
 	}
 
+	/**
+	 * 根据学年下载学生名单
+	 * @param year
+	 */
+	@RequestMapping("/downloadStudentsByYear")
+	public void downloadStudentsByYear(StudentQueryDto dto, HttpServletResponse response) {
+		List<Student> students = studentService.downloadStudents(dto);
+		
+		Integer colId = dto.getColId();
+		
+		ExcelUtil.downloadStudents(students, colId, response);
+	}
+	
+	
+	
+	
 	private ServletContext servletContext;
 	@Override
 	public void setServletContext(ServletContext servletContext) {

@@ -141,6 +141,76 @@ public class ExcelUtil {
 	}
 	
 	/**
+	 * 根据学年下载学生名单
+	 * @param dtos
+	 * @param titles
+	 * @param response
+	 */
+	public static void downloadStudents(List<Student> dtos, Integer colId, HttpServletResponse response) {
+		WritableWorkbook book = null;
+		try {
+			OutputStream os = response.getOutputStream();
+			response.setHeader("Content-disposition", 
+					"attachment; filename=" + new String("学生名单".getBytes("GB2312"),"8859_1") + ".xls");// 设定输出文件头
+	        response.setContentType("application/msexcel");
+	        // 创建一个工作薄，就是整个Excel文档
+	        book = Workbook.createWorkbook(os);
+	        // 创建工作表
+	        WritableSheet sheet = book.createSheet("学生名单", 0);
+	        
+	        List<String> titles = null;
+	        if(colId == null) {	// 管理员
+	        	titles = Arrays.asList("序号", "学号", "姓名", "性别", "联系方式", "学院", "专业", "等级", "是否通过考核");
+	        }else { // 学院
+	        	titles = Arrays.asList("序号", "学号", "姓名", "性别", "联系方式", "专业", "等级", "是否通过考核");
+	        }
+	        
+	       
+	        for (int i = 0; i < titles.size(); i++) {
+				// 第1行，第(i+1)列添加标题
+				Label label = new Label(i, 0, titles.get(i));
+				sheet.addCell(label);
+			}
+	        
+	        if(dtos.size() == 0) {
+	        	
+	        }else {
+	        	for(int i = 0; i < dtos.size(); i++) {
+	        		Student student = dtos.get(i);
+	        		String num = student.getNum();
+	        		String name = student.getName();
+	        		String gender = student.getGender();
+	        		String phone = student.getPhone();
+	        		String colName = student.getCollege().getName();
+	        		String specName = student.getSpecialty().getName();
+	        		String rankName = student.getRank().getName();
+	        		
+	        		List<String> datas = null;
+	        		if(colId == null) {	// 管理员
+	        			datas = Arrays.asList((i+1)+"", num, name, gender, phone, colName, specName, rankName, "否");
+	    	        }else { // 学院
+	    	        	datas = Arrays.asList((i+1)+"", num, name, gender, phone, specName, rankName, "否");
+	    	        }
+	        		
+	        		for(int j = 0; j < datas.size(); j++) {
+	    				Label label = new Label(j, i+1, datas.get(j));
+	    				sheet.addCell(label);
+	        		}
+	        	}
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				book.write();
+				book.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
 	 * 创建
 	 * @param downloadDto
 	 * @param response

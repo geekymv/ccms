@@ -229,6 +229,7 @@ public class CollegeController {
 		ExcelUtil.downloadApplyStudents(dtos, titles , response);
 	}
 	
+	
 	/**
 	 * 本院学生列表页面
 	 * @return
@@ -299,6 +300,12 @@ public class CollegeController {
 		return studentService.register(student);
 	}
 	
+	/**
+	 * 判断学生是否存在
+	 * @param num 学号
+	 * @param year 学年
+	 * @return
+	 */
 	@RequestMapping(value="/studentIsExist", method=RequestMethod.POST)
 	@ResponseBody
 	public String studentIsExist(String num, String year) {

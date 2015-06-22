@@ -29,7 +29,9 @@
                    <li><a href="${ctx }/college/addStudent">添加学生</a></li>
               	</ul>
               </li>
+              <!-- 
               <li><a href="javascript:void(0);" onclick="alert('攻城狮们正在努力开发中...')">考核管理</a></li>
+              -->
              </c:if>
           </ul>
       </li>

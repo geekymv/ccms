@@ -78,5 +78,12 @@ public interface StudentDAO extends BaseDAO<Student>{
 	 * @return
 	 */
 	public List<StudentDto> getAllStudentByActivityId(Integer actId);
+
+	/**
+	 * 根据条件查询学生列表
+	 * @param year
+	 * @return
+	 */
+	public List<Student> queryStudentsByDto(@Param("dto")StudentQueryDto dto);
 	
 }

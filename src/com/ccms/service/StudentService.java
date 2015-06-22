@@ -74,6 +74,12 @@ public interface StudentService {
 	 * @return
 	 */
 	public List<StudentDto> getAllStudentByActivityId(Integer actId);
+
+	/**
+	 * 下载学生名单
+	 * @param year
+	 */
+	public List<Student> downloadStudents(StudentQueryDto dto);
 	
 }
 

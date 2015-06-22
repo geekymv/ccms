@@ -1,12 +1,8 @@
 package com.ccms.controller;
 
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
-import jxl.Sheet;
-import jxl.Workbook;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +18,6 @@ import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
-import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.SecondLevel;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.ActivityItemService;
@@ -263,13 +258,13 @@ public class AdminController {
 		return secondLevelService.update(level);
 	}
 	
-	/**
-	 * 导入学生名单
-	 */
-	@RequestMapping("/admin/import")
-	public void importStudents() {
-		readExcel2();
-	}
+//	/**
+//	 * 导入学生名单
+//	 */
+//	@RequestMapping("/admin/import")
+//	public void importStudents() {
+//		readExcel2();
+//	}
 	
 	/**
 	 * 编辑用工单位
@@ -322,92 +317,92 @@ public class AdminController {
 		return pager;
 	}
 	
-	// 循环读取Excel的内容
-	public void readExcel2() {
-		try {
-			Workbook workbook = Workbook.getWorkbook(new File("C:/Users/miying/Desktop/20150503/2014-2015学年受资助生一轮考核情况统计表.xls"));
-			Sheet sheet = workbook.getSheet(0);
-
-			int cols = sheet.getColumns();
-			int rows = sheet.getRows();
-//			System.out.println("列数 = " + cols + ", 行数 = " + rows);
-			
-			List<Rank> ranks = rankService.findAll();	// 查询所有等级
-			List<College> colleges = collegeService.getColleges(); // 获取所有的学院
-			
-			Student student = null;
-			for (int i = 2; i < rows; i++) {
-				student = new Student();
-				
-				// 姓名
-				String name = sheet.getCell(1, i).getContents();
-				// 学号
-				String num = sheet.getCell(2, i).getContents();
-				// 初始密码
-				String pwd = num;
-				// 性别
-				String gender = sheet.getCell(3, i).getContents();
-//				String mz = sheet.getCell(4, i).getContents();
-//				String nj = sheet.getCell(5, i).getContents();
-				
-				// 专业名称
-				String specName = sheet.getCell(6, i).getContents();
-				// 学院名称
-				String colName = sheet.getCell(7, i).getContents();
-				// 等级名称
-				String rankName = sheet.getCell(8, i).getContents();
-				
-//				for (int j = 0; j < cols; j++) {
-//					value = sheet.getCell(j, i).getContents();
-//				}
-
-				// 匹配等级
-				Rank rank = null;
-				for(Rank r : ranks) {
-					String rName = r.getName();
-					if(rName.equals(rankName)) {
-						rank = r;
-						break;
-					}
-				}
-				
-				// 匹配学院
-				for(College col : colleges) {
-//					int colId = col.getId(); // 学院id
-					String c_name = col.getName();	// 学院名称
-					
-					if(c_name.equals(colName)) {
-						student = new Student(num, pwd, name, gender, "2014-2015", rank, col, 1);
-						break;
-					}
-					
-//					// 专业
-//					List<Specialty> specialties = collegeService.getSpecialties(colId);
-//					boolean isExist = false;
-//					for(Specialty spec : specialties) {
-//						String spName = spec.getName();
-//						if(c_name.equals(colName) && spName.equals(specName)) {
-//							student = new Student(num, pwd, name, gender, "2014-2015", rank, col, spec, 1);
-//							isExist = true;
-//						}
-//					}
-//					
-//					if(isExist) {
+//	// 循环读取Excel的内容
+//	public void readExcel2() {
+//		try {
+//			Workbook workbook = Workbook.getWorkbook(new File("C:/Users/miying/Desktop/20150503/2014-2015学年受资助生一轮考核情况统计表.xls"));
+//			Sheet sheet = workbook.getSheet(0);
+//
+//			int cols = sheet.getColumns();
+//			int rows = sheet.getRows();
+////			System.out.println("列数 = " + cols + ", 行数 = " + rows);
+//			
+//			List<Rank> ranks = rankService.findAll();	// 查询所有等级
+//			List<College> colleges = collegeService.getColleges(); // 获取所有的学院
+//			
+//			Student student = null;
+//			for (int i = 2; i < rows; i++) {
+//				student = new Student();
+//				
+//				// 姓名
+//				String name = sheet.getCell(1, i).getContents();
+//				// 学号
+//				String num = sheet.getCell(2, i).getContents();
+//				// 初始密码
+//				String pwd = num;
+//				// 性别
+//				String gender = sheet.getCell(3, i).getContents();
+////				String mz = sheet.getCell(4, i).getContents();
+////				String nj = sheet.getCell(5, i).getContents();
+//				
+//				// 专业名称
+//				String specName = sheet.getCell(6, i).getContents();
+//				// 学院名称
+//				String colName = sheet.getCell(7, i).getContents();
+//				// 等级名称
+//				String rankName = sheet.getCell(8, i).getContents();
+//				
+////				for (int j = 0; j < cols; j++) {
+////					value = sheet.getCell(j, i).getContents();
+////				}
+//
+//				// 匹配等级
+//				Rank rank = null;
+//				for(Rank r : ranks) {
+//					String rName = r.getName();
+//					if(rName.equals(rankName)) {
+//						rank = r;
 //						break;
 //					}
-				}
-				
-				// 插入数据库
-				studentService.register(student);
-			}
-
-			workbook.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
+//				}
+//				
+//				// 匹配学院
+//				for(College col : colleges) {
+////					int colId = col.getId(); // 学院id
+//					String c_name = col.getName();	// 学院名称
+//					
+//					if(c_name.equals(colName)) {
+//						student = new Student(num, pwd, name, gender, "2014-2015", rank, col, 1);
+//						break;
+//					}
+//					
+////					// 专业
+////					List<Specialty> specialties = collegeService.getSpecialties(colId);
+////					boolean isExist = false;
+////					for(Specialty spec : specialties) {
+////						String spName = spec.getName();
+////						if(c_name.equals(colName) && spName.equals(specName)) {
+////							student = new Student(num, pwd, name, gender, "2014-2015", rank, col, spec, 1);
+////							isExist = true;
+////						}
+////					}
+////					
+////					if(isExist) {
+////						break;
+////					}
+//				}
+//				
+//				// 插入数据库
+//				studentService.register(student);
+//			}
+//
+//			workbook.close();
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 	
 }
 

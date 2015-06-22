@@ -15,7 +15,7 @@ import com.ccms.service.StudentService;
 import com.ccms.util.DateUtils;
 import com.ccms.util.EncryptUtil;
 
-@Service("studentService")
+@Service
 public class StudentServiceImpl implements StudentService {
 	
 	@Autowired
@@ -134,6 +134,12 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public List<StudentDto> getAllStudentByActivityId(Integer actId) {
 		return studentDAO.getAllStudentByActivityId(actId);
+	}
+
+
+	@Override
+	public List<Student> downloadStudents(StudentQueryDto dto) {
+		return studentDAO.queryStudentsByDto(dto);
 	}
 
 }

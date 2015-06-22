@@ -85,6 +85,7 @@
             </div>      
 		</div>
 	</div>
+	<script type="text/javascript" src="${ctx }/resources/scripts/utils/util.js""></script>
 	<script type="text/javascript">
 		jQuery(function(){
 			var $ = jQuery;
@@ -125,6 +126,11 @@
 			$('#query').click(function() {
 				$('#page').page('destroy')
 				pager();
+			});
+			
+			// 下载学生列表
+			$('#downloadStudents').click(function() {
+				post(contextPath+'/downloadStudentsByYear', {'year': $('#year').val()});
 			});
 			
 		})
