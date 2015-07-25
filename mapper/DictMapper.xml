@@ -18,5 +18,14 @@
 		select * from t_dicts where category = #{category};
 	</select>
 	
+	<!-- 更新 -->
+	<update id="update" parameterType="Dict">
+		update t_dicts 
+		<set> 
+			<if test="val != null">val=#{val} </if>
+		</set>
+		where id=#{id};
+	</update>
+	
 	
 </mapper>  

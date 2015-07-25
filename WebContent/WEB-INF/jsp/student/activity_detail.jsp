@@ -60,7 +60,7 @@
 			  <li class="active">公告详情</li>
 			</ol>
 			<input type="hidden" id="is_comment" value="${comment }"/>
-			<table class="table table-bordered table-hover table-condensed table-responsive" style="width: 600px; text-align: left;">
+			<table class="table table-bordered table-hover table-condensed table-responsive" style="width: 700px; text-align: left;">
 				<tr>
 			    	<td colspan="2">
 			    		<span class="td_title">活动名称：</span>${activity.name }
@@ -129,9 +129,9 @@
 		      	</tr>
 			</table>
 			
-			<div id="comment_list" style="border: 1px solid #ccc; width: 600px; margin-left: 285px;" >
+			<div id="comment_list" style="border: 1px solid #ccc; width: 700px; margin-left: 235px;" >
 	      	</div>
-	      	<div id="load_div" style="width: 600px; margin-left: 285px; text-align: center;" >
+	      	<div id="load_div" style="width: 700px; margin-left: 185px; text-align: center;" >
 	      		<button id="load_more" class="btn btn-primary">更多评论</button>
 	      	</div>
 	      	
@@ -273,7 +273,7 @@
 				var html = '';
 				
 				if(len == 0) {
-					html = '暂无评论';
+					$('#load_more').hide();
 				}else {
 					if(len < 10) {
 						$('#load_more').hide();

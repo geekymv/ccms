@@ -18,16 +18,19 @@ import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Dict;
 import com.ccms.persistence.pojo.SecondLevel;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.ActivityItemService;
 import com.ccms.service.ActivityService;
 import com.ccms.service.ActivityTypeService;
 import com.ccms.service.CollegeService;
+import com.ccms.service.DictService;
 import com.ccms.service.RankService;
 import com.ccms.service.SecondLevelService;
 import com.ccms.service.SpecialtyService;
 import com.ccms.service.StudentService;
+import com.ccms.util.SysCode;
 
 @Controller
 public class AdminController {
@@ -47,6 +50,8 @@ public class AdminController {
 	private ActivityTypeService activityTypeService;
 	@Autowired
 	private SecondLevelService secondLevelService;
+	@Autowired
+	private DictService dictService;
 	
 	/**
 	 * 管理员登录成功
@@ -316,6 +321,47 @@ public class AdminController {
 		studentService.findStudents(pager, dto);
 		return pager;
 	}
+	
+	
+	/**
+	 * 设置认证时间
+	 * @return
+	 */
+	@RequestMapping("/admin/setAuthTime")
+	public String setAuthTime() {
+		return "admin/setAuthTime";
+	}
+	
+	/**
+	 * 设置添加学生时间
+	 * @return
+	 */
+	@RequestMapping("/admin/setAddStudentTime")
+	public String setAddStudentTime() {
+		return "admin/setAddStudentTime";
+	}
+	
+	/**
+	 * 获取已设置的添加学生时间
+	 * @return
+	 */
+	@RequestMapping(value="/admin/getAddStudentTime", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Dict> getAddStudentTime() {
+		return dictService.getByCategory(SysCode.ADD_STUDENT_TIME);
+	}
+	
+	/**
+	 * 更新字典表
+	 * @param dict
+	 * @return
+	 */
+	@RequestMapping(value="/admin/updateDict", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateDict(Dict dict) {
+		return dictService.updateDict(dict) == 1 ? "success" : "fail";
+	}
+	
 	
 //	// 循环读取Excel的内容
 //	public void readExcel2() {

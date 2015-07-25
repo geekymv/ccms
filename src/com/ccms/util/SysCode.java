@@ -109,4 +109,6 @@ public class SysCode {
 		 */
 		public static final Integer UNAPPROVED = -1;
 	}
+	
+	public static final String ADD_STUDENT_TIME = "ADD_STUDENT_TIME";
 }

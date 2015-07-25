@@ -13,6 +13,7 @@
 	        },
 	        // 文件提交完成后可执行的方法
 	        onComplete: function (fileName, response) {
+	        	
 	        	if(response != null) {
 	        		var reg = /<pre.+?>(.+)<\/pre>/g;  
 	        		var result = response.match(reg);  
