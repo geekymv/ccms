@@ -47,7 +47,7 @@
 		<div style="display: none; margin-top: 10px;text-align: center;" id="addSpecialty">
 			<table style="margin: 70px;">
 				<tr>
-					<td>名称：</td>
+					<td>时间：</td>
 					<td>
 						<input type="text" name="endDate" id="endDate" class="input-medium" 
 	                    	onFocus="WdatePicker({dateFmt:'yyyy-MM-dd', minDate:'%y-%M-%d', isShowClear:false})"/>

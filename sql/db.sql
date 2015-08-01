@@ -33,11 +33,35 @@ create table t_students(
 	email varchar(30), /*邮箱*/
 	qq varchar(11), /*qq*/
 	year varchar(20), /*学年*/
-	rank_id, /*受助等级*/
+	rank_id int, /*受助等级*/
 	col_id int, /*所在学院*/
 	spec_id int, /*所在专业*/
 	introduce varchar(60), /*个人简介*/
 	status int /*学生账号状态：1可用，0不可用*/
+);
+
+create table t_students(
+	id int primary key auto_increment,
+	num varchar(11) unique not null,	/*学号*/
+	pwd varchar(30) not null, /*密码*/
+	name varchar(20) not null, /*姓名*/
+	gender varchar(5), /*性别*/
+	phone varchar(20), /*手机号码*/
+	email varchar(30), /*邮箱*/
+	qq varchar(11), /*qq*/
+	col_id int, /*所在学院*/
+	spec_id int, /*所在专业*/
+	introduce varchar(60), /*个人简介*/
+	status int /*学生账号状态：1可用，0不可用*/
+);
+
+/*学生受助等级表*/
+create table t_stu_levle(
+	 id int primary key auto_increment,
+	 stu_id int not null, /*学生id*/
+	 num varchar(11) not null, /*学号*/
+	 rank_id int,	/*受助等级*/
+	 year varchar(20) /*学年*/	
 );
 
 /*用户访问记录表*/
@@ -79,32 +103,35 @@ create table t_rank_acttype(
 /*活动*/
 create table t_activities(
 	id int primary key auto_increment,
-	name varchar(60) not null, /*活动名称*/
+	name varchar(255) not null, /*活动名称*/
 	col_id int, /*发布单位*/
-	publish_time datetime, /*发布时间*/
+	publish_time varchar(20), /*发布时间*/
 	date_time varchar(30),	/*活动时间*/
-	end_date date, /*报名截止日期*/
+	end_date varchar(20), /*报名截止日期*/
 	location varchar(60), /*活动地点*/
-	aim varchar(30), /*活动目的*/
-	content varchar(60), /*活动内容*/
+	aim varchar(1500), /*活动目的*/
+	content varchar(2000), /*活动内容*/
 	activity_type int, /*活动加分类型*/
-	duration int, /*活动加分时长*/
+	second_level int, /*二级分类id*/
+	duration float default '0', /*活动加分时长*/
 	act_object varchar(30), /*参与对象*/
 	number int, /*参与人数*/
 	contact varchar(20), /*联系人*/ 
 	phone varchar(20), /*联系方式*/
 	assist varchar(20), /*协助人员*/
-	status int /*状态:通过1， 未通过0， 删除-1*/
-);
+	status int /*状态:通过1， 待审核0，未通过-1*/
+	reason varchar(255) comment '未通过原因',
+	activityUuid varchar(120) comment '活动uuid'
+);	
 
 /*活动报名清单*/
 create table t_activity_item (
 	id int primary key auto_increment,
 	act_id int, /*活动编号*/
 	stu_id int, /*学生编号*/
-	audit int, /*审核：认证通过1，等待认证0， 认证不通过-1*/
-	record_time datetime, /*记录时间*/ 
-	reason varchar(255)	// 认证/审核不通过原因
+	audit int, /*审核结果：等待认证0， 认证通过1， 未通过-1，等待勤管中心审核1， 勤管中心审核通过2， 勤管中心审核未通过3，*/
+	applyTime varchar(20), /*记录时间*/ 
+	reason varchar(255)	/* 认证/审核不通过原因*/
 );
 
 /**

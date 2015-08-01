@@ -52,7 +52,7 @@
 	
 	
 	<!-- 根据学号查询学生 -->
-	<select id="queryByNum" parameterType="string" resultMap="StudentResultMap">
+	<!-- 
 		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 		stu.year, rank.id rand_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
 		FROM t_students stu 
@@ -60,15 +60,52 @@
 		inner join t_colleges col on stu.col_id=col.id 
 		inner join t_specialties spe on stu.spec_id=spe.id 
 		where stu.num=#{num} and status=1;
+	 -->
+	<select id="queryByNum" parameterType="string" resultMap="StudentResultMap">
+		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
+		level.year, rank.id rand_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
+		FROM t_students stu 
+		,t_ranks rank
+		,t_colleges col
+		,t_specialties spe
+	    ,t_stu_level level
+			where level.rank_id =rank.id and level.stu_id = stu.id
+	    and stu.col_id=col.id
+	    and stu.spec_id=spe.id 
+	    and stu.num=#{num} and status=1;
 	</select>	
 	
+	<!-- 根据学号和学年查询 -->
+	<select id="queryByNumAndYear" resultMap="StudentResultMap">
+		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
+			level.year, rank.id rand_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
+			FROM t_students stu 
+			,t_ranks rank
+			,t_colleges col
+			,t_specialties spe
+		    ,t_stu_level level
+				where level.rank_id =rank.id and level.stu_id = stu.id and level.`year` = #{year}
+		    and stu.col_id=col.id
+		    and stu.spec_id=spe.id 
+		    and stu.num=#{num} and status=1;
+	</select>
+	
 	<!-- 根据学号和密码查询学生 status=1学生账号可用-->
-	<select id="queryByNumAndPwd" resultMap="StudentResultMap2">
-	select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
+	<!-- 
+		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 		rank.id rank_id, rank.name rank_name, duration
 		FROM t_students stu 
 		inner join t_ranks rank on stu.rank_id=rank.id
 		where stu.num=#{num} and stu.pwd=#{pwd} and status=1;
+	 -->
+	<select id="queryByNumAndPwd" resultMap="StudentResultMap2">
+		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
+			rank.id rank_id, rank.name rank_name, rank.duration duration
+			FROM t_students stu
+	    ,t_ranks rank
+	    ,t_stu_level level
+			where level.num = stu.num and level.rank_id = rank.id 
+	    and stu.num=#{num} and stu.pwd=#{pwd} and status=1;
 
 	</select>
 		<resultMap type="Student" id="StudentResultMap2">

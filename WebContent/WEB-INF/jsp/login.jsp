@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="com.ccms.persistence.pojo.Student, com.ccms.persistence.pojo.College" 
+	contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -19,6 +20,16 @@
     <![endif]-->
   </head>
  <body onkeydown="on_login();">
+ 	<%
+ 		// 判断用户是否已经登录了
+ 		Object user = request.getSession().getAttribute("user");
+ 		if(user instanceof Student) {
+			response.sendRedirect(request.getContextPath()+"/stu/stu_success");
+		}else if (user instanceof College) {
+			response.sendRedirect(request.getContextPath()+"/admin/admin_success");
+		}
+ 	%>
+ 
 	<!--导航条-->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container">

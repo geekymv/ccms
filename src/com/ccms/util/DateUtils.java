@@ -71,6 +71,8 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
 		int startDate = 0;
 		int endDate = 0;
 		
+		System.out.println(currentMonth);
+		
 		if(currentMonth >= 9) {
 			startDate = currentYear;
 			endDate = currentYear + 1;
@@ -919,8 +921,11 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
 	public static void main(String[] args) {
 	//	getRecent5XueYear();
 		
-		System.out.println(DateUtils.getCurrentYear());
+//		System.out.println(DateUtils.getCurrentYear());
 		
+//		System.out.println(getCurrentXueNian());
+		
+		System.out.println(getCurrentYear());
 	}
 	
 }
