@@ -16,5 +16,20 @@ public interface ActivityTypeDAO extends BaseDAO<ActivityType> {
 	 * @return
 	 */
 	public List<ActivityType> list();
+	
+	/**
+	 * 编辑活动类别
+	 * @param type
+	 * @return
+	 */
+	public int setCategory(ActivityType type);
+	
+	/**
+	 * 根据名称查询
+	 * @param name
+	 * @return
+	 */
+	public ActivityType queryByName(String name);
+	
 
 }

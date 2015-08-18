@@ -12,6 +12,10 @@
 <script src="<c:url value='/resources/layer-v1.9.1/layer/layer.js'/>"></script>
 <script src="<c:url value='/resources/layer-v1.9.1/layer/extend/layer.ext.js'/>"></script>
 
+<!-- artDialog -->
+<link href="<c:url value='/resources/lib/artDialog/css/ui-dialog.css'/>" rel="stylesheet"/>
+<script src="<c:url value='/resources/lib/artDialog/js/dialog-min.js'/>" ></script>
+
 <script type="text/javascript">
 	var contextPath = "${ctx}";
 </script>

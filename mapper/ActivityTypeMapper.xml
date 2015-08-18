@@ -15,5 +15,14 @@
 		select * from t_activity_type type where type.id = #{id}
 	</select>
 	
+	<!-- 根据名称查询 -->
+	<select id="queryByName" parameterType="string" resultType="ActivityType" >
+		select * from t_activity_type type where type.name = #{name}
+	</select>
+	
+	<!-- 编辑活动类别 -->
+	<update id="setCategory" parameterType="ActivityType">
+		update t_activity_type set name=#{name} where id = #{id} 
+	</update>
  	 
 </mapper>  

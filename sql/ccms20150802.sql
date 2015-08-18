@@ -131,7 +131,7 @@ CREATE TABLE `t_specialties` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `t_stu_levle` (
+CREATE TABLE `t_stu_level` (
   `id` int(11) NOT NULL auto_increment,
   `stu_id` int(11) NOT NULL,
   `num` varchar(11) NOT NULL,

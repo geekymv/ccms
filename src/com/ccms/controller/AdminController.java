@@ -216,7 +216,7 @@ public class AdminController {
 	 * 设置活动类别
 	 * @return
 	 */
-	@RequestMapping("/admin/setCategory")
+	@RequestMapping(value="/admin/setCategory", method=RequestMethod.GET)
 	public String setSecondLevel() {
 		return "admin/setCategory";
 	}
@@ -229,6 +229,17 @@ public class AdminController {
 	@ResponseBody
 	public List<ActivityType> categories() {
 		return activityTypeService.getAll();
+	}
+	
+	/**
+	 * 编辑活动类别
+	 * @param type
+	 * @return
+	 */
+	@RequestMapping(value="/admin/setCategory", method=RequestMethod.POST)
+	@ResponseBody
+	public String setCategory(ActivityType type) {
+		return activityTypeService.setCategory(type);
 	}
 
 	/**

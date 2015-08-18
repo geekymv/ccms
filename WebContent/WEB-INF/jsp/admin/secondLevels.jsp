@@ -59,28 +59,30 @@
 				asysc: false,
 				success: function(d) {
 					name = d.name;
+					
+					// 根据一级类别id显示所有二级类别
+					$.post(contextPath+"/admin/secondLevels", {'superiorId': $('#superiorId').val()}).done(function(data) {
+						var len = data.length;
+						var html = '';
+						for(var i = 0; i < len; i++) {
+							var category = data[i];
+							html += '<tr>'
+								+ '<td class="centeralign"><input type="checkbox" /></td>'
+			                    + '<td>'
+			                    +	(i+1)
+			                    + 	'<input type="hidden" id="categoryId" value="'+category.id+'"/>'
+			                    + '</td>'
+			                    + '<td id="super_name">'+name+'</td>'
+			                    + '<td title="点击编辑" id="name" onclick="editLevel(this);">'+category.name+'</td>'
+			                    + '</tr>';
+						}
+						
+						$('tbody').html(html);
+					});
 				}
 			});
 			
-			// 根据一级类别id显示所有二级类别
-			$.post(contextPath+"/admin/secondLevels", {'superiorId': $('#superiorId').val()}).done(function(data) {
-				var len = data.length;
-				var html = '';
-				for(var i = 0; i < len; i++) {
-					var category = data[i];
-					html += '<tr>'
-						+ '<td class="centeralign"><input type="checkbox" /></td>'
-	                    + '<td>'
-	                    +	(i+1)
-	                    + 	'<input type="hidden" id="categoryId" value="'+category.id+'"/>'
-	                    + '</td>'
-	                    + '<td id="super_name">'+name+'</td>'
-	                    + '<td id="name" onclick="editLevel(this);">'+category.name+'</td>'
-	                    + '</tr>';
-				}
-				
-				$('tbody').html(html);
-			});
+			
 		});
 		
 		

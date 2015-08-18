@@ -56,7 +56,7 @@ create table t_students(
 );
 
 /*学生受助等级表*/
-create table t_stu_levle(
+create table t_stu_level(
 	 id int primary key auto_increment,
 	 stu_id int not null, /*学生id*/
 	 num varchar(11) not null, /*学号*/
@@ -170,5 +170,16 @@ create table t_secondLevels(
 	superiorId int /*上级id*/
 );
 
+/**
+ * 首页公告
+ */
+create table t_notice(
+	id int primary key auto_increment comment '主键id',
+	title varchar(255) comment '标题',
+	content varchar(2048) comment '内容', 
+	publisherId int not null comment '发布单位id',
+	pubTime varchar(14) not null comment '发布时间',
+	nociceUuid varchar(128) comment comment 'uuid'
+);
 
 

@@ -39,12 +39,6 @@
 	                <tbody>
 	                </tbody>	  
                 </table>
-                
-                <!-- 
-                <div style="width: 600px; height: 200px; border: 1px solid red;" id="div_div">
-                </div>
-                 -->
-                
             </div>
             </div>
             </div>      
@@ -71,25 +65,79 @@
 	                    + '<td id="name">'+category.name+'</td>'
 	                    + '<td class="centeralign">'
 	                    + 	'<a href="javascript:void(0);" onclick="secondLevels(this);" class="edit" title="查看"><span class="icon-eye-open"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-	                    + 	'<a href="javascript:void(0);" class="edit" title="编辑"><span class="icon-edit"></span></a>'
+	                    + 	'<a href="javascript:void(0);" onclick="editCategory(this)" class="edit" title="编辑" id="edit"><span class="icon-edit"></span></a>'
 	                    + '</td>'
 	                    + '</tr>';
 				}
 				
 				$('tbody').html(html);
 			});
-			
-			
 		});
+		
+		// 编辑类别
+		var editCategory = function(t) {
+			var $this = $(t);
+			var $tr = $this.parent().parent();
+			var id = $tr.find('#categoryId').val();
+			var name = $tr.find('#name').text();
+			
+			var d = dialog({
+				title: '编辑活动分类',
+				content: '<input class="form-control" name="cate" id="cate" value="'+name+'" autofocus />',
+				ok: function() {
+					var val = $('#cate').val().trim();
+					if(val == '') {
+						alert('不能为空！');
+						return;
+					}
+					
+					var datas = {
+						'id': id,
+						'name': val
+					};
+					$.post(contextPath+'/admin/setCategory', datas).done(function(res) {
+						if('success' == res) {
+							tip('更新成功！')
+							$tr.find('#name').text(val);
+							d.close();
+							return false;
+						}else if("fail" == res) {
+							tip('更新失败！')
+						}else if("exist" == res){
+							tip('该类别已存在！')
+							return;
+						}
+					}).fail(function() {
+						alert('服务器端错误！');
+					});
+				},
+				cancelValue: '取消',
+				cancel: function() {
+				}
+			});
+			
+			d.show();
+		};
 	
+		// 查看二级分类
 		function secondLevels(t) {
 			var $this = $(t);
 			var $tr = $this.parent().parent();
 			var categoryId = $tr.find('#categoryId').val();
-			
 			window.location.href = contextPath + "/admin/secondLevels/"+categoryId;
 		}
-	
+		
+		// 提示框
+		var tip = function(tip) {
+			var dc = dialog({
+			    content: tip
+			});
+			dc.show();
+			setTimeout(function () {
+				dc.close().remove();
+			}, 2000);
+			
+		}
 	</script>
 
 </body>
