@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+"-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccms.dao.NoticeDao">
+	<!-- 添加公告 -->
+	<insert id="add" parameterType="Activity">
+	</insert>
+	
+	<!-- 根据id删除活动 -->
+	<delete id="delete" parameterType="int">
+		delete from t_activities where id = #{id}
+	</delete>
+	
+	<!-- 分页查询所有通过审核的Activity -->
+	<select id="queryPageByStatus" resultType="NoticeVO">
+	
+		select t1.id id, t1.title title, t1.content content, t2.name pubName, t1.pubTime pubTime 
+		from t_notices t1
+		inner join t_colleges t2
+		on t1.publisherId = t2.id
+		where t1.status = #{status}
+		limit #{pager.pageOffset}, #{pager.pageSize};	
+	</select>
+
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

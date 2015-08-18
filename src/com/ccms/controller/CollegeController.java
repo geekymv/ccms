@@ -258,9 +258,10 @@ public class CollegeController {
 	 * @param stuId
 	 * @return
 	 */
-	@RequestMapping("/admin/student/{stuNum}")
-	public String student(@PathVariable("stuNum") String stuNum, Model model) {
-		Student student = studentService.getInfo(stuNum);
+	@RequestMapping("/admin/student/{year}/{stuNum}")
+	public String student(@PathVariable("year")String year, @PathVariable("stuNum") String stuNum, 
+					Model model) {
+		Student student = studentService.getInfo(stuNum, year);
 		model.addAttribute("student", student);
 		
 		return "admin/student";

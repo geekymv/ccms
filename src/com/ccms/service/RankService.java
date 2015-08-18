@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.Student;
+import com.ccms.persistence.vo.RankVO;
 
 public interface RankService {
 	
@@ -15,5 +16,12 @@ public interface RankService {
 	 * @return
 	 */
 	public int getTotalDuration(Student student);
+	
+	/**
+	 * 根据学生学号查看学生历年受助等级
+	 * @param num
+	 * @return
+	 */
+	public List<RankVO> getByStudentNum(String num);
 
 }

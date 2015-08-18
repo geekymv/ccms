@@ -13,5 +13,14 @@
 	<select id="queryById" parameterType="int" resultType="Rank">
 		select * from t_ranks where id = #{id}
 	</select>
+	
+	<!-- 根据学生学号查看学生历年受助等级 -->
+	<select id="queryByStudentNum" parameterType="string" resultType="RankVO">
+		select t1.id id, t1.stu_id stuId, t1.num num, t1.year, t2.name rankName
+			from t_stu_level t1
+			left join t_ranks t2
+			on t1.rank_id = t2.id
+			where t1.num = #{num}
+	</select>
  	 
 </mapper>  

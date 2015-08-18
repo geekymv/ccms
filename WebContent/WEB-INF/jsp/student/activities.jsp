@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>欢迎访问公益活动时间认证系统</title>
+    <title>活动列表</title>
     <%@ include file="/WEB-INF/jsp/inc/style.jsp"%>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -42,8 +42,23 @@
 		<div class="row">
 			<ol class="breadcrumb">
 			  <li><a href="${pageContext.request.contextPath }/stu/index">首页</a></li>
-			  <li class="active">公告通知</li>
+			  <li class="active">活动公告</li>
 			</ol>
+			<input type="hidden" id="user_college_id"  value="${user.college.id }"/>
+			
+			<div class="col-md-offset-3 col-md-8">
+			<form class="form-inline">
+			  <div class="form-group">
+			    <input type="text" class="form-control" id="search" placeholder="请输入发布单位名称">
+			  </div>
+			  <div class="form-group">
+               	 <select name="actTypeId" id="actType" class="form-control" style="width: 160px;">
+             	</select>
+              </div>
+			  &nbsp;&nbsp;<button type="button" id="search_btn" class="btn btn-primary">查询</button>
+			</form>
+			</div>	
+			
 			<br/>
 			<br/>
 			<br/>
@@ -51,8 +66,13 @@
 			<table class="table table-bordered table-hover table-condensed table-responsive">
 				<thead>
 			      <tr>
-			         <th width="80%">标题</th>
-			         <th>查看详情</th>
+			         <th>活动名称</th>
+			         <th>发布单位</th>
+			         <th>活动对象</th>
+			         <th>截止时间</th>
+			         <th>活动类型</th>
+			         <th>认证时长</th>
+			         <th>查看活动详情</th>
 			      </tr>
 			   	</thead>
 			   	<tbody id="t_body">
@@ -68,7 +88,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="${ctx }/resources/scripts/ui/student/notices.js"></script>
+	<script type="text/javascript" src="${ctx }/resources/scripts/ui/student/index.js"></script>
 	
   </body>
 </html>

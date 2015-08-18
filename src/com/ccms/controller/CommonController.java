@@ -3,7 +3,6 @@ package com.ccms.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URLDecoder;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 

@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>       
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp"%>
+
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>欢迎访问公益活动时间认证系统</title>
-    <%@ include file="/WEB-INF/jsp/inc/style.jsp"%>
+    <title>受助等级</title>
+	<%@ include file="/WEB-INF/jsp/inc/style.jsp"%>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,59 +19,68 @@
     <![endif]-->
     
     <style type="text/css">
-    	.pagination a {
-		    cursor: pointer;
-		    -moz-user-select: none;
-		    -webkit-user-select: none;
-		    -ms-user-select: none;
-		    -khtml-user-select: none;
-		    user-select: none;
-		}
-    	
-    	td, th {
+    	table {
+    		margin: 0 auto;
+    	}
+    	tr th {
     		font-family: "微软雅黑";
+			text-align: center;
+    	}
+    	tr td {
     		text-align: center;
     	}
-    
     </style>
+    
   </head>
   <body>
-  
-  	
 	<div class="container">
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="row">
 			<ol class="breadcrumb">
 			  <li><a href="${pageContext.request.contextPath }/stu/index">首页</a></li>
-			  <li class="active">公告通知</li>
+			  <li class="active">受助等级</li>
 			</ol>
-			<br/>
-			<br/>
-			<br/>
+			<input type="hidden" name="num" id="stu_num" value="${user.num }"/>
 			
 			<table class="table table-bordered table-hover table-condensed table-responsive">
 				<thead>
 			      <tr>
-			         <th width="80%">标题</th>
-			         <th>查看详情</th>
+			         <th>学号</th>
+			         <th>年份</th>
+			         <th>受助等级</th>
 			      </tr>
 			   	</thead>
-			   	<tbody id="t_body">
+			   	<tbody id="myranks">
 			   	</tbody>
 			</table>
 			
-			<div class="panel-footer">
-				<nav style="text-align: center;">
-				    <ul id="page" class="pagination" data-first-btn-text="首页" data-last-btn-text="尾页"></ul>
-				</nav>
-            </div>
-			
 		</div>
 	</div>
-
-	<script type="text/javascript" src="${ctx }/resources/scripts/ui/student/notices.js"></script>
-	
+    
+    <script type="text/javascript" src="${ctx}/resources/scripts/ui/student/student.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     

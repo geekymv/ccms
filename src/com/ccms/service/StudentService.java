@@ -27,9 +27,10 @@ public interface StudentService {
 	/**
 	 * 根据学生学号获得学生个人信息
 	 * @param num
+	 * @param year 年份
 	 * @return
 	 */
-	public Student getInfo(String num);
+	public Student getInfo(String num, String year);
 	
 	/**
 	 * 更新学生信息

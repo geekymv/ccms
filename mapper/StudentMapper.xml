@@ -52,15 +52,6 @@
 	
 	
 	<!-- 根据学号查询学生 -->
-	<!-- 
-		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
-		stu.year, rank.id rand_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
-		FROM t_students stu 
-		inner join t_ranks rank on stu.rank_id=rank.id
-		inner join t_colleges col on stu.col_id=col.id 
-		inner join t_specialties spe on stu.spec_id=spe.id 
-		where stu.num=#{num} and status=1;
-	 -->
 	<select id="queryByNum" parameterType="string" resultMap="StudentResultMap">
 		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 		level.year, rank.id rand_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
@@ -91,13 +82,6 @@
 	</select>
 	
 	<!-- 根据学号和密码查询学生 status=1学生账号可用-->
-	<!-- 
-		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
-		rank.id rank_id, rank.name rank_name, duration
-		FROM t_students stu 
-		inner join t_ranks rank on stu.rank_id=rank.id
-		where stu.num=#{num} and stu.pwd=#{pwd} and status=1;
-	 -->
 	<select id="queryByNumAndPwd" resultMap="StudentResultMap2">
 		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 			rank.id rank_id, rank.name rank_name, rank.duration duration
@@ -129,11 +113,12 @@
 	
 	
 	<!-- 根据id查询学生 -->
-	<select id="queryById" parameterType="int" resultMap="StudentResultMap">
+	<select id="queryByIdAndYear" parameterType="int" resultMap="StudentResultMap">
 		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 		rank.id rank_id, rank.name rank_name, duration, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
 		FROM t_students stu 
-		inner join t_ranks rank on stu.rank_id=rank.id
+    	inner join t_stu_level lev on lev.`year`= #{year} and lev.stu_id = stu.id
+		inner join t_ranks rank on lev.rank_id=rank.id
 		inner join t_colleges col on stu.col_id=col.id 
 		inner join t_specialties spe on stu.spec_id=spe.id 
 		where stu.id=#{id};
@@ -226,11 +211,13 @@
 	 select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 		rank.id rank_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
 		from t_students stu 
-		inner join t_ranks rank on stu.rank_id=rank.id
+		inner join t_stu_level lev on lev.stu_id = stu.id
+		inner join t_ranks rank on lev.rank_id=rank.id
 		inner join t_colleges col on stu.col_id=col.id 
 		inner join t_specialties spe on stu.spec_id=spe.id 
+   
 		<where>
-			stu.year = #{dto.year}
+			lev.year = #{dto.year}
 			<if test="dto.num != null and dto.num != '' ">and stu.num=#{dto.num}</if>
 			<if test="dto.name != null and dto.name != '' ">and stu.name like "%"#{dto.name}"%"</if>
 			<if test="dto.specId != null and dto.specId != -1">and spe.id=#{dto.specId}</if>
@@ -244,8 +231,9 @@
 		select count(*) from t_students stu
 		inner join t_specialties spe on stu.spec_id=spe.id 
 		inner join t_colleges col on stu.col_id=col.id 
+		inner join t_stu_level lev on lev.stu_id = stu.id
 		<where>
-			stu.year = #{dto.year}
+			lev.year = #{dto.year}
 			<if test="dto.num != null and dto.num != '' ">and stu.num=#{dto.num}</if>
 			<if test="dto.name != null and dto.name != '' ">and stu.name like "%"#{dto.name}"%"</if>
 			<if test="dto.specId != null and dto.specId != -1">and spe.id=#{dto.specId}</if>

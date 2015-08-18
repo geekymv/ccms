@@ -45,9 +45,6 @@
 						<li class="logout"><a style="cursor: pointer;" id="logout">退出</a></li>
 					</c:otherwise>
 				</c:choose>
-				
-				
-				
 			</ul>
 		  </div>
 		  <div class="clear"> </div>
@@ -85,14 +82,13 @@
 		<div class="warp">
 			<ul>
 				<li><a href="${pageContext.request.contextPath }/stu/index" target="_parent">首页</a></li>
+				<li><a href="${pageContext.request.contextPath }/stu/activities" target="_parent">活动列表</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu/myactivities" target="_parent">我的公益活动</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu/timeCounter" target="_parent">时间统计</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu/${user.num }/infocenter" target="_parent">账号管理</a></li>
-				<li><a href="${pageContext.request.contextPath }/stu/index" target="_parent">活动公告</a></li>
-				
-				 <%--
+				<li><a href="${pageContext.request.contextPath }/stu//myrank" target="_parent">受助等级</a></li>
 				<li><a href="" target="_parent">文档下载</a></li>
-				 --%>
+				 
 				<div class="clear"> </div>
 			</ul>
 		</div>

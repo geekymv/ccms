@@ -102,7 +102,9 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 			dto.setEndDate(years.get(1));
 		}
 		
-		Student student = studentDAO.queryById(dto.getStudentId());
+		List<Integer> years = DateUtils.getCurrentYear();
+		String yearStr = years.get(0) + "-" + years.get(1);
+		Student student = studentDAO.queryByIdAndYear(dto.getStudentId(), yearStr);
 		// 获得学生受助等级
 		Rank rank = student.getRank();
 		

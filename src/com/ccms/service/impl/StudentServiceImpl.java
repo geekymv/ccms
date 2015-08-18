@@ -55,10 +55,8 @@ public class StudentServiceImpl implements StudentService {
 
 
 	@Override
-	public Student getInfo(String num) {
-		List<Integer> years = DateUtils.getCurrentYear();
-		String yearStr = years.get(0) + "-" + years.get(1);
-		return studentDAO.queryByNumAndYear(num, yearStr);
+	public Student getInfo(String num, String year) {
+		return studentDAO.queryByNumAndYear(num, year);
 	}
 
 
