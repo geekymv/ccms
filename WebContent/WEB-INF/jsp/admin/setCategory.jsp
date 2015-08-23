@@ -85,7 +85,8 @@
 				title: '编辑活动分类',
 				content: '<input class="form-control" name="cate" id="cate" value="'+name+'" autofocus />',
 				ok: function() {
-					var val = $('#cate').val().trim();
+					var val = $('#cate').val();	
+					val = $.trim(val);
 					if(val == '') {
 						alert('不能为空！');
 						return;

@@ -14,7 +14,7 @@ public interface StudentService {
 	 * @param student
 	 * @return
 	 */
-	public String register(Student student);
+	public String addStudent(Student student);
 	
 	/**
 	 * 学生登录

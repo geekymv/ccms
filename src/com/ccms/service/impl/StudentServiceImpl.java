@@ -6,10 +6,12 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ccms.dao.StuLevelDao;
 import com.ccms.dao.StudentDAO;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.dto.StudentDto;
 import com.ccms.persistence.dto.StudentQueryDto;
+import com.ccms.persistence.pojo.StuLevel;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.StudentService;
 import com.ccms.util.DateUtils;
@@ -20,13 +22,11 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Autowired
 	private StudentDAO studentDAO;
-	public void setStudentDAO(StudentDAO studentDAO) {
-		this.studentDAO = studentDAO;
-	}
-	
+	@Autowired
+	private StuLevelDao stuLevelDao;
 	
 	@Override
-	public String register(Student student) {
+	public String addStudent(Student student) {
 		String num = student.getNum();
 		// 默认密码和学号相同
 		student.setPwd(EncryptUtil.md5Encrypt(num));
@@ -44,7 +44,17 @@ public class StudentServiceImpl implements StudentService {
 		student.setStatus(1);
 		
 		int res = studentDAO.add(student);
-		return res == 1 ? "success": "fail";
+		
+		if(res == 1) {
+			StuLevel stuLevel = new StuLevel(student.getNum(), 
+					student.getRank().getId(), student.getYear());
+			res = stuLevelDao.add(stuLevel);
+			if(res == 1) {
+				return "success";
+			}
+		}
+		
+		return "fail";
 	}
 
 	@Override

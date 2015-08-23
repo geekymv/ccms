@@ -8,15 +8,18 @@
 	<!-- 添加学生 -->
 	<insert id="add" parameterType="Student">
 		<![CDATA[
-			insert into t_students( num, pwd, name, gender, phone, email, qq, rank_id, col_id, spec_id, introduce, year )
+			insert into t_students( num, pwd, name, gender, phone, col_id, spec_id )
 			values(#{num}, #{pwd}, #{name}, #{gender}, #{phone}, 
-			#{email}, #{qq}, #{rank.id}, #{college.id}, #{specialty.id}, #{introduce}, #{year});	
+			#{college.id}, #{specialty.id});	
 		]]>
 	</insert>
 	
 	<!-- 根据学号和学年查询学生 -->
 	<select id="queryNumAndYear" resultType="Student">
-		select num, year from t_students where num = #{num} and year = #{year};
+		select stu.num num, lev.year year  from t_students stu
+			left join t_stu_level lev
+			on stu.num = lev.num
+			where stu.num = #{num} and lev.year = #{year}
 	</select>
 	
 	<!-- 更新学生 -->
@@ -60,7 +63,7 @@
 		,t_colleges col
 		,t_specialties spe
 	    ,t_stu_level level
-			where level.rank_id =rank.id and level.stu_id = stu.id
+			where level.rank_id =rank.id and level.num = stu.num
 	    and stu.col_id=col.id
 	    and stu.spec_id=spe.id 
 	    and stu.num=#{num} and status=1;
@@ -75,7 +78,7 @@
 			,t_colleges col
 			,t_specialties spe
 		    ,t_stu_level level
-				where level.rank_id =rank.id and level.stu_id = stu.id and level.`year` = #{year}
+				where level.rank_id =rank.id and level.num = stu.num and level.`year` = #{year}
 		    and stu.col_id=col.id
 		    and stu.spec_id=spe.id 
 		    and stu.num=#{num} and status=1;
@@ -117,7 +120,7 @@
 		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 		rank.id rank_id, rank.name rank_name, duration, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
 		FROM t_students stu 
-    	inner join t_stu_level lev on lev.`year`= #{year} and lev.stu_id = stu.id
+    	inner join t_stu_level lev on lev.`year`= #{year} and lev.num = stu.num
 		inner join t_ranks rank on lev.rank_id=rank.id
 		inner join t_colleges col on stu.col_id=col.id 
 		inner join t_specialties spe on stu.spec_id=spe.id 
@@ -211,7 +214,7 @@
 	 select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 		rank.id rank_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
 		from t_students stu 
-		inner join t_stu_level lev on lev.stu_id = stu.id
+		inner join t_stu_level lev on lev.num = stu.num
 		inner join t_ranks rank on lev.rank_id=rank.id
 		inner join t_colleges col on stu.col_id=col.id 
 		inner join t_specialties spe on stu.spec_id=spe.id 
@@ -231,7 +234,7 @@
 		select count(*) from t_students stu
 		inner join t_specialties spe on stu.spec_id=spe.id 
 		inner join t_colleges col on stu.col_id=col.id 
-		inner join t_stu_level lev on lev.stu_id = stu.id
+		inner join t_stu_level lev on lev.num = stu.num
 		<where>
 			lev.year = #{dto.year}
 			<if test="dto.num != null and dto.num != '' ">and stu.num=#{dto.num}</if>

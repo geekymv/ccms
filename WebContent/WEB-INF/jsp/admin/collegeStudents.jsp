@@ -143,7 +143,8 @@
 		// 编辑
 		function edit(t) {
 			var $this = $(t);
-			window.location.href = contextPath + "/admin/student/" + $this.data('num');
+		//	window.location.href = contextPath + "/admin/student/" + $this.data('num');
+			window.location.href = contextPath + "/admin/student/"+$('#year').val()+"/"+ $this.data('num');
 		} 
 		
 		function pager() {

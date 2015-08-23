@@ -16,11 +16,11 @@
 	
 	<!-- 根据学生学号查看学生历年受助等级 -->
 	<select id="queryByStudentNum" parameterType="string" resultType="RankVO">
-		select t1.id id, t1.stu_id stuId, t1.num num, t1.year, t2.name rankName
-			from t_stu_level t1
-			left join t_ranks t2
-			on t1.rank_id = t2.id
-			where t1.num = #{num}
+		select lev.id id, lev.num num, lev.year, rank.name rankName
+			from t_stu_level lev
+			left join t_ranks rank
+			on lev.rank_id = rank.id
+			where lev.num = #{num}
 	</select>
  	 
 </mapper>  

@@ -199,7 +199,7 @@
 						}else if(data == 'fail') {
 							alert('报名失败！');
 						}else if(data == 'overtimes') {
-							alert('该类活动你已参加过2次！');
+							alert('该类活动你已参加过3次！');
 						}
 					}
 				});

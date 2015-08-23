@@ -298,7 +298,7 @@ public class CollegeController {
 		College college = (College) session.getAttribute("user");
 		student.setCollege(college);
 		
-		return studentService.register(student);
+		return studentService.addStudent(student);
 	}
 	
 	/**
