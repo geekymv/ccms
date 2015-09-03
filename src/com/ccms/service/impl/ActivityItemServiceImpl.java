@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.ccms.dao.ActivityDAO;
 import com.ccms.dao.ActivityItemDAO;
+import com.ccms.dao.DictDao;
 import com.ccms.dao.RankActivityTypeDAO;
 import com.ccms.dao.StudentDAO;
 import com.ccms.persistence.dto.ActivityItemDto;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
+import com.ccms.persistence.pojo.Dict;
 import com.ccms.persistence.pojo.Rank;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.persistence.vo.ActivityItemVO;
@@ -25,14 +27,14 @@ import com.ccms.util.SysCode;
 public class ActivityItemServiceImpl implements ActivityItemService {
 	@Autowired
 	private ActivityDAO activityDAO;
-//	@Autowired
-//	private ActivityItemDAO actItemDAO;
 	@Autowired
 	private StudentDAO studentDAO;
 	@Autowired
 	private RankActivityTypeDAO rankActivityTypeDAO;
 	@Autowired
 	private ActivityItemDAO activityItemDAO;
+	@Autowired
+	private DictDao dictDao;
 
 	@Override
 	public String apply(Activity activity, Student student) {
@@ -56,8 +58,16 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 			
 			// 根据活动id判断学生报名这类活动活的二级分类是否超过2次
 			int times = activityItemDAO.getTotalTimes(student.getId(), activity.getSecondLevel().getId());
-			if(times >= 2) {
-				return "overtimes";	// 超过两次
+			
+			String applyTime = "";
+			// 获取可以参加某一小类活动最多次数
+			List<Dict> dicts = dictDao.queryByCategory("APPLY_MAX_TIMES");
+			if(dicts != null && dicts.size() > 0) {
+				applyTime = dicts.get(0).getVal();
+			}
+			
+			if(times >= Integer.valueOf(applyTime)) { // 超过最大次数
+				return "overtimes";	
 			}
 			
 			actItem = new ActivityItem();
@@ -105,6 +115,9 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 		List<Integer> years = DateUtils.getCurrentYear();
 		String yearStr = years.get(0) + "-" + years.get(1);
 		Student student = studentDAO.queryByIdAndYear(dto.getStudentId(), yearStr);
+		if(student == null) {
+			return null;
+		}
 		// 获得学生受助等级
 		Rank rank = student.getRank();
 		
@@ -141,6 +154,7 @@ public class ActivityItemServiceImpl implements ActivityItemService {
 		activityItemDAO.deleteByActIdAndStuId(activityId, studentId);
 		return "success";
 	}
+	
 }
 
 

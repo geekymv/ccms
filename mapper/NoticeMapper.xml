@@ -4,8 +4,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ccms.dao.NoticeDao">
-	<!-- 添加公告 -->
-	<insert id="add" parameterType="Activity">
+	<!-- 添加资讯 -->
+	<insert id="add" parameterType="Notice">
+		insert into t_notices(title, content, publisherId, pubTime, nociceUuid, status )
+			values(#{title}, #{content}, #{publisherId}, #{pubTime}, #{nociceUuid}, #{status})
+			
 	</insert>
 	
 	<!-- 根据id删除活动 -->

@@ -1,9 +1,17 @@
 package com.ccms.service;
 
 import com.ccms.persistence.dto.Pager;
+import com.ccms.persistence.pojo.Notice;
 import com.ccms.persistence.vo.NoticeVO;
 
 public interface NoticeService {
+	
+	/**
+	 * 发布或保存资讯
+	 * @param notice
+	 * @return "success" 成功， "fail" 失败
+	 */
+	public String pubNotice(Notice notice);
 
 	/**
 	 * 分页查询所有已发布的公告通知

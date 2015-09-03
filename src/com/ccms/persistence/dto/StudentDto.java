@@ -10,6 +10,7 @@ public class StudentDto {
 	 */
 	private Integer stuId;
 	private String num;
+	private String pwd;
 	private String name;
 	private String gender;
 	private String phone;
@@ -71,7 +72,12 @@ public class StudentDto {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-	
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
 	
 }

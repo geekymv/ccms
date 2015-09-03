@@ -19,13 +19,16 @@ import com.ccms.persistence.pojo.ActivityItem;
 import com.ccms.persistence.pojo.ActivityType;
 import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.Dict;
+import com.ccms.persistence.pojo.Notice;
 import com.ccms.persistence.pojo.SecondLevel;
 import com.ccms.persistence.pojo.Student;
+import com.ccms.persistence.vo.NoticeVO;
 import com.ccms.service.ActivityItemService;
 import com.ccms.service.ActivityService;
 import com.ccms.service.ActivityTypeService;
 import com.ccms.service.CollegeService;
 import com.ccms.service.DictService;
+import com.ccms.service.NoticeService;
 import com.ccms.service.RankService;
 import com.ccms.service.SecondLevelService;
 import com.ccms.service.SpecialtyService;
@@ -52,6 +55,8 @@ public class AdminController {
 	private SecondLevelService secondLevelService;
 	@Autowired
 	private DictService dictService;
+	@Autowired
+	private NoticeService noticeService;
 	
 	/**
 	 * 管理员登录成功
@@ -373,6 +378,48 @@ public class AdminController {
 		return dictService.updateDict(dict) == 1 ? "success" : "fail";
 	}
 	
+	/**
+	 * 跳转到发布资讯页面
+	 * @return
+	 */
+	@RequestMapping(value="/admin/pubNotice", method=RequestMethod.GET)
+	public String pubNotice() {
+		return "admin/pubNotice";
+	}
+	
+	/**
+	 * 发布资讯
+	 * @param notice
+	 * @return
+	 */
+	@RequestMapping(value="/admin/pubNotice", method=RequestMethod.POST)
+	@ResponseBody
+	public String pubNotice(Notice notice, HttpSession session) {
+		College college = (College) session.getAttribute("user");
+		notice.setPublisherId(college.getId());
+		return noticeService.pubNotice(notice);
+	}
+	
+	/**
+	 * 跳转到资讯列表
+	 * @return
+	 */
+	@RequestMapping(value="/admin/noticeList", method=RequestMethod.POST)
+	public String noticeList() {
+		return "admin/noticeList";
+	}
+	
+	/**
+	 * 加载资讯列表
+	 * @param pager
+	 * @return
+	 */
+	@RequestMapping(value="/admin/noticeList", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Pager<NoticeVO> noticeList(Pager<NoticeVO> pager) {
+		noticeService.queryPageByStatus(pager, SysCode.NOTICE_STATUS.PUBLISHED);
+		return pager;
+	}
 	
 //	// 循环读取Excel的内容
 //	public void readExcel2() {

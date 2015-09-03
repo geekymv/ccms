@@ -195,16 +195,19 @@ public class StudentController {
 		String year = years.get(0) + "-" + years.get(1);	// 获取当前年
 		
 		Student student = studentService.getInfo(num, year);
-		model.addAttribute("student", student);
+		if(student != null) {
+			model.addAttribute("student", student);
+			
+			College college = student.getCollege();
+			// 获得该学生所在学院的所有专业
+			List<Specialty> specialties = collegeService.getSpecialties(college.getId());
+			model.addAttribute("specialties", specialties);
+			
+			// 查询所有学院
+			List<College> colleges = collegeService.getColleges();
+			model.addAttribute("colleges", colleges);
+		}
 		
-		College college = student.getCollege();
-		// 获得该学生所在学院的所有专业
-		List<Specialty> specialties = collegeService.getSpecialties(college.getId());
-		model.addAttribute("specialties", specialties);
-		
-		// 查询所有学院
-		List<College> colleges = collegeService.getColleges();
-		model.addAttribute("colleges", colleges);
 
 		return "student/into_center";
 	}
@@ -333,14 +336,12 @@ public class StudentController {
 		return rankService.getByStudentNum(num);
 	}
 	
-	
 	/**
 	 * 分页显示公告通知
-	 * 学生只可以查看自己学院发布的和面向全校的活动
 	 * @param pager
 	 * @return
 	 */
-	@RequestMapping(value="/notices", method=RequestMethod.GET)
+	@RequestMapping(value="/notices", method=RequestMethod.POST)
 	@ResponseBody
 	public Pager<NoticeVO> pager(Pager<NoticeVO> pager) {
 		noticeService.queryPageByStatus(pager, 1);

@@ -45,13 +45,11 @@
 			  <li class="active">公告通知</li>
 			</ol>
 			<br/>
-			<br/>
-			<br/>
-			
 			<table class="table table-bordered table-hover table-condensed table-responsive">
 				<thead>
 			      <tr>
-			         <th width="80%">标题</th>
+			         <th width="60%">标题</th>
+			         <th width="20%">发布单位</th>
 			         <th>查看详情</th>
 			      </tr>
 			   	</thead>

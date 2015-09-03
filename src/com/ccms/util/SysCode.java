@@ -111,4 +111,25 @@ public class SysCode {
 	}
 	
 	public static final String ADD_STUDENT_TIME = "ADD_STUDENT_TIME";
+
+	/**
+	 * 公告通知状态
+	 * @author miying
+	 */
+	public interface NOTICE_STATUS {
+		/**
+		 * 已发布
+		 */
+		int PUBLISHED = 1;
+		/**
+		 * 已删除
+		 */
+		int DELETED = -1;
+		
+		/**
+		 * 保存
+		 */
+		int DRAFT = 0;
+	}
+	
 }

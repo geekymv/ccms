@@ -30,6 +30,9 @@ public class RankServiceImpl implements RankService {
 		List<Integer> years = DateUtils.getCurrentYear();
 		String yearStr = years.get(0) + "-" + years.get(1);
 		student = studentDAO.queryByIdAndYear(student.getId(), yearStr);
+		if(student == null) {
+			return 0;
+		}
 		Integer rankId = student.getRank().getId();
 		Rank rank = rankDAO.queryById(rankId );
 		

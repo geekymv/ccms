@@ -16,12 +16,19 @@ import com.ccms.persistence.vo.NoticeVO;
 public interface NoticeDao extends BaseDAO<Notice>{
 	
 	/**
-	 * 分页查询所有已发布的公告通知
+	 * 分页查询所有已发布的资讯
 	 * @param pager
 	 * @param status
 	 * @return
 	 */
 	public List<NoticeVO> queryPageByStatus(@Param("pager")Pager<NoticeVO> pager, 
 			@Param("status")int status);
+	
+	/**
+	 * 分页查询所有资讯（草稿、已发布）
+	 * @param pager
+	 */
+	public void queryByPage(@Param("pager")Pager<NoticeVO> pager);
+	
 	
 }
