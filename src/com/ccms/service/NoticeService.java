@@ -20,4 +20,11 @@ public interface NoticeService {
 	 * @return
 	 */
 	public void queryPageByStatus(Pager<NoticeVO> pager, int status);
+	
+	/**
+	 * 根据用户id 获取通知详情
+	 * @param id
+	 * @return
+	 */
+	public NoticeVO getById(Integer id);
 }

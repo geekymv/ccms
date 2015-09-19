@@ -25,10 +25,23 @@ public interface NoticeDao extends BaseDAO<Notice>{
 			@Param("status")int status);
 	
 	/**
+	 * 根据公告状态活动总记录数
+	 * @param status
+	 * @return
+	 */
+	public int getTotleRecordByStatus(int status);
+	
+	/**
 	 * 分页查询所有资讯（草稿、已发布）
 	 * @param pager
 	 */
 	public void queryByPage(@Param("pager")Pager<NoticeVO> pager);
 	
+	/**
+	 * 根据id查询
+	 * @param noticeId
+	 * @return
+	 */
+	public NoticeVO queryByNoticeId(Integer noticeId);
 	
 }

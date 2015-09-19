@@ -11,7 +11,7 @@
 		        	var len = datas.length;
 		        	if(len == 0) {
 		        		$('thead').hide();
-		        		$('tbody').html('<div style="text-align: center; color: blue">暂无活动！</div>');
+		        		$('tbody').html('<div style="text-align: center; color: blue">暂无公告！</div>');
 		        	}else {
 		        		$('thead').show();
 		        		
@@ -21,7 +21,8 @@
 		        			html += "<tr>"
 		        					+ "<td>"+ notice.title +"</td>"
 		        					+ "<td>"+ notice.pubName +"</td>"
-		        					+ "<td></td>"
+		        					+ "<td>"+ formatterDate(notice.pubTime) +"</td>"
+		        					+ '<td><a href="javascript:;" class="detail" data-id="'+notice.id+'">查看</a></td>'
 		        				+"</tr>";
 		        		}
 		        		
@@ -34,8 +35,15 @@
 			totalName: 'totalRecord'       //指定返回数据的总数据量
 		});
 		
+		/**
+		 * 添加查看详情事件
+		 */
+		$('#t_body').on('click', '.detail', function() {
+			var $this = $(this);
+			var id = $this.data('id');
+			window.location.href = contextPath + "/stu/noticeDetail/" + id;
+		});
 		
 	}
-	
 	
 })();

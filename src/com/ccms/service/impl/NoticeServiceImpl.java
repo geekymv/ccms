@@ -20,6 +20,12 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public void queryPageByStatus(Pager<NoticeVO> pager, int status) {
+		
+		// 计算总页数
+		int totalRecord = noticeDao.getTotleRecordByStatus(status);
+		pager.setTotalRecord(totalRecord);
+		
+		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
 		List<NoticeVO> datas = noticeDao.queryPageByStatus(pager, status);
 		pager.setDatas(datas);
 	}
@@ -32,6 +38,11 @@ public class NoticeServiceImpl implements NoticeService {
 		int res = noticeDao.add(notice);
 		
 		return res == 1 ? "success": "fail";
+	}
+
+	@Override
+	public NoticeVO getById(Integer id) {
+		return noticeDao.queryByNoticeId(id);
 	}
 
 	

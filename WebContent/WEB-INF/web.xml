@@ -20,7 +20,7 @@
 
 	<!-- 配置控制器 -->
 	<servlet>
-		<servlet-name>hello</servlet-name>
+		<servlet-name>ccms</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -29,7 +29,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>hello</servlet-name>
+		<servlet-name>ccms</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 

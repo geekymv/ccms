@@ -347,6 +347,16 @@ public class StudentController {
 		noticeService.queryPageByStatus(pager, 1);
 		return pager;
 	}
+
+	/**
+	 * 查看公告详情
+	 * @return
+	 */
+	@RequestMapping(value="/noticeDetail/{id}", method=RequestMethod.GET)
+	public String getNoticeDetail(@PathVariable("id")Integer id, Model model) {
+		model.addAttribute("id", id);
+		return "student/noticeDetail";
+	}
 }
 
 

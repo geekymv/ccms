@@ -4,6 +4,11 @@ function get_form_data(form_id) {
 	return decodeURIComponent(data, true);	// 解决中文乱码问题
 }
 
+/**
+ * 日期格式化
+ * @param time
+ * @returns {String}
+ */
 function formatterDate(time) {
 	if(time == null || jQuery.trim(time) == '') {	// $.trim(str) 取代str.trim() ie下不可用
 		return "";
@@ -36,3 +41,22 @@ function post(URL, PARAMS) {
     temp.submit();      
     return temp;      
 }    
+
+/**
+ * 获取URL参数
+ * @param name 参数名
+ * @return 参数值，若没有该参数，则返回null
+ */
+function getQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if (r != null)
+		return unescape(r[2]);
+	return '';
+}
+
+function unescape( args ) {
+	return args ? args.replace( /\\'/g, "'").replace(/\\\\/g, "\\" ) : null;
+}
+
+

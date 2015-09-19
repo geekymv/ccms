@@ -18,13 +18,26 @@
 	
 	<!-- 分页查询所有通过审核的Activity -->
 	<select id="queryPageByStatus" resultType="NoticeVO">
-	
 		select t1.id id, t1.title title, t1.content content, t2.name pubName, t1.pubTime pubTime 
 		from t_notices t1
 		inner join t_colleges t2
 		on t1.publisherId = t2.id
 		where t1.status = #{status}
 		limit #{pager.pageOffset}, #{pager.pageSize};	
+	</select>
+
+	<!-- 根据状态获取公告总数 -->
+	<select id="getTotleRecordByStatus" parameterType="int" resultType="int">
+		select count(*) from t_notices where status = #{status};
+	</select>
+	
+	<!-- 根据id查询 -->
+	<select id="queryByNoticeId" parameterType="int" resultType="NoticeVO">
+		select t1.id id, t1.title title, t1.content content, t2.name pubName, t1.pubTime pubTime 
+		from t_notices t1
+		inner join t_colleges t2
+		on t1.publisherId = t2.id
+		where t1.id = #{noticeId};
 	</select>
 
 </mapper>  
