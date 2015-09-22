@@ -20,7 +20,6 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public void queryPageByStatus(Pager<NoticeVO> pager, int status) {
-		
 		// 计算总页数
 		int totalRecord = noticeDao.getTotleRecordByStatus(status);
 		pager.setTotalRecord(totalRecord);
@@ -29,14 +28,31 @@ public class NoticeServiceImpl implements NoticeService {
 		List<NoticeVO> datas = noticeDao.queryPageByStatus(pager, status);
 		pager.setDatas(datas);
 	}
+	
+	@Override
+	public void getAllNotice(Pager<NoticeVO> pager) {
+		// 计算总页数
+		int totalRecord = noticeDao.getTotleRecord();
+		pager.setTotalRecord(totalRecord);
+		
+		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
+		List<NoticeVO> datas = noticeDao.queryAllByPage(pager);
+		pager.setDatas(datas);
+	}
 
 	@Override
 	public String pubNotice(Notice notice) {
-		notice.setNociceUuid(UUID.randomUUID().toString());
-		notice.setPubTime(DateUtils.getCurrentGaDate());
-		
-		int res = noticeDao.add(notice);
-		
+		Long id = notice.getId();
+
+		int res = 0;
+		if(id != null) {	// 编辑
+			noticeDao.update(notice);
+			res = 1;
+		}else {	// 添加
+			notice.setNociceUuid(UUID.randomUUID().toString());
+			notice.setPubTime(DateUtils.getCurrentGaDate());
+			res = noticeDao.add(notice);
+		}
 		return res == 1 ? "success": "fail";
 	}
 

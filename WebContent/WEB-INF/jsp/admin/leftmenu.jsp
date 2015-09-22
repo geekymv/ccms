@@ -62,8 +62,9 @@
               		<li><a href="${ctx }/admin/noticeList">资讯列表</a></li>
               	</ul>	
             </li>
-            
+            <!-- 
             <li><a href="${ctx }/admin/timeauth">时间认证</a></li>
+             -->
             <li><a href="${ctx}/admin/doc">文档管理</a></li>
             <li class="dropdown"><a href="">系统设置</a>
             	<ul>

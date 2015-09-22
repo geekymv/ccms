@@ -344,7 +344,7 @@ public class StudentController {
 	@RequestMapping(value="/notices", method=RequestMethod.POST)
 	@ResponseBody
 	public Pager<NoticeVO> pager(Pager<NoticeVO> pager) {
-		noticeService.queryPageByStatus(pager, 1);
+		noticeService.queryPageByStatus(pager, SysCode.NOTICE_STATUS.PUBLISHED);
 		return pager;
 	}
 

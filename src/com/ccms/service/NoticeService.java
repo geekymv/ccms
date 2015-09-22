@@ -22,6 +22,12 @@ public interface NoticeService {
 	public void queryPageByStatus(Pager<NoticeVO> pager, int status);
 	
 	/**
+	 * 分页查询所有发布/保存的公告通知
+	 * @param pager
+	 */
+	public void getAllNotice(Pager<NoticeVO> pager);
+	
+	/**
 	 * 根据用户id 获取通知详情
 	 * @param id
 	 * @return

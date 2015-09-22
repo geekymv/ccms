@@ -24,4 +24,5 @@ public class NoticeController {
 	public NoticeVO getNoticeDetail(Integer noticeId) {
 		return noticeService.getById(noticeId);
 	}
+	
 }

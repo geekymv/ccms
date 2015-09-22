@@ -278,15 +278,7 @@ public class AdminController {
 	public String editLevel(SecondLevel level) {
 		return secondLevelService.update(level);
 	}
-	
-//	/**
-//	 * 导入学生名单
-//	 */
-//	@RequestMapping("/admin/import")
-//	public void importStudents() {
-//		readExcel2();
-//	}
-	
+
 	/**
 	 * 编辑用工单位
 	 * @return
@@ -388,7 +380,7 @@ public class AdminController {
 	}
 	
 	/**
-	 * 发布资讯
+	 * 发布(编辑)资讯
 	 * @param notice
 	 * @return
 	 */
@@ -404,7 +396,7 @@ public class AdminController {
 	 * 跳转到资讯列表
 	 * @return
 	 */
-	@RequestMapping(value="/admin/noticeList", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/noticeList", method=RequestMethod.GET)
 	public String noticeList() {
 		return "admin/noticeList";
 	}
@@ -414,10 +406,10 @@ public class AdminController {
 	 * @param pager
 	 * @return
 	 */
-	@RequestMapping(value="/admin/noticeList", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/admin/noticeList", method=RequestMethod.POST)
 	@ResponseBody
 	public Pager<NoticeVO> noticeList(Pager<NoticeVO> pager) {
-		noticeService.queryPageByStatus(pager, SysCode.NOTICE_STATUS.PUBLISHED);
+		noticeService.getAllNotice(pager);
 		return pager;
 	}
 	
@@ -509,18 +501,5 @@ public class AdminController {
 //	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

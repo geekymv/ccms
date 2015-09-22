@@ -20,6 +20,7 @@
 			<jsp:include page="leftmenu.jsp"></jsp:include>
 		</div>
 		<div class="righpanel">
+			<!-- 
 			<div id="container">
 				<table class="table" cellspacing="0" cellpadding="0" width="100%" align="center"  border="0">
 				    <tr>
@@ -57,6 +58,7 @@
 				    </tr>
 				</table>
 			</div>
+			 -->
 		</div>
 	</div>
 </body>

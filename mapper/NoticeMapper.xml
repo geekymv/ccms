@@ -22,13 +22,26 @@
 		from t_notices t1
 		inner join t_colleges t2
 		on t1.publisherId = t2.id
-		where t1.status = #{status}
+		where t1.status = #{status} order by pubTime desc
 		limit #{pager.pageOffset}, #{pager.pageSize};	
 	</select>
-
 	<!-- 根据状态获取公告总数 -->
 	<select id="getTotleRecordByStatus" parameterType="int" resultType="int">
 		select count(*) from t_notices where status = #{status};
+	</select>
+
+	<!-- 分页查询所有资讯（草稿、已发布） -->
+	<select id="queryAllByPage" resultType="NoticeVO">
+		select t1.id id, t1.title title, t1.content content, t2.name pubName, t1.pubTime pubTime, t1.status status
+			from t_notices t1
+			inner join t_colleges t2
+			on t1.publisherId = t2.id
+			where t1.status != -1 order by pubTime desc
+			limit #{pager.pageOffset}, #{pager.pageSize};	
+	</select>
+	<!-- 所有资讯（草稿、已发布）总记录数 -->
+	<select id="getTotleRecord" resultType="int">
+		select count(*) from t_notices where status != -1;
 	</select>
 	
 	<!-- 根据id查询 -->
@@ -39,6 +52,12 @@
 		on t1.publisherId = t2.id
 		where t1.id = #{noticeId};
 	</select>
+	
+	<!-- 更新资讯 -->
+	<update id="update" parameterType="Notice">
+		update t_notices set title = #{title}, content = #{content}, status = #{status}
+		where id = #{id};
+	</update>
 
 </mapper>  
 
