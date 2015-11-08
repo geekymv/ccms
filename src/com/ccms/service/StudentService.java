@@ -33,6 +33,13 @@ public interface StudentService {
 	public Student getInfo(String num, String year);
 	
 	/**
+	 * 根据学生学号查询学生信息
+	 * @param num
+	 * @return
+	 */
+	public Student getInfoByNum(String num);
+	
+	/**
 	 * 更新学生信息
 	 * @param student
 	 * @return

@@ -34,7 +34,9 @@
 				<if test="email != null">email=#{email}, </if>
 				<if test="qq != null">qq=#{qq}, </if>
 				<if test="year != null">year=#{year}, </if>
+				<!-- 
 				<if test="rank.id != null">rank_id=#{rank.id}, </if>
+				 -->
 				<if test="college.id != null">col_id=#{college.id}, </if>
 				<if test="specialty.id != null">spec_id=#{specialty.id}, </if>
 				<if test="introduce != null"> introduce=#{introduce}, </if>
@@ -55,7 +57,8 @@
 	
 	
 	<!-- 根据学号查询学生 -->
-	<select id="queryByNum" parameterType="string" resultMap="StudentResultMap">
+	<select id="queryByNum" parameterType="string" resultType="StudentDto">
+		<!-- 
 		select stu.id stu_id, stu.pwd, stu.num, stu.name stu_name, stu.gender, stu.phone, stu.email, stu.qq, 
 		level.year, rank.id rand_id, rank.name rank_name, col.id col_id, col.name col_name, spe.id spe_id, spe.name spe_name
 		FROM t_students stu 
@@ -67,6 +70,16 @@
 	    and stu.col_id=col.id
 	    and stu.spec_id=spe.id 
 	    and stu.num=#{num} and status=1;
+	     -->
+	  select stu.id stuId, stu.num, stu.name name, stu.gender, stu.phone, stu.email, stu.qq, 
+		col.id collegeId, col.name collegeName, spe.id specialtyId, spe.name specialtyName, stu.introduce
+		FROM t_students stu 
+		,t_colleges col
+		,t_specialties spe
+		where stu.col_id=col.id
+	    and stu.spec_id=spe.id 
+	    and stu.num=#{num} and status=1;
+	     
 	</select>	
 	
 	<!-- 根据学号和学年查询 -->

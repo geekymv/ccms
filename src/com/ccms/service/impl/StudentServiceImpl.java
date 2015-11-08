@@ -2,6 +2,8 @@ package com.ccms.service.impl;
 
 import java.util.List;
 
+import javax.crypto.SealedObject;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import com.ccms.dao.StudentDAO;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.dto.StudentDto;
 import com.ccms.persistence.dto.StudentQueryDto;
+import com.ccms.persistence.pojo.College;
+import com.ccms.persistence.pojo.Specialty;
 import com.ccms.persistence.pojo.StuLevel;
 import com.ccms.persistence.pojo.Student;
 import com.ccms.service.StudentService;
@@ -68,7 +72,23 @@ public class StudentServiceImpl implements StudentService {
 	public Student getInfo(String num, String year) {
 		return studentDAO.queryByNumAndYear(num, year);
 	}
-
+	
+	@Override
+	public Student getInfoByNum(String num) {
+		StudentDto dto = studentDAO.queryByNum(num);
+		Student student = new Student();
+		student.setId(dto.getStuId());
+		student.setNum(dto.getNum());
+		student.setName(dto.getName());
+		student.setPhone(dto.getPhone());
+		student.setGender(dto.getGender());
+		student.setEmail(dto.getEmail());
+		student.setIntroduce(dto.getIntroduce());
+		student.setQq(dto.getQq());
+		student.setCollege(new College(dto.getCollegeId(), dto.getCollegeName()));
+		student.setSpecialty(new Specialty(dto.getSpecialtyId(), dto.getSpecialtyName()));
+		return student;
+	}
 
 	@Override
 	public boolean updateInfo(Student student) {

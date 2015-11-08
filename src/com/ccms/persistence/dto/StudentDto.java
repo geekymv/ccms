@@ -14,9 +14,32 @@ public class StudentDto {
 	private String name;
 	private String gender;
 	private String phone;
+	private String qq;
+	private String email;
+	private String introduce;
+	/**
+	 * 学院id
+	 */
+	private Integer collegeId;
+	/**
+	 * 学院名称
+	 */
 	private String collegeName;
+
+	/**
+	 * 专业id
+	 */
+	private Integer specialtyId;
+	/**
+	 * 专业名称
+	 */
 	private String specialtyName;
-	private Integer status;	// 审核状态
+	
+	/**
+	 * 审核状态
+	 */
+	private Integer status;
+	
 	
 	public Integer getItemId() {
 		return itemId;
@@ -36,6 +59,12 @@ public class StudentDto {
 	public void setNum(String num) {
 		this.num = num;
 	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 	public String getName() {
 		return name;
 	}
@@ -54,11 +83,35 @@ public class StudentDto {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public String getQq() {
+		return qq;
+	}
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Integer getCollegeId() {
+		return collegeId;
+	}
+	public void setCollegeId(Integer collegeId) {
+		this.collegeId = collegeId;
+	}
 	public String getCollegeName() {
 		return collegeName;
 	}
 	public void setCollegeName(String collegeName) {
 		this.collegeName = collegeName;
+	}
+	public Integer getSpecialtyId() {
+		return specialtyId;
+	}
+	public void setSpecialtyId(Integer specialtyId) {
+		this.specialtyId = specialtyId;
 	}
 	public String getSpecialtyName() {
 		return specialtyName;
@@ -72,12 +125,11 @@ public class StudentDto {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public String getPwd() {
-		return pwd;
+	public String getIntroduce() {
+		return introduce;
 	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
 	}
-
 	
 }

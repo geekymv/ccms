@@ -191,13 +191,10 @@ public class StudentController {
 	 */
 	@RequestMapping(value="/{num}/infocenter", method=RequestMethod.GET)
 	public String infoCenter(@PathVariable String num, Model model) {
-		List<Integer> years = DateUtils.getCurrentYear();
-		String year = years.get(0) + "-" + years.get(1);	// 获取当前年
+		Student student = studentService.getInfoByNum(num);
 		
-		Student student = studentService.getInfo(num, year);
 		if(student != null) {
 			model.addAttribute("student", student);
-			
 			College college = student.getCollege();
 			// 获得该学生所在学院的所有专业
 			List<Specialty> specialties = collegeService.getSpecialties(college.getId());

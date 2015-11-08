@@ -144,14 +144,6 @@
 			  </div>
 			  
 			  <div class="form-group">
-			    <label for="num" class="col-sm-4 control-label">受助等级：</label>
-			    <div class="col-sm-3 div-top">
-			    	${student.rank.name }
-			    	<input type="hidden" name="rank.id" value="${student.rank.id }" />
-			    </div>
-			  </div>
-			  
-			  <div class="form-group">
 			    <label for="num" class="col-sm-4 control-label">联系电话：</label>
 			    <div class="col-sm-3">
 			    	<input type="text" class="form-control" name="phone" id="phone" value="${student.phone}" />
@@ -175,7 +167,7 @@
 			 <div class="form-group">
 			    <label for="num" class="col-sm-4 control-label">个人简介：</label>
 			    <div class="col-sm-3">
-			    	 <textarea class="form-control" name="introduce" id="introduce" rows="2"><c:if test="${empty student.introduce }">暂无介绍...</c:if></textarea>
+			    	 <textarea class="form-control" name="introduce" id="introduce" rows="2">${student.introduce }</textarea>
 			    </div>
 			  </div>
 			 
@@ -259,9 +251,14 @@
 				var qq = $("#qq").val();
 				if(qq.length > 11) {
 					alert('qq不合法！');
+					return;
 				}
 				
 				var introduce = $("#introduce").val();
+				if(introduce.length > 30) {
+					alert('个人简介内容不能超过30字！');
+					return;
+				}
 	
 				var data = $("#stuform").serialize();
 				data = decodeURIComponent(data,true); /* 解决中文乱码问题 */

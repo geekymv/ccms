@@ -27,6 +27,12 @@ public class College {
 		this.id = id;
 	}
 	
+	public College(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
+	
 	
 	@Override
 	public String toString() {
