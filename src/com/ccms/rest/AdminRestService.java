@@ -1,4 +1,4 @@
-package com.ccms.android.rest;
+package com.ccms.rest;
 
 public class AdminRestService {
 

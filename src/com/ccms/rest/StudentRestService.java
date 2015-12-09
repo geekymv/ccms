@@ -1,4 +1,4 @@
-package com.ccms.android.rest;
+package com.ccms.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
