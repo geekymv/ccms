@@ -26,7 +26,10 @@
  		
  		<!-- 设置为true 表示在取得连接的同时将校验连接的有效性 -->
 		<property name="testConnectionOnCheckin" value="true"></property>
+		<property name="preferredTestQuery" value="SELECT 1"></property>
+		<!-- 
 		<property name="automaticTestTable" value="C3P0TestTable"></property>
+		 -->
 		<!-- 每18000秒检查所有连接池中的空闲连接 -->
 		<property name="idleConnectionTestPeriod" value="18000"></property>
 
