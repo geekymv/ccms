@@ -87,7 +87,7 @@
 				<li><a href="${pageContext.request.contextPath }/stu/timeCounter" target="_parent">时间统计</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu/${user.num }/infocenter" target="_parent">账号管理</a></li>
 				<li><a href="${pageContext.request.contextPath }/stu//myrank" target="_parent">受助等级</a></li>
-				<li><a href="" target="_parent">文档下载</a></li>
+				<li><a href="${pageContext.request.contextPath }/stu/docs" target="_parent">文档下载</a></li>
 				 
 				<div class="clear"> </div>
 			</ul>

@@ -5,7 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ccms.base.dao.BaseDAO;
+import com.ccms.persistence.dto.FileQueryDto;
+import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.FileEntity;
+import com.ccms.persistence.vo.FileEntityVO;
 
 public interface FileEntityDAO extends BaseDAO<FileEntity> {
 
@@ -16,15 +19,14 @@ public interface FileEntityDAO extends BaseDAO<FileEntity> {
 	 * @param pageSize
 	 * @return
 	 */
-	public List<FileEntity> queryByPage(@Param("authority") Integer authority, 
-			@Param("pageOffset")int pageOffset, @Param("pageSize")int pageSize);
+	public List<FileEntityVO> queryByPage(@Param("pager")Pager<FileEntityVO> pager, @Param("dto") FileQueryDto dto) ;
 	
 	/**
 	 * 根据权限查询总记录数
-	 * @param authority
+	 * @param dto
 	 * @return
 	 */
-	public int totalRecord(@Param("authority") Integer authority);
+	public int totalRecord(@Param("dto") FileQueryDto dto);
 	
 	/**
 	 * 根据文件新名称查询

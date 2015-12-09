@@ -1,13 +1,18 @@
-package com.ccms.persistence.pojo;
+package com.ccms.persistence.vo;
 
-
-/**
- * 文件类
- * @author miying
- */
-public class FileEntity {
+public class FileEntityVO {
+	/**
+	 * 文件id
+	 */
 	private Integer id;
-	private Integer colId;	// 所属用工单位
+	/**
+	 * 用工单位id
+	 */
+	private Integer colId;
+	/**
+	 * 用工单位名称
+	 */
+	private String colName;
 	private String activityUuid;	// 活动的uuid
 	private String originalFilename; // 文件原始名称
 	private String newFileName;	// 文件新的名称
@@ -24,13 +29,30 @@ public class FileEntity {
 	 * -1 私有：只有本单位可以看
 	 */
 	private Integer authority;	// 查看文件的权限
-	private Integer status = 1; // 文件状态：1默认, -1删除
-
+	private Integer status; // 文件状态：1默认, -1删除
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Integer getColId() {
+		return colId;
+	}
+	public void setColId(Integer colId) {
+		this.colId = colId;
+	}
+	public String getColName() {
+		return colName;
+	}
+	public void setColName(String colName) {
+		this.colName = colName;
+	}
+	public String getActivityUuid() {
+		return activityUuid;
+	}
+	public void setActivityUuid(String activityUuid) {
+		this.activityUuid = activityUuid;
 	}
 	public String getOriginalFilename() {
 		return originalFilename;
@@ -62,6 +84,12 @@ public class FileEntity {
 	public void setUploadDate(String uploadDate) {
 		this.uploadDate = uploadDate;
 	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public Integer getAuthority() {
 		return authority;
 	}
@@ -74,24 +102,6 @@ public class FileEntity {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-	public String getActivityUuid() {
-		return activityUuid;
-	}
-	public void setActivityUuid(String activityUuid) {
-		this.activityUuid = activityUuid;
-	}
-	public Integer getColId() {
-		return colId;
-	}
-	public void setColId(Integer colId) {
-		this.colId = colId;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
+
 	
 }

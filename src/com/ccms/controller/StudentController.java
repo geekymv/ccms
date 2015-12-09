@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.persistence.dto.ActivityItemDto;
 import com.ccms.persistence.dto.ActivitySearchDto;
+import com.ccms.persistence.dto.FileQueryDto;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.Activity;
 import com.ccms.persistence.pojo.ActivityItem;
@@ -23,6 +24,7 @@ import com.ccms.persistence.pojo.College;
 import com.ccms.persistence.pojo.FileEntity;
 import com.ccms.persistence.pojo.Specialty;
 import com.ccms.persistence.pojo.Student;
+import com.ccms.persistence.vo.FileEntityVO;
 import com.ccms.persistence.vo.NoticeVO;
 import com.ccms.persistence.vo.RankActivityTypeVO;
 import com.ccms.persistence.vo.RankVO;
@@ -33,7 +35,6 @@ import com.ccms.service.FileEntityService;
 import com.ccms.service.NoticeService;
 import com.ccms.service.RankService;
 import com.ccms.service.StudentService;
-import com.ccms.util.DateUtils;
 import com.ccms.util.SysCode;
 
 @Controller
@@ -60,7 +61,6 @@ public class StudentController {
 	 */
 	@RequestMapping(value="/stu_success", method=RequestMethod.GET)
 	public String login() {
-
 		return "redirect:index";
 	}
 	
@@ -285,18 +285,25 @@ public class StudentController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/docs")
-	public String docs(HttpServletRequest request, Model model) {
-		String pagerOffset = request.getParameter("pager.offset");
-		Integer offSet = 0;
-		if(pagerOffset != null && !pagerOffset.trim().equals("")) {
-			offSet = Integer.parseInt(pagerOffset);
-		}
-		
-		Pager<FileEntity> pager = fileService.listByPage(SysCode.FileAuthority.FILE_PUBLIC, offSet, 3);
-		model.addAttribute("pager", pager);
-		
+	@RequestMapping(value="/docs", method=RequestMethod.GET)
+	public String docs() {
 		return "student/docs";
+	}
+	
+	/**
+	 * 首页学生查看文档
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/docs", method=RequestMethod.POST)
+	@ResponseBody
+	public Pager<FileEntityVO> getDocPage(Pager<FileEntityVO> pager) {
+		FileQueryDto dto = new FileQueryDto();
+		dto.setAuthority(SysCode.FileAuthority.FILE_PUBLIC);
+		dto.setCategory(SysCode.FileCategory.DOCUMENT);
+		
+		pager = fileService.listByPage(pager, dto);
+		return pager;
 	}
 	
 	/**

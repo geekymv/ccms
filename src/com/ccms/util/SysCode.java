@@ -132,4 +132,20 @@ public class SysCode {
 		int DRAFT = 0;
 	}
 	
+	/**
+	 * 文件种类
+	 * @author miying
+	 *
+	 */
+	public interface FileCategory {
+		/**
+		 * 活动附件
+		 */
+		String ACTIVITY = "1";
+		/**
+		 * 文档上传
+		 */
+		String DOCUMENT = "2";
+	}
+	
 }

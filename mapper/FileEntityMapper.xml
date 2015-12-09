@@ -6,30 +6,36 @@
 <mapper namespace="com.ccms.dao.FileEntityDAO">
 	<insert id="add" parameterType="FileEntity">
 		insert into t_files (
-		  col_id,
+		  colId,
 		  originalFilename,
 		  newFileName,
 		  saveUrl,
 		  fileSize,
 		  uploadDate,
-		  authority
+		  authority,
+		  category
 		  ) 
-		  VALUES (#{college.id}, #{originalFilename}, #{newFileName},
-		   		#{saveUrl}, #{fileSize}, #{uploadDate}, #{authority})
+		  values (#{colId}, #{originalFilename}, #{newFileName},
+		   		#{saveUrl}, #{fileSize}, #{uploadDate}, #{authority}, #{category})
 	</insert>
 	
-	<!--  -->
-	<select id="queryByPage" resultType="FileEntity">
-		select col_id, originalFilename, uploadDate from t_files f 
+	<!-- 分页查询文件 -->
+	<select id="queryByPage" resultType="FileEntityVO">
+		select originalFilename, newFileName, uploadDate, fileSize, c.name colName, c.id colId 
+			from t_files f
+			left join t_colleges c on f.colId = c.id 
 			where f.status = 1 
-			and f.authority = #{authority}
-			limit #{pageOffset}, #{pageSize}
+			and f.authority = #{dto.authority}
+			and f.category = #{dto.category}
+			order by f.uploadDate desc
+			limit #{pager.pageOffset}, #{pager.pageSize}
 	</select>
 	
 	<!--  -->
-	<select id="totalRecord">
+	<select id="totalRecord" resultType="int">
 		select count(*) from t_files f
-			where f.authority = #{authority}
+			where f.authority = #{dto.authority}
+			and f.category = #{dto.category}
 	</select>
 	
 	<!-- 根据文件新名称查询 -->

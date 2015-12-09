@@ -2,8 +2,10 @@ package com.ccms.service;
 
 import java.util.List;
 
+import com.ccms.persistence.dto.FileQueryDto;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.FileEntity;
+import com.ccms.persistence.vo.FileEntityVO;
 
 public interface FileEntityService {
 	
@@ -16,12 +18,9 @@ public interface FileEntityService {
 
 	/**
 	 * 根据文件权限分页显示所有文件
-	 * @param authority
-	 * @param pageOffset
-	 * @param pageSize
 	 * @return
 	 */
-	public Pager<FileEntity> listByPage(int authority, int pageOffset, int pageSize);
+	public Pager<FileEntityVO> listByPage(Pager<FileEntityVO> page, FileQueryDto dto);
 
 	/**
 	 * 根据文件新名称查询

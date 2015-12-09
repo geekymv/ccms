@@ -3,7 +3,6 @@ package com.ccms.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URLDecoder;
-import java.util.Date;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -45,6 +44,7 @@ import com.ccms.util.DateUtils;
 import com.ccms.util.ExcelUtil;
 import com.ccms.util.FileUtil;
 import com.ccms.util.RandomValidateCode;
+import com.ccms.util.SysCode;
 
 @Controller
 public class CommonController implements ServletContextAware{
@@ -157,8 +157,8 @@ public class CommonController implements ServletContextAware{
 					multipartFile.transferTo(new File(realPath, newFileName));
 					
 					FileEntity fileEntity = new FileEntity();
-					fileEntity.setCollege(college);
-					fileEntity.setUploadDate(new Date());
+					fileEntity.setColId(college.getId());
+					fileEntity.setUploadDate(DateUtils.getCurrentDate(DateUtils.FORMAT_NORMAL_NO_SIGN));
 
 					String fileSize = FileUtil.convertFileSize(size);
 					fileEntity.setFileSize(fileSize);
@@ -166,6 +166,7 @@ public class CommonController implements ServletContextAware{
 					fileEntity.setAuthority(authority);
 					fileEntity.setNewFileName(newFileName);
 					fileEntity.setOriginalFilename(originalFilename);
+					fileEntity.setCategory(SysCode.FileCategory.ACTIVITY);	// 活动附件
 					
 					// 保存文件信息
 					fileService.upload(fileEntity);	
@@ -234,8 +235,8 @@ public class CommonController implements ServletContextAware{
 					multipartFile.transferTo(new File(realPath, newFileName));
 					
 					FileEntity fileEntity = new FileEntity();
-					fileEntity.setCollege(college);
-					fileEntity.setUploadDate(new Date());
+					fileEntity.setColId(college.getId());
+					fileEntity.setUploadDate(DateUtils.getCurrentDate(DateUtils.FORMAT_NORMAL_NO_SIGN));
 
 					String fileSize = FileUtil.convertFileSize(size);
 					fileEntity.setFileSize(fileSize);
@@ -243,6 +244,7 @@ public class CommonController implements ServletContextAware{
 					fileEntity.setAuthority(authority);
 					fileEntity.setNewFileName(newFileName);
 					fileEntity.setOriginalFilename(originalFilename);
+					fileEntity.setCategory(SysCode.FileCategory.DOCUMENT);
 					
 					// 保存文件信息
 					fileService.upload(fileEntity);	

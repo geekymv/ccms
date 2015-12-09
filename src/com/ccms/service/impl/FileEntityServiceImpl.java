@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccms.dao.FileEntityDAO;
+import com.ccms.persistence.dto.FileQueryDto;
 import com.ccms.persistence.dto.Pager;
 import com.ccms.persistence.pojo.FileEntity;
+import com.ccms.persistence.vo.FileEntityVO;
 import com.ccms.service.FileEntityService;
 
 @Service
@@ -21,19 +23,14 @@ public class FileEntityServiceImpl implements FileEntityService {
 	}
 
 	@Override
-	public Pager<FileEntity> listByPage(int authority, int pageOffset,
-			int pageSize) {
-		Pager<FileEntity> pager = new Pager<FileEntity>();
-		
-		int totalRecord = fileDao.totalRecord(authority); // // 总记录数
-		int totalPage = totalRecord % pageSize == 0 ? 
-				totalRecord / pageSize : totalRecord / pageSize + 1; // 总页数
+	public Pager<FileEntityVO> listByPage(Pager<FileEntityVO> pager, FileQueryDto dto) {
+		int totalRecord = fileDao.totalRecord(dto); // // 总记录数
 		pager.setTotalRecord(totalRecord);
-		pager.setTotalPage(totalPage);
 		
-		List<FileEntity> fileEntities = fileDao.queryByPage(authority, pageOffset, pageSize);
+		pager.setPageOffset(pager.getPageIndex(), pager.getPageSize());
+		
+		List<FileEntityVO> fileEntities = fileDao.queryByPage(pager, dto);
 		pager.setDatas(fileEntities);
-		
 		return pager;
 	}
 
