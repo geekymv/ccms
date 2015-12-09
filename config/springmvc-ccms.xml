@@ -10,6 +10,7 @@
 	<mvc:annotation-driven />
 
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	<mvc:resources location="/upload/" mapping="/upload/**"/>
 	<!-- 
 		mvc:view-controller可以在不需要Controller处理request的情况，转向到设置的View 
 		<mvc:view-controller path="/" view-name="forward:login"/>
@@ -67,8 +68,8 @@
 	<!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->  
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
         <property name="defaultEncoding" value="UTF-8"/>  
-        <!-- 指定所上传文件的总大小不能超过800KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->  
-        <property name="maxUploadSize" value="800000"/>  
+        <!-- 指定所上传文件的总大小(字节)不能超过20M。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->  
+        <property name="maxUploadSize" value="20971520"/>  
     </bean>  
       
     <!-- SpringMVC在超出上传文件限制时，会抛出org.springframework.web.multipart.MaxUploadSizeExceededException -->  
