@@ -141,7 +141,7 @@ CREATE TABLE `t_stu_level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `t_students` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `num` int(11) NOT NULL,
   `pwd` varchar(30) NOT NULL,
   `name` varchar(20) NOT NULL,
